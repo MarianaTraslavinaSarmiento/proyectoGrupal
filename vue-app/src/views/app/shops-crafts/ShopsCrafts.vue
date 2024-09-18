@@ -3,7 +3,7 @@
 </script>
 
 <template>
-HOME
+SHOPS AND CRAFTS
 </template>
 
 <style lang="scss" scoped>

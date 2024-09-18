@@ -3,7 +3,7 @@
 </script>
 
 <template>
-HOME
+DISCOUNTS AND PROMOTIONS
 </template>
 
 <style lang="scss" scoped>

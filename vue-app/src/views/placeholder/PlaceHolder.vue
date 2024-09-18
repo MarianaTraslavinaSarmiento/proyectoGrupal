@@ -3,7 +3,7 @@
 </script>
 
 <template>
-HOME
+PLACEHOLDER
 </template>
 
 <style lang="scss" scoped>

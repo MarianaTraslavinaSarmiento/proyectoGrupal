@@ -3,7 +3,7 @@
 </script>
 
 <template>
-HOME
+SHOPPING CART
 </template>
 
 <style lang="scss" scoped>

@@ -3,7 +3,7 @@
 </script>
 
 <template>
-HOME
+PROFILE
 </template>
 
 <style lang="scss" scoped>
