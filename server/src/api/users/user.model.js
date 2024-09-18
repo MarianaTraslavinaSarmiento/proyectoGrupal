@@ -38,7 +38,7 @@ const userSchema = new Schema({
     },
     type: {
         type: string,
-        enum : ['client','artisan'],
+        enum : ['client','artisan','support'],
         required: true
     }
 }, {

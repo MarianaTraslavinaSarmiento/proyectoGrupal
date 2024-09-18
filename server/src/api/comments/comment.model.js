@@ -6,7 +6,7 @@ const commentSchema = new Schema({
         ref: 'User',
         required: true
     },
-    problem_message: {
+    problem: {
         type: String,
         required: true
     },
