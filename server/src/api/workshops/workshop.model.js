@@ -1,6 +1,6 @@
-import { Schema, model } from "mongoose";
+const mongoose = require("mongoose")
 
-const workshopSchema = new Schema({
+const workshopSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
@@ -54,4 +54,6 @@ const workshopSchema = new Schema({
     timestamps: true
 })
 
-export default model('Workshop', workshopSchema)
+const Workshop = mongoose.model('Workshop', workshopSchema)
+
+module.exports = Workshop
