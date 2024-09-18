@@ -2,7 +2,8 @@ import { defineStore } from 'pinia'
 
 export const useThemeStore = defineStore('theme', {
   state: () => ({
-    currentTheme: 'light' 
+    availableThemes: ['grey', 'brown', 'ocean'],
+    currentTheme: 'brown'
   }),
   getters: {
     getCurrentTheme: (state) => state.currentTheme
@@ -21,14 +22,4 @@ export const useThemeStore = defineStore('theme', {
       this.currentTheme = this.availableThemes[nextIndex]
     }
   },
-  availableThemes: ['light', 'brown' , 'ocean']
 });
-
-// import { useThemeStore } from './stores/theme'
-// const themeStore = useThemeStore()
-// // Get current theme
-// console.log(themeStore.getCurrentTheme)
-// // Set a specific theme
-// themeStore.setTheme('sepia')
-// // Toggle to next theme
-// themeStore.toggleTheme()
