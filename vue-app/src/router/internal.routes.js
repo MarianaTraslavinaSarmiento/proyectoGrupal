@@ -1,4 +1,8 @@
 import  Home  from '@views/app/home/Home.vue'
+import  ShopsCrafts  from '@views/app/shops-crafts/ShopsCrafts.vue'
+import  ShoppingCart  from '@views/app/shopping-cart/ShoppingCart.vue'
+import  DiscountsPromotions  from '@views/app/discounts-promotions/DiscountsPromotions.vue'
+import  Profile  from '@views/app/profile/Profile.vue'
 
 
 export const interalRoutes = [
@@ -7,30 +11,35 @@ export const interalRoutes = [
         name: 'Home',
         alias: 'inicio',
         meta:{ requiresNav: true },
+        component: Home
     },
     {
         path: '/app/shops-crafts',
         name: 'ShopsCrafts',
-        alias: 'tiendas-artesanías',
+        alias: 'tiendas-artesanias',
         meta:{ requiresNav: true },
+        component: ShopsCrafts
     },
     {
         path: '/app/shopping-cart',
         name: 'ShoppingCart',
         alias: 'carrito-de-compras',
         meta:{ requiresNav: true },
+        component: ShoppingCart
     },
     {
         path: '/app/discounts-promotions',
         name: 'DiscountsPromotions',
         alias: 'descuentos-promociones',
         meta:{ requiresNav: true },
+        component: DiscountsPromotions
     },
     {
         path: '/app/profile',
         name: 'Profile',
         alias: 'perfil',
         meta:{ requiresNav: true },
+        component: Profile
     }
 ]
 

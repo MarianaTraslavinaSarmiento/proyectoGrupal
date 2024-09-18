@@ -7,13 +7,13 @@ const themeStore = useThemeStore()
 
 <template>
   <div :class="['app-container', themeStore.currentTheme+'-theme']">
+    <RouterView />
     <div class="color-tester">
        Texto
     </div>
     <ThemeSelector />
   </div>
 
-  <!-- <RouterView /> -->
 </template>
 
 

@@ -2,6 +2,8 @@
     import { computed } from 'vue';
     import { useRoute } from 'vue-router';
 
+    import Nav from '@components/nav/Nav.vue'
+
     const route = useRoute();
     const requiresNav = computed(() => route.meta.requiresNav);
 </script>
@@ -12,7 +14,7 @@
         <slot />
     </main>
     <div v-show="requiresNav">
-        NAVIGATION
+        <Nav />
     </div>
   </div>
 
