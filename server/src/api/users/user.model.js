@@ -36,9 +36,9 @@ const userSchema = new Schema({
         type: string,
         require: true
     },
-    role: {
+    type: {
         type: string,
-        enum : ['client','support'],
+        enum : ['client','artisan'],
         require: true
     }
 }, {

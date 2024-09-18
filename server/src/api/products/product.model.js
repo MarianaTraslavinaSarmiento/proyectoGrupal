@@ -26,7 +26,7 @@ const productSchema = new Schema({
     },
     weight: {
         type: String,
-        require: true
+        require: false
     },
     category: {
         type: String,
@@ -44,9 +44,9 @@ const productSchema = new Schema({
         ],
         require: true,
     },
-    image_url: {
-        type: String,
-        require: true
+    images_url: {
+        type: [String],
+        required: false 
     },
     price: {
         type: Number,
@@ -57,45 +57,24 @@ const productSchema = new Schema({
         ref: 'Shop',
         require: true
     },
-    hasDiscount: {
-        type: Boolean,
-        require: true
-    },
-    discount: {
-        percentage: {
-            type: Number,
-            require: true
-        },
-        new_price: {
-            type: Number,
-            require: true
-        },
-    },
-    hasOffer: {
-        type: Boolean,
-        require: true
-    },
     offer: {
         type: {
           type: String,
-          enum: ["BuyXGetY", "FreeShipping", "Other"]
+          enum: ["discount", "buyxgety", "freeshipping", "other"],
+          require: false
         },
         details: {
           buyX: {
             type: Number,
-            require: true
+            require: false
           },
           getY: {
             type: Number,
-            require: true
+            require: false
           },
           description: {
             type: String,
-            require: true
-          },
-          freeShipping: {
-            type: Boolean,
-            require: true
+            require: false
           }
         }
     },
