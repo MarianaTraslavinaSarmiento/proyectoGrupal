@@ -3,43 +3,43 @@ import { Schema, model } from "mongoose";
 const userSchema = new Schema({
     username: {
         type: string,
-        require: true
+        required: true
     },
     email: {
         type: string,
-        require: true
+        required: true
     },
     phone: {
         prefix: {
             type: string,
-            require: true,
+            required: true,
         },
         number: {
             type: string,
-            require: true
+            required: true
         }
     },
     genre: {
         type: string,
         enum : ['M','F'],
-        require: true
+        required: true
     },
     born_date: {
         type: date,
-        require: true
+        required: true
     },
     password: {
         type: string,
-        require: true
+        required: true
     },
     profile_pic_url: {
         type: string,
-        require: true
+        required: true
     },
     type: {
         type: string,
         enum : ['client','artisan'],
-        require: true
+        required: true
     }
 }, {
     timestamps: true

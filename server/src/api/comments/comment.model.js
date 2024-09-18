@@ -4,15 +4,15 @@ const commentSchema = new Schema({
     user_id: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        require: true
+        required: true
     },
     problem_message: {
         type: String,
-        require: true
+        required: true
     },
-    image_url: {
+    screenshot_url: {
         type: String,
-        require: false
+        required: false
     }
 }, {
     timestamps: true

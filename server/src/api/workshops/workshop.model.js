@@ -3,49 +3,52 @@ import { Schema, model } from "mongoose";
 const workshopSchema = new Schema({
     name: {
         type: String,
-        require: true
+        required: true
     },
     description: {
         type: String,
-        require: true
+        required: true
     },
     image_url: {
         type: String,
-        require: true
+        required: true
     },
     target_audience: {
-        value: {
-            type: String,
-            require: true
-        },
-        comment: {
-            type: String,
-            require: false
-        },
+        type: String,
+        required: true
     },
     duration: {
         type: String,
-        require: true
+        required: true
     },
     date_start: {
         type: Date,
-        require: true
+        required: true
     },
     schedule: {
         type: String,
-        require: true
+        required: true
     },
     location: {
         type: String,
-        require: true
+        required: true
     },
     modality: {
         type: String,
-        require: true
+        required: true
     },
     materials: {
         type: String,
-        require: true
+        required: true
+    },
+    artisan_id: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    price: {
+        type: Number,
+        required: true
     }
 }, {
     timestamps: true

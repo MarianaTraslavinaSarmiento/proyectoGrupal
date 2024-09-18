@@ -3,23 +3,28 @@ import { Schema, model } from "mongoose";
 const shopSchema = new Schema({
     name: {
         type: String,
-        require: true
+        required: true
     },
-    city: {
+    location: {
         type: String,
-        require: true
+        required: true
     },
     description: {
         type: String,
-        require: true
+        required: true
     },
     image_url: {
         type: String,
-        require: true
+        required: true
     },
     video_url: {
         type: String,
-        require: false
+        required: false
+    },
+    artisan_id: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
     }
 }, {
     timestamps: true

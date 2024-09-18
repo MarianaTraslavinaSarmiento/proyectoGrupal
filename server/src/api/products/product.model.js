@@ -3,30 +3,30 @@ import { Schema, model } from "mongoose";
 const productSchema = new Schema({
     name: {
         type: String,
-        require: true
+        required: true
     },
     description: {
         type: String,
-        require: true
+        required: true
     },
     size: {
         height: {
             type: Number,
-            require: true
+            required: true
         },
         width: {
             type: Number,
-            require: true
+            required: true
         },
         unit: {
             type: String,
             enum: ["cm", "m"],
-            require: true
+            required: true
         },
     },
     weight: {
         type: String,
-        require: false
+        required: false
     },
     category: {
         type: String,
@@ -42,7 +42,7 @@ const productSchema = new Schema({
           "Estampado",
           "Pintura tradicional"
         ],
-        require: true,
+        required: true,
     },
     images_url: {
         type: [String],
@@ -50,37 +50,37 @@ const productSchema = new Schema({
     },
     price: {
         type: Number,
-        require: true
+        required: true
     },
     shop_id: {
         type: Schema.Types.ObjectId,
         ref: 'Shop',
-        require: true
+        required: true
     },
     offer: {
         type: {
           type: String,
           enum: ["discount", "buyxgety", "freeshipping", "other"],
-          require: false
+          required: false
         },
         details: {
           buyX: {
             type: Number,
-            require: false
+            required: false
           },
           getY: {
             type: Number,
-            require: false
+            required: false
           },
           description: {
             type: String,
-            require: false
+            required: false
           }
         }
     },
     shipping_price: {
         type: Number,
-        require: true
+        required: true
     }
 }, {
     timestamps: true

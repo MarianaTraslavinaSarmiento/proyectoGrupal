@@ -4,7 +4,7 @@ const orderSchema = new Schema({
     user_id: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        require: true
+        required: true
     },
     products: {
         type: [{
@@ -22,19 +22,32 @@ const orderSchema = new Schema({
     },
     date: {
         type: Date,
-        require: true
+        required: true
     },
-    status: {
-        type: String,
-        enum: ['pending', 'approved', 'rejected'],
-        require: true
-    },
-    price: {
+    amount: {
         type: Number,
-        require: true
+        required: true
+    },
+    stripe_charge_id: {
+        type: String,
+        required: true
+    },
+    currency: {
+        type: String,
+        required: true,
+        enum: ['usd', 'eur', 'cop']
+    },
+    payment_status: {
+        type: String,
+        enum: ['succeeded', 'pending', 'failed'],
+        required: true
+    },
+    stripe_customer_id: {
+        type: String,
+        required: false
     }
-},{
+}, {
     timestamps: true
-})
+});
 
-export default model('Order', orderSchema)
+export default model('Order', orderSchema);
