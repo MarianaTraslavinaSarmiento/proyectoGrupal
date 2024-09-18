@@ -1,0 +1,16 @@
+.app-container.grey-theme {
+
+    /* Backgrounds */
+    --background-primary: var(--grey-bg-primary);
+    --background-secondary: var(--grey-bg-secondary);
+    --background-base: var(--grey-bg-base);
+
+    /* Text */
+    --text-contrast: var(--grey-text-contrast);
+    --text-color: var(--grey-text-color);
+
+    /* Others */
+    --color-accent: var(--grey-color-accent);
+    --color-border: var(--grey-color-border);
+    
+}

@@ -1,0 +1,15 @@
+.app-container.ocean-theme {
+    
+    /* Backgrounds */
+    --background-primary: var(--ocean-bg-primary);
+    --background-secondary: var(--ocean-bg-secondary);
+    --background-base: var(--ocean-bg-base);
+
+    /* Text */
+    --text-contrast: var(--ocean-text-contrast);
+    --text-color: var(--ocean-text-color);
+
+    /* Others */
+    --color-accent: var(--ocean-color-accent);
+    --color-border: var(--ocean-color-border);
+}

@@ -1,0 +1,14 @@
+.app-container.brown-theme {
+    /* Backgrounds */
+    --background-primary: var(--brown-bg-primary);
+    --background-secondary: var(--brown-bg-secondary);
+    --background-base: var(--brown-bg-base);
+
+    /* Text */
+    --text-contrast: var(--brown-text-contrast);
+    --text-color: var(--brown-text-color);
+
+    /* Others */
+    --color-accent: var(--brown-color-accent);
+    --color-border: var(--brown-color-border);
+} 
