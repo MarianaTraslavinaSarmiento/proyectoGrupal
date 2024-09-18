@@ -1,0 +1,48 @@
+/* Themes colors */
+:root {
+    /* #region brown-theme */
+        /* Backgrounds */
+        --brown-bg-primary: #2E1108;
+        --brown-bg-secondary: #703A31;
+        --brown-bg-base: #FFFFFF;
+
+        /* Text */
+        --brown-text-contrast: #9D1A1A;
+        --brown-text-color: #FFFFFF;
+
+        /* Others */
+        --brown-color-accent: #FFA800;
+        --brown-color-border: #9D1A1A;
+    /* #endregion */
+
+    /*#region grey-theme */
+        /* Backgrounds */
+        --grey-bg-primary: #000000;
+        --grey-bg-secondary: #3D3D3D;
+        --grey-bg-base: #FFFFFF;
+
+        /* Text */
+        --grey-text-contrast: #000000;
+        --grey-text-color: #000000;
+
+        /* Others */
+        --grey-color-accent: #3D3D3D;
+        --grey-color-border: #A3A3A3;
+    /* #endregion */
+
+    /* #region ocean-theme */
+        /* Backgrounds */
+        --ocean-bg-primary: #013A63;
+        --ocean-bg-secondary: #0277BD;
+        --ocean-bg-base: #FFFFFF;
+
+        /* Text */
+        --ocean-text-contrast: #01579B;
+        --ocean-text-color: #FFFFFF;
+
+        /* Others */
+        --ocean-color-accent: #00E5FF;
+        --ocean-color-border: #01579B;
+    /* #endregion */
+
+}
