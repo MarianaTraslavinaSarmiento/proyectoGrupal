@@ -14,6 +14,11 @@ export const routes = [
         name: 'app',
         component: AppPage,
         children: interalRoutes
+    },
+    {
+        path: '/login',
+        name: 'login',
+        component: Auth
     }
 
 ]
