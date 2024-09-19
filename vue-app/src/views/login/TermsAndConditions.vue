@@ -1,8 +1,9 @@
 <script setup>
 
-import CheckedIcon from "@/assets/icons/general/CheckedIcon.vue";
+import CheckedIcon from "@assets/icons/general/CheckedIcon.vue";
 import SquareBackground from "@assets/img/general/SquareBackground.vue"
-import Back from "@/assets/img/general/Back.vue"
+import Back from "@assets/img/general/Back.vue"
+import DropdownArrow from "@assets/img/general/DropdownArrow.vue"
 
 import { ref } from 'vue';
 const checkedTerms = ref(false);
@@ -24,36 +25,45 @@ const checkedPromotions = ref(false);
         <div class="content">
             <div class="__items__terms_conditions">
                 <div class="item">
-                    <div>
-                        <input type="checkbox" id="privacyPolicy" class="checkbox" v-model="checkedPolicy" />
-                        <CheckedIcon v-if="checkedPolicy" class="icon" />
-                    </div>
-
-                    <label for="privacyPolicy" style="color: var(--background-primary)">
-                        He leído y acepto la <a href="">Política de privacidad*</a>
+                    <label class="custom__checkbox">
+                        <input type="checkbox" v-model="checkedPolicy" />
+                        <span class="checkmark">
+                            <CheckedIcon v-if="checkedPolicy" class="icon" />
+                        </span>
+                        <span class="label__text">
+                            He leído y acepto la <a href="">Política de privacidad*</a>
+                        </span>
                     </label>
                 </div>
                 <div class="item">
-                    <div>
-                        <input type="checkbox" id="termsAndsConditions" class="checkbox" v-model="checkedTerms" />
-                        <CheckedIcon v-if="checkedTerms" class="icon" />
-                    </div>
-                    <label for="privacyPolicy" style="color: var(--background-primary)">
-                        He leído y acepto la <a href="">Política de privacidad*</a>
+                    <label class="custom__checkbox">
+                        <input type="checkbox" v-model="checkedTerms" />
+                        <span class="checkmark">
+                            <CheckedIcon v-if="checkedTerms" class="icon" />
+                        </span>
+                        <span class="label__text">
+                            He leído y acepto los <a href="">Términos y condiciones*</a>
+                        </span>
                     </label>
                 </div>
                 <div class="item">
-                    <div>
-                        <input type="checkbox" id="promotions" class="checkbox" v-model="checkedPromotions" />
-                        <CheckedIcon v-if="checkedPromotions" class="icon" />
-                    </div>
-
-                    <label for="privacyPolicy" style="color: var(--background-primary)">
-                        He leído y acepto la <a href="">Política de privacidad*</a>
+                    <label class="custom__checkbox">
+                        <input type="checkbox" v-model="checkedPromotions" />
+                        <span class="checkmark">
+                            <CheckedIcon v-if="checkedPromotions" class="icon" />
+                        </span>
+                        <span class="label__text">
+                            Acepto que me envíen promociones y eventos a mi correo electrónico
+                        </span>
                     </label>
                 </div>
             </div>
         </div>
+
+        <span v-show="checkedPolicy && checkedTerms" class="register_now">
+            <DropdownArrow class="arrow_icon"/>
+            <a href="">Registrarse</a>
+        </span>
     </main>
 </template>
   
@@ -81,9 +91,12 @@ const checkedPromotions = ref(false);
     position: absolute;
     top: 0;
     right: 0;
-    width: 150px;
-    height: 150px;
+    left: 290px;
+    transform: translateY(-50%);
+    width: 280px;
+    height: 280px;
     z-index: -1;
+    
 }
 
 .back {
@@ -107,48 +120,79 @@ const checkedPromotions = ref(false);
 .__items__terms_conditions {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 4rem;
 }
 
 .item {
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    position: relative;
+}
 
-    .checkbox {
-        min-width: 27px;
-        min-height: 27px;
+.custom__checkbox {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    user-select: none;
+
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+
+    }
+
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 30px;
+        width: 30px;
         border: 2px solid var(--color-accent);
         border-radius: 6px;
-        appearance: none;
-        margin: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        position: relative;
-        background-color: transparent;
     }
 
     .icon {
-        width: 16px;
-        height: 16px;
-        position: absolute
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 20px;
+        height: 20px;
     }
 
-
-    p {
-        margin: 0;
+    .label__text {
+        color: var(--background-primary);
+        margin-left: 10px;
     }
 
     a {
         color: var(--text-contrast);
         text-decoration: underline;
         font-weight: bold;
-
     }
 
+}
+
+.register_now {
+    color: var(--text-contrast);
+    display: flex;
+    height: 20px;
+    position: absolute;
+    bottom: 3rem;
+    right: 4rem;
+
+    .arrow_icon {
+        width: 15px;
+    }
+
+    a {
+        text-decoration: underline;
+        font-size: 1.7rem;
+        margin-left: 10px;
+    }
 
 }
 </style>
