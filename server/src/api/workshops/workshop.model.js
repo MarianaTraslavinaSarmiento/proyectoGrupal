@@ -1,6 +1,6 @@
-const mongoose = require("mongoose")
+const { Schema, model } = require("mongoose")
 
-const workshopSchema = new mongoose.Schema({
+const workshopSchema = new Schema({
     name: {
         type: String,
         required: true
@@ -54,6 +54,6 @@ const workshopSchema = new mongoose.Schema({
     timestamps: true
 })
 
-const Workshop = mongoose.model('Workshop', workshopSchema)
+const Workshop = model('Workshop', workshopSchema)
 
 module.exports = Workshop

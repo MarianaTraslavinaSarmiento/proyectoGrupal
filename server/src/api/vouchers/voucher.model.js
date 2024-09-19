@@ -1,6 +1,6 @@
-const mongoose = require("mongoose")
+const { Schema, model } = require("mongoose")
 
-const voucherSchema = new mongoose.Schema({
+const voucherSchema = new Schema({
     description: {
         type: String,
         required: true
@@ -46,6 +46,6 @@ const voucherSchema = new mongoose.Schema({
     timestamps: true
 })
 
-const Voucher = mongoose.model('Voucher', voucherSchema)
+const Voucher = model('Voucher', voucherSchema)
 
 module.exports = Voucher

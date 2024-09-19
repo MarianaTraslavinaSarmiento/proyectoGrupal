@@ -1,6 +1,6 @@
-const mongoose = require("mongoose")
+const { Schema, model } = require("mongoose")
 
-const shopSchema = new mongoose.Schema({
+const shopSchema = new Schema({
     name: {
         type: String,
         required: true
@@ -30,6 +30,6 @@ const shopSchema = new mongoose.Schema({
     timestamps: true
 })
 
-const Shop = mongoose.model('Shop', shopSchema)
+const Shop = model('Shop', shopSchema)
 
 module.exports = Shop
