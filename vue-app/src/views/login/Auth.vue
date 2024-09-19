@@ -14,20 +14,20 @@ import UserIcon from "@/assets/icons/auth/UserIcon.vue";
         <span class="auth__highlight">artesanías favoritas</span>
       </h1>
       <div class="auth__buttons">
-        <button class="auth__button auth__button--facebook">
-          <FacebookIcon class="auth__button-icon" />
+        <button class="auth__button auth__button__facebook">
+          <FacebookIcon class="auth__button_icon" />
           <span class="auth__button-text">Inicia sesión con <span style="font-weight: bold;"> Facebook</span></span>
         </button>
-        <button class="auth__button auth__button--instagram">
-          <InstagramIcon class="auth__button-icon" />
+        <button class="auth__button auth__button__instagram">
+          <InstagramIcon class="auth__button_icon" />
           <span class="auth__button-text">Inicia sesión con <span style="font-weight: bold;"> Instagram</span></span>
         </button>
-        <button class="auth__button auth__button--gmail">
-          <GmailIcon class="auth__button-icon" />
+        <button class="auth__button auth__button__instagram">
+          <GmailIcon class="auth__button_icon" />
           <span class="auth__button-text">Inicia sesión con <span style="font-weight: bold;"> Gmail</span></span>
         </button>
-        <button class="auth__button auth__button--ruraq-maki">
-          <img src="@/assets/img/auth/userProfileIcon.png" class="auth__button-icon" alt="">
+        <button class="auth__button auth__button__ruraq_maki">
+          <img src="@/assets/img/auth/userProfileIcon.png" class="auth__button_icon" alt="">
           <span class="auth__button-text">Inicia sesión con tu cuenta de <span style="font-weight: bold;"> Ruraq Maki</span></span>
         </button>
       </div>
@@ -96,7 +96,7 @@ main {
   opacity: 0.9;
 }
 
-.auth__button-icon {
+.auth__button_icon {
   margin-right: 1.5rem;
   width: 32px;
   height: 32px;
@@ -106,10 +106,10 @@ main {
   color: var(--text-color) ;
 }
 
-.auth__button--ruraq-maki,
-.auth__button--gmail,
-.auth__button--instagram, 
-.auth__button--facebook {
+.auth__button__ruraq_maki,
+.auth__button__instagram,
+.auth__button__instagram, 
+.auth__button__facebook {
   background-color: var(--background-secondary);
 }
 </style>
