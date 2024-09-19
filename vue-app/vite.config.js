@@ -18,6 +18,7 @@ export default defineConfig({
       '@components': fileURLToPath(new URL('./src/components', import.meta.url)),
       '@icons': fileURLToPath(new URL('./src/assets/icons', import.meta.url)),
       '@layouts': fileURLToPath(new URL('./src/layouts', import.meta.url)),
+      '@assets': fileURLToPath(new URL('./src/assets', import.meta.url)),
     }
   }
 })

@@ -1,14 +1,14 @@
 <script setup>
 
-import CheckedIcon from "@/assets/icons/general/CheckedIcon.vue";
-import TriangleBackground from "@/assets/img/general/TriangleBackground.vue"
+import CheckedIcon from "@assets/icons/general/CheckedIcon.vue";
+import SquareBackground from "@assets/img/general/SquareBackground.vue"
 
 </script>
 <template>
     <main class="main__container">
 
-        <TriangleCorner class="triangle__corner "/>
-        <TriangleBackground class="triangle__center"/>
+        <SquareBackground class="triangle__corner "/>
+        <SquareBackground class="triangle__center"/>
         <div class="back__icon">
             <img src="@/assets/img/general/back.png" alt="Back">
         </div>
