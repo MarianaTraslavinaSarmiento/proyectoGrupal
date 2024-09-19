@@ -1,7 +1,7 @@
 <script setup>
 
 import CheckedIcon from "@/assets/icons/general/CheckedIcon.vue";
-import TriangleBackground from "@/assets/img/general/TriangleBackground.vue"
+import SquareBackground from "@assets/img/general/SquareBackground.vue"
 import Back from "@/assets/img/general/Back.vue"
 
 import { ref } from 'vue';
@@ -15,8 +15,8 @@ const checkedPromotions = ref(false);
 <template>
     <main class="main__container">
 
-        <TriangleCorner class="triangle__corner " />
-        <TriangleBackground class="triangle__center" />
+        <SquareBackground class="triangle__corner " />
+        <SquareBackground class="triangle__center" />
         <div class="back">
             <Back class="back__icon" />
         </div>
