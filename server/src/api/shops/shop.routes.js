@@ -10,6 +10,8 @@ const shopController = new ShopController(shopService)
 
 appShop.get("/", asyncHandler((req, res) => shopController.getAll(req, res)))
 appShop.get("/:id", asyncHandler((req, res) => shopController.getOneById(req, res)))
+
+// ! Just for development
 appShop.post("/many", asyncHandler((req, res) => shopController.createMany(req, res)))
 
 module.exports = appShop

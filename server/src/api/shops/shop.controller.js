@@ -9,11 +9,13 @@ class ShopController {
     }
 
     async getOneById(req, res) {
-        return await this.service.getOneById()
+        const shop = await this.service.getOneById(req.params.id)
+        res.json(shop)
     }
 
     async createMany(req, res) {
-        return await this.service.insertMany(req.body)
+        const result = await this.service.insertMany(req.body)
+        res.json(result)
     }
 }
 
