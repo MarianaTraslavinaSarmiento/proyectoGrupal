@@ -1,11 +1,15 @@
 const express = require("express")
 const cors = require("cors")
 const MongooseDB = require("./src/config/database")
-
+const errorHandler = require("./src/middlewares/errorHandler")
 
 const app = express();
-
 const PORT = 3000
+
+app.use(errorHandler)
+app.use(express.json())
+
+
 
 app.use(cors({
     origin: process.env.NODE_ENV === 'production' ? process.env.ALLOWED_ORIGINS.split(',') : ['http://localhost:5173'],
@@ -13,6 +17,8 @@ app.use(cors({
     allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
     credentials: true
 }));
+
+
 
 
 app.get("/", (req, res) => {
