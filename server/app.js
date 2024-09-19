@@ -1,6 +1,7 @@
 const express = require("express")
 const cors = require("cors")
-const http = require("http")
+const MongooseDB = require("./src/config/database")
+
 
 const app = express();
 
@@ -18,16 +19,18 @@ app.get("/", (req, res) => {
     res.send("Hello World!");
 });
 
-function startServer() {
+async function startServer() {
+    await MongooseDB.connect()
     const server = app.listen(PORT, () => {
         console.log("Server started on port http://localhost:" + PORT);
     });
 
-    server.on("SIGINT", () => closeServer(server))
-    server.on("SIGTERM", () => closeServer(server))
+    process.on("SIGINT", () => closeServer(server))
+    process.on("SIGTERM", () => closeServer(server))
 }
 
-function closeServer(server) {
+async function closeServer(server) {
+    await MongooseDB.disconnect()
     server.close()
 
     console.log("Server closed sucessfully");
