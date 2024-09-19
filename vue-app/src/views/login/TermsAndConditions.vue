@@ -1,12 +1,14 @@
 <script setup>
 
 import CheckedIcon from "@/assets/icons/general/CheckedIcon.vue";
+import TriangleBackground from "@/assets/img/general/TriangleBackground.vue"
 
 </script>
 <template>
     <main class="main__container">
-        <div class="triangle__center"></div>
-        <div class="triangle__corner"></div>
+
+        <TriangleCorner class="triangle__corner "/>
+        <TriangleBackground class="triangle__center"/>
         <div class="back__icon">
             <img src="@/assets/img/general/back.png" alt="Back">
         </div>
@@ -52,13 +54,11 @@ import CheckedIcon from "@/assets/icons/general/CheckedIcon.vue";
 .triangle__center {
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
     top: 77%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-100%, -50%);
     width: 450px;
     height: 450px;
-    background-image: url('@/assets/img/general/triangleCenter.png');
     background-size: contain;
     background-repeat: no-repeat;
     z-index: -1;
@@ -86,14 +86,14 @@ import CheckedIcon from "@/assets/icons/general/CheckedIcon.vue";
 }
 
 .content {
-    padding: 14rem 3rem 1rem 5rem;
+    padding: 14rem 3rem 1rem 4rem;
     max-width: 600px;
 }
 
 .__items__terms_conditions {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 3rem;
 }
 
 .item {
@@ -102,18 +102,18 @@ import CheckedIcon from "@/assets/icons/general/CheckedIcon.vue";
     gap: 1.5rem;
 
     .checkbox {
-        min-width: 24px;
-        height: 24px;
+        min-width: 33px;
+        min-height: 33px;
         border: 2px solid var(--color-accent);
-        border-radius: 4px;
+        border-radius: 6px;
         position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
 
         .checked__icon {
-            max-width: 80%;
-            max-height: 80%;
+            max-width: 75%;
+            max-height: 75%;
             object-fit: contain;
         }
     }
@@ -130,4 +130,6 @@ import CheckedIcon from "@/assets/icons/general/CheckedIcon.vue";
     }
 
 
-}</style>
+}
+
+</style>
