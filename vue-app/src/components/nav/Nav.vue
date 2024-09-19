@@ -27,19 +27,15 @@ const toHome = () => {
 <style lang="scss" scoped>
 .nav {
   position: relative;
-  height: 93px;
+  height: 52px;
   width: 100%;
   .nav-content {
-    border-radius: 15px 15px 0 0;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 93px;
-    background: black;
-    padding: 15px 15px;
+    height: 52px;
+    background: var(--background-primary);
     color: var(--text-color);
-    outline-offset: -1px;
-    outline: 1px rgba(var(--text-color-rgb), 0.1) solid;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -50,6 +46,7 @@ const toHome = () => {
     width: 100%;
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-evenly;
 
    .nav-link {

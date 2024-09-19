@@ -36,9 +36,6 @@ const isRouteCurrent = computed(() => {
         <div class="link-icon">
           <component :is="iconComponent" />
         </div>
-        <span class="link-text">
-          {{ text }}
-        </span>
       </div>
     </RouterLink>
   </div>
@@ -47,45 +44,36 @@ const isRouteCurrent = computed(() => {
 
 <style lang="scss" scoped>
 .nav-link {
-  .link-icon {
-    height: 20px;
-    width: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+  position: relative;
   .link-content {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    .link-icon {
-      height: 20px;
-      width: 20px;
-    }
-    .link-icon,
-    .link-text {
+    width: 31px;
+    height: 31px;
+    .link-icon{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
       color: var(--text-color);
       transition: color 0.3s;
-      font-family: var(--font-poppins);
-      font-weight: 700;
-      font-size: 10px;
+      background-color: var(--background-secondary);
     }
     &:hover {
-    .link-icon,
-    .link-text {
-     
-      color: var(--secondary-color);
+    .link-icon{
+      color: var(--color-accent);
     }
   }
   }
-  /**.link-text {
-    margin-left: 10px;
-  }*/
   a {
     display: flex;
     align-items: center;
-    padding: 0px 0;
+    padding: 0;
     position: relative;
     justify-content: center;
     &:before {
@@ -102,15 +90,19 @@ const isRouteCurrent = computed(() => {
   }
  
 }
-
+// scale 0.23529411764
 .nav-link.is-current-page {
   a:before {
     opacity: 1;
   }
-  .link-icon,
-  .link-text {
-    fill: var(--primary-color);
-    color: var(--primary-color);
+  .link-icon{
+    position: relative;
+    padding: 10.5px;
+    top: -3px;
+    width: 56px;
+    height: 56px;
+    transition: all 0.3s;
+    color: var(--color-accent);
   }
 }
 </style>
