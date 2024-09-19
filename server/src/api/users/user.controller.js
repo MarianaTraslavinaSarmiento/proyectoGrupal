@@ -1,20 +1,23 @@
-class UserController {
-    constructor(UserService) {
-        this.service = UserService
-    }
+const bcrypt = require("bcrypt")
 
-    async getAll(req, res) {
-        const users = await this.service.getAll()
-        res.json(users)
+class UserController {
+    constructor(userService) {
+        this.service = userService
     }
 
     async getOneById(req, res) {
-        return await this.service.getOneById(req.params.id)
+        const user = await this.service.getOneById(req.params.id)
+        res.json(user)
     }
-    
-    async createMany(req, res) {
-        return await this.service.insertMany(req.body)
-    }
+
+    // ! This should be refactored, and moved to auth
+    // async createOne(req, res) {
+    //     const user = await this.service.create(req.body)
+    //     res.status(201).json({
+    //         message: "User created successfully",
+    //         user
+    //     })
+    // }
 }
 
 module.exports = UserController

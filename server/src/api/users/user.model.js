@@ -7,17 +7,12 @@ const userSchema = new Schema({
     },
     email: {
         type: string,
-        required: true
+        required: true,
+        validate: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
     },
     phone: {
-        prefix: {
-            type: string,
-            required: true,
-        },
-        number: {
-            type: string,
-            required: true
-        }
+       type: string,
+       required: true
     },
     genre: {
         type: string,
@@ -34,7 +29,7 @@ const userSchema = new Schema({
     },
     profile_pic_url: {
         type: string,
-        required: true
+        required: false
     },
     type: {
         type: string,

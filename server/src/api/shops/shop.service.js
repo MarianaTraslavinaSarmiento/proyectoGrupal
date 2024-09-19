@@ -1,4 +1,11 @@
+const { Model } = require("mongoose")
+
 class ShopService {
+
+    /**
+     * 
+     * @param {Model} shopModel 
+     */
     constructor(shopModel) {
         this.model = shopModel
     }
