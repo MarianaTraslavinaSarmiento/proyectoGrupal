@@ -1,44 +1,59 @@
 <script setup>
 
-import CheckedIcon from "@assets/icons/general/CheckedIcon.vue";
-import SquareBackground from "@assets/img/general/SquareBackground.vue"
+import CheckedIcon from "@/assets/icons/general/CheckedIcon.vue";
+import TriangleBackground from "@/assets/img/general/TriangleBackground.vue"
+import Back from "@/assets/img/general/Back.vue"
+
+import { ref } from 'vue';
+const checkedTerms = ref(false);
+const checkedPolicy = ref(false);
+const checkedPromotions = ref(false);
+
+
 
 </script>
 <template>
     <main class="main__container">
 
-        <SquareBackground class="triangle__corner "/>
-        <SquareBackground class="triangle__center"/>
-        <div class="back__icon">
-            <img src="@/assets/img/general/back.png" alt="Back">
+        <TriangleCorner class="triangle__corner " />
+        <TriangleBackground class="triangle__center" />
+        <div class="back">
+            <Back class="back__icon" />
         </div>
 
         <div class="content">
             <div class="__items__terms_conditions">
                 <div class="item">
-                    <div class="checkbox">
-                        <CheckedIcon class="checked__icon"/>
+                    <div>
+                        <input type="checkbox" id="privacyPolicy" class="checkbox" v-model="checkedPolicy" />
+                        <CheckedIcon v-if="checkedPolicy" class="icon" />
                     </div>
-                    <p style="color: var(--background-primary)">He leído y acepto la <a href="">Política de privacidad*</a>
-                    </p>
+
+                    <label for="privacyPolicy" style="color: var(--background-primary)">
+                        He leído y acepto la <a href="">Política de privacidad*</a>
+                    </label>
                 </div>
                 <div class="item">
-                    <div class="checkbox">
-                        <CheckedIcon class="checked__icon"/>
+                    <div>
+                        <input type="checkbox" id="termsAndsConditions" class="checkbox" v-model="checkedTerms" />
+                        <CheckedIcon v-if="checkedTerms" class="icon" />
                     </div>
-                    <p style="color: var(--background-primary)">He leído y acepto los <a href="">Términos y condiciones*</a>
-                    </p>
+                    <label for="privacyPolicy" style="color: var(--background-primary)">
+                        He leído y acepto la <a href="">Política de privacidad*</a>
+                    </label>
                 </div>
                 <div class="item">
-                    <div class="checkbox">
-                        <CheckedIcon class="checked__icon"/>
+                    <div>
+                        <input type="checkbox" id="promotions" class="checkbox" v-model="checkedPromotions" />
+                        <CheckedIcon v-if="checkedPromotions" class="icon" />
                     </div>
-                    <p style="color: var(--background-primary)">Acepto que me envíen promociones y eventos a mi correo
-                        electrónico</p>
+
+                    <label for="privacyPolicy" style="color: var(--background-primary)">
+                        He leído y acepto la <a href="">Política de privacidad*</a>
+                    </label>
                 </div>
             </div>
         </div>
-
     </main>
 </template>
   
@@ -59,8 +74,6 @@ import SquareBackground from "@assets/img/general/SquareBackground.vue"
     transform: translate(-100%, -50%);
     width: 450px;
     height: 450px;
-    background-size: contain;
-    background-repeat: no-repeat;
     z-index: -1;
 }
 
@@ -70,18 +83,19 @@ import SquareBackground from "@assets/img/general/SquareBackground.vue"
     right: 0;
     width: 150px;
     height: 150px;
-    background-image: url('@/assets/img/general/triangleCornerRight.png');
-    background-size: contain;
-    background-repeat: no-repeat;
     z-index: -1;
 }
 
-.back__icon {
+.back {
     position: absolute;
 
-    img {
+    .back__icon {
         width: 50px;
         cursor: pointer;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 80px;
     }
 }
 
@@ -100,23 +114,29 @@ import SquareBackground from "@assets/img/general/SquareBackground.vue"
     display: flex;
     align-items: center;
     gap: 1.5rem;
+    position: relative;
 
     .checkbox {
-        min-width: 33px;
-        min-height: 33px;
+        min-width: 27px;
+        min-height: 27px;
         border: 2px solid var(--color-accent);
         border-radius: 6px;
-        position: relative;
+        appearance: none;
+        margin: 0;
         display: flex;
         justify-content: center;
         align-items: center;
-
-        .checked__icon {
-            max-width: 75%;
-            max-height: 75%;
-            object-fit: contain;
-        }
+        cursor: pointer;
+        position: relative;
+        background-color: transparent;
     }
+
+    .icon {
+        width: 16px;
+        height: 16px;
+        position: absolute
+    }
+
 
     p {
         margin: 0;
@@ -131,5 +151,4 @@ import SquareBackground from "@assets/img/general/SquareBackground.vue"
 
 
 }
-
 </style>
