@@ -35,7 +35,7 @@ import UserIcon from "@/assets/icons/auth/UserIcon.vue";
   </main>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 
 main {
   font-family: Bellota;

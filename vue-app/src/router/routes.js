@@ -3,6 +3,7 @@ import { interalRoutes } from './internal.routes.js'
 import PlaceHolder from "@views/placeholder/PlaceHolder.vue";
 import AppPage from "@views/AppPage.vue";
 import Auth from "@views/login/Auth.vue";
+import TermsAndConditions from "@views/login/TermsAndConditions.vue";
 
 export const routes = [
     {
@@ -16,11 +17,15 @@ export const routes = [
         component: Auth
     },
     {
+        path: '/login/terms-and-conditions',
+        name: 'termsAndConditions',
+        component: TermsAndConditions
+    },
+    {
         path: '/app',
         name: 'app',
         component: AppPage,
         children: interalRoutes
     }
-
 
 ]
