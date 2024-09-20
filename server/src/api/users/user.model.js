@@ -2,38 +2,31 @@ const { Schema, model } = require("mongoose")
 
 const userSchema = new Schema({
     username: {
-        type: string,
-        required: true
+        type: String,
+        required: true,
+        unique: true
     },
     email: {
-        type: string,
+        type: String,
         required: true,
-        validate: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g
-    },
-    phone: {
-       type: string,
-       required: true
+        validate: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+        unique: true
     },
     genre: {
-        type: string,
+        type: String,
         enum : ['M','F'],
         required: true
     },
     born_date: {
-        type: date,
+        type: Schema.Types.Date,
         required: true
     },
     password: {
-        type: string,
+        type: String,
         required: true
     },
     profile_pic_url: {
-        type: string,
-        required: false
-    },
-    type: {
-        type: string,
-        enum : ['client','artisan','support'],
+        type: String,
         required: true
     }
 }, {

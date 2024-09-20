@@ -14,11 +14,6 @@ class ShopController {
         const shop = await this.service.getOneById(req.params.id)
         res.json(shop)
     }
-
-    async createMany(req, res) {
-        const result = await this.service.insertMany(req.body)
-        res.json(result)
-    }
 }
 
 module.exports = ShopController

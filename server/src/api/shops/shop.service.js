@@ -8,10 +8,6 @@ class ShopService {
     async getOneById(id) {
         return await ShopModel.findById(id)
     }
-
-    async insertMany(newShops) {
-        return await ShopModel.insertMany(newShops)
-    }    
 }
 
 module.exports = ShopService
