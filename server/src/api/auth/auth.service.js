@@ -5,24 +5,6 @@ const bcrypt = require("bcrypt")
 const defaultProfilePic = "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small_2x/default-avatar-icon-of-social-media-user-vector.jpg"
 
 class AuthService {
-    /**
-    * @param {UserModel} user 
-    */
-    async login({username, email, password}) {
-        let user;
-        if (username) {
-            user = await UserModel.findOne({username})
-        } else if (email) {
-            user = await UserModel.findOne({email})
-        }
-
-        if(!user) throw new HttpError(401, 'User not found')
-
-        const passwordMatch = await bcrypt.compare(password, user.password)
-        if(!passwordMatch) throw new HttpError(401, 'Password is incorrect')
-
-        return user.id
-    }
 
     /**
      * @param {UserModel} user 

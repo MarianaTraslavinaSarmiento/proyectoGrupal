@@ -7,18 +7,6 @@ class AuthController {
         this.service = new AuthService()
     }
 
-    async login(req, res) {
-        const {username, email, password} = req.body
-        const userId = await this.service.login({username, email, password})
-
-        req.session.userId = userId
-
-        res.json({
-            message: 'Login successful',
-            authorized: true
-        })
-    }
-
     async signup(req, res) {
         const {username, email, genre, born_date, password} = req.body
         const user = await this.service.signup({username, email, genre, born_date, password})
@@ -36,6 +24,18 @@ class AuthController {
             }
             res.json({ message: "Logout successful" });
         });  
+    }
+
+    async verify(req, res) {
+        if (req.isAuthenticated()) {
+            res.json({
+                authenticated: true
+            })
+        } else {
+            res.json({
+                authenticated: false
+            })
+        }
     }
 }
 

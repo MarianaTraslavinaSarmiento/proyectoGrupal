@@ -1,19 +1,12 @@
-const {body, oneOf} = require("express-validator")
+const { body } = require("express-validator")
 
 const validateLogin = () => {
     return [
-        oneOf([
-            body('username')
-                .notEmpty()
-                .withMessage('Either username or email is required')
-                .isString()
-                .withMessage('The username must be a string'),
-            body('email')
-                .notEmpty()
-                .withMessage('Either username or email is required')
-                .isEmail()
-                .withMessage('The email must be a valid email')
-        ], 'Either username or email must be provided'),
+        body("login")
+            .notEmpty()
+            .withMessage("Username or email are required")
+            .isString()
+            .withMessage("Username or email must be strings"),
         body('password')
             .notEmpty()
             .withMessage('The password is required')
