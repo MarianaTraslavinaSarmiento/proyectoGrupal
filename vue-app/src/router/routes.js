@@ -1,6 +1,6 @@
 import { interalRoutes } from './internal.routes.js'
 
-import PlaceHolder from "@views/placeholder/PlaceHolder.vue";
+import SplashScreen from "@views/splash-screen/SplashScreen.vue";
 import AppPage from "@views/AppPage.vue";
 import Auth from "@views/login/Auth.vue";
 import TermsAndConditions from "@views/login/TermsAndConditions.vue";
@@ -9,8 +9,8 @@ import StartSession from '@/views/login/startSession.vue';
 export const routes = [
     {
         path: '/',
-        name: 'auth',
-        component: PlaceHolder
+        name: 'loading',
+        component: SplashScreen
     },
     {
         path: '/login',

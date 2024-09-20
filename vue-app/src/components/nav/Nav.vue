@@ -27,13 +27,13 @@ const toHome = () => {
 <style lang="scss" scoped>
 .nav {
   position: relative;
-  height: 52px;
+  height: 60px;
   width: 100%;
   .nav-content {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 52px;
+    height: 60px;
     background: var(--background-primary);
     color: var(--text-color);
     display: flex;

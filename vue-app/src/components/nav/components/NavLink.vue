@@ -1,6 +1,5 @@
 <script setup>
 defineOptions({ name: "NavLink" });
-
 const props = defineProps({
   iconComponent: {
     type: Object,
@@ -19,10 +18,8 @@ const props = defineProps({
     default: "",
   },
 });
-
 import { computed } from "vue";
 import { useRoute } from "vue-router";
-
 const route = useRoute();
 const isRouteCurrent = computed(() => {
   return route?.name?.toLowerCase() === props?.pageName?.toLowerCase();
@@ -30,7 +27,7 @@ const isRouteCurrent = computed(() => {
 </script>
 
 <template>
-  <div :class="['nav-link', { 'is-current-page': isRouteCurrent }]">
+  <div class="nav-link" :class="{ 'is-current-page': isRouteCurrent }">
     <RouterLink :to="alias || { name: pageName }">
       <div class="link-content">
         <div class="link-icon">
@@ -41,67 +38,77 @@ const isRouteCurrent = computed(() => {
   </div>
 </template>
 
-
 <style lang="scss" scoped>
 .nav-link {
   position: relative;
+  width: 35px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
   .link-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 31px;
-    height: 31px;
-    .link-icon{
+    position: relative;
+    width: 100%;
+    height: 35px;
+
+    .link-icon {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
       display: flex;
       align-items: center;
       justify-content: center;
+      width: 35px;
+      height: 35px;
       padding: 6px;
-      width: 100%;
-      height: 100%;
       border-radius: 50%;
       color: var(--text-color);
-      transition: color 0.3s;
       background-color: var(--background-secondary);
-    }
-    &:hover {
-    .link-icon{
-      color: var(--color-accent);
+      transition: all 0.3s ease;
     }
   }
-  }
+
   a {
     display: flex;
     align-items: center;
-    padding: 0;
-    position: relative;
     justify-content: center;
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+
     &:before {
       content: "";
-      height: 0px;
-      width: 0px;
+      height: 0;
+      width: 0;
       background: var(--primary-color);
       position: absolute;
       left: 0;
-      display: block;
+      bottom: 0;
       opacity: 0;
-      transition: 0.5s ease opacity;
+      transition: opacity 0.3s ease;
     }
   }
- 
-}
-// scale 0.23529411764
-.nav-link.is-current-page {
-  a:before {
-    opacity: 1;
+
+  &.is-current-page {
+    .link-icon {
+      width: 66px;
+      height: 66px;
+      padding: 11px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex;
+      justify-content: center;
+      bottom: -11px;
+      color: var(--color-accent);
+    }
+
+    a:before {
+      opacity: 1;
+    }
   }
-  .link-icon{
-    position: relative;
-    padding: 10.5px;
-    top: -3px;
-    width: 56px;
-    height: 56px;
-    transition: all 0.3s;
+
+  &:hover .link-icon {
     color: var(--color-accent);
   }
 }
