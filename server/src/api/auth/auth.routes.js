@@ -7,11 +7,6 @@ const passport = require("../../middlewares/passport")
 
 const controller = new AuthController()
 
-// const redirects = {
-//     failureRedirect: process.env.NODE_ENV === 'production' ? process.env.ALLOWED_ORIGIN + "/login" : 'http://localhost:5173/login',
-//     sucessRedirect: process.env.NODE_ENV === 'production' ? process.env.ALLOWED_ORIGIN + "/signup" : 'http://localhost:5173/signup',
-// }
-
 appAuth.post("/login", validateLogin(), handleValidationErrors, passport.authenticate("local"), (req, res) => {
     res.json({ message: "Login successful" })
 })
@@ -28,13 +23,9 @@ appAuth.get("/google/auth/callback")
 appAuth.get("/discord/auth/")
 appAuth.get("/discord/auth/callback")
 
+// * Linkedin
+appAuth.get("/linkedin/auth/")
+appAuth.get("/linkedin/auth/callback")
 
-// * Facebook
-appAuth.get("/facebook/auth/")
-appAuth.get("/facebook/auth/callback")
-
-// * Instagram
-appAuth.get("/instagram/auth/")
-appAuth.get("/instagram/auth/callback")
 
 module.exports = appAuth
