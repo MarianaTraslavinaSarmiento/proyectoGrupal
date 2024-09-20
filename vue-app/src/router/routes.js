@@ -4,7 +4,8 @@ import SplashScreen from "@views/splash-screen/SplashScreen.vue";
 import AppPage from "@views/AppPage.vue";
 import Auth from "@views/login/Auth.vue";
 import TermsAndConditions from "@views/login/TermsAndConditions.vue";
-import StartSession from '@/views/login/startSession.vue';
+import StartSession from "@views/login/StartSession.vue"
+
 
 export const routes = [
     {
