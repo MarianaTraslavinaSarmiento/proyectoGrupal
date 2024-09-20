@@ -3,22 +3,41 @@
 import Back from "@assets/img/general/Back.vue"
 import DiamondHeader from "@assets/img/general/DiamondHeader.vue"
 import { defineProps } from "vue";
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const props = defineProps({
     title: {
         type: String,
         required: true
+    },
+    hideDiamond: {
+        type: Boolean,
+        default: false
+    },
+    customBackRoute: {
+        type: String,
+        default: false
     }
 })
+
+const goBack = () => {
+    if (props.customBackRoute) {
+        router.push(props.customBackRoute); 
+    } else {
+        router.back();
+    }
+}
 
 </script>
 
 <template>
     <div class="header__container">
-        <div class="header__container__back">
+        <div class="header__container__back" @click="goBack">
             <Back class="back__icon" />
         </div>
-        <div class="title">
+        <div v-if="!hideDiamond" class="title">
             <span class="title__text">{{ title }}</span>
             <DiamondHeader class="title__diamond"/>
         </div>
@@ -35,6 +54,7 @@ const props = defineProps({
 
     &__back {
         position: absolute;
+        z-index: 5;
 
         .back__icon {
             width: 50px;

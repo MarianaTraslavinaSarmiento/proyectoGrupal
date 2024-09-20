@@ -2,6 +2,7 @@
 import HeadBar from '@/components/head-bar/HeadBar.vue';
 import Nav from '@/components/nav/Nav.vue';
 import TitleSection from '@components/title-section/TitleSection.vue'
+import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
 
 </script>
 
@@ -14,6 +15,13 @@ import TitleSection from '@components/title-section/TitleSection.vue'
         subtitle="Tiendas de artesanías de todas partes del Perú"
         :showFilter="true"
         />
+
+        <HeaderTitle
+        title="Talleres educativos"
+        :hideDiamond="true"
+        />
+
+
 
     </main>
     <Nav />
