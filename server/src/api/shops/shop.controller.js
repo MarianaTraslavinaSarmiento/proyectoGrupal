@@ -1,6 +1,8 @@
+const ShopService = require("./shop.service")
+
 class ShopController {
-    constructor(shopService) {
-        this.service = shopService
+    constructor() {
+        this.service = new ShopService()
     }
 
     async getAll(req, res) {

@@ -1,17 +1,13 @@
 const appShop = require("express").Router()                  
 const asyncHandler = require("../../middlewares/asyncHandler")
-
 const ShopController = require("./shop.controller")
-const ShopService = require("./shop.service")
-const ShopModel = require("./shop.model")
 
-const shopService = new ShopService(ShopModel)
-const shopController = new ShopController(shopService)
+const controller = new ShopController()
 
-appShop.get("/", asyncHandler((req, res) => shopController.getAll(req, res)))
-appShop.get("/:id", asyncHandler((req, res) => shopController.getOneById(req, res)))
+appShop.get("/", asyncHandler((req, res) => controller.getAll(req, res)))
+appShop.get("/:id", asyncHandler((req, res) => controller.getOneById(req, res)))
 
 // ! Just for development
-appShop.post("/many", asyncHandler((req, res) => shopController.createMany(req, res)))
+appShop.post("/many", asyncHandler((req, res) => controller.createMany(req, res)))
 
 module.exports = appShop

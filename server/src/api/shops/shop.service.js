@@ -1,25 +1,16 @@
-const { Model } = require("mongoose")
+const ShopModel = require("./shop.model")
 
 class ShopService {
-
-    /**
-     * 
-     * @param {Model} shopModel 
-     */
-    constructor(shopModel) {
-        this.model = shopModel
-    }
-
     async getAll() {
-        return await this.model.find()
+        return await ShopModel.find()
     }
 
     async getOneById(id) {
-        return await this.model.findById(id)
+        return await ShopModel.findById(id)
     }
 
     async insertMany(newShops) {
-        return await this.model.insertMany(newShops)
+        return await ShopModel.insertMany(newShops)
     }    
 }
 
