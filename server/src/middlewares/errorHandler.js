@@ -3,7 +3,7 @@ function errorHandler(error, req, res, next) {
     const message = error.message || 'Internal Server Error'
     
     res.status(statusCode).json({
-        message
+        error: message
     })
 }
 
