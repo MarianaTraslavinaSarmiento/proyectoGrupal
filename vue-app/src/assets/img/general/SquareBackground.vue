@@ -5,6 +5,10 @@ const props = defineProps({
   isInverted: {
     type: Boolean,
     default: false,
+  },
+  opacity:{
+    type: Number,
+    default: "0.15"
   }
 });
 
@@ -14,7 +18,7 @@ const accentColor = computed(() => props.isInverted ? 'var(--color-border)' : 'v
 
 <template>
     <svg height="100%" viewBox="0 0 1397 1425" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g opacity="0.15">
+        <g :opacity="opacity">
             <path d="M683.572 30.2787L1.31958 712.35L683.572 1394.42L1365.83 712.35L683.572 30.2787Z" :fill="accentColor" />
             <path
                 d="M684.917 1425.45L662.768 1404.69L677.995 1389.47L669.689 1379.78L675.226 1374.24L684.917 1382.55L693.222 1374.24L698.76 1379.78L690.454 1389.47L705.681 1404.69L684.917 1425.45Z"
