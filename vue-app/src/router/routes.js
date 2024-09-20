@@ -5,6 +5,7 @@ import AppPage from "@views/AppPage.vue";
 import Auth from "@views/login/Auth.vue";
 import TermsAndConditions from "@views/login/TermsAndConditions.vue";
 import StartSession from "@views/login/StartSession.vue"
+import WorkshopsAndCraftStores from "@views/workshops-crafts-stores/WorkshopsAndCraftStores.vue"
 
 
 export const routes = [
@@ -27,6 +28,11 @@ export const routes = [
         path: '/login/session-start',
         name: 'sessionStart',
         component: StartSession
+    },
+    {
+        path: '/workshops-craft-stores',
+        name: 'workshopsAndCraftStores',
+        component: WorkshopsAndCraftStores
     },
     {
         path: '/app',
