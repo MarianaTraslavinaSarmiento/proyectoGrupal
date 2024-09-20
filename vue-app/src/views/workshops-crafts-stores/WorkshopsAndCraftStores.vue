@@ -16,13 +16,6 @@ import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
         :showFilter="true"
         />
 
-        <HeaderTitle
-        title="Talleres educativos"
-        :hideDiamond="true"
-        />
-
-
-
     </main>
     <Nav />
 </template>

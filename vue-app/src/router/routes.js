@@ -36,12 +36,6 @@ export const routes = [
         component: WorkshopsAndCraftStores
     },
     {
-        path: '/component',
-        name: 'component',
-        component: HeaderTitle
-
-    },
-    {
         path: '/app',
         name: 'app',
         component: AppPage,

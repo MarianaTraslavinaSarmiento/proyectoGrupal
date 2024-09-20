@@ -2,6 +2,28 @@
 
 import SquareBackground from "@assets/img/general/SquareBackground.vue"
 import Back from "@assets/img/general/Back.vue"
+import { reactive } from "vue";
+import axios from "axios";
+import router from "@/router";
+const user = reactive({
+    login: '',
+    password: ''
+})
+
+const handleUserAuth = async () => {
+    try{
+        const res = await axios.post('http://localhost:3000/api/auth/login', user)
+        console.log(res);
+
+    if(res.status == 200){
+        router.push('/workshops-craft-stores')
+    }
+
+    }catch(err){
+        console.error(err)
+        alert('Error al iniciar sesión. Por favor verifica tu información.')
+    }
+}
 </script>
 
 <template>
@@ -13,13 +35,13 @@ import Back from "@assets/img/general/Back.vue"
         </div>
         <div class="login__form">
             <label for="username" class="login__label">Nombre de usuario, celular o correo</label>
-            <input type="text" id="username" class="box__input" />
+            <input type="text" id="username" class="box__input" v-model="user.login"/>
 
             <label for="password" class="login__label">Contraseña</label>
-            <input type="password" id="password" class="box__input" />
+            <input type="password" id="password" class="box__input" v-model="user.password"/>
 
             <div class="login__form__links">
-                <a href="#" class="login__form__link">Iniciar sesión</a>
+                <a href="#" class="login__form__link" @click="handleUserAuth">Iniciar sesión</a>
                 <a href="#" class="login__form__link">¿Olvidaste tu contraseña?</a>
             </div>
         </div>

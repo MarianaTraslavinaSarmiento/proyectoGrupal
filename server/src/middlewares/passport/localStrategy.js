@@ -1,6 +1,6 @@
 const LocalStrategy = require("passport-local").Strategy 
 const UserService = require("../../api/users/user.service")
-
+const bcrypt = require("bcrypt")
 const userService = new UserService()
 
 module.exports = new LocalStrategy(
@@ -17,7 +17,7 @@ module.exports = new LocalStrategy(
                 return done(null, false, { message: 'User not found' });
             }
 
-            const isMatch = await user.comparePassword(password);
+            const isMatch = await bcrypt.compare(password, user.password )
             if (!isMatch) {
                 return done(null, false, { message: 'Incorrect password' });
             }

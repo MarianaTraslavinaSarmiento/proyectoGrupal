@@ -13,7 +13,8 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (id, done) => {
     try {
         const user = await userService.getById(id); 
-        done(null, user); 
+        const { password, ...userWithoutPassword } = user;
+        done(null, userWithoutPassword); 
     } catch (err) {
         done(err);
     }
