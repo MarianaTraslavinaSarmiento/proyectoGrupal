@@ -18,6 +18,8 @@
   a {
     text-decoration: none;
     color: inherit;
+    -webkit-tap-highlight-color: transparent;
+    -moz-focusring-color: transparent;
   }
   
   /* Reset form element fonts */
