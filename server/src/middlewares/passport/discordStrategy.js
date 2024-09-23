@@ -2,20 +2,22 @@ const DiscordStrategy = require('passport-discord').Strategy;
 const bcrypt = require('bcrypt');
 const UserService = require('../../api/users/user.service');
 const UserModel = require('../../api/users/user.model')
+const defaultProfilePic = require("../../utils/defaultPfp")
 
 const userService = new UserService()
 
-const DISCORD_APPLICATION_ID = process.env.DISCORD_APPLICATION_ID
+const DISCORD_CLIENT_ID = process.env.DISCORD_CLIENT_ID
 const DISCORD_CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET
 
 
 module.exports = new DiscordStrategy({
-    clientID: DISCORD_APPLICATION_ID,
+    clientID: DISCORD_CLIENT_ID,
     clientSecret: DISCORD_CLIENT_SECRET,
-    callbackURL: 'http://localhost:5000/api/auth/discord/callback',
+    callbackURL: '/api/auth/discord/callback',
     scope: ['identify', 'email']
 
 }, async(accessToken, refreshToken, profile, done) => {
+    console.log(profile)
     try {
         if (user) {
             return done(null, user);
