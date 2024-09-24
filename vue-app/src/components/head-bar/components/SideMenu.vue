@@ -1,8 +1,11 @@
 <script setup>
-import Avatar from '@components/avatar/Avatar.vue'
-//   import { HeartIcon, ShoppingBagIcon, AcademicCapIcon, TicketIcon, CogIcon, ChatBubbleLeftIcon, PhoneIcon } from '@heroicons/vue/24/outline';
+import Avatar from '@/components/avatar/Avatar.vue'
+import SideItemLink from './SideItemLink.vue'
+import menuList from './data/menu-list.js'
+import DiamondIcon from '@icons/general/DiamondIcon.vue'
+import DiamondSeparator from '@components/diamond-separator/DiamondSeparator.vue'
 
-defineProps({
+const props = defineProps({
     isOpen: {
         type: Boolean,
         required: true
@@ -13,48 +16,40 @@ defineProps({
     }
 });
 
-defineEmits(['close']);
+const emit = defineEmits(['close']);
 
-const menuItems = [
-    { id: 1, label: 'Lista de favoritos' },
-    { id: 2, label: 'Compras' },
-    { id: 3, label: 'Talleres' },
-    { id: 4, label: 'Canjear cupón' },
-    { id: 5, label: 'Ajustes' },
-    { id: 6, label: 'Comentarios' },
-    { id: 7, label: 'Atención al cliente' },
-];
+const closeMenu = () => {
+    emit('close');
+};
 </script>
 
 <template>
-    <transition name="slide">
+    <Transition name="slide">
         <div v-if="isOpen" class="side-menu">
             <div class="user-info">
                 <Avatar class="user-avatar" />
                 <span class="user-name">{{ user.name }}</span>
             </div>
-
             <nav class="menu-items">
                 <ul>
-                    <li v-for="item in menuItems" :key="item.id">
-                        <a href="#" class="menu-item">
-                            <!-- <component :is="item" class="item-icon" /> -->
-                            {{ item.label }}
-                        </a>
+                    <li v-for="item in menuList" :key="item.pageName">
+                        <DiamondSeparator v-if="item.separator" :icon="DiamondIcon" class="separator" />
+                        <SideItemLink v-else
+                            :icon-component="item.icon"
+                            :page-name="item.pageName"
+                            :text="item.text"
+                            :alias="item.alias"
+                        />
                     </li>
                 </ul>
             </nav>
-
             <div class="footer-info">
-                <!-- <img src="/peru-flag.png" alt="Peru flag" class="peru-flag"> -->
                 <span class="footer-text">Aplicación potenciada por: Perú Ministerio de Cultura</span>
             </div>
         </div>
-    </transition>
-
-    <div v-if="isOpen" class="overlay" @click="$emit('close')"></div>
+    </Transition>
+    <div v-if="isOpen" class="overlay" @click="closeMenu"></div>
 </template>
-
 
 <style lang="scss" scoped>
 .side-menu {
@@ -74,50 +69,34 @@ const menuItems = [
     .user-info {
         display: flex;
         align-items: center;
-
         gap: 1rem;
 
         .user-avatar {
-            width: 60%;
-            height: auto;
+            width: 60px;
+            height: 60px;
         }
 
         .user-name {
             font-family: var(--font-bellota);
-            font-weight: regular;
+            font-weight: normal;
             color: var(--color-text);
             font-size: 1.5rem;
-            width: 100%;
         }
     }
 }
 
-
-
 .menu-items {
     flex-grow: 1;
+
+    .separator {
+        width: 100%;
+        margin: 2em 0;
+        color: var(--background-secondary);
+    }
 
     ul {
         list-style-type: none;
         padding: 0;
-    }
-
-    .menu-item {
-        display: flex;
-        align-items: center;
-        padding: 10px 0;
-        color: var(--color-accent);
-        text-decoration: none;
-
-        &:hover {
-            opacity: 0.8;
-        }
-
-        .item-icon {
-            width: 20px;
-            height: 20px;
-            margin-right: 10px;
-        }
     }
 }
 
@@ -126,12 +105,6 @@ const menuItems = [
     color: var(--color-text-muted);
     display: flex;
     align-items: center;
-
-    .peru-flag {
-        width: 24px;
-        height: 16px;
-        margin-right: 8px;
-    }
 }
 
 .overlay {
@@ -140,7 +113,7 @@ const menuItems = [
     left: 0;
     right: 0;
     bottom: 0;
-    // background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0);
     z-index: 999;
 }
 
