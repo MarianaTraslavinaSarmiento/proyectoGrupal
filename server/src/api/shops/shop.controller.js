@@ -1,8 +1,10 @@
 const ShopService = require("./shop.service")
 
 class ShopController {
+    #service
+
     constructor() {
-        this.service = new ShopService()
+        this.#service = new ShopService()
     }
 
     async getAll(req, res) {

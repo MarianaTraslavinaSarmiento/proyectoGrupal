@@ -5,6 +5,7 @@ const errorHandler = require("./src/middlewares/errorHandler");
 const session = require("express-session");
 const passport = require("./src/middlewares/passport")
 const cookieParser = require("cookie-parser")
+const checkAuth = require("./src/middlewares/checkAuth")
 
 const app = express();
 const PORT = 3001
@@ -34,8 +35,8 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
-app.use("/api/shop", appShop)
 app.use("/api/auth", appAuth)
+app.use("/api/shop", checkAuth, appShop)
 
 
 app.use(errorHandler)
