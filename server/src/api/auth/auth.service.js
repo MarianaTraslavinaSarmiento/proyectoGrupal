@@ -1,8 +1,8 @@
 const UserModel = require("../users/user.model")
 const HttpError = require("../../utils/HttpError")
 const bcrypt = require("bcrypt")
+const defaultProfilePic = require("../../utils/defaultPfp")
 
-const defaultProfilePic = "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small_2x/default-avatar-icon-of-social-media-user-vector.jpg"
 
 class AuthService {
 

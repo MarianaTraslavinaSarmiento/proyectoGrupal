@@ -3,8 +3,7 @@ const { Schema, model } = require("mongoose")
 const userSchema = new Schema({
     username: {
         type: String,
-        required: true,
-        unique: true
+        required: true
     },
     email: {
         type: String,
@@ -15,19 +14,22 @@ const userSchema = new Schema({
     genre: {
         type: String,
         enum : ['M','F'],
-        required: true
+        required: false
     },
     born_date: {
         type: Schema.Types.Date,
-        required: true
+        required: false
     },
     password: {
         type: String,
-        required: true
+        required: false
     },
     profile_pic_url: {
         type: String,
         required: true
+    },
+    account_id: {
+        type: String
     }
 }, {
     timestamps: true

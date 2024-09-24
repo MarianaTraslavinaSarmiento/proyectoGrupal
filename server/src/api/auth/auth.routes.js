@@ -7,10 +7,10 @@ const passport = require("../../middlewares/passport")
 
 const controller = new AuthController()
 
-// const redirects = {
-//     failureRedirect: process.env.NODE_ENV === 'production' ? process.env.ALLOWED_ORIGIN + "/login" : 'http://localhost:5173/login',
-//     sucessRedirect: process.env.NODE_ENV === 'production' ? process.env.ALLOWED_ORIGIN + "/signup" : 'http://localhost:5173/signup',
-// }
+const redirects = {
+    successRedirect: process.env.ALLOWED_ORIGIN + "/app/home",
+    failureRedirect: process.env.ALLOWED_ORIGIN + "/login"
+}
 
 appAuth.post("/login", validateLogin(), handleValidationErrors, passport.authenticate("local"), (req, res) => {
     res.json({ message: "Login successful" })
@@ -21,20 +21,16 @@ appAuth.get("/logout", asyncHandler((req, res) => controller.logout(req, res)))
 appAuth.get("/verify", asyncHandler((req, res) => controller.verify(req, res)))
 
 // * Google
-appAuth.get("/google/auth/")
-appAuth.get("/google/auth/callback")
+appAuth.get("/google", passport.authenticate("google"))
+appAuth.get("/google/callback", passport.authenticate("google", redirects))
 
 // * Discord
-appAuth.get("/discord/auth/")
-appAuth.get("/discord/auth/callback")
+appAuth.get("/discord", passport.authenticate("discord"))
+appAuth.get("/discord/callback", passport.authenticate("discord", redirects))
 
+// ! Linkedin - not working currently, Linkedin Captcha Error
+// appAuth.get("/linkedin", passport.authenticate("linkedin"))
+// appAuth.get("/linkedin/callback", passport.authenticate("discord", redirects))
 
-// * Facebook
-appAuth.get("/facebook/auth/")
-appAuth.get("/facebook/auth/callback")
-
-// * Instagram
-appAuth.get("/instagram/auth/")
-appAuth.get("/instagram/auth/callback")
 
 module.exports = appAuth
