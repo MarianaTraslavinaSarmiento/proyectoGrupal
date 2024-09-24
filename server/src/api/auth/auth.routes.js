@@ -28,9 +28,9 @@ appAuth.get("/google/callback", passport.authenticate("google", redirects))
 appAuth.get("/discord", passport.authenticate("discord"))
 appAuth.get("/discord/callback", passport.authenticate("discord", redirects))
 
-// * Linkedin
-appAuth.get("/linkedin")
-appAuth.get("/linkedin/callback")
+// ! Linkedin - not working currently, Linkedin Captcha Error
+// appAuth.get("/linkedin", passport.authenticate("linkedin"))
+// appAuth.get("/linkedin/callback", passport.authenticate("discord", redirects))
 
 
 module.exports = appAuth

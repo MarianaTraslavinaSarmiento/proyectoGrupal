@@ -1,4 +1,4 @@
-const LinkedinStrategy = require("passport-google-oauth20").Strategy
+const LinkedinStrategy = require("passport-linkedin-oauth2").Strategy
 const bcrypt = require("bcrypt")
 const UserService = require("../../api/users/user.service")
 const UserModel = require("../../api/users/user.model")
@@ -6,46 +6,14 @@ const defaultProfilePic = require("../../utils/defaultPfp")
 
 const userService = new UserService()
 
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
-const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET
+const LINKEDIN_CLIENT_ID = process.env.LINKEDIN_CLIENT_ID
+const LINKEDIN_CLIENT_SECRET = process.env.LINKEDIN_CLIENT_SECRET
 
-// {
-//     id: '118265993970559349529',
-//     displayName: 'Samuel Suarez',
-//     name: { familyName: 'Suarez', givenName: 'Samuel' },
-//     emails: [ { value: 'samuel.suarezgm@gmail.com', verified: true } ],
-//     photos: [
-//       {
-//         value: 'https://lh3.googleusercontent.com/a/ACg8ocIusFOap7Ra1ThvmPXGrwT5hPRTm4wZ8LGy3m5LOsRwHoWy9vnw=s96-c'
-//       }
-//     ],
-//     provider: 'google',
-//     _raw: '{\n' +
-//       '  "sub": "118265993970559349529",\n' +
-//       '  "name": "Samuel Suarez",\n' +
-//       '  "given_name": "Samuel",\n' +
-//       '  "family_name": "Suarez",\n' +
-//       '  "picture": "https://lh3.googleusercontent.com/a/ACg8ocIusFOap7Ra1ThvmPXGrwT5hPRTm4wZ8LGy3m5LOsRwHoWy9vnw\\u003ds96-c",\n' +
-//       '  "email": "samuel.suarezgm@gmail.com",\n' +
-//       '  "email_verified": true\n' +
-//       '}',
-//     _json: {
-//       sub: '118265993970559349529',
-//       name: 'Samuel Suarez',
-//       given_name: 'Samuel',
-//       family_name: 'Suarez',
-//       picture: 'https://lh3.googleusercontent.com/a/ACg8ocIusFOap7Ra1ThvmPXGrwT5hPRTm4wZ8LGy3m5LOsRwHoWy9vnw=s96-c',
-//       email: 'samuel.suarezgm@gmail.com',
-//       email_verified: true
-//     }
-//   }
-
-
-module.exports = new GoogleStrategy({
-    clientID: GOOGLE_CLIENT_ID,
-    clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "/api/auth/google/callback",
-    scope: ["profile", "email"]
+module.exports = new LinkedinStrategy({
+    clientID: LINKEDIN_CLIENT_ID,
+    clientSecret: LINKEDIN_CLIENT_SECRET,
+    callbackURL: "/api/auth/linkedin/callback",
+    scope: ['profile', 'email']
   }, async(accessToken, refreshToken, profile, done ) => {
     console.log(profile)
     try {
