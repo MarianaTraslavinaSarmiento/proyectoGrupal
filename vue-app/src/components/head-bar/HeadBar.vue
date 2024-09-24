@@ -1,9 +1,21 @@
 <script setup>
+import { ref } from 'vue';
 import MenuIcon from '@icons/head-bar/MenuIcon.vue';
 import SearchBar from '@components/search-bar/SearchBar.vue';
+import SideMenu from './components/SideMenu.vue';
+
+const isMenuOpen = ref(false);
+const user = ref({
+  name: 'SaraMartin9',
+  avatar: '/path/to/avatar.jpg'
+});
 
 const toggleMenu = () => {
-    console.log('Toggling menu');
+  isMenuOpen.value = !isMenuOpen.value;
+};
+
+const closeMenu = () => {
+  isMenuOpen.value = false;
 };
 </script>
 
@@ -13,6 +25,11 @@ const toggleMenu = () => {
             <MenuIcon />
         </button>
         <SearchBar class="search-bar" />
+        <SideMenu 
+            :is-open="isMenuOpen" 
+            :user="user" 
+            @close="closeMenu"
+        />
     </header>
 </template>
 
