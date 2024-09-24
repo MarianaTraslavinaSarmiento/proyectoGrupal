@@ -6,7 +6,7 @@ import Auth from "@views/login/Auth.vue";
 import TermsAndConditions from "@views/login/TermsAndConditions.vue";
 import StartSession from "@views/login/StartSession.vue"
 import WorkshopsAndCraftStores from "@views/workshops-crafts-stores/WorkshopsAndCraftStores.vue"
-import HeaderTitle from "@components/header-title/HeaderTitle.vue"
+import Categories from "@views/categories/Categories.vue"
 
 
 export const routes = [
@@ -34,6 +34,12 @@ export const routes = [
         path: '/workshops-craft-stores',
         name: 'workshopsAndCraftStores',
         component: WorkshopsAndCraftStores
+    },
+
+    {
+        path: '/categories',
+        name: 'categories',
+        component: Categories
     },
     {
         path: '/app',
