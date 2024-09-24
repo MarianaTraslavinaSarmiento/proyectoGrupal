@@ -44,7 +44,7 @@ const closeMenu = () => {
                 </ul>
             </nav>
             <div class="footer-info">
-                <span class="footer-text">Aplicación potenciada por: Perú Ministerio de Cultura</span>
+                <span class="footer-text">Aplicación potenciada por:</span>
             </div>
         </div>
     </Transition>
@@ -65,11 +65,12 @@ const closeMenu = () => {
     z-index: 1000;
     display: flex;
     flex-direction: column;
+    gap: 2.5rem;
 
     .user-info {
         display: flex;
         align-items: center;
-        gap: 1rem;
+        gap: 1.3rem;
 
         .user-avatar {
             width: 60px;
@@ -96,13 +97,18 @@ const closeMenu = () => {
 
     ul {
         list-style-type: none;
-        padding: 0;
+        padding:0;
+        margin: 0;
+        li {
+            margin-bottom: 2em;
+        }
     }
 }
 
 .footer-info {
+    font-family: var(--font-bellota);
     font-size: 0.8rem;
-    color: var(--color-text-muted);
+    color: var(--color-text);
     display: flex;
     align-items: center;
 }
