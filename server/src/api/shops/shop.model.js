@@ -16,15 +16,6 @@ const shopSchema = new Schema({
     image_url: {
         type: String,
         required: true
-    },
-    video_url: {
-        type: String,
-        required: false
-    },
-    artisan_id: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
     }
 }, {
     timestamps: true

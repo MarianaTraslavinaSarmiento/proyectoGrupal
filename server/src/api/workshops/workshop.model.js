@@ -41,10 +41,9 @@ const workshopSchema = new Schema({
         type: String,
         required: true
     },
-    artisan_id: {
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
+    video_url: {
+        type: String,
+        required: false
     },
     price: {
         type: Number,
