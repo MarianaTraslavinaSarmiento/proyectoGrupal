@@ -6,6 +6,11 @@ import Auth from "@views/login/Auth.vue";
 import TermsAndConditions from "@views/login/TermsAndConditions.vue";
 import StartSession from "@views/login/StartSession.vue"
 import WorkshopsAndCraftStores from "@views/workshops-crafts-stores/WorkshopsAndCraftStores.vue"
+
+import SingUp from "@views/singup/SingUp.vue";
+import RegisterRuraqMaki from "@views/singup/RegisterRuraqMaki.vue";
+
+
 import HeaderTitle from "@components/header-title/HeaderTitle.vue"
 
 
@@ -34,6 +39,16 @@ export const routes = [
         path: '/workshops-craft-stores',
         name: 'workshopsAndCraftStores',
         component: WorkshopsAndCraftStores
+    },
+    {
+        path: '/singup',
+        name: 'singup',
+        component: SingUp
+    },
+    {   
+        path: '/singup/RegisterRuraqMaki',
+        name: 'RegisterRuraqMaki',
+        component: RegisterRuraqMaki
     },
     {
         path: '/app',
