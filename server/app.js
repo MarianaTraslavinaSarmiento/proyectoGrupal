@@ -10,8 +10,9 @@ const checkAuth = require("./src/middlewares/checkAuth")
 const app = express();
 const PORT = 3001
 
-const appShop = require("./src/api/shops/shop.routes");
 const appAuth = require("./src/api/auth/auth.routes");
+const appShop = require("./src/api/shops/shop.routes");
+const appUser = require("./src/api/users/user.routes")
 
 app.use(cookieParser())
 app.use(express.json())
@@ -37,6 +38,7 @@ app.use(passport.session())
 
 app.use("/api/auth", appAuth)
 app.use("/api/shop", checkAuth, appShop)
+app.use("/api/user", checkAuth, appUser)
 
 
 app.use(errorHandler)
