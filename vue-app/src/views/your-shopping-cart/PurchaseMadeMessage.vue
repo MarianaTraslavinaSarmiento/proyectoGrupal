@@ -105,6 +105,7 @@ const email = ref('');
   flex-direction: column;
   align-items: center;
   padding: 0 3rem;
+  margin-bottom: 5.5%;
 }
 
 .email-message {
