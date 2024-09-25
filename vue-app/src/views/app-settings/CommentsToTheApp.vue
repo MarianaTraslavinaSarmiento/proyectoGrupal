@@ -48,7 +48,7 @@ const userProblem = ref('');
   margin: 50px 30px;
 
   h2 {
-    color: red;
+    color: var(--text-contrast);
     font-size: 1.6rem;
     margin-bottom: 20px;
     margin-top: 50px;
@@ -69,7 +69,7 @@ const userProblem = ref('');
 
 .problem {
   background-color: var(--background-secondary);
-  color: white;
+  color: var(--text-color);
   padding: 15px;
   margin-bottom: 15px;
   border-radius: 5px;
@@ -88,7 +88,7 @@ textarea {
   width: 100%;
   height: 20vh;
   background-color: var(--background-secondary);
-  color: white;
+  color: rgb(from var(--text-color) r g b / 40%);
   border: none;
   border-radius: 5px;
   padding: 15px;
@@ -108,8 +108,8 @@ textarea {
 }
 
 .attach-button, .send-button {
-  background-color: var(--background-secondary);
-  color: white;
+  background-color: var(--background-primary);
+  color: var(--text-color);
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
@@ -122,6 +122,6 @@ textarea {
 }
 
 .send-button {
-  background-color: var(--color-border);
+  background-color: var(--background-primary);
 }
 </style>
