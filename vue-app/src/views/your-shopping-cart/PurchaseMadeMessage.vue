@@ -1,32 +1,31 @@
 <template>
   <div class="main__container">
-    
-        <div class="content">
-        <successfulPurchase class="success-icon" />
-        <h1 class="title">¡Compra realizada con exito!</h1>
-        <div class="diamond-divider">
-            <smallTriangles v-for="i in 1" :key="i" />
-        </div>
-        <p class="message">
-            Gracias por apoyar a los artesanos peruanos, puedes revisar tu compra en la opción de
-        </p>
-        <button class="btn-purchases">Compras</button>
-        <div class="diamond-divider">
-            <smallTriangles v-for="i in 1" :key="i" />
-        </div>
+    <div class="content">
+      <successfulPurchase class="success-icon" />
+      <h1 class="title">¡Compra realizada con exito!</h1>
+      <div class="diamond-divider">
+        <smallTriangles v-for="i in 1" :key="i" />
+      </div>
+      <p class="message">
+        Gracias por apoyar a los artesanos peruanos, puedes revisar tu compra en la opción de 
+      </p>
+      <button class="btn-purchases">Compras</button>
+      <div class="diamond-divider">
+        <smallTriangles v-for="i in 1" :key="i" />
+      </div>
     </div>
-      <div class="link-mail">
-        <p class="email-message">
-            Vincula tu correo para recibir más detalles sobre tus compras realizadas
-        </p>
-        <input 
-            type="email" 
-            v-model="email" 
-            placeholder="Añadir correo electrónico" 
-            class="email-input"
-        />
-        <button class="btn-return">Regresar al inicio</button>
-        </div>
+      </div>
+    <div class="link-mail">
+      <p class="email-message">
+        Vincula tu correo para recibir más detalles sobre tus compras realizadas
+      </p>
+      <input 
+        type="email" 
+        v-model="email" 
+        placeholder="Añadir correo electrónico" 
+        class="email-input"
+      />
+      <button class="btn-return">Regresar al inicio</button>
     </div>
 </template>
 
@@ -41,31 +40,13 @@ const email = ref('');
 <style scoped>
 .main__container {
   position: relative;
-  min-height: 100vh;
   font-family: 'Bellota', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: white;
   overflow: hidden;
-  padding: 3rem;
-}
-
-.triangle__top, .triangle__bottom {
-  position: absolute;
-  z-index: -1;
-}
-
-.triangle__top {
-  top: -100px;
-  right: -100px;
-  transform: rotate(45deg);
-}
-
-.triangle__bottom {
-  bottom: -100px;
-  left: -100px;
-  transform: rotate(225deg);
+  padding: 2rem 0;
 }
 
 .content {
@@ -96,36 +77,41 @@ const email = ref('');
   fill: #8B4513;
 }
 
-.message, .email-message {
-  font-size: 1.8rem;
+.message {
+  font-size: 1.57rem;
   margin-bottom: 1rem;
   color: #8B4513;
-}
-
-.email-message {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-      width: 100vw;
-    color: #8B4513;
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    width: 100vw;
-    color: #8B4513;
+  margin: 0 30px;
 }
 
 .btn-purchases {
-    background-color: #8B4513;
-    width: 25vw;
-    height: 4vh;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
-    margin-top: 2rem;
+  background-color: #8B4513;
+  width: 25vw;
+  height: 4vh;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.link-mail {
+  width: 100%;
+  font-family: 'Bellota', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 3rem;
+}
+
+.email-message {
+  text-align: center;
+  color: #8B4513;
+  font-size: 1.57rem;
+  margin-bottom: 1rem;
 }
 
 .email-input {
@@ -134,7 +120,14 @@ const email = ref('');
   margin-bottom: 1rem;
   border: 1px solid #8B4513;
   border-radius: 4px;
-  font-size: 0.9rem;
+  font-size: 1.6rem;
+  background-color: #8B4513;
+  color: white;
+  margin-top: 3%;
+}
+
+.email-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .btn-return {
@@ -144,15 +137,8 @@ const email = ref('');
   padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 0.9rem;
-  width: 100%;
+  font-size: 1.6rem;
+  width: 50%;
+  margin-top: 5%;
 }
-
-.link-mail{
-
-  border: 1px solid red;
-  width: 100vw;
-  padding: 2.5rem;
-}
-
 </style>
