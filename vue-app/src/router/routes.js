@@ -11,7 +11,7 @@ import SingUp from "@views/singup/SingUp.vue";
 import RegisterRuraqMaki from "@views/singup/RegisterRuraqMaki.vue";
 import WorkshopsAndCraftStores from "@views/workshops-crafts-stores/WorkshopsAndCraftStores.vue"
 import GeneralPublicInfoWorkshops from "@views/educational-workshops/GeneralPublicInfoWorkshops.vue"
-
+import PurchaseMadeMessage from "@views/your-shopping-cart/PurchaseMadeMessage.vue"
 
 
 import HeaderTitle from "@components/header-title/HeaderTitle.vue"
@@ -57,6 +57,11 @@ export const routes = [
         path: '/educational-workshops/GeneralPublicInfoWorkshops',
         name: 'GeneralPublicInfoWorkshops',
         component: GeneralPublicInfoWorkshops
+    },
+    {   
+        path: '/your-shopping-cart/PurchaseMadeMessage',
+        name: 'PurchaseMadeMessage',
+        component: PurchaseMadeMessage
     },
     {
         path: '/app',
