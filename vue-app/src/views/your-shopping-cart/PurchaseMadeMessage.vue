@@ -132,8 +132,8 @@ const email = ref('');
 }
 
 .btn-return {
-  background-color: var(--text-color);
-  color: var(--background-secondary);
+  background-color: var(--background-secondary);
+  color: var(--text-color);
   border: 1px solid var(--background-secondary);
   padding: 0.5rem 1rem;
   border-radius: 4px;
