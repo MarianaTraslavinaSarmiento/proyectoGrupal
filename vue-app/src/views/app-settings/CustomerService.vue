@@ -40,13 +40,13 @@ import commentsMenu from "@/assets/icons/app-configuration/commentsMenu.vue";
         margin: 50px 30px;
         
         h2 {
-          color: #8b0000;
-          margin-bottom: 10px;
+          color: var(--color-border);
+          margin-bottom: 15px;
           font-size: 1.6rem;
         }
         
         .pregunta {
-          background-color: #8b4513;
+          background-color: var(--background-secondary);
           color: white;
           padding: 15px;
           margin-bottom: 15px;
@@ -58,7 +58,7 @@ import commentsMenu from "@/assets/icons/app-configuration/commentsMenu.vue";
           cursor: pointer;
           
           &:hover {
-            background-color: #a0522d;
+            background-color: var(--background-secondary);
           }
         }
       }
@@ -69,7 +69,7 @@ import commentsMenu from "@/assets/icons/app-configuration/commentsMenu.vue";
         margin: 30px;
         
         p {
-          color: #8b0000;
+          color: var(--color-border);
           margin-bottom: 20px;
           font-size: 1.6rem;
           font-weight: bold;
@@ -83,7 +83,7 @@ import commentsMenu from "@/assets/icons/app-configuration/commentsMenu.vue";
           margin-bottom: 10px;
           border: none;
           border-radius: 5px;
-          color: white;
+          color: var(--text-color);
           font-weight: bold;
           font-size: 1.3rem;
           cursor: pointer;
@@ -96,18 +96,18 @@ import commentsMenu from "@/assets/icons/app-configuration/commentsMenu.vue";
         }
         
         .chat-button {
-          background-color: #8b4513;
+          background-color: var(--background-secondary);
           
           &:hover {
-            background-color: #a0522d;
+            background-color: var(--background-secondary);
           }
         }
         
         .llamada-button {
-          background-color: #8b0000;
+          background-color: var(--background-secondary);
           
           &:hover {
-            background-color: #a52a2a;
+            background-color: var(--background-secondary);
           }
         }
       }
