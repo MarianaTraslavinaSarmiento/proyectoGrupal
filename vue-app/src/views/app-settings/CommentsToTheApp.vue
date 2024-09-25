@@ -120,4 +120,20 @@ textarea {
 .send-button {
   background-color: var(--color-border);
 }
+
+.other-problem{
+
+font-family: Bellota;
+margin-top: 20px;
+margin: 50px 30px;
+
+    h2{
+        color: red;
+        margin-top: -20px;
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+}
+}
+
+
 </style>
