@@ -5,10 +5,13 @@ import AppPage from "@views/AppPage.vue";
 import Auth from "@views/login/Auth.vue";
 import TermsAndConditions from "@views/login/TermsAndConditions.vue";
 import StartSession from "@views/login/StartSession.vue"
-import WorkshopsAndCraftStores from "@views/workshops-crafts-stores/WorkshopsAndCraftStores.vue"
+
 
 import SingUp from "@views/singup/SingUp.vue";
 import RegisterRuraqMaki from "@views/singup/RegisterRuraqMaki.vue";
+import WorkshopsAndCraftStores from "@views/workshops-crafts-stores/WorkshopsAndCraftStores.vue"
+import GeneralPublicInfoWorkshops from "@views/educational-workshops/GeneralPublicInfoWorkshops.vue"
+
 
 
 import HeaderTitle from "@components/header-title/HeaderTitle.vue"
@@ -49,6 +52,11 @@ export const routes = [
         path: '/singup/RegisterRuraqMaki',
         name: 'RegisterRuraqMaki',
         component: RegisterRuraqMaki
+    },
+    {   
+        path: '/educational-workshops/GeneralPublicInfoWorkshops',
+        name: 'GeneralPublicInfoWorkshops',
+        component: GeneralPublicInfoWorkshops
     },
     {
         path: '/app',
