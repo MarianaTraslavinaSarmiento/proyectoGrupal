@@ -88,6 +88,7 @@ import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
 
 textarea {
   width: 100%;
+  height: 20vh;
   background-color: var(--background-secondary);
   color: white;
   border: none;
