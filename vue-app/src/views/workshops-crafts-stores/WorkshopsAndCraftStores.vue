@@ -42,6 +42,10 @@ import TitleSection from '@components/title-section/TitleSection.vue'
     font-family: Bellota;
     display: flex;
     padding: 15px 20px;
+    gap: 20px;
+
+    justify-content: center;
+    align-items: center;
 }
 
 .item {
