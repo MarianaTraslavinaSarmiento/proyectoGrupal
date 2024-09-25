@@ -1,3 +1,10 @@
+<script setup>
+import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
+import Call from "@/assets/icons/app-configuration/call.vue";
+import commentsMenu from "@/assets/icons/app-configuration/commentsMenu.vue";
+
+</script>
+
 <template>
     <div class="atencion-cliente">
       <header-title :title="'Atención al cliente'" :hideDiamond="false" />
@@ -14,34 +21,28 @@
       <div class="atencion-personalizada">
         <p>¿Necesitas atención personalizada? habla con nuestro equipo de soporte</p>
         <button class="chat-button">
-          <SmallTriangles class="icon" />
+          <commentsMenu class="icon" />
           Empieza un chat
         </button>
         <button class="llamada-button">
-          <SuccessfulPurchase class="icon" />
+          <Call class="icon" />
           Programa una llamada
         </button>
       </div>
     </div>
   </template>
   
-  <script setup>
-  import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
-  import SmallTriangles from "@/assets/icons/app-configuration/call.vue";
-  import SuccessfulPurchase from "@/assets/icons/app-configuration/commentsMenu.vue";
-  
-  </script>
   
   <style scoped lang="scss">
     .preguntas-frecuentes {
         font-family: Bellota;
         margin-top: 20px;
-        margin: 30px;
+        margin: 50px 30px;
         
         h2 {
           color: #8b0000;
-          font-size: 1.5rem;
           margin-bottom: 10px;
+          font-size: 1.6rem;
         }
         
         .pregunta {
@@ -53,7 +54,7 @@
           width: 100%;
           text-align: left;
           border: none;
-          font-size: 1rem;
+          font-size: 1.3rem;
           cursor: pointer;
           
           &:hover {
@@ -64,10 +65,14 @@
       
       .atencion-personalizada {
         margin-top: 20px;
+        font-family: 'Bellota', sans-serif;
+        margin: 30px;
         
         p {
           color: #8b0000;
           margin-bottom: 10px;
+          font-size: 1.6rem;
+          font-weight: bold;
         }
         
         button {

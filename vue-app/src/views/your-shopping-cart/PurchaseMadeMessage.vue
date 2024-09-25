@@ -1,3 +1,11 @@
+<script setup>
+import { ref } from 'vue';
+import smallTriangles from "@/assets/icons/your-shopping-cart/smallTriangles.vue"
+import successfulPurchase from "@/assets/icons/your-shopping-cart/successfulPurchase.vue"
+
+const email = ref('');
+</script>
+
 <template>
   <div class="main__container">
     <div class="content">
@@ -29,13 +37,6 @@
     </div>
 </template>
 
-<script setup>
-import { ref } from 'vue';
-import smallTriangles from "@/assets/icons/your-shopping-cart/smallTriangles.vue"
-import successfulPurchase from "@/assets/icons/your-shopping-cart/successfulPurchase.vue"
-
-const email = ref('');
-</script>
 
 <style scoped>
 .main__container {
