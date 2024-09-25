@@ -13,6 +13,7 @@ const PORT = 3001
 const appAuth = require("./src/api/auth/auth.routes");
 const appShop = require("./src/api/shops/shop.routes");
 const appUser = require("./src/api/users/user.routes")
+const appProduct = require("./src/api/products/product.routes")
 
 app.use(cookieParser())
 app.use(express.json())
@@ -37,8 +38,9 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use("/api/auth", appAuth)
-app.use("/api/shop", checkAuth, appShop)
+app.use("/api/shop", appShop)
 app.use("/api/user", checkAuth, appUser)
+app.use("/api/product", checkAuth, appProduct)
 
 
 app.use(errorHandler)

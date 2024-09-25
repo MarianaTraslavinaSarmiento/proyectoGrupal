@@ -8,12 +8,12 @@ class ShopController {
     }
 
     async getAll(req, res) {
-        const shops = await this.service.getAll()
+        const shops = await this.#service.getAll()
         res.json(shops)
     }
 
     async getOneById(req, res) {
-        const shop = await this.service.getOneById(req.params.id)
+        const shop = await this.#service.getOneById(req.params.id)
         res.json(shop)
     }
 }

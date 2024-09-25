@@ -1,6 +1,11 @@
 const UserModel = require("./user.model")
 
 class UserService {
+    async getOneByQuery(query = {}) {
+        return await UserModel.findOne(query)
+    }
+
+
     async getOneById(id) {
         return await UserModel.findById(id)
     }

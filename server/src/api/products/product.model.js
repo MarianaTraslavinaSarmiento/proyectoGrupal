@@ -10,19 +10,8 @@ const productSchema = new Schema({
         required: true
     },
     size: {
-        height: {
-            type: Number,
-            required: true
-        },
-        width: {
-            type: Number,
-            required: true
-        },
-        unit: {
-            type: String,
-            enum: ["cm", "m"],
-            required: true
-        },
+        type: String,
+        required: true
     },
     weight: {
         type: String,
@@ -45,8 +34,8 @@ const productSchema = new Schema({
         required: true,
     },
     images_url: {
-        type: [String],
-        required: false 
+        type: String,
+        required: true 
     },
     price: {
         type: Number,
@@ -60,7 +49,7 @@ const productSchema = new Schema({
     offer: {
         type: {
           type: String,
-          enum: ["discount", "buyxgety", "freeshipping", "other"],
+          enum: ["discount", "buyxgety", "freeshipping"],
           required: false
         },
         details: {
@@ -72,8 +61,8 @@ const productSchema = new Schema({
             type: Number,
             required: false
           },
-          description: {
-            type: String,
+          discount_percentage: {
+            type: Number,
             required: false
           }
         }
