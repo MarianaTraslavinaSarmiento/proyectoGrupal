@@ -12,6 +12,7 @@ import RegisterRuraqMaki from "@views/singup/RegisterRuraqMaki.vue";
 import GeneralPublicInfoWorkshops from "@views/educational-workshops/GeneralPublicInfoWorkshops.vue"
 import PurchaseMadeMessage from "@views/your-shopping-cart/PurchaseMadeMessage.vue"
 import CustomerService from "@views/app-settings/CustomerService.vue"
+import CommentsToTheApp from "@views/app-settings/CommentsToTheApp.vue"
 
 
 import HeaderTitle from "@components/header-title/HeaderTitle.vue"
@@ -67,6 +68,11 @@ export const routes = [
         path: '/app-settings/CustomerService',
         name: 'CustomerService',
         component: CustomerService
+    },
+    {   
+        path: '/app-settings/CommentsToTheApp',
+        name: 'CommentsToTheApp',
+        component: CommentsToTheApp
     },
     {
         path: '/app',
