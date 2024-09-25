@@ -1,8 +1,9 @@
 <script setup>
 import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
+import { ref } from 'vue';
 
+const userProblem = ref('');
 </script>
-
 
 <template>
   <div class="customer-service">
@@ -25,48 +26,45 @@ import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
         placeholder="Describe aquí tu problema..."
         rows="4"
       ></textarea>
-      <div class="button-group">
-        <button class="attach-button">Adjuntar captura</button>
-        <button class="send-button">Enviar</button>
-      </div>
     </div>
 
+    <div class="button-group">
+      <button class="attach-button">Adjuntar captura</button>
+      <button class="send-button">Enviar</button>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-
-.frequent-problems{
-
-    font-family: Bellota;
-    margin-top: 20px;
-    margin: 50px 30px;
-
-        h2{
-            color: red;
-            margin-top: 50px;
-            font-size: 1.6rem;
-            margin-bottom: 20px;
-    }
-}
-
-.other-problem h2{
-    color: red;
-}
-.app-comments {
+.customer-service {
+  position: relative;
+  min-height: 100vh;
+//   padding-bottom: 70px;
   font-family: 'Bellota', sans-serif;
   color: white;
-  padding: 20px;
-  
-  h2 {
-    color: var(--color-border);
-    margin-bottom: 15px;
-    font-size: 1.4rem;
-  }
 }
 
 .frequent-problems, .other-problem {
+  margin: 50px 30px;
+
+  h2 {
+    color: red;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
+    margin-top: 50px;
+  }
+}
+
+.frequent-problems {
   margin-top: 20px;
+}
+
+.other-problem {
+  margin-top: 0px;
+
+  h2 {
+    margin-top: -20px;
+  }
 }
 
 .problem {
@@ -100,9 +98,13 @@ textarea {
 }
 
 .button-group {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
+  padding: 0px 30px;
 }
 
 .attach-button, .send-button {
@@ -122,20 +124,4 @@ textarea {
 .send-button {
   background-color: var(--color-border);
 }
-
-.other-problem{
-
-font-family: Bellota;
-margin-top: 20px;
-margin: 50px 30px 0 30px;
-
-    h2{
-        color: red;
-        margin-top: -20px;
-        font-size: 1.6rem;
-        margin-bottom: 20px;
-}
-}
-
-
 </style>
