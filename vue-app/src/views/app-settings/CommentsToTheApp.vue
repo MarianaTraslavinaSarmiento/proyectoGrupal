@@ -102,6 +102,7 @@ textarea {
 .button-group {
   display: flex;
   justify-content: space-between;
+  margin-top: 15px;
 }
 
 .attach-button, .send-button {
@@ -126,7 +127,7 @@ textarea {
 
 font-family: Bellota;
 margin-top: 20px;
-margin: 50px 30px;
+margin: 50px 30px 0 30px;
 
     h2{
         color: red;
