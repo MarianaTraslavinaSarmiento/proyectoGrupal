@@ -6,7 +6,7 @@ const {validateUpdate} = require("./user.validator")
 const controller = new UserController()
 
 appUser.get("/profile", asyncHandler((req, res) => controller.getOneById(req ,res)))
-appUser.get("/update", validateUpdate(), asyncHandler((req, res) => controller.updateUser(req, res)))
+appUser.put("/update", validateUpdate(), asyncHandler((req, res) => controller.updateUser(req, res)))
 
 module.exports = appUser
 
