@@ -3,9 +3,10 @@ import  ShopsCrafts  from '@views/app/shops-crafts/ShopsCrafts.vue'
 import  ShoppingCart  from '@views/app/shopping-cart/ShoppingCart.vue'
 import  DiscountsPromotions  from '@views/app/discounts-promotions/DiscountsPromotions.vue'
 import  Profile  from '@views/app/profile/Profile.vue'
+import WorkshopsAndCraftStores from "@views/workshops-crafts-stores/WorkshopsAndCraftStores.vue"
 
 
-export const interalRoutes = [
+export const internalRoutes = [
     {
         path: '/app/home',
         name: 'Home',
@@ -40,6 +41,12 @@ export const interalRoutes = [
         alias: 'perfil',
         meta:{ requiresNav: true , requiresHeadBar: true },
         component: Profile
+    },
+    {
+        path: '/app/workshops-craft-stores',
+        name: 'workshopsAndCraftStores',
+        alias: 'talleres-y-tiendas',
+        component: WorkshopsAndCraftStores
     }
 ]
 

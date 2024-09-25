@@ -1,12 +1,10 @@
-import { interalRoutes } from './internal.routes.js'
+import { internalRoutes } from './internal.routes.js'
 
 import SplashScreen from "@views/splash-screen/SplashScreen.vue";
 import AppPage from "@views/AppPage.vue";
 import Auth from "@views/login/Auth.vue";
 import TermsAndConditions from "@views/login/TermsAndConditions.vue";
 import StartSession from "@views/login/StartSession.vue"
-import WorkshopsAndCraftStores from "@views/workshops-crafts-stores/WorkshopsAndCraftStores.vue"
-import Categories from "@views/categories/Categories.vue"
 
 
 export const routes = [
@@ -30,22 +28,12 @@ export const routes = [
         name: 'sessionStart',
         component: StartSession
     },
-    {
-        path: '/workshops-craft-stores',
-        name: 'workshopsAndCraftStores',
-        component: WorkshopsAndCraftStores
-    },
 
-    {
-        path: '/categories',
-        name: 'categories',
-        component: Categories
-    },
     {
         path: '/app',
         name: 'app',
         component: AppPage,
-        children: interalRoutes
+        children: internalRoutes
     }
 
 ]
