@@ -7,7 +7,7 @@
         <smallTriangles v-for="i in 1" :key="i" />
       </div>
       <p class="message">
-        Gracias por apoyar a los artesanos peruanos, puedes revisar tu compra en la opción de 
+        Gracias por apoyar a los artesanos Colombianos, puedes revisar tu compra en la opción de 
       </p>
       <button class="btn-purchases">Compras</button>
       <div class="diamond-divider">
@@ -73,14 +73,14 @@ const email = ref('');
 }
 
 .diamond-divider :deep(svg) {
-  width: 70%;
+  width: 60%;
 }
 
 .message {
   font-size: 1.57rem;
   margin-bottom: 1rem;
   color: var(--color-confirmation);
-  margin: 0 30px;
+  margin: 0 60px;
   font-weight: bold;
 }
 
