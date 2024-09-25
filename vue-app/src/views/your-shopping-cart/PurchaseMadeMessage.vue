@@ -1,31 +1,33 @@
 <template>
   <div class="main__container">
     
-    <div class="content">
-      <successfulPurchase class="success-icon" />
-      <h1 class="title">¡Compra realizada con exito!</h1>
-      <div class="diamond-divider">
-        <smallTriangles v-for="i in 1" :key="i" />
-      </div>
-      <p class="message">
-        Gracias por apoyar a los artesanos peruanos, puedes revisar tu compra en la opción de
-      </p>
-      <button class="btn-purchases">Compras</button>
-      <div class="diamond-divider">
-        <smallTriangles v-for="i in 1" :key="i" />
-      </div>
-      <p class="email-message">
-        Vincula tu correo para recibir más detalles sobre tus compras realizadas
-      </p>
-      <input 
-        type="email" 
-        v-model="email" 
-        placeholder="Añadir correo electrónico" 
-        class="email-input"
-      />
-      <button class="btn-return">Regresar al inicio</button>
+        <div class="content">
+        <successfulPurchase class="success-icon" />
+        <h1 class="title">¡Compra realizada con exito!</h1>
+        <div class="diamond-divider">
+            <smallTriangles v-for="i in 1" :key="i" />
+        </div>
+        <p class="message">
+            Gracias por apoyar a los artesanos peruanos, puedes revisar tu compra en la opción de
+        </p>
+        <button class="btn-purchases">Compras</button>
+        <div class="diamond-divider">
+            <smallTriangles v-for="i in 1" :key="i" />
+        </div>
     </div>
-  </div>
+      <div class="link-mail">
+        <p class="email-message">
+            Vincula tu correo para recibir más detalles sobre tus compras realizadas
+        </p>
+        <input 
+            type="email" 
+            v-model="email" 
+            placeholder="Añadir correo electrónico" 
+            class="email-input"
+        />
+        <button class="btn-return">Regresar al inicio</button>
+        </div>
+    </div>
 </template>
 
 <script setup>
@@ -45,8 +47,8 @@ const email = ref('');
   flex-direction: column;
   align-items: center;
   background-color: white;
-  padding: 2rem;
   overflow: hidden;
+  padding: 3rem;
 }
 
 .triangle__top, .triangle__bottom {
@@ -68,7 +70,6 @@ const email = ref('');
 
 .content {
   text-align: center;
-  max-width: 300px;
   width: 100%;
 }
 
@@ -96,9 +97,21 @@ const email = ref('');
 }
 
 .message, .email-message {
-  color: #8B4513;
   font-size: 1.8rem;
   margin-bottom: 1rem;
+  color: #8B4513;
+}
+
+.email-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+      width: 100vw;
+    color: #8B4513;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    width: 100vw;
+    color: #8B4513;
 }
 
 .btn-purchases {
@@ -134,4 +147,12 @@ const email = ref('');
   font-size: 0.9rem;
   width: 100%;
 }
+
+.link-mail{
+
+  border: 1px solid red;
+  width: 100vw;
+  padding: 2.5rem;
+}
+
 </style>
