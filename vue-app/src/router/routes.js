@@ -45,8 +45,8 @@ export const routes = [
         component: WorkshopsAndCraftStores
     },
     {
-        path: '/singup',
-        name: 'singup',
+        path: '/signup',
+        name: 'signup',
         component: SingUp
     },
     {   
