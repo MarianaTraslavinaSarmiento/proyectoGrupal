@@ -13,105 +13,156 @@ import Jewelry from '@assets/img/categories/Jewelry.vue'
 import SheetMetal from '@assets/img/categories/SheetMetal.vue'
 import PaintingTraditiona from '@assets/img/categories/PaintingTraditiona.vue'
 import Printed from '@assets/img/categories/Printed.vue'
+import DiamondIcon from '@/assets/icons/general/DiamondIcon.vue';
+import DiamondSeparator from '@/components/diamond-separator/DiamondSeparator.vue'
 
 </script>
 
 <template>
+  <main>
+    <div class="search__location">
+      <div class="location">
+        <Location class="location__icon" />
+        <input type="text" placeholder="Ubicación de entrega actual" class="location__input" />
+      </div>
+    </div>
+    <TitleSection title="Categorías" />
 
-    <main>
-        <div class="search__location">
-          <div class="location">
-            <Location class="location__icon" />
-            <input  type="text" placeholder="Ubicación de entrega actual" class="location__input" />
-          </div>
+    <div class="categories">
+      <div class="categories__item">
+        <div class="categories__circle">
+          <Textile class="categories__icon" />
         </div>
-        <TitleSection
-        title="Categorías"
-        />
-
-        <div class="categories">
-          <div class="categories__item">
-            <div class="categories__circle">
-              <Textile class="categories__icon" />
-            </div>
-            <p >Textilería</p>
-          </div>
-          <div class="categories__item">
-            <div class="categories__circle">
-              <Ceramics class="categories__icon" />
-            </div>
-            <p >Cerámica</p>
-          </div>
-          <div class="categories__item">
-            <div class="categories__circle">
-              <Goldsmithing class="categories__icon" />
-            </div>
-            <p >Orfebrería</p>
-          </div>
-          <div class="categories__item">
-            <div class="categories__circle">
-              <StoneCarving class="categories__icon" />
-            </div>
-            <p >Talla en piedra</p>
-          </div>
-          <div class="categories__item">
-            <div class="categories__circle">
-              <WoodCarving class="categories__icon" />
-            </div>
-            <p >Talla en madera</p>
-          </div>
-
+        <p>Textilería</p>
+      </div>
+      <div class="categories__item">
+        <div class="categories__circle">
+          <Ceramics class="categories__icon" />
         </div>
-
-        <div class="categories">
-          <div class="categories__item">
-            <div class="categories__circle">
-              <Embroidery class="categories__icon" />
-            </div>
-            <p >Bordado</p>
-          </div>
-          <div class="categories__item">
-            <div class="categories__circle">
-              <Jewelry class="categories__icon" />
-            </div>
-            <p >Joyería</p>
-          </div>
-          <div class="categories__item">
-            <div class="categories__circle">
-              <SheetMetal class="categories__icon" />
-            </div>
-            <p >Hojalatería</p>
-          </div>
-          <div class="categories__item">
-            <div class="categories__circle">
-              <Printed class="categories__icon" />
-            </div>
-            <p >Estampado</p>
-          </div>
-          <div class="categories__item">
-            <div class="categories__circle">
-              <PaintingTraditiona class="categories__icon" />
-            </div>
-            <p >Pintura tradicional</p>
-          </div>
-
+        <p>Cerámica</p>
+      </div>
+      <div class="categories__item">
+        <div class="categories__circle">
+          <Goldsmithing class="categories__icon" />
         </div>
+        <p>Orfebrería</p>
+      </div>
+      <div class="categories__item">
+        <div class="categories__circle">
+          <StoneCarving class="categories__icon" />
+        </div>
+        <p>Talla en piedra</p>
+      </div>
+      <div class="categories__item">
+        <div class="categories__circle">
+          <WoodCarving class="categories__icon" />
+        </div>
+        <p>Talla en madera</p>
+      </div>
 
-        <Nav/>
+    </div>
 
-    </main>
+    <div class="categories">
+      <div class="categories__item">
+        <div class="categories__circle">
+          <Embroidery class="categories__icon" />
+        </div>
+        <p>Bordado</p>
+      </div>
+      <div class="categories__item">
+        <div class="categories__circle">
+          <Jewelry class="categories__icon" />
+        </div>
+        <p>Joyería</p>
+      </div>
+      <div class="categories__item">
+        <div class="categories__circle">
+          <SheetMetal class="categories__icon" />
+        </div>
+        <p>Hojalatería</p>
+      </div>
+      <div class="categories__item">
+        <div class="categories__circle">
+          <Printed class="categories__icon" />
+        </div>
+        <p>Estampado</p>
+      </div>
+      <div class="categories__item">
+        <div class="categories__circle">
+          <PaintingTraditiona class="categories__icon" />
+        </div>
+        <p>Pintura tradicional</p>
+      </div>
 
+    </div>
+
+    <div class="month__workshops">
+      <div class="month__workshops__title">
+        <DiamondSeparator class="diamond__separator" :icon="DiamondIcon" :size-em="2.3" />
+        <p>Talleres del mes</p>
+        <DiamondSeparator class="diamond__separator" :icon="DiamondIcon" :size-em="2.3" />
+      </div>
+      <div class="month__workshops__subtitle">
+        <p>¡Aprende como hacerlos en estos talleres educativos!</p>
+      </div>
+      <div class="month__workshops__figure">
+        <img src="" alt="">
+      </div>
+    </div>
+
+    <Nav />
+
+  </main>
 </template>
 
 <style lang="scss"  scoped>
-
 main {
   font-family: Bellota;
 }
+
+.month__workshops {
+  margin-top: 35px;
+  padding-inline: 20px;
+
+  .diamond__separator {
+    color: var(--background-secondary);
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+
+
+    p {
+      color: var(--text-contrast);
+      text-wrap: nowrap;
+      font-size: 2rem;
+      margin-inline: 20px;
+    }
+  }
+
+  &__subtitle {
+    color: rgb(from var(--text-contrast) r g b / 50%);
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  &__figure {
+    height: 0;
+    width: 0;
+    margin: auto;
+    margin-top: 25px; 
+    border-top: 40px solid var(--color-border);
+    border-right: 80px solid var(--color-border);
+    border-bottom: 40px solid var(--color-border);
+  }
+}
+
 .search__location {
-  padding: 15px 0px 0px 0px;  
+  padding: 15px 0px 0px 0px;
   font-size: 1.5rem;
 }
+
 .location {
   display: flex;
   margin-inline: 25px;
@@ -130,7 +181,8 @@ main {
     min-width: 20px;
     height: 30px;
   }
-  &__input { 
+
+  &__input {
     width: 90%;
     background-color: var(--background-secondary);
     height: 30px;
@@ -138,7 +190,7 @@ main {
     border: none;
 
     &::placeholder {
-    color: rgb(from var(--text-color) r g b / 30%);
+      color: rgb(from var(--text-color) r g b / 30%);
     }
 
   }
@@ -157,26 +209,27 @@ main {
   margin-bottom: 10px;
 
   &::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
-}
+    display: none;
+    /* Chrome, Safari, Edge */
+  }
 
-    &__item {
-      display: flex;
-      flex-direction: column;
-      justify-content: start;
-      align-items: center ;
-      gap: 5px;
+  &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
 
 
-      p {
-        font-size: 1.6rem;
-        text-align: center;
-        color: var(--text-contrast);
+    p {
+      font-size: 1.6rem;
+      text-align: center;
+      color: var(--text-contrast);
 
-      }
     }
+  }
 
-    &__circle {
+  &__circle {
     flex: 0 0 auto;
     width: 60px;
     height: 60px;
@@ -193,5 +246,4 @@ main {
     height: 40px;
   }
 }
-
 </style>
