@@ -1,17 +1,19 @@
 <template>
   <div class="main__container">
-    <smallTriangles class="triangle__top" />
-    <smallTriangles class="triangle__bottom" />
     
     <div class="content">
       <successfulPurchase class="success-icon" />
       <h1 class="title">¡Compra realizada con exito!</h1>
-      <div class="diamond-divider"></div>
+      <div class="diamond-divider">
+        <smallTriangles v-for="i in 1" :key="i" />
+      </div>
       <p class="message">
         Gracias por apoyar a los artesanos peruanos, puedes revisar tu compra en la opción de
       </p>
       <button class="btn-purchases">Compras</button>
-      <div class="diamond-divider"></div>
+      <div class="diamond-divider">
+        <smallTriangles v-for="i in 1" :key="i" />
+      </div>
       <p class="email-message">
         Vincula tu correo para recibir más detalles sobre tus compras realizadas
       </p>
@@ -28,8 +30,8 @@
 
 <script setup>
 import { ref } from 'vue';
-import smallTriangles from "@assets/icons/your-shopping-cart/smallTriangles.vue"
-import successfulPurchase from "@assets/icons/your-shopping-cart/successfulPurchase.vue"
+import smallTriangles from "@/assets/icons/your-shopping-cart/smallTriangles.vue"
+import successfulPurchase from "@/assets/icons/your-shopping-cart/successfulPurchase.vue"
 
 const email = ref('');
 </script>
@@ -38,7 +40,7 @@ const email = ref('');
 .main__container {
   position: relative;
   min-height: 100vh;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Bellota', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -71,40 +73,46 @@ const email = ref('');
 }
 
 .success-icon {
-  width: 80px;
-  height: 80px;
+  width: 80%;
+  height: 80%;
   margin: 0 auto 1rem;
 }
 
 .title {
   color: #FFA800;
-  font-size: 1.2rem;
+  font-size: 2.2rem;
   margin-bottom: 1rem;
 }
 
 .diamond-divider {
-  height: 10px;
-  background-image: url('@assets/icons/your-shopping-cart/smallTriangles.vue');
-  background-repeat: repeat-x;
-  background-size: contain;
+  display: flex;
+  justify-content: center;
   margin: 1rem 0;
+}
+
+.diamond-divider :deep(svg) {
+  width: 70%;
+  fill: #8B4513;
 }
 
 .message, .email-message {
   color: #8B4513;
-  font-size: 0.9rem;
+  font-size: 1.8rem;
   margin-bottom: 1rem;
 }
 
 .btn-purchases {
-  background-color: #8B4513;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
+    background-color: #8B4513;
+    width: 25vw;
+    height: 4vh;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
 }
 
 .email-input {
