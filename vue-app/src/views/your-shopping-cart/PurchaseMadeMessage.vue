@@ -44,7 +44,7 @@ const email = ref('');
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
+  background-color: var(--background-base);
   overflow: hidden;
   padding: 2rem 0;
 }
@@ -61,7 +61,7 @@ const email = ref('');
 }
 
 .title {
-  color: #FFA800;
+  color: var(--color-border);
   font-size: 2.2rem;
   margin-bottom: 1rem;
 }
@@ -74,18 +74,18 @@ const email = ref('');
 
 .diamond-divider :deep(svg) {
   width: 70%;
-  fill: #8B4513;
 }
 
 .message {
   font-size: 1.57rem;
   margin-bottom: 1rem;
-  color: #8B4513;
+  color: var(--color-confirmation);
   margin: 0 30px;
+  font-weight: bold;
 }
 
 .btn-purchases {
-  background-color: #8B4513;
+  background-color: var(--background-secondary);
   width: 25vw;
   height: 4vh;
   color: white;
@@ -109,31 +109,32 @@ const email = ref('');
 
 .email-message {
   text-align: center;
-  color: #8B4513;
+  color: var(--color-confirmation);
   font-size: 1.57rem;
   margin-bottom: 1rem;
+  font-weight: bold;
 }
 
 .email-input {
   width: 100%;
   padding: 0.5rem;
   margin-bottom: 1rem;
-  border: 1px solid #8B4513;
+  border: 1px solid var(--background-secondary);
   border-radius: 4px;
   font-size: 1.6rem;
-  background-color: #8B4513;
+  background-color: var(--background-secondary);
   color: white;
   margin-top: 3%;
 }
 
 .email-input::placeholder {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgb(from var(--text-color) r g b / 27%);
 }
 
 .btn-return {
-  background-color: white;
-  color: #8B4513;
-  border: 1px solid #8B4513;
+  background-color: var(--text-color);
+  color: var(--background-secondary);
+  border: 1px solid var(--background-secondary);
   padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
