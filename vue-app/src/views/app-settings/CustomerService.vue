@@ -2,8 +2,8 @@
 import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
 import Call from "@/assets/icons/app-configuration/call.vue";
 import commentsMenu from "@/assets/icons/app-configuration/commentsMenu.vue";
-
 </script>
+
 
 <template>
     <div class="atencion-cliente">
@@ -49,7 +49,7 @@ import commentsMenu from "@/assets/icons/app-configuration/commentsMenu.vue";
           background-color: #8b4513;
           color: white;
           padding: 15px;
-          margin-bottom: 10px;
+          margin-bottom: 15px;
           border-radius: 5px;
           width: 100%;
           text-align: left;
@@ -70,7 +70,7 @@ import commentsMenu from "@/assets/icons/app-configuration/commentsMenu.vue";
         
         p {
           color: #8b0000;
-          margin-bottom: 10px;
+          margin-bottom: 20px;
           font-size: 1.6rem;
           font-weight: bold;
         }
@@ -85,7 +85,7 @@ import commentsMenu from "@/assets/icons/app-configuration/commentsMenu.vue";
           border-radius: 5px;
           color: white;
           font-weight: bold;
-          font-size: 1rem;
+          font-size: 1.3rem;
           cursor: pointer;
           
           .icon {
