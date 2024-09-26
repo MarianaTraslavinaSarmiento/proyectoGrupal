@@ -42,13 +42,13 @@ import Printed from '@assets/img/categories/Printed.vue'
       <div class="categories__circle">
         <StoneCarving class="categories__icon" />
       </div>
-      <p>Talla en piedra</p>
+      <p>Orfeberia</p>
     </div>
     <div class="categories__item">
       <div class="categories__circle">
         <WoodCarving class="categories__icon" />
       </div>
-      <p>Talla en madera</p>
+      <p>Orfeberia</p>
     </div>
   </div>
 
@@ -60,10 +60,12 @@ import Printed from '@assets/img/categories/Printed.vue'
   overflow-x: auto;
   gap: 1.5rem;
   scroll-behavior: smooth;
-  margin-left: 1.7rem;
+  padding-left: 1.7rem;
+  padding-top: 1.5rem;  
+  padding-bottom: 1rem;
   scrollbar-width: none;
   padding-inline-end: 1.5rem;
-  margin-bottom: 10px;
+  border-bottom: 2px solid var(--background-secondary);
 
   &::-webkit-scrollbar {
   display: none;
