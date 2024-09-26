@@ -28,11 +28,12 @@ const selectedCurrency = ref('PEN');
 
 const globalSettings = {
   country: [
-    { name: 'Canadá', cities: ['Toronto', 'Vancouver', 'Montreal'] },
-    { name: 'Estados Unidos', cities: ['Nueva York', 'Los Ángeles', 'Chicago'] },
-    { name: 'México', cities: ['Ciudad de México', 'Guadalajara', 'Monterrey'] },
-    { name: 'España', cities: ['Madrid', 'Barcelona', 'Valencia'] },
-    { name: 'Argentina', cities: ['Buenos Aires', 'Córdoba', 'Rosario'] },
+    { name: 'Canadá', cities: ['Toronto'] },
+    { name: 'Estados Unidos', cities: ['Nueva York'] },
+    { name: 'México', cities: ['Ciudad de México'] },
+    { name: 'España', cities: ['Madrid'] },
+    { name: 'Argentina', cities: ['Buenos Aires'] },
+    { name: 'Colombia', cities: ['Bucaramanga'] },
   ],
   language: ['Español', 'Inglés', 'Francés', 'Alemán', 'Italiano', 'Portugués', 'Chino', 'Japonés', 'Coreano', 'Árabe'],
   currency: ['CAD', 'USD', 'MXN', 'EUR', 'ARS', 'GBP', 'JPY', 'CNY', 'KRW', 'AED']
@@ -132,13 +133,13 @@ const selectOption = (option) => {
 
       <h2 class="section-title">Legal</h2>
       <div class="settings-list">
-        <a href="https://www.canva.com/" target="_blank" class="setting-item clickable">
+        <a href="https://www.canva.com/design/DAGR1Or9v3g/eSMBMibECl1WK-V16qCp2Q/edit?utm_content=DAGR1Or9v3g&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank" class="setting-item clickable">
           <span>Política de privacidad</span>
         </a>
-        <a href="https://www.canva.com/" target="_blank" class="setting-item clickable">
+        <a href="https://www.canva.com/design/DAGR1KFkm5k/4qQijj-7hi1g4aFRE3ig6A/edit?utm_content=DAGR1KFkm5k&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank" class="setting-item clickable">
           <span>Información legal</span>
         </a>
-        <a href="https://www.canva.com/" target="_blank" class="setting-item clickable">
+        <a href="https://www.canva.com/design/DAGR1K2H9-E/dv-eQ0Ld6TkHK6l7gyDj3g/edit?utm_content=DAGR1K2H9-E&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank" class="setting-item clickable">
           <span>Libro de reclamaciones</span>
         </a>
       </div>
@@ -170,7 +171,7 @@ const selectOption = (option) => {
 .settings-view {
   color: white;
   font-family: 'Bellota', sans-serif;
-  min-height: 100vh;
+  min-height: 70vh;
   padding: 15px 20px;
 }
 
