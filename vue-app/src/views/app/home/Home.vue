@@ -13,6 +13,9 @@ import Jewelry from '@assets/img/categories/Jewelry.vue'
 import SheetMetal from '@assets/img/categories/SheetMetal.vue'
 import PaintingTraditiona from '@assets/img/categories/PaintingTraditiona.vue'
 import Printed from '@assets/img/categories/Printed.vue'
+import HomeImage from '@/assets/img/general/HomeImage.vue';
+import DiamondIcon from '@/assets/icons/general/DiamondIcon.vue';
+import DiamondSeparator from '@/components/diamond-separator/DiamondSeparator.vue';
 
 </script>
 
@@ -97,6 +100,20 @@ import Printed from '@assets/img/categories/Printed.vue'
 
         </div>
 
+        <div class="month__workshops">
+      <div class="month__workshops__title">
+        <DiamondSeparator class="diamond__separator" :icon="DiamondIcon" :size-em="1.7" />
+        <p>Talleres del mes</p>
+        <DiamondSeparator class="diamond__separator" :icon="DiamondIcon" :size-em="1.7" />
+      </div>
+      <div class="month__workshops__subtitle">
+        <p>¡Aprende como hacerlos en estos talleres educativos!</p>
+      </div>
+      <div class="month__workshops__img">
+        <HomeImage class="home__img"/>
+      </div>
+    </div>
+
         <Nav/>
 
     </main>
@@ -108,6 +125,52 @@ import Printed from '@assets/img/categories/Printed.vue'
 main {
   font-family: Bellota;
 }
+
+.month__workshops {
+  margin-top: 35px;
+
+  .diamond__separator {
+    color: var(--background-secondary);
+  }
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+
+
+    p {
+      color: var(--text-contrast);
+      text-wrap: nowrap;
+      font-size: 2rem;
+    }
+  }
+
+  &__subtitle {
+    color: rgb(from var(--text-contrast) r g b / 50%);
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  &__img {
+
+    display: flex;
+    justify-content: center;
+    height: 345px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+
+    .home__img {
+      width: 75%;
+      left: 15%;
+      height: 455px;
+      color: var(--text-contrast)
+
+    }
+  }
+}
+
+
 .search__location {
   padding: 15px 0px 0px 0px;  
   font-size: 1.5rem;
