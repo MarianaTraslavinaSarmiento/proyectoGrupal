@@ -28,6 +28,11 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    favorites: {
+        type: [Schema.Types.ObjectId],
+        ref: 'Product',
+        required: false
+    },
     account_id: {
         type: String
     }

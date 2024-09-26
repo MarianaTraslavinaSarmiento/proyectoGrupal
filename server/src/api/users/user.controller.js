@@ -23,6 +23,20 @@ class UserController {
             newUser: user
         })
     }
+
+    async addProductToFavorites(req, res) {
+        const { productId } = req.body
+        const user = await this.#service.addProductToFavorites(req.user.id, productId)
+        res.json({
+            message: "Product added to favorites",
+            user
+        })
+    }
+
+    async getFavorites(req, res) {
+        const favorites = await this.#service.getFavorites(req.user.id)
+        res.json(favorites)
+    }
 }
 
 module.exports = UserController

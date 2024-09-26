@@ -23,6 +23,17 @@ const validateUpdate = () => {
     ]
 }
 
+const validateAddToFavorites = () => {
+    return [
+        body('productId')
+            .notEmpty()
+            .withMessage('The product id is required')
+            .isMongoId()
+            .withMessage('The product id must be a MongoDB id')
+    ]
+}
+
 module.exports = {
-    validateUpdate
+    validateUpdate,
+    validateAddToFavorites
 }
