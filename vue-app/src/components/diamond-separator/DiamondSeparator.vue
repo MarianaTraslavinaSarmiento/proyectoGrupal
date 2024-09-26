@@ -53,6 +53,7 @@ onUnmounted(() => {
 .icon-container {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: .5em;
   flex-wrap: nowrap;
   overflow: hidden;
