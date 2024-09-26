@@ -11,7 +11,8 @@ import Filter from "@assets/img/general/Filter.vue";
         <CategoriesCarousel />
 
         <div class="filter__products">
-            <SearchBar />
+            <SearchBar 
+            placeholder = "Buscar producto o palabra clave..." />
             <Filter />
         </div>
 
