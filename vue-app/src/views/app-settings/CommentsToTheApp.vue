@@ -3,6 +3,24 @@ import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
 import { ref } from 'vue';
 
 const userProblem = ref('');
+const selectedImage = ref(null);
+
+const handleImageUpload = (event) => {
+  const file = event.target.files[0];
+  if (file && file.type.startsWith('image/')) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      selectedImage.value = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  } else {
+    alert('Por favor, selecciona una imagen válida.');
+  }
+};
+
+const removeImage = () => {
+  selectedImage.value = null;
+};
 </script>
 
 <template>
@@ -26,10 +44,26 @@ const userProblem = ref('');
         placeholder="Describe aquí tu problema..."
         rows="4"
       ></textarea>
+      
+      <div v-if="selectedImage" class="image-preview">
+        <img :src="selectedImage" alt="Imagen adjunta" />
+        <button @click="removeImage" class="remove-image" aria-label="Eliminar imagen">
+          &times;
+        </button>
+      </div>
     </div>
 
     <div class="button-group">
-      <button class="attach-button">Adjuntar captura</button>
+      <label for="image-upload" class="attach-button">
+        Adjuntar captura
+        <input 
+          type="file" 
+          id="image-upload" 
+          accept="image/*" 
+          @change="handleImageUpload" 
+          class="hidden-input"
+        >
+      </label>
       <button class="send-button">Enviar</button>
     </div>
   </div>
@@ -39,9 +73,9 @@ const userProblem = ref('');
 .customer-service {
   position: relative;
   min-height: 100vh;
-//   padding-bottom: 70px;
   font-family: 'Bellota', sans-serif;
   color: white;
+  padding-bottom: 70px;
 }
 
 .frequent-problems, .other-problem {
@@ -98,17 +132,17 @@ textarea {
 }
 
 .button-group {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   display: flex;
   justify-content: space-between;
-  padding: 0px 30px;
+  padding: 15px 30px;
 }
 
 .attach-button, .send-button {
-  background-color: var(--background-primary);
+  background-color: var(--background-secondary);
   color: var(--text-color);
   border: none;
   border-radius: 5px;
@@ -123,5 +157,41 @@ textarea {
 
 .send-button {
   background-color: var(--background-primary);
+}
+
+.image-preview {
+  position: relative;
+  margin-top: 15px;
+  
+  img {
+    max-width: 100%;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .remove-image {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+  }
+}
+
+.hidden-input {
+  display: none;
 }
 </style>
