@@ -14,6 +14,68 @@ const notifications = ref({
 const toggleNotification = (key) => {
   notifications.value[key] = !notifications.value[key];
 };
+
+const showPopup = ref(false);
+const popupContent = ref({
+  title: '',
+  options: [],
+  type: ''
+});
+
+const selectedCountry = ref('Canadá, Toronto');
+const selectedLanguage = ref('Español');
+const selectedCurrency = ref('PEN');
+
+const globalSettings = {
+  country: [
+    { name: 'Canadá', cities: ['Toronto', 'Vancouver', 'Montreal'] },
+    { name: 'Estados Unidos', cities: ['Nueva York', 'Los Ángeles', 'Chicago'] },
+    { name: 'México', cities: ['Ciudad de México', 'Guadalajara', 'Monterrey'] },
+    { name: 'España', cities: ['Madrid', 'Barcelona', 'Valencia'] },
+    { name: 'Argentina', cities: ['Buenos Aires', 'Córdoba', 'Rosario'] },
+  ],
+  language: ['Español', 'Inglés', 'Francés', 'Alemán', 'Italiano', 'Portugués', 'Chino', 'Japonés', 'Coreano', 'Árabe'],
+  currency: ['CAD', 'USD', 'MXN', 'EUR', 'ARS', 'GBP', 'JPY', 'CNY', 'KRW', 'AED']
+};
+
+const openPopup = (type) => {
+  showPopup.value = true;
+  popupContent.value.type = type;
+  if (type === 'country') {
+    popupContent.value = {
+      title: 'Cambiar país y región',
+      options: globalSettings.country.map(country => `${country.name} (${country.cities[0]})`),
+      type: 'country'
+    };
+  } else if (type === 'language') {
+    popupContent.value = {
+      title: 'Cambiar idioma',
+      options: globalSettings.language,
+      type: 'language'
+    };
+  } else if (type === 'currency') {
+    popupContent.value = {
+      title: 'Cambiar moneda',
+      options: globalSettings.currency,
+      type: 'currency'
+    };
+  }
+};
+
+const closePopup = () => {
+  showPopup.value = false;
+};
+
+const selectOption = (option) => {
+  if (popupContent.value.type === 'country') {
+    selectedCountry.value = option;
+  } else if (popupContent.value.type === 'language') {
+    selectedLanguage.value = option;
+  } else if (popupContent.value.type === 'currency') {
+    selectedCurrency.value = option;
+  }
+  closePopup();
+};
 </script>
 
 <template>
@@ -22,17 +84,17 @@ const toggleNotification = (key) => {
     <div class="settings-view">
       <h2 class="section-title">Global</h2>
       <div class="settings-list">
-        <div class="setting-item">
+        <div class="setting-item clickable" @click="openPopup('country')">
           <span>Cambiar país y región</span>
-          <span class="setting-value">Canadá, Toronto</span>
+          <span class="setting-value">{{ selectedCountry }}</span>
         </div>
-        <div class="setting-item">
+        <div class="setting-item clickable" @click="openPopup('language')">
           <span>Cambiar idioma</span>
-          <span class="setting-value">Español</span>
+          <span class="setting-value">{{ selectedLanguage }}</span>
         </div>
-        <div class="setting-item">
+        <div class="setting-item clickable" @click="openPopup('currency')">
           <span>Cambiar moneda</span>
-          <span class="setting-value">PEN</span>
+          <span class="setting-value">{{ selectedCurrency }}</span>
         </div>
       </div>
 
@@ -70,15 +132,28 @@ const toggleNotification = (key) => {
 
       <h2 class="section-title">Legal</h2>
       <div class="settings-list">
-        <div class="setting-item">
+        <a href="https://www.canva.com/" target="_blank" class="setting-item clickable">
           <span>Política de privacidad</span>
-        </div>
-        <div class="setting-item">
+        </a>
+        <a href="https://www.canva.com/" target="_blank" class="setting-item clickable">
           <span>Información legal</span>
-        </div>
-        <div class="setting-item">
+        </a>
+        <a href="https://www.canva.com/" target="_blank" class="setting-item clickable">
           <span>Libro de reclamaciones</span>
-        </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Popup -->
+    <div v-if="showPopup" class="popup-overlay">
+      <div class="popup">
+        <h3>{{ popupContent.title }}</h3>
+        <ul>
+          <li v-for="option in popupContent.options" :key="option" @click="selectOption(option)">
+            {{ option }}
+          </li>
+        </ul>
+        <button @click="closePopup">Cerrar</button>
       </div>
     </div>
   </div>
@@ -118,6 +193,15 @@ const toggleNotification = (key) => {
   align-items: center;
   padding: 15px;
   border-bottom: 1px solid #7e4b4b;
+
+  &.clickable {
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #7e4b4b;
+    }
+  }
 }
 
 .setting-item:last-child {
@@ -151,5 +235,66 @@ const toggleNotification = (key) => {
 
 .toggle :deep(svg:last-child) {
   left: 0;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  background-color: #6b3e3e;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 80%;
+  max-height: 80%;
+  overflow-y: auto;
+
+  h3 {
+    color: #ff9999;
+    margin-bottom: 10px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #7e4b4b;
+    }
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ff9999;
+    color: #4a2828;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #ff7777;
+    }
+  }
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 </style>
