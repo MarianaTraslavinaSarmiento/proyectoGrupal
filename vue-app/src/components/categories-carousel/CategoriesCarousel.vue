@@ -12,48 +12,45 @@ import Jewelry from "@assets/img/categories/Jewelry.vue";
 import SheetMetal from "@assets/img/categories/SheetMetal.vue";
 import PaintingTraditiona from "@assets/img/categories/PaintingTraditiona.vue";
 import Printed from "@assets/img/categories/Printed.vue";
+import { ref } from "vue";
+
+const categories = [
+  {name: "Textilería", icon: Textile},
+  {name: "Cerámica", icon: Ceramics},
+  {name: "Orfebrería", icon: Goldsmithing},
+  {name: "Piedra", icon: StoneCarving},
+  {name: "Madera", icon: WoodCarving},
+  {name: "Bordado", icon: Embroidery},
+  {name: "Joyeria", icon: Jewelry},
+  {name: "Metalistería", icon: SheetMetal},
+  {name: "Tradicional", icon: PaintingTraditiona},
+  {name: "Impresiones", icon: Printed},
+]
+
+const currentCategory = ref(0);
+const selectCategory = (index) => {
+  currentCategory.value = index
+}
+
 </script>
 
 <template>
   <main>
     <div class="categories">
-      <div class="categories__item">
+      <div v-for="(category, index) in categories"
+       :key="category.name"
+       :class="['categories__item', {'active': index === currentCategory}]"
+       @click="selectCategory(index)">
         <div class="categories__circle">
-          <Textile class="categories__icon" />
+          <component :is="category.icon" class="categories__icon" />
         </div>
-        <p>Textilería</p>
-      </div>
-      <div class="categories__item">
-        <div class="categories__circle">
-          <Ceramics class="categories__icon" />
-        </div>
-        <p>Cerámica</p>
-      </div>
-      <div class="categories__item">
-        <div class="categories__circle">
-          <Goldsmithing class="categories__icon" />
-        </div>
-        <p>Orfebrería</p>
-      </div>
-      <div class="categories__item">
-        <div class="categories__circle">
-          <StoneCarving class="categories__icon" />
-        </div>
-        <p>Orfeberia</p>
-      </div>
-      <div class="categories__item">
-        <div class="categories__circle">
-          <WoodCarving class="categories__icon" />
-        </div>
-        <p>Orfeberia</p>
+        <p>{{category.name}}</p>
       </div>
     </div>
   </main>
 </template>
 
 <style lang="scss" scoped>
-
-
 .categories {
   display: flex;
   overflow-x: auto;
@@ -66,23 +63,43 @@ import Printed from "@assets/img/categories/Printed.vue";
   border-bottom: 2px solid var(--background-secondary);
   font-family: Bellota;
 
-
   &::-webkit-scrollbar {
     display: none;
   }
+
   &__item {
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: center;
     gap: 5px;
+    position: relative;
+    cursor: pointer;
+
     p {
       font-size: 1.4rem;
       text-align: center;
       color: var(--color-black);
       padding-bottom: 1rem;
     }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: var(--background-secondary);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    &.active::after {
+      transform: scaleX(1);
+    }
   }
+
   &__circle {
     flex: 0 0 auto;
     width: 50px;
@@ -94,6 +111,7 @@ import Printed from "@assets/img/categories/Printed.vue";
     justify-content: center;
     margin: 0 10px;
   }
+
   &__icon {
     width: 30px;
     height: 35px;
