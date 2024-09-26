@@ -3,12 +3,49 @@ import CategoriesCarousel from "@components/categories-carousel/CategoriesCarous
 import HeaderTitle from "@/components/header-title/HeaderTitle.vue";
 import SearchBar from "@/components/search-bar/SearchBar.vue";
 import Filter from "@assets/img/general/Filter.vue";
+import { reactive } from "vue";
+
+// const categories = [
+//   {name: "Textilería", icon: Textile},
+//   {name: "Cerámica", icon: Ceramics},
+//   {name: "Orfebrería", icon: Goldsmithing},
+//   {name: "Piedra", icon: StoneCarving},
+//   {name: "Madera", icon: WoodCarving},
+//   {name: "Bordado", icon: Embroidery},
+//   {name: "Joyeria", icon: Jewelry},
+//   {name: "Metalistería", icon: SheetMetal},
+//   {name: "Tradicional", icon: PaintingTraditiona},
+//   {name: "Impresiones", icon: Printed},
+// ]
+
+let products = reactive([
+    {
+        name: "Camiseta",
+        category: "Textilería"
+    },
+    {
+        name: "Camiseta",
+        category: "Cerámica"
+    },
+    {
+        name: "Camiseta",
+        category: "Orfebrería"
+    }
+])
+
+console.log("Productos:", products)
+
+const filterProducts = (category) => {
+    let filtered = products.filter(product => product.category == category.name)
+    console.log(filtered)
+}
+
 </script>
 
 <template>
     <main>
         <HeaderTitle title="Categorías" />
-        <CategoriesCarousel />
+        <CategoriesCarousel @selectCategory="filterProducts" />
 
         <div class="filter__products">
             <SearchBar 

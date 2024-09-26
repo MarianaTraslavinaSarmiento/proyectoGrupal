@@ -28,9 +28,19 @@ const categories = [
 ]
 
 const currentCategory = ref(0);
-const selectCategory = (index) => {
+const selectCategory = (category, index) => {
   currentCategory.value = index
+  emit('selectCategory', category)
 }
+
+const props = defineProps({
+  model: {
+    type: Object,
+    required: true
+  }
+})
+
+const emit = defineEmits(['selectCategory']);
 
 </script>
 
@@ -40,7 +50,7 @@ const selectCategory = (index) => {
       <div v-for="(category, index) in categories"
        :key="category.name"
        :class="['categories__item', {'active': index === currentCategory}]"
-       @click="selectCategory(index)">
+       @click="selectCategory(category, index)">
         <div class="categories__circle">
           <component :is="category.icon" class="categories__icon" />
         </div>
