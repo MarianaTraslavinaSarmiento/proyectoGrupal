@@ -68,7 +68,7 @@ onMounted(() => {
 <style scoped lang="scss">
 .customer {
   font-family: Bellota;
-  background-color: #fff;
+  background-color: var(--background-base);
 }
 
 .content-wrapper {
@@ -108,7 +108,7 @@ onMounted(() => {
 }
 
 .customer-service {
-  color: #8B0000;
+  color: var(--background-base);
   padding: 0px 20px 20px;
 }
 
@@ -117,18 +117,18 @@ onMounted(() => {
   font-size: 14px;
   line-height: 1.4;
   margin: 10px 0;
-  color: #333;
+  color: var(--color-confirmation);
   text-align: center;
 }
 
 .section-title {
   font-size: 1.5em;
-  color: #8B0000;
+  color: var(--text-contrast);
 }
 
 .video-wrapper {
   width: 100%;
-  background-color: #8B0000;
+  background-color: var(--background-secondary);
   padding: 20px 0;
   margin-bottom: 20px;
 }
@@ -141,7 +141,7 @@ onMounted(() => {
 
 .video-container {
   position: relative;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  padding-bottom: 56.25%; 
   height: 0;
   overflow: hidden;
 }
@@ -157,13 +157,15 @@ onMounted(() => {
 .interactive-prompt {
   font-weight: bold;
   margin-bottom: 10px;
-  color: #8B0000;
+  color: var(--text-contrast);
+  font-size: 1.6rem;
 }
 
 .qr-instruction {
   margin-bottom: 20px;
-  color: #666;
+  color: rgb(from var(--text-contrast) r g b / 40%);
   font-size: 14px;
+  padding-right: 80px;
 }
 
 .qr-code {
@@ -174,7 +176,7 @@ onMounted(() => {
 .placeholder-qr {
   width: 150px;
   height: 150px;
-  background-color: #8B0000;
+  background-color: var(--background-secondary);
 }
 
 :deep(.small-triangle) {
