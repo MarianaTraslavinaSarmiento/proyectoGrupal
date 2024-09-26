@@ -27,7 +27,7 @@ const toHome = () => {
 <style lang="scss" scoped>
 .nav {
   position: relative;
-  height: 60px;
+  height: 0px;
   width: 100%;
   .nav-content {
     bottom: 0;
