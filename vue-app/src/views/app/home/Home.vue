@@ -101,7 +101,6 @@ const secondCategories = [
         <MonthWorkshop />
       </div>
     </div>
-    <Nav />
 
   </main>
 </template>

@@ -1,8 +1,8 @@
 <template>
     <svg width="131" height="65" viewBox="0 0 131 65" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect y="4" width="131" height="57" rx="20" fill="#2E1108"/>
+    <rect y="4" width="131" height="57" rx="20" fill="var(--background-primary)"/>
     <g filter="url(#filter0_d_327_2)">
-    <rect x="65" y="4" width="66" height="57" rx="20" fill="#FFA800"/>
+    <rect x="65" y="4" width="66" height="57" rx="20" fill="var(--color-accent)"/>
     </g>
     <defs>
     <filter id="filter0_d_327_2" x="57" y="0" width="74" height="65" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">

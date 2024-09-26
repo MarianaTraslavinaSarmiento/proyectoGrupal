@@ -1,7 +1,7 @@
 <script setup>
 import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
-import Call from "@/assets/icons/app-configuration/call.vue";
-import commentsMenu from "@/assets/icons/app-configuration/commentsMenu.vue";
+import Call from "@/assets/icons/app-configuration/CallIcon.vue";
+import CommentIcon from '@/assets/icons/general/CommentIcon.vue';
 </script>
 
 
@@ -21,7 +21,7 @@ import commentsMenu from "@/assets/icons/app-configuration/commentsMenu.vue";
     <div class="personalized-support">
       <p>¿Necesitas atención personalizada? habla con nuestro equipo de soporte</p>
       <button class="chat-button">
-        <commentsMenu class="icon" />
+        <CommentIcon class="icon" />
         Empieza un chat
       </button>
       <button class="call-button">
@@ -46,7 +46,7 @@ import commentsMenu from "@/assets/icons/app-configuration/commentsMenu.vue";
       
       .question {
         background-color: var(--background-secondary);
-        color: white;
+        color: var(--text-color);
         padding: 15px;
         margin-bottom: 15px;
         border-radius: 5px;

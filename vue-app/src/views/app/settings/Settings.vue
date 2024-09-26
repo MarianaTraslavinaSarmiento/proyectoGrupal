@@ -1,8 +1,20 @@
 <script setup>
 import { ref } from 'vue';
 import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
-import AcceptedSettings from "@/assets/icons/app-configuration/SettingsC.vue";
-import SettingsNOTAccepted from "@/assets/icons/app-configuration/SettingsO.vue";
+import AcceptedSettings from "@/assets/icons/app-configuration/SettingsCIcon.vue";
+import SettingsNOTAccepted from "@/assets/icons/app-configuration/SettingsOIcon.vue";
+
+import { useThemeStore } from '@stores/theme.js';
+import { storeToRefs } from 'pinia';
+
+// Initialize the theme store
+const themeStore = useThemeStore();
+const { availableThemes, currentTheme } = storeToRefs(themeStore);
+
+// Handle theme change
+const handleThemeChange = (event) => {
+  themeStore.setTheme(event.target.value);
+};
 
 const notifications = ref({
   purchases: false,
@@ -41,7 +53,7 @@ const globalSettings = {
     { name: 'Brasil', cities: ['São Paulo'] }
   ],
   language: ['Español', 'Inglés', 'Francés', 'Alemán', 'Italiano', 'Portugués', 'Chino', 'Japonés', 'Coreano', 'Árabe'],
-  currency: ['CAD', 'USD', 'MXN', 'EUR', 'ARS', 'GBP', 'JPY', 'COP','CNY', 'KRW', 'AED']
+  currency: ['CAD', 'USD', 'MXN', 'EUR', 'ARS', 'GBP', 'JPY', 'COP', 'CNY', 'KRW', 'AED']
 };
 
 const openPopup = (type) => {
@@ -84,7 +96,6 @@ const selectOption = (option) => {
 };
 </script>
 
-
 <template>
   <div class="customer-service">
     <header-title :title="'Ajustes'" :hideDiamond="false" />
@@ -102,6 +113,14 @@ const selectOption = (option) => {
         <div class="setting-item clickable" @click="openPopup('currency')">
           <span>Cambiar moneda</span>
           <span class="setting-value">{{ selectedCurrency }}</span>
+        </div>
+        <div class="setting-item">
+          <span>Cambiar tema</span>
+          <select v-model="currentTheme" @change="handleThemeChange">
+            <option v-for="theme in availableThemes" :key="theme" :value="theme">
+              {{ theme }}
+            </option>
+          </select>
         </div>
       </div>
 
@@ -139,13 +158,16 @@ const selectOption = (option) => {
 
       <h2 class="section-title">Legal</h2>
       <div class="settings-list">
-        <a href="https://www.canva.com/design/DAGR1Or9v3g/eSMBMibECl1WK-V16qCp2Q/edit?utm_content=DAGR1Or9v3g&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank" class="setting-item clickable">
+        <a href="https://www.canva.com/design/DAGR1Or9v3g/eSMBMibECl1WK-V16qCp2Q/edit?utm_content=DAGR1Or9v3g&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
+          target="_blank" class="setting-item clickable">
           <span>Política de privacidad</span>
         </a>
-        <a href="https://www.canva.com/design/DAGR1KFkm5k/4qQijj-7hi1g4aFRE3ig6A/edit?utm_content=DAGR1KFkm5k&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank" class="setting-item clickable">
+        <a href="https://www.canva.com/design/DAGR1KFkm5k/4qQijj-7hi1g4aFRE3ig6A/edit?utm_content=DAGR1KFkm5k&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
+          target="_blank" class="setting-item clickable">
           <span>Información legal</span>
         </a>
-        <a href="https://www.canva.com/design/DAGR1K2H9-E/dv-eQ0Ld6TkHK6l7gyDj3g/edit?utm_content=DAGR1K2H9-E&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton" target="_blank" class="setting-item clickable">
+        <a href="https://www.canva.com/design/DAGR1K2H9-E/dv-eQ0Ld6TkHK6l7gyDj3g/edit?utm_content=DAGR1K2H9-E&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
+          target="_blank" class="setting-item clickable">
           <span>Libro de reclamaciones</span>
         </a>
       </div>
@@ -216,7 +238,7 @@ const selectOption = (option) => {
 }
 
 .setting-value {
-  color:  rgb(from var(--text-color) r g b / 40%);
+  color: rgb(from var(--text-color) r g b / 40%);
 }
 
 .toggle {
@@ -303,5 +325,13 @@ const selectOption = (option) => {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+select {
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid var(--text-color);
+  background-color: var(--background-secondary);
+  color: var(--text-color);
 }
 </style>
