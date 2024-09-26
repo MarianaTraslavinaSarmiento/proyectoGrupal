@@ -1,30 +1,28 @@
 <script setup>
-import Nav from "../nav/Nav.vue";
-import TitleSection from "../title-section/TitleSection.vue";
-import Location from "@assets/img/categories/Location.vue";
-import Textile from "@assets/img/categories/Textile.vue";
-import Ceramics from "@assets/img/categories/Ceramics.vue";
-import Goldsmithing from "@assets/img/categories/Goldsmithing.vue";
-import StoneCarving from "@assets/img/categories/StoneCarving.vue";
-import WoodCarving from "@assets/img/categories/WoodCarving.vue";
-import Embroidery from "@assets/img/categories/Embroidery.vue";
-import Jewelry from "@assets/img/categories/Jewelry.vue";
-import SheetMetal from "@assets/img/categories/SheetMetal.vue";
-import PaintingTraditiona from "@assets/img/categories/PaintingTraditiona.vue";
-import Printed from "@assets/img/categories/Printed.vue";
+import TextileIcon from "@icons/categories/TextileIcon.vue";
+import CeramicsIcon from "@icons/categories/CeramicsIcon.vue";
+import GoldsmithingIcon from "@icons/categories/GoldsmithingIcon.vue";
+import StoneCarving from "@icons/categories/StoneCarvingIcon.vue";
+import WoodCarving from "@icons/categories/WoodCarvingIcon.vue";
+import EmbroideryIcon from "@icons/categories/EmbroideryIcon.vue";
+import JewelryIcon from "@icons/categories/JewelryIcon.vue";
+import SheetMetalIcon from "@icons/categories/SheetMetalIcon.vue";
+import PaintingTraditionalIcon from "@icons/categories/PaintingTraditionalIcon.vue";
+import PrintedIcon from "@icons/categories/PrintedIcon.vue";
+
 import { ref } from "vue";
 
 const categories = [
-  {name: "Textilería", icon: Textile},
-  {name: "Cerámica", icon: Ceramics},
-  {name: "Orfebrería", icon: Goldsmithing},
+  {name: "Textilería", icon: TextileIcon},
+  {name: "Cerámica", icon: CeramicsIcon},
+  {name: "Orfebrería", icon: GoldsmithingIcon},
   {name: "Piedra", icon: StoneCarving},
   {name: "Madera", icon: WoodCarving},
-  {name: "Bordado", icon: Embroidery},
-  {name: "Joyeria", icon: Jewelry},
-  {name: "Metalistería", icon: SheetMetal},
-  {name: "Tradicional", icon: PaintingTraditiona},
-  {name: "Impresiones", icon: Printed},
+  {name: "Bordado", icon: EmbroideryIcon},
+  {name: "Joyeria", icon: JewelryIcon},
+  {name: "Metalistería", icon: SheetMetalIcon},
+  {name: "Tradicional", icon: PaintingTraditionalIcon},
+  {name: "Impresiones", icon: PrintedIcon}
 ]
 
 const currentCategory = ref(0);
