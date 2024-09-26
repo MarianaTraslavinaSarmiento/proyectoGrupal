@@ -138,7 +138,7 @@ textarea {
   right: 0;
   display: flex;
   justify-content: space-between;
-  padding: 15px 30px;
+  padding: 0px 30px;
 }
 
 .attach-button, .send-button {

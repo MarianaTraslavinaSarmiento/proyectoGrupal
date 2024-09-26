@@ -34,9 +34,14 @@ const globalSettings = {
     { name: 'España', cities: ['Madrid'] },
     { name: 'Argentina', cities: ['Buenos Aires'] },
     { name: 'Colombia', cities: ['Bucaramanga'] },
+    { name: 'Francia', cities: ['París'] },
+    { name: 'Italia', cities: ['Roma'] },
+    { name: 'Alemania', cities: ['Berlín'] },
+    { name: 'Reino Unido', cities: ['Londres'] },
+    { name: 'Brasil', cities: ['São Paulo'] }
   ],
   language: ['Español', 'Inglés', 'Francés', 'Alemán', 'Italiano', 'Portugués', 'Chino', 'Japonés', 'Coreano', 'Árabe'],
-  currency: ['CAD', 'USD', 'MXN', 'EUR', 'ARS', 'GBP', 'JPY', 'CNY', 'KRW', 'AED']
+  currency: ['CAD', 'USD', 'MXN', 'EUR', 'ARS', 'GBP', 'JPY', 'COP','CNY', 'KRW', 'AED']
 };
 
 const openPopup = (type) => {
@@ -78,6 +83,7 @@ const selectOption = (option) => {
   closePopup();
 };
 </script>
+
 
 <template>
   <div class="customer-service">
@@ -145,7 +151,6 @@ const selectOption = (option) => {
       </div>
     </div>
 
-    <!-- Popup -->
     <div v-if="showPopup" class="popup-overlay">
       <div class="popup">
         <h3>{{ popupContent.title }}</h3>
@@ -165,24 +170,24 @@ const selectOption = (option) => {
   position: relative;
   min-height: 100vh;
   font-family: 'Bellota', sans-serif;
-  color: white;
+  color: var(--text-color);
 }
 
 .settings-view {
-  color: white;
+  color: var(--text-color);
   font-family: 'Bellota', sans-serif;
   min-height: 70vh;
   padding: 15px 20px;
 }
 
 .section-title {
-  color: #ff9999;
+  color: var(--text-contrast);
   font-size: 20px;
   margin-bottom: 10px;
 }
 
 .settings-list {
-  background-color: #6b3e3e;
+  background-color: var(--background-secondary);
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 20px;
@@ -193,14 +198,15 @@ const selectOption = (option) => {
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  border-bottom: 1px solid #7e4b4b;
+  border-bottom: 1px solid var(--background-secondary);
+  font-size: 1.2rem;
 
   &.clickable {
     cursor: pointer;
     transition: background-color 0.3s;
 
     &:hover {
-      background-color: #7e4b4b;
+      background-color: var(--background-secondary);
     }
   }
 }
@@ -210,7 +216,7 @@ const selectOption = (option) => {
 }
 
 .setting-value {
-  color: #ff9999;
+  color:  rgb(from var(--text-color) r g b / 40%);
 }
 
 .toggle {
@@ -244,14 +250,14 @@ const selectOption = (option) => {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgb(from var(--background-tertiary) r g b / 50%);
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .popup {
-  background-color: #6b3e3e;
+  background-color: var(--background-secondary);
   padding: 20px;
   border-radius: 10px;
   max-width: 80%;
@@ -259,7 +265,7 @@ const selectOption = (option) => {
   overflow-y: auto;
 
   h3 {
-    color: #ff9999;
+    color: var(--text-color);
     margin-bottom: 10px;
   }
 
@@ -274,14 +280,14 @@ const selectOption = (option) => {
     transition: background-color 0.3s;
 
     &:hover {
-      background-color: #7e4b4b;
+      background-color: var(--background-secondary);
     }
   }
 
   button {
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #ff9999;
+    background-color: var(--background-base);
     color: #4a2828;
     border: none;
     border-radius: 5px;
@@ -289,7 +295,7 @@ const selectOption = (option) => {
     transition: background-color 0.3s;
 
     &:hover {
-      background-color: #ff7777;
+      background-color: var(--background-base);
     }
   }
 }
