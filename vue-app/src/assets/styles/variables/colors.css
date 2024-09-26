@@ -7,14 +7,17 @@
     --background-primary: #2E1108;
     --background-secondary: #703A31;
     --background-base: #FFFFFF;
+    --background-tertiary:#000000;
 
     /* Text */
     --text-contrast: #9D1A1A;
     --text-color: #FFFFFF;
+    --text-black: #000000;
 
     /* Others */
     --color-accent: #FFA800;
     --color-border: #9D1A1A;
+    --color-confirmation: #2E1108;
     --color-black: #000000;
   }
   
