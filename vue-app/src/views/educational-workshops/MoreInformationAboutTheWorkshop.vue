@@ -7,7 +7,6 @@ const videoSrc = ref("https://www.youtube.com/embed/_Nr9VPY8b-Q");
 const trianglesCount = ref(1);
 
 onMounted(() => {
-  // Ensure the YouTube video is properly embedded
   const tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
   const firstScriptTag = document.getElementsByTagName('script')[0];
@@ -17,18 +16,18 @@ onMounted(() => {
 
 <template>
   <div class="customer">
-    <header-title :hideDiamond="true" />
-      <div class="customer-service">
+    <div class="header-section">
+      <div class="diamond-divider">
+        <SmallTriangles v-for="i in trianglesCount" :key="i" />
+      </div>
+      <header-title :hideDiamond="true" />
+    </div>
+    <div class="customer-service">
       <div class="content-section">
-        <div class="diamond-divider">
-          <SmallTriangles v-for="i in trianglesCount" :key="i" />
-        </div>
-        
         <p class="workshop-description">
           El Taller de Arte Awaq Ayllus reúne a más de 60 tejedores y tejedoras ayacuchanos que producen tapices murales y delicadas piezas bordadas para diversos usos decorativos y utilitarios.
         </p>
-
-        <div class="diamond-divider">
+        <div class="diamond-divider content-diamonds">
           <SmallTriangles v-for="i in trianglesCount" :key="i" />
         </div>
         
@@ -47,7 +46,6 @@ onMounted(() => {
         <p class="qr-instruction">Escanea el código QR con tu celular y disfruta de la experiencia.</p>
         
         <div class="qr-code">
-          <!-- Replace this with an actual QR code image when available -->
           <div class="placeholder-qr"></div>
         </div>
       </div>
@@ -56,11 +54,47 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
-.customer-service {
+.customer {
+  font-family: Arial, sans-serif;
   background-color: #fff;
+}
+
+.header-section {
+  position: relative;
+  background-color: #8B0000;
+}
+
+.diamond-divider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  background-color: #8B0000;
+  width: 220px;
+  margin: 0 auto;
+}
+
+.content-diamonds {
+  background-color: transparent;
+  padding: 5px 0;
+}
+
+.header-section .diamond-divider {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.header-section :deep(header-title) {
+  position: relative;
+  z-index: 2;
+}
+
+.customer-service {
   color: #8B0000;
   padding: 20px;
-  font-family: Arial, sans-serif;
 }
 
 .content-section {
@@ -69,21 +103,16 @@ onMounted(() => {
   text-align: center;
 }
 
-.diamond-divider {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-  overflow: hidden;
-}
-
 .workshop-description {
-  font-style: italic;
-  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 1.4;
+  margin: 10px 0;
+  color: #333;
 }
 
 .section-title {
   font-size: 1.5em;
-  margin-bottom: 20px;
+  margin: 20px 0;
   color: #8B0000;
 }
 
@@ -111,6 +140,8 @@ onMounted(() => {
 
 .qr-instruction {
   margin-bottom: 20px;
+  color: #666;
+  font-size: 14px;
 }
 
 .qr-code {
@@ -122,5 +153,11 @@ onMounted(() => {
   width: 150px;
   height: 150px;
   background-color: #8B0000;
+}
+
+:deep(.small-triangle) {
+  width: 10px;
+  height: 10px;
+  margin: 0 2px;
 }
 </style>
