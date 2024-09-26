@@ -4,6 +4,7 @@ import  ShoppingCart  from '@views/app/shopping-cart/ShoppingCart.vue'
 import  DiscountsPromotions  from '@views/app/discounts-promotions/DiscountsPromotions.vue'
 import  Profile  from '@views/app/profile/Profile.vue'
 import WorkshopsAndCraftStores from "@views/workshops-crafts-stores/WorkshopsAndCraftStores.vue"
+import ProductsByCategories from "@views/products-by-categories/ProductsByCategories.vue"
 
 
 export const internalRoutes = [
@@ -47,6 +48,12 @@ export const internalRoutes = [
         name: 'workshopsAndCraftStores',
         alias: 'talleres-y-tiendas',
         component: WorkshopsAndCraftStores
+    },
+    {
+        path: '/app/products-by-categories',
+        name: 'productsByCategories',
+        alias: 'productos-por-categoria',
+        component: ProductsByCategories
     }
 ]
 
