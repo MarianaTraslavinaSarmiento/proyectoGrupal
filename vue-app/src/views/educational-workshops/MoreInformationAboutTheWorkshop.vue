@@ -16,23 +16,29 @@ onMounted(() => {
 
 <template>
   <div class="customer">
-    <div class="header-section">
-      <div class="diamond-divider">
-        <SmallTriangles v-for="i in trianglesCount" :key="i" />
-      </div>
-      <header-title :hideDiamond="true" />
-    </div>
-    <div class="customer-service">
-      <div class="content-section">
-        <p class="workshop-description">
-          El Taller de Arte Awaq Ayllus reúne a más de 60 tejedores y tejedoras ayacuchanos que producen tapices murales y delicadas piezas bordadas para diversos usos decorativos y utilitarios.
-        </p>
-        <div class="diamond-divider content-diamonds">
+    <div class="content-wrapper">
+      <div class="header-section">
+        <div class="diamond-divider">
           <SmallTriangles v-for="i in trianglesCount" :key="i" />
         </div>
-        
-        <h2 class="section-title">Taller de arte Awaq Ayllus - Documental</h2>
-        
+        <header-title :hideDiamond="true" />
+      </div>
+      <div class="customer-service">
+        <div class="content-section">
+          <p class="workshop-description">
+            El Taller de Arte Awaq Ayllus reúne a más de 60 tejedores y tejedoras ayacuchanos que producen tapices murales y delicadas piezas bordadas para diversos usos decorativos y utilitarios.
+          </p>
+          <div class="diamond-divider content-diamonds">
+            <SmallTriangles v-for="i in trianglesCount" :key="i" />
+          </div>
+          
+          <h2 class="section-title">Taller de arte Awaq Ayllus - Documental</h2>
+        </div>
+      </div>
+    </div>
+    
+    <div class="video-wrapper">
+      <div class="video-background">
         <div class="video-container">
           <iframe 
             :src="videoSrc" 
@@ -41,12 +47,18 @@ onMounted(() => {
             allowfullscreen
           ></iframe>
         </div>
-        
-        <p class="interactive-prompt">Conoce más del taller de forma interactiva</p>
-        <p class="qr-instruction">Escanea el código QR con tu celular y disfruta de la experiencia.</p>
-        
-        <div class="qr-code">
-          <div class="placeholder-qr"></div>
+      </div>
+    </div>
+    
+    <div class="content-wrapper">
+      <div class="customer-service">
+        <div class="content-section">
+          <p class="interactive-prompt">Conoce más del taller de forma interactiva</p>
+          <p class="qr-instruction">Escanea el código QR con tu celular y disfruta de la experiencia.</p>
+          
+          <div class="qr-code">
+            <div class="placeholder-qr"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -55,13 +67,17 @@ onMounted(() => {
 
 <style scoped lang="scss">
 .customer {
-  font-family: Arial, sans-serif;
+  font-family: Bellota;
   background-color: #fff;
+}
+
+.content-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .header-section {
   position: relative;
-  background-color: #8B0000;
 }
 
 .diamond-divider {
@@ -69,7 +85,6 @@ onMounted(() => {
   justify-content: center;
   align-items: center;
   padding: 10px 0;
-  background-color: #8B0000;
   width: 220px;
   margin: 0 auto;
 }
@@ -94,26 +109,34 @@ onMounted(() => {
 
 .customer-service {
   color: #8B0000;
-  padding: 20px;
+  padding: 0px 20px 20px;
 }
 
-.content-section {
-  max-width: 800px;
-  margin: 0 auto;
-  text-align: center;
-}
 
 .workshop-description {
   font-size: 14px;
   line-height: 1.4;
   margin: 10px 0;
   color: #333;
+  text-align: center;
 }
 
 .section-title {
   font-size: 1.5em;
-  margin: 20px 0;
   color: #8B0000;
+}
+
+.video-wrapper {
+  width: 100%;
+  background-color: #8B0000;
+  padding: 20px 0;
+  margin-bottom: 20px;
+}
+
+.video-background {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .video-container {
@@ -121,7 +144,6 @@ onMounted(() => {
   padding-bottom: 56.25%; /* 16:9 aspect ratio */
   height: 0;
   overflow: hidden;
-  margin-bottom: 20px;
 }
 
 .video-container iframe {
@@ -159,5 +181,6 @@ onMounted(() => {
   width: 10px;
   height: 10px;
   margin: 0 2px;
+  fill: aqua;
 }
 </style>
