@@ -58,22 +58,28 @@ const workshops = ref([
 
 <style scoped lang="scss">
 
-
+.talleres-educativos{
+    font-family: Bellota;
+}
 .search-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   margin: 1rem;
+  padding: 0px 10px;
 
   input {
-    width: calc(95% - 2rem);
-    height: 5vh;
-    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    width: calc(100% - 2rem);
+    height: 4vh;
     border-radius: 0.5rem;
     border: none;
     background-color: #8B4513;
     color: #F5DEB3;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     margin-top: 20px;
-    margin: 20px 20px;
+    margin: 20px 15px;
+    padding-left: 40px;
 
     &::placeholder {
       color: #D2B48C;
@@ -82,7 +88,7 @@ const workshops = ref([
 
   .search-icon {
     position: absolute;
-    left: 2.85rem;
+    left: 10%;
     width: 20px;
     top: 50%;
     transform: translateY(-50%);
@@ -92,6 +98,7 @@ const workshops = ref([
 
 .workshops {
   margin: 1rem;
+      padding: 0px 10px;
 }
 
 .workshop-card {
