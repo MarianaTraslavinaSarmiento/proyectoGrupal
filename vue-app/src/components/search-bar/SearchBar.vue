@@ -56,7 +56,7 @@ const handleSearch = () => {
         margin-right: 12px;
     
         &::placeholder {
-            color: rgb(from var(--text-contrast) r g b /50%);
+            color: rgb(from var(--text-color) r g b /44%);
         }
     }
 }

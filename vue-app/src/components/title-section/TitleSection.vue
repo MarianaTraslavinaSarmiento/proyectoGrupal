@@ -1,6 +1,6 @@
 <script setup>
     import Diamond from '@assets/img/general/Diamond.vue';
-    import Filter from '@assets/img/general/Filter.vue';
+    import Filter from '@icons/general/Filter.vue';
     import { defineProps } from 'vue'
 
     const props = defineProps({
@@ -60,7 +60,7 @@
         }
 
         &__subtitle {
-            color: #9d1a1a80;
+            color: rgb(from var(--text-contrast) r g b / 50%);
             font-size: 1.4rem;
         }
     }
@@ -72,6 +72,7 @@
         position: absolute;
         right: 17px;
         bottom: 5px;
+        color: var(--color-contrast);
     }
 
 }

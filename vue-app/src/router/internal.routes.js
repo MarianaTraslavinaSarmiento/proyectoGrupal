@@ -4,7 +4,6 @@ import ShoppingCart from '@views/app/shopping-cart/ShoppingCart.vue'
 import DiscountsPromotions from '@views/app/discounts-promotions/DiscountsPromotions.vue'
 import Profile from '@views/app/profile/Profile.vue'
 
-import WorkshopsAndCraftStores from "@views/app/workshops-crafts-stores/WorkshopsAndCraftStores.vue"
 import ProductsByCategories from "@views/app/products-by-categories/ProductsByCategories.vue"
 import GeneralPublicInfoWorkshops from "@views/app/educational-workshops/GeneralPublicInfoWorkshops.vue"
 import PurchaseMadeMessage from "@views/app/your-shopping-cart/PurchaseMadeMessage.vue"
