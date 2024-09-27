@@ -64,7 +64,7 @@ export const internalRoutes = [
         component: CommentsToTheApp
     },
     {
-        path: '/app-settings/CustomerService',
+        path: '/app-settings/customer-service',
         name: 'CustomerService',
         alias: 'atencion-al-cliente',
         component: CustomerService
