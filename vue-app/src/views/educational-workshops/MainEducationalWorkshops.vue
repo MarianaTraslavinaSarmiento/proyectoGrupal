@@ -38,8 +38,10 @@ const workshops = ref([
     </header>
     
     <div class="search-bar">
-      <SearchIcon class="search-icon" />
-      <input type="text" placeholder="Buscar taller, por categoría o artesanos" />
+      <div class="search-input-wrapper">
+        <SearchIcon class="search-icon" />
+        <input type="text" placeholder="Buscar taller, por categoría o artesanos" />
+      </div>
     </div>
     
     <div class="workshops">
@@ -57,20 +59,26 @@ const workshops = ref([
 </template>
 
 <style scoped lang="scss">
-
-.talleres-educativos{
-    font-family: Bellota;
+.talleres-educativos {
+  font-family: Bellota;
 }
+
 .search-bar {
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
   margin: 1rem;
   padding: 0px 10px;
 
+  .search-input-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
   input {
-    width: calc(100% - 2rem);
+    width: 100%;
     height: 4vh;
     border-radius: 0.5rem;
     border: none;
@@ -78,27 +86,26 @@ const workshops = ref([
     color: rgb(from var(--text-color) r g b / 38%);
     font-size: 1.2rem;
     margin-top: 20px;
-    margin: 20px 15px;
-    padding-left: 40px;
+    margin-bottom: 20px;
+    padding: 0 15px 0 40px;
 
     &::placeholder {
-        color: rgb(from var(--text-color) r g b / 38%);
+      color: rgb(from var(--text-color) r g b / 38%);
     }
   }
 
   .search-icon {
     position: absolute;
-    left: 10%;
+    left: 15px;
     width: 20px;
-    top: 50%;
-    transform: translateY(-50%);
     color: var(--text-color);
+    z-index: 1;
   }
 }
 
 .workshops {
   margin: 1rem;
-      padding: 0px 10px;
+  padding: 0px 10px;
 }
 
 .workshop-card {
@@ -126,8 +133,8 @@ const workshops = ref([
       margin-bottom: 0.25rem;
     }
 
-    .description{
-        text-decoration: underline;
+    .description {
+      text-decoration: underline;
     }
 
     p {
@@ -135,15 +142,14 @@ const workshops = ref([
       margin-bottom: 0.25rem;
     }
 
-
     .instructor {
       font-weight: bold;
     }
 
     button {
-     height:3vh;
-     background-color: var(--background-primary);
-     color: var(--text-color);
+      height: 3vh;
+      background-color: var(--background-primary);
+      color: var(--text-color);
       border: none;
       padding: 0.5rem 1rem;
       border-radius: 0.25rem;
