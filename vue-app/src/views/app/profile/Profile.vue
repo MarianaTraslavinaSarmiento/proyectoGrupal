@@ -2,86 +2,74 @@
   <div class="profile">
     <h1>Foto de perfil</h1>
     <Avatar :showEditIcon="true" class="profile-photo" />
-    <div class="fields-container">
-      <template v-for="(label, field) in labels" :key="field">
-        <div :class="['field', { split: field === 'gender' }]">
-          <template v-if="field === 'gender'">
-            <div v-for="subField in ['gender', 'birthdate']" :key="subField" class="sub-field" :class="subField">
-              <label>{{ labels[subField] }}:</label>
-              <div class="input-container">
-                <input :type="inputTypes[subField]" v-model="editableFields[subField]" :disabled="!editMode[subField]" :class="{ 'input-gender': subField === 'gender' }" />
-                <button @click="toggleEdit(subField)" class="edit-button">
-                  <EditIcon />
-                </button>
-              </div>
-            </div>
-          </template>
-          <template v-else>
-            <label>{{ label }}:</label>
-            <div class="input-container">
-              <input v-if="field === 'phone'" type="text" class="country-code" v-model="editableFields.phoneCountryCode" :disabled="!editMode.phoneCountryCode" placeholder="+1" />
-              <input :type="inputTypes[field]" v-model="editableFields[field]" :disabled="!editMode[field]" :placeholder="field === 'phoneNumber' ? 'Añadir número de celular' : ''" />
-              <button @click="toggleEdit(field)" class="edit-button">
-                <EditIcon />
-              </button>
-            </div>
-          </template>
+
+    <div class="user-info">
+      <div class="profile-section">
+        <label>Usuario:</label>
+        <div class="input-group">
+          <input style="min-width: 250px;" type="text" v-model="user.username" :readonly="!isEditing.username" placeholder="Nombre de usuario">
+          <button @click="toggleEdit('username')" class="edit-button">
+            <EditIcon class="edit-icon"/>
+          </button>
         </div>
-      </template>
+      </div>
+      <div class="profile-section">
+        <label>Correo:</label>
+        <div class="input-group">
+          <input style="min-width: 250px;" type="email" v-model="user.email" :readonly="!isEditing.email" placeholder="Correo electrónico">
+          <button @click="toggleEdit('email')" class="edit-button">
+            <EditIcon class="edit-icon"/>
+          </button>
+        </div>
+      </div>
+      <div class="genre-and-born_date">
+        <div class="profile-section">
+        <label>Sexo:</label>
+        <div class="input-group">
+          <input style="max-width: 30px;" type="text" v-model="user.genre" :readonly="!isEditing.genre" placeholder="M o F">
+          <button @click="toggleEdit('genre')" class="edit-button">
+            <EditIcon class="edit-icon"/>
+          </button>
+        </div>
+      </div>
+      <div class="profile-section">
+        <label>Fecha de nacimiento:</label>
+        <div class="input-group">
+          <input type="date" v-model="user.born_date" :readonly="!isEditing.born_date" placeholder="DD/MM/AAAA">
+          <button @click="toggleEdit('born_date')" class="edit-button">
+            <EditIcon class="edit-icon"/>
+          </button>
+        </div>
+      </div>
+      </div>
+
     </div>
+    
   </div>
 </template>
 
 <script setup>
 import Avatar from '@components/avatar/Avatar.vue';
 import EditIcon from '@icons/profile/EditIcon.vue';
-import { ref, reactive, computed } from 'vue';
-import { useUserStore } from '@stores/user.js'
+import { ref, reactive } from 'vue'
 
-const userStore = useUserStore()
-const user = computed(() => userStore.user)
-
-const editableFields = reactive({
-  username: user.value.name,
-  email: user.value.email,
-  phoneCountryCode: '',
-  phoneNumber: '',
-  gender: user.value.sex,
-  birthdate: user.value.birthday
+const user = reactive({
+  username: 'SaraMartin9',
+  email: 'SMBY1996@gmail.com',
+  genre: 'F',
+  born_date: '1996-09-15'
 })
 
-const splitPhoneNumber = (phone) => {
-  const match = phone.match(/^(\+\d+)-(.*)$/)
-  editableFields.phoneCountryCode = match ? match[1] : ''
-  editableFields.phoneNumber = match ? match[2] : phone
-}
+const isEditing = reactive({
+  username: false,
+  email: false,
+  genre: false,
+  born_date: false
+})
 
-splitPhoneNumber(user.value.phone)
-
-const labels = {
-  username: 'Usuario',
-  email: 'Correo',
-  phone: 'Celular',
-  gender: 'Sexo',
-  birthdate: 'Fecha de nacimiento'
-}
-
-const inputTypes = {
-  username: 'text',
-  email: 'email',
-  phoneCountryCode: 'text',
-  phoneNumber: 'tel',
-  gender: 'text',
-  birthdate: 'date'
-}
-
-const editMode = reactive(Object.keys(editableFields).reduce((acc, field) => ({ ...acc, [field]: false }), {}))
 
 const toggleEdit = (field) => {
-  editMode[field] = !editMode[field]
-  if (field === 'phoneCountryCode' || field === 'phoneNumber') {
-    editMode.phoneCountryCode = editMode.phoneNumber = editMode[field]
-  }
+  isEditing[field] = !isEditing[field]
 }
 </script>
 
@@ -92,95 +80,82 @@ const toggleEdit = (field) => {
   align-items: center;
   font-family: var(--font-bellota);
 
+  .edit-icon {
+    width: 1.5em;
+    color: var(--text-contrast);
+  }
+
+  .user-info {
+    margin-top: 30px;
+    padding-inline: 15px;
+    max-width: calc(100vw - 15px) ;
+  }
+
+  .genre-and-born_date {
+    display: flex;
+    gap: 5px;
+  }
+
   h1 {
     color: var(--text-contrast);
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     margin-bottom: 0.5rem;
   }
 
   .profile-photo {
     margin-bottom: 1rem;
-    width: 100px;
-    height: 100px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     border: 2px solid var(--text-contrast);
   }
 
-  .fields-container {
-    width: 100%;
+  .profile-section {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
 
-    .field {
-      margin-bottom: 1rem;
+
+    h2,
+    h3 {
+      margin-bottom: 10px;
+    }
+
+    label {
+      display: block;
+      color: var(--text-contrast);
+      font-size: 1.7rem;
+      font-weight: bold;
+    }
+
+    .input-group {
       display: flex;
-      width: 100%;
-      gap: 1rem;
+      align-items: center;
 
-      label {
-        color: var(--text-contrast);
-        font-size: 1.2rem;
-        font-weight: 600;
-        margin-bottom: 0.25rem;
-        display: block;
-      }
+      input {
+        width: 100%;
+        background-color: var(--background-secondary);
+        color: #F3D3BD;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        font-size: 1.7rem;
+        min-width: 30px;
 
-      .input-container {
-        display: flex;
-        align-items: center;
-        overflow: hidden;
-
-        input {
-          flex-grow: 1;
-          border-radius: 6px;
-          padding: 0.5rem;
-          border: none;
-          background-color: var(--background-secondary);
-          color: var(--text-color);
-          
-          &:disabled {
-            color: rgba(var(--text-color-rgb), 0.6);
-          }
-        }
-
-        .country-code {
-          width: 3rem;
-          margin-right: 1rem;
-          border-right: 1px solid rgba(var(--text-color-rgb), 0.2);
-        }
-
-        .edit-button {
-          background: none;
-          border: none;
-          cursor: pointer;
-          width: 2em;
-          color: var(--text-contrast);
+        &::placeholder {
+          color: #A67B5B;
         }
       }
 
-      &.split {
-        display: flex;
-        gap: .5rem;
-
-        .sub-field {
-          flex: 1;
-          gap: 1rem;
-          display: flex;
-          flex-direction: row;
-
-          &.gender {
-            flex: 0;
-
-            .input-gender {
-              width: 3rem;
-            }
-          }
-
-          label {
-            display: flex;
-            align-items: center;
-           
-            color: var(--text-contrast);
-          }
-        }
+      .edit-button {
+        background: none;
+        border: none;
+        color: #F3D3BD;
+        padding: 5px;
+        margin-left: 2px;
+        cursor: pointer;
       }
     }
   }
