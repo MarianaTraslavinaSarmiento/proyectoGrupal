@@ -16,6 +16,7 @@ import CommentsToTheApp from "@views/app-settings/CommentsToTheApp.vue"
 import MainSettings from "@views/app-settings/MainSettings.vue"
 import MoreInformationAboutTheWorkshop from "@views/educational-workshops/MoreInformationAboutTheWorkshop.vue"
 import MainEducationalWorkshops from "@views/educational-workshops/MainEducationalWorkshops.vue"
+import DiscountCoupons from "@views/your-shopping-cart/DiscountCoupons.vue"
 
 import HeaderTitle from "@components/header-title/HeaderTitle.vue"
 
@@ -90,6 +91,11 @@ export const routes = [
         path: '/educational-workshops/MainEducationalWorkshops',
         name: 'MainEducationalWorkshops',
         component: MainEducationalWorkshops
+    },
+    {   
+        path: '/your-shopping-cart/DiscountCoupons',
+        name: 'DiscountCoupons',
+        component: DiscountCoupons
     },
     {
         path: '/app',
