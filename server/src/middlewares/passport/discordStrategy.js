@@ -4,6 +4,8 @@ const UserService = require('../../api/users/user.service');
 const UserModel = require('../../api/users/user.model')
 const userService = new UserService()
 
+const DISCORD_CDN_BASE_URL = "https://cdn.discordapp.com/attachments/"
+
 function getDiscordAvatarUrl(userId, avatarHash) {
     if (!avatarHash) {
       // Si el usuario no tiene un avatar personalizado, devolver el avatar por defecto
