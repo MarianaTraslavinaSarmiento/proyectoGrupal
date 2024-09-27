@@ -10,8 +10,8 @@ export const useUserStore = defineStore('user', {
             name: 'SaraMartin9',
             avatar: 'https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg',
             email: 'sara.martin@gmail.com',
-            phone: '+56 999 9999 9999',
-            sex : 'Femenino',
+            phone: '+56-99999999999',
+            sex : 'F',
             birthday: '01/01/1990',
         },
         // isFilledData: false
