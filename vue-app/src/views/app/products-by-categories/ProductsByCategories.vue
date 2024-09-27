@@ -45,7 +45,7 @@ const filterProducts = (category) => {
 <template>
     <main>
         <HeaderTitle title="Categorías" />
-        <CategoriesCarousel @selectCategory="filterProducts" />
+        <CategoriesCarousel :routeParamName="'category'" @selectCategory="filterProducts" />
 
         <div class="filter__products">
             <SearchBar 
@@ -69,7 +69,7 @@ const filterProducts = (category) => {
 
 <style scoped>
 main {
-    font-family: Bellota;
+    font-family: var(--font-bellota);
 }
 
 .filter__products {

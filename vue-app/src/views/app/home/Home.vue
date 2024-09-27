@@ -1,5 +1,4 @@
 <script setup>
-import Nav from '@/components/nav/Nav.vue';
 import TitleSection from '@components/title-section/TitleSection.vue'
 
 import DiamondIcon from '@/assets/icons/general/DiamondIcon.vue';
@@ -20,31 +19,35 @@ import LocationBar from './components/LocationBar.vue';
 import Categories from './components/Categories.vue';
 import MonthWorkshop from './components/MonthWorkshop.vue';
 
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
 const primeCategories = [
   {
     name: 'Textilería',
     icon: TextileIcon,
-    onClick: () => console.log('Textilería clicked')
+    onClick: () => router.push('/app/productos-por-categoria/textileria')
   },
   {
     name: 'Cerámica',
     icon: CeramicsIcon,
-    onClick: () => console.log('Cerámica clicked')
+    onClick: () => router.push('/app/productos-por-categoria/ceramica')
   },
   {
     name: 'Orfebrería',
     icon: GoldsmithingIcon,
-    onClick: () => console.log('Orfebrería clicked')
+    onClick: () => router.push('/app/productos-por-categoria/orfebreria')
   },
   {
     name: 'Talla en piedra',
     icon: StoneCarving,
-    onClick: () => console.log('Talla en piedra clicked')
+    onClick: () => router.push('/app/productos-por-categoria/piedra')
   },
   {
     name: 'Talla en madera',
     icon: WoodCarving,
-    onClick: () => console.log('Talla en madera clicked')
+    onClick: () => router.push('/app/productos-por-categoria/madera')
   }
 ];
 
@@ -52,27 +55,27 @@ const secondCategories = [
   {
     name: 'Bordado',
     icon: EmbroideryIcon,
-    onClick: () => console.log('Bordado clicked')
+    onClick: () => router.push('/app/productos-por-categoria/bordado')
   },
   {
     name: 'Joyería',
     icon: JewelryIcon,
-    onClick: () => console.log('Joyería clicked')
+    onClick: () => router.push('/app/productos-por-categoria/joyeria')
   },
   {
     name: 'Hojalatería',
     icon: SheetMetalIcon,
-    onClick: () => console.log('Hojalatería clicked')
+    onClick: () => router.push('/app/productos-por-categoria/metalisteria')
   },
   {
     name: 'Estampado',
     icon: PrintedIcon,
-    onClick: () => console.log('Estampado clicked')
+    onClick: () => router.push('/app/productos-por-categoria/impresiones')
   },
   {
     name: 'Pintura tradicional',
     icon: PaintingTraditionalIcon,
-    onClick: () => console.log('Pintura tradicional clicked')
+    onClick: () => router.push('/app/productos-por-categoria/tradicional')
   }
 ];
 
