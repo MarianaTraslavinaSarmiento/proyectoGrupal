@@ -36,11 +36,11 @@ const animateGrid = () => {
 };
 
 const animateLogo = async () => {
-  await new Promise(resolve => setTimeout(resolve, 3000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   isLogoVisible.value = true;
-  await new Promise(resolve => setTimeout(resolve, 3000));
+  await new Promise(resolve => setTimeout(resolve, 2500));
   isLogoVisible.value = false;
-  await new Promise(resolve => setTimeout(resolve, 3000));
+  await new Promise(resolve => setTimeout(resolve, 1000));
   router.push({ name: 'signup' });
 };
 
@@ -55,7 +55,9 @@ onMounted(() => {
 <template>
   <div class="splash-screen" ref="containerRef">
     <div class="app-logo-container">
-      <RuraqMakiIcon class="app-logo" v-show="isLogoVisible" />
+      <Transition>
+        <RuraqMakiIcon class="app-logo" v-show="isLogoVisible" v-tran/>
+      </Transition>
     </div>
     <div class="square-grid" :style="`
       transform: translate(${-animationOffset}px, ${-animationOffset}px);
@@ -74,6 +76,17 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
 .splash-screen {
   background-color: var(--color-black);
   width: 100vw;
