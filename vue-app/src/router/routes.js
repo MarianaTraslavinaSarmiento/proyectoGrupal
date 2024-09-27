@@ -15,7 +15,7 @@ import CustomerService from "@views/app-settings/CustomerService.vue"
 import CommentsToTheApp from "@views/app-settings/CommentsToTheApp.vue"
 import MainSettings from "@views/app-settings/MainSettings.vue"
 import MoreInformationAboutTheWorkshop from "@views/educational-workshops/MoreInformationAboutTheWorkshop.vue"
-
+import MainEducationalWorkshops from "@views/educational-workshops/MainEducationalWorkshops.vue"
 
 import HeaderTitle from "@components/header-title/HeaderTitle.vue"
 
@@ -85,6 +85,11 @@ export const routes = [
         path: '/educational-workshops/MoreInformationAboutTheWorkshop',
         name: 'MoreInformationAboutTheWorkshop',
         component: MoreInformationAboutTheWorkshop
+    },
+    {   
+        path: '/educational-workshops/MainEducationalWorkshops',
+        name: 'MainEducationalWorkshops',
+        component: MainEducationalWorkshops
     },
     {
         path: '/app',
