@@ -2,9 +2,17 @@ const DiscordStrategy = require('passport-discord').Strategy;
 const bcrypt = require('bcrypt');
 const UserService = require('../../api/users/user.service');
 const UserModel = require('../../api/users/user.model')
-const defaultProfilePic = require("../../utils/defaultPfp")
-
 const userService = new UserService()
+
+function getDiscordAvatarUrl(userId, avatarHash) {
+    if (!avatarHash) {
+      // Si el usuario no tiene un avatar personalizado, devolver el avatar por defecto
+      return `${DISCORD_CDN_BASE_URL}embed/avatars/${parseInt(userId) % 5}.png`;
+    }
+    
+    // Construir la URL del avatar personalizado
+    return `${DISCORD_CDN_BASE_URL}avatars/${userId}/${avatarHash}.png`;
+  }
 
 const DISCORD_CLIENT_ID = process.env.DISCORD_CLIENT_ID
 const DISCORD_CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET
@@ -37,16 +45,17 @@ module.exports = new DiscordStrategy({
     clientSecret: DISCORD_CLIENT_SECRET,
     callbackURL: '/api/auth/discord/callback',
     scope: ["identify", "email"],
-
 }, async(accessToken, refreshToken, profile, done) => {
-    console.log(profile)
     try {
-        let user = await userService.getOne({discord_id: profile.id})
+        let user = await userService.getOneByQuery({email: profile.email, account_id: profile.id})
         if (user) {
             return done(null, user);
         } else {
             user = new UserModel({
-                discord_id: profile.id,    
+                username: profile.username,
+                email: profile.email,
+                profile_pic_url: getDiscordAvatarUrl(profile.id, profile.avatar),
+                account_id: profile.id    
             });
             await user.save();
             return done(null, user);

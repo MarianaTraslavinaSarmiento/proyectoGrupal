@@ -38,8 +38,8 @@ export const routes = [
         component: SingUp
     },
     {   
-        path: '/singup/RegisterRuraqMaki',
-        name: 'RegisterRuraqMaki',
+        path: '/signup/ruraqmaki',
+        name: 'ruraqmaki',
         component: RegisterRuraqMaki
     },
     {

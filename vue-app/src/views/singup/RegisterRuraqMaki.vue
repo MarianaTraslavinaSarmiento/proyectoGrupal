@@ -33,7 +33,7 @@ import Back from "@assets/img/general/Back.vue"
 
         <div class="start__registration">
             <div class="back__icon">
-                <router-link to="/singup">
+                <router-link to="/signup">
                     <div class="back">
                         <Back class="back__icon" />
                     </div>

@@ -17,7 +17,7 @@ module.exports = new LinkedinStrategy({
   }, async(accessToken, refreshToken, profile, done ) => {
     console.log(profile)
     try {
-        let user = await userService.getOne({email: profile.emails[0].value, account_id: profile.id})
+        let user = await userService.getOneByQuery({email: profile.emails[0].value, account_id: profile.id})
         if (user) {
             return done(null, user)
         } else {

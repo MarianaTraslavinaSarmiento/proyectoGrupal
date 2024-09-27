@@ -3,6 +3,8 @@ import FacebookIcon from "@/assets/icons/auth/FacebookIcon.vue";
 import InstagramIcon from "@/assets/icons/auth/InstagramIcon.vue";
 import GmailIcon from "@/assets/icons/auth/GmailIcon.vue";
 import UserIcon from "@/assets/icons/auth/UserIcon.vue";
+import DiscordIcon from "@/assets/icons/auth/DiscordIcon.vue";
+import {useAuth} from "@/composables/useAuth.js";
 </script>
 
 <template>
@@ -14,23 +16,23 @@ import UserIcon from "@/assets/icons/auth/UserIcon.vue";
         en <span class="auth__highlight">Artesanías Colombianas</span>
       </h1>
       <div class="auth__buttons">
-        <button class="auth__button auth__button--facebook">
+        <!-- <button class="auth__button auth__button--facebook">
           <FacebookIcon class="auth__button-icon" />
           <span class="auth__button-text">Regístrate con <span style="font-weight: bold;"> Facebook</span></span>
         </button>
         <button class="auth__button auth__button--instagram">
           <InstagramIcon class="auth__button-icon" />
           <span class="auth__button-text">Regístrate con <span style="font-weight: bold;"> Instagram</span></span>
-        </button>
-        <button class="auth__button auth__button--gmail">
+        </button> -->
+        <button @click="useAuth('google')" class="auth__button auth__button--gmail">
           <GmailIcon class="auth__button-icon" />
           <span class="auth__button-text">Regístrate con <span style="font-weight: bold;"> Gmail</span></span>
         </button>
-        <button class="auth__button auth__button--gmail">
-          <InstagramIcon class="auth__button-icon" />
+        <button @click="useAuth('discord')" class="auth__button auth__button--gmail">
+          <DiscordIcon class="auth__button-icon" />
           <span class="auth__button-text">Regístrate con <span style="font-weight: bold;"> Discord</span></span>
         </button>
-        <router-link to="/singup/RegisterRuraqMaki" class="auth__button auth__button--ruraq-maki">
+        <router-link to="/signup/ruraqmaki" class="auth__button auth__button--ruraq-maki">
           <img src="@/assets/img/auth/userProfileIcon.png" class="auth__button_icon" alt="">
           <span class="auth__button-text">Regístrate con una cuenta de <span style="font-weight: bold;"> Ruraq Maki</span></span>
         </router-link>
