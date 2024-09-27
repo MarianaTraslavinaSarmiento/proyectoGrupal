@@ -6,16 +6,16 @@ import DiscountCoupons from "@/assets/icons/your-shopping-cart/couponMenu.vue";
 const couponCode = ref('');
 
 const validateCoupon = () => {
-  // Add validation logic here
+
   console.log('Validating coupon:', couponCode.value);
 };
 
 const useCoupon = () => {
-  // Add logic to use the coupon
+
   console.log('Using coupon');
 };
 
-// Sample data for multiple coupons
+
 const coupons = ref([
   {
     id: 1,
@@ -85,14 +85,23 @@ const coupons = ref([
 </template>
 
 <style scoped lang="scss">
+
 .customer-service {
-  font-family: Arial, sans-serif;
-  color: #8B0000;
+  font-family: Bellota;
+  color: var(--text-contrast);
   height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
+h2 {
+    font-size: 2rem;
+}
+
+.subtext {
+    font-size: 2rem;
+    font-weight: bold;
+}
 .content {
   padding: 20px;
   flex-grow: 1;
@@ -114,8 +123,8 @@ const coupons = ref([
 .coupon-input {
   display: flex;
   align-items: center;
-  background-color: #8B0000;
-  border-radius: 25px;
+  background-color: var(--background-secondary);
+  border-radius: 10px;
   padding: 5px 15px;
   margin-bottom: 30px;
 
@@ -123,27 +132,26 @@ const coupons = ref([
     width: 24px;
     height: 24px;
     margin-right: 10px;
-    fill: white;
   }
 
   input {
     flex-grow: 1;
     background: transparent;
     border: none;
-    color: white;
+    color: rgb(from var(--text-color) r g b /25%);
     font-size: 16px;
     padding: 10px 0;
 
     &::placeholder {
-      color: rgba(255, 255, 255, 0.7);
+        color: rgb(from var(--text-color) r g b /25%);
     }
   }
 
   button {
-    background-color: #4B0000;
-    color: white;
+    background-color: var(--background-primary);
+    color: var(--text-color);
     border: none;
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 8px 15px;
     font-size: 14px;
     cursor: pointer;
@@ -162,9 +170,10 @@ const coupons = ref([
   }
 
   .expiry-note {
-    color: #FF0000;
+    color: rgb(from var(--text-contrast) r g b /50%);
     font-size: 14px;
     margin-bottom: 20px;
+    font-weight: bold;
   }
 }
 
@@ -173,19 +182,18 @@ const coupons = ref([
   overflow-y: auto;
   padding-right: 10px; 
   height: 20px;
+  scrollbar-width: none;
 }
 
 .coupon-card {
-  background-color: white;
+  background-color: var(--background-secondary);
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
   margin-bottom: 20px;
 
   .coupon-image {
-    width: 100px;
-    height: 100px;
+    width: 35vw;
     object-fit: cover;
   }
 
@@ -196,19 +204,22 @@ const coupons = ref([
     .discount {
       font-weight: bold;
       margin-bottom: 5px;
+      font-size: 1.3rem;
+      color: var(--text-color);
     }
 
     .expiry {
       font-size: 14px;
-      color: #666;
+      color: var(--text-color);
       margin-bottom: 10px;
+      font-weight: bold;
     }
 
     .use-coupon {
-      background-color: #8B0000;
-      color: white;
+      background-color: var(--background-primary);
+      color: var(--text-color);
       border: none;
-      border-radius: 20px;
+      border-radius: 10px;
       padding: 8px 15px;
       font-size: 14px;
       cursor: pointer;
