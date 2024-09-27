@@ -14,6 +14,7 @@ const appAuth = require("./src/api/auth/auth.routes");
 const appShop = require("./src/api/shops/shop.routes");
 const appUser = require("./src/api/users/user.routes")
 const appProduct = require("./src/api/products/product.routes")
+const appWorkshop = require("./src/api/workshops/workshop.routes")
 
 app.use(cookieParser())
 app.use(express.json())
@@ -39,8 +40,9 @@ app.use(passport.session())
 
 app.use("/api/auth", appAuth)
 app.use("/api/shop", appShop)
-app.use("/api/user", checkAuth, appUser)
-app.use("/api/product", checkAuth, appProduct)
+app.use("/api/user", appUser)
+app.use("/api/product", appProduct)
+app.use("/api/workshop", appWorkshop)
 
 
 app.use(errorHandler)
