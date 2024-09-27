@@ -102,6 +102,7 @@ const workshops = ref([
 }
 
 .workshop-card {
+  height: 18vh;
   display: flex;
   background-color: #8B4513;
   border-radius: 0.5rem;
@@ -109,8 +110,8 @@ const workshops = ref([
   margin-bottom: 1rem;
 
   img {
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 18vh;
     object-fit: cover;
   }
 
@@ -120,33 +121,36 @@ const workshops = ref([
     flex: 1;
 
     h2 {
-      font-size: 1.1rem;
+      font-size: 1.3rem;
       font-weight: 600;
       margin-bottom: 0.25rem;
+    }
+
+    .description{
+        text-decoration: underline;
     }
 
     p {
-      font-size: 0.8rem;
+      font-size: 1.3rem;
       margin-bottom: 0.25rem;
     }
 
-    .description {
-      font-weight: 600;
-    }
 
     .instructor {
-      font-style: italic;
+      font-weight: bold;
     }
 
     button {
+     height:3vh;
       background-color: #6B3E26;
       color: white;
       border: none;
       padding: 0.5rem 1rem;
       border-radius: 0.25rem;
-      font-size: 0.8rem;
-      margin-top: 0.5rem;
+      font-size: 1.1rem;
+      margin-top: 2rem;
       cursor: pointer;
+      text-decoration: underline;
     }
   }
 }
