@@ -15,15 +15,15 @@ export default [
     icon: HeartLineIcon,
   },
   {
-    pageName: 'DiscountsPromotions',
-    text: 'Discounts & Promotions',
-    alias: 'descuentos-promociones',
+    pageName: 'Purchases',
+    text: 'Compras',
+    alias: 'purchases',
     icon: ShoppingBagIcon,
   },
   {
     pageName: 'Workshops',
     text: 'Talleres',
-    alias: 'talleres',
+    alias: 'talleres-educativos',
     icon: SuscribeWorksshopIcon,
   },
   {

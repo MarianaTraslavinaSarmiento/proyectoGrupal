@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
-import DiscountCoupons from "@/assets/icons/your-shopping-cart/couponMenu.vue";
+import CouponIcon from "@icons/general/CouponIcon.vue";
 
 const couponCode = ref('');
 
@@ -60,7 +60,7 @@ const coupons = ref([
       <p class="subtext">Canjealo aquí</p>
       
       <div class="coupon-input">
-        <DiscountCoupons class="coupon-icon" />
+        <CouponIcon class="coupon-icon" />
         <input v-model="couponCode" type="text" placeholder="Ingresa tu cupón" />
         <button @click="validateCoupon">Validar</button>
       </div>
@@ -87,7 +87,7 @@ const coupons = ref([
 <style scoped lang="scss">
 
 .customer-service {
-  font-family: Bellota;
+  font-family: var(--font-bellota);
   color: var(--text-contrast);
   height: 100vh;
   display: flex;
@@ -132,13 +132,14 @@ h2 {
     width: 24px;
     height: 24px;
     margin-right: 10px;
+    color: var(--text-color);
   }
 
   input {
     flex-grow: 1;
     background: transparent;
     border: none;
-    color: rgb(from var(--text-color) r g b /25%);
+    color: var(--text-color);
     font-size: 16px;
     padding: 10px 0;
 

@@ -10,6 +10,9 @@ import GeneralPublicInfoWorkshops from "@views/app/educational-workshops/General
 import PurchaseMadeMessage from "@views/app/your-shopping-cart/PurchaseMadeMessage.vue"
 import MoreInformationAboutTheWorkshop from "@views/app/educational-workshops/MoreInformationAboutTheWorkshop.vue"
 
+import RedeemCoupons from "@views/app/redeem-coupons/RedeemCoupons.vue"
+import EducationalWorkshops from "@views/app/educational-workshops/EducationalWorkshops.vue"
+
 import CustomerService from "@views/app/customer-service/CustomerService.vue"
 import CommentsToTheApp from "@views/app/comments-to-the-app/CommentsToTheApp.vue"
 import Settings from '@/views/app/settings/Settings.vue'
@@ -51,13 +54,25 @@ export const internalRoutes = [
         meta: { requiresNav: true, requiresHeadBar: true },
         component: Profile
     },
-     {
+    {
+        path: '/app/redeem-coupons',
+        name: 'RedeemCoupons',
+        alias: 'canjear-cupon',
+        component: RedeemCoupons
+    },
+    {
+        path: '/app/educational-workshops',
+        name: 'EducationalWorkshops',
+        alias: 'talleres-educativos',
+        component: EducationalWorkshops
+    },
+    {
         path: '/app/settings',
         name: 'Settings',
         alias: 'ajustes',
         component: Settings
     },
-      {
+    {
         path: '/app/coments',
         name: 'Coments',
         alias: 'comentarios',
