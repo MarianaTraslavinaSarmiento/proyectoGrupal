@@ -74,15 +74,15 @@ const workshops = ref([
     height: 4vh;
     border-radius: 0.5rem;
     border: none;
-    background-color: #8B4513;
-    color: #F5DEB3;
+    background-color: var(--background-secondary);
+    color: rgb(from var(--text-color) r g b / 38%);
     font-size: 1.2rem;
     margin-top: 20px;
     margin: 20px 15px;
     padding-left: 40px;
 
     &::placeholder {
-      color: #D2B48C;
+        color: rgb(from var(--text-color) r g b / 38%);
     }
   }
 
@@ -92,7 +92,7 @@ const workshops = ref([
     width: 20px;
     top: 50%;
     transform: translateY(-50%);
-    color: #D2B48C;
+    color: var(--text-color);
   }
 }
 
@@ -104,7 +104,7 @@ const workshops = ref([
 .workshop-card {
   height: 18vh;
   display: flex;
-  background-color: #8B4513;
+  background-color: var(--background-secondary);
   border-radius: 0.5rem;
   overflow: hidden;
   margin-bottom: 1rem;
@@ -117,7 +117,7 @@ const workshops = ref([
 
   .workshop-info {
     padding: 0.75rem;
-    color: white;
+    color: var(--text-color);
     flex: 1;
 
     h2 {
@@ -142,8 +142,8 @@ const workshops = ref([
 
     button {
      height:3vh;
-      background-color: #6B3E26;
-      color: white;
+     background-color: var(--background-primary);
+     color: var(--text-color);
       border: none;
       padding: 0.5rem 1rem;
       border-radius: 0.25rem;
