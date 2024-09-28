@@ -64,7 +64,7 @@ const sendMessage = (text) => {
         
             h1{
                 font-family: var(--font-bellota);
-                font-size: 1.5rem;
+                font-size: 1.8rem;
                 color: var(--text-color);
                 text-wrap: wrap;
                 margin: 0;

@@ -30,6 +30,9 @@
     font-size: 16px;
     line-height: 1.4;
     position: relative;
+    font-family: var(--font-bellota);
+    font-weight: 600;
+    font-size: 2rem;
   }
   
   .message-bubble::after {
@@ -46,13 +49,13 @@
   }
   
   .sent .message-bubble {
-    background-color: #B22222;
-    color: white;
+    background-color: var(--text-contrast);
+    color:var(--text-color);
   }
   
   .sent .message-bubble::after {
     right: 0px;
-    border-left-color: #B22222;
+    border-left-color: var(--text-contrast);
     border-right: 0;
     border-bottom: 1;
     margin-bottom: -10px;
@@ -64,13 +67,13 @@
   }
   
   .received .message-bubble {
-    background-color: #8B4513;
-    color: white;
+    background-color: var(--background-secondary);
+    color: var(--text-color);
   }
   
   .received .message-bubble::after {
     left: 0px;
-    border-right-color: #8B4513;
+    border-right-color: var(--background-secondary);
     border-left: 0;
     border-bottom: 1;
     margin-bottom: -10px;
