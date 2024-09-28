@@ -1,17 +1,20 @@
 import { ref } from 'vue'
-import axios from "@/config/axios.js"
+import { useApiCacheStore } from '@/stores/apiCache'
+import { createPinia } from 'pinia'
 import toast from "@/config/toast.js"
 
+const pinia = createPinia()
+const apiCacheStore = useApiCacheStore(pinia)
+
 export const useGetOneWorkshop = (id) => {
+    const url = `/workshop/${id}`
     const workshop = ref()
     const isLoading = ref(true)
 
     const getWorkshop = async() => {
         try {
-            const { data } = await axios.get(`/workshop/${id}`)
-            workshop.value = data
+            workshop.value = await apiCacheStore.fetchData(url)
             isLoading.value = false
-            console.log(data)
         } catch (err) {
             toast.error('Error al cargar el taller.')
         }
@@ -23,13 +26,13 @@ export const useGetOneWorkshop = (id) => {
 }
 
 export const useGetTrendingWorkshops = () => {
+    const url = '/workshop/trending'
     const workshops = ref()
     const isLoading = ref(true)
 
     const getWorkshops = async() => {
         try {
-            const { data } = await axios.get('/workshop/trending')
-            workshops.value = data 
+            workshops.value = await apiCacheStore.fetchData(url)
             isLoading.value = false
 
         } catch (err) {

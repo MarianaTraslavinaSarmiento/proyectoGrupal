@@ -1,15 +1,19 @@
 import { ref } from 'vue'
-import axios from "@/config/axios.js"
+import { useApiCacheStore } from '@/stores/apiCache'
+import { createPinia } from 'pinia'
 import toast from "@/config/toast.js"
 
+const pinia = createPinia()
+const apiCacheStore = useApiCacheStore(pinia)
+
 export const useGetAllShops = () => {
+    const url = '/shop'
     const shops = ref()
     const isLoading = ref(true)
 
     const getShops = async() => {
         try {
-            const { data } = await axios.get('/shop')
-            shops.value = data 
+            shops.value = await apiCacheStore.fetchData(url)
             isLoading.value = false
         } catch (err) {
             toast.error('Error al cargar las tiendas')
