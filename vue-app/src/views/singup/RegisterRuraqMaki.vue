@@ -21,7 +21,7 @@ const handleSubmit = () => {
 
 
 import CheckedIcon from "@/assets/icons/general/CheckedIcon.vue";
-import Back from "@assets/img/general/Back.vue"
+import BackIcon from '@icons/general/BackIcon.vue'
 
 </script>
 
@@ -35,7 +35,7 @@ import Back from "@assets/img/general/Back.vue"
             <div class="back__icon">
                 <router-link to="/signup">
                     <div class="back">
-                        <Back class="back__icon" />
+                        <BackIcon class="back__icon" />
                     </div>
                 </router-link>
             </div>

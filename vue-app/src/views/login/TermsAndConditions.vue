@@ -2,7 +2,7 @@
 
 import CheckedIcon from "@assets/icons/general/CheckedIcon.vue";
 import SquareBackground from "@assets/img/general/SquareBackground.vue"
-import Back from "@assets/img/general/Back.vue"
+import BackIcon from '@icons/general/BackIcon.vue'
 import DropdownArrow from "@assets/img/general/DropdownArrow.vue"
 
 import { ref } from 'vue';
@@ -19,7 +19,7 @@ const checkedPromotions = ref(false);
         <SquareBackground class="triangle__corner " />
         <SquareBackground class="triangle__center" />
         <div class="back">
-            <Back class="back__icon" />
+            <BackIcon class="back__icon" />
         </div>
 
         <div class="content">

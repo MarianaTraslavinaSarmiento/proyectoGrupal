@@ -2,6 +2,13 @@
 import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
 import Call from "@/assets/icons/app-configuration/CallIcon.vue";
 import CommentIcon from '@/assets/icons/general/CommentIcon.vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const onChatClick = () => {
+  router.push('/app/atencion-al-cliente/chat')
+}
 </script>
 
 
@@ -20,7 +27,7 @@ import CommentIcon from '@/assets/icons/general/CommentIcon.vue';
     
     <div class="personalized-support">
       <p>¿Necesitas atención personalizada? habla con nuestro equipo de soporte</p>
-      <button class="chat-button">
+      <button @click="onChatClick" class="chat-button">
         <CommentIcon class="icon" />
         Empieza un chat
       </button>

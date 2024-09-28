@@ -1,6 +1,5 @@
 <script setup>
 
-import Back from "@assets/img/general/Back.vue"
 import SmallTriangle from "@assets/icons/workshops/SmallTriangle.vue";
 import SubscribeWorkshop from "@assets/icons/workshops/SubscribeWorkshop.vue";
 
