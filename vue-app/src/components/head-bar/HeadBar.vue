@@ -36,6 +36,8 @@ const closeMenu = () => {
 <style lang="scss" scoped>
 .header-bar {
   display: flex;
+  position: relative;
+  z-index: 1;
   padding: 25px 28px 25px 8px;
   gap: 30px;
   background-color: var(--background-primary);

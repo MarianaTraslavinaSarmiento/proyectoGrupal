@@ -26,6 +26,7 @@ import Spinner from "@assets/img/general/Spinner.vue"
   align-items: center;
   width: 50px;
   height: 50px;
+  color: var(--background-secondary);
 }
 
 @keyframes spin {

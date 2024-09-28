@@ -1,7 +1,6 @@
 <script setup>
     import Diamond from '@assets/img/general/Diamond.vue';
     import FilterIcon from '@icons/general/FilterIcon.vue';
-    import { defineProps } from 'vue'
 
     const props = defineProps({
         title: {

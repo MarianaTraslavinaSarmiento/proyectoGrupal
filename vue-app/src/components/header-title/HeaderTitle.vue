@@ -2,7 +2,6 @@
 
 import Back from "@assets/img/general/Back.vue"
 import DiamondHeader from "@assets/img/general/DiamondHeader.vue"
-import { defineProps } from "vue";
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
