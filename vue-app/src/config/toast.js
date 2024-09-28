@@ -1,6 +1,8 @@
-export default {
+import { useToast } from "vue-toastification"
+
+const toast = useToast({
     position: "top-center",
-    timeout: 5000,
+    timeout: 3000,
     closeOnClick: true,
     pauseOnFocusLoss: false,
     pauseOnHover: false,
@@ -11,4 +13,6 @@ export default {
     closeButton: "button",
     icon: true,
     rtl: false
-} 
+})
+
+export default toast

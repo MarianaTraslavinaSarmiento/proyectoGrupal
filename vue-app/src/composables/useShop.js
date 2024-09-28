@@ -1,13 +1,23 @@
-import axios from "@/composables/useShop"
-import toastConfig from "@/config/vue-toastification"
-import { useToast } from "vue-toastification"
+import { ref } from 'vue'
+import axios from "@/config/axios.js"
+import toast from "@/config/toast.js"
 
-const toast = new useToast()
+export const useGetAllShops = () => {
+    const shops = ref()
+    const isLoading = ref(true)
 
-export const useGetAllShops = async () => {
-    try {
-        throw new Error()
-    } catch (err) {
-        toast.error('Error al cargar las tiendas', toastConfig)
+    const getShops = async() => {
+        try {
+            const { data } = await axios.get('/shop')
+            shops.value = data 
+            isLoading.value = false
+        } catch (err) {
+            toast.error('Error al cargar las tiendas')
+        } 
+
     }
+    
+    getShops()
+
+    return { shops, isLoading }
 }

@@ -1,16 +1,10 @@
 <script setup>
-
 import Spinner from "@assets/img/general/Spinner.vue"
-import { ref } from "vue";
-
-const isLoading = ref(false)
-
-
 </script>
 
 <template>
 
-<div v-if="isLoading" class="loading__spinner">
+<div class="loading__spinner">
     <Spinner class="animate__spin" />
 </div>
 
@@ -20,9 +14,9 @@ const isLoading = ref(false)
 
 .loading__spinner {
 
-  width: 100%;
-  height: 100%;
-  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .animate__spin {
