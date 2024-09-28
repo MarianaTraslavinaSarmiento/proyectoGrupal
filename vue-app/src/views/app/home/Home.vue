@@ -142,7 +142,7 @@ main {
 }
 
 .month__workshops {
-  margin: 2em 0 5em 0;
+  margin: 2em 0 10em 0;
 
   .diamond__separator {
     color: var(--background-secondary);
