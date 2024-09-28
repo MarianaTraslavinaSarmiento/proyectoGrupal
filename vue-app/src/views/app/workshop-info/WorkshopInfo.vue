@@ -1,10 +1,15 @@
 <script setup>
-
 import Back from "@assets/img/general/Back.vue"
 import SmallTriangle from "@assets/icons/workshops/SmallTriangle.vue";
 import SubscribeWorkshop from "@assets/icons/workshops/SubscribeWorkshop.vue";
-
 import HeaderTitle from "@components/header-title/HeaderTitle.vue";
+import { useRoute } from "vue-router";
+import { useGetOneWorkshop } from "@/composables/useWorkshop";
+import LoadingScreen from "@/components/loading-screen/LoadingScreen.vue";
+
+const route = useRoute();
+
+const { workshop, isLoading } = useGetOneWorkshop(route.params.workshop);
 
 </script>
 
@@ -13,38 +18,40 @@ import HeaderTitle from "@components/header-title/HeaderTitle.vue";
 <template>
     <main class="main__container">
 
-
         <div class="start__registration">
             <div class="back__icon">
                 <HeaderTitle :hideDiamond="true" />
             </div>
 
-            <div class="workshop__container">
+            <div v-if="isLoading">
+                <LoadingScreen style="min-height: 60dvh;"/>
+            </div>
+            <div v-else class="workshop__container">
 
-                <img src="https://www.conasi.eu/blog/wp-content/uploads/2020/09/ceramica-y-porcelana-para-cocinar-1111-1.jpg" alt="Taller de Cerámica" class="workshop__image" />
+                <img :src="workshop.image_url" :alt="workshop.name" class="workshop__image" />
             
                 <div class="workshop__name">
                     <div class="workshop__icon">
                         <SmallTriangle class="smallTriangle__icon" />
                     </div>
                     <div class="workshop__orginal__name">
-                        <h1>Taller de cerámica artesanal</h1>
+                        <h1>{{ workshop.name }}</h1>
                     </div>
                 </div>
 
                 <section class="workshop-details">
                     <p class="description">
-                    En este taller dado por los artesanos de Cerámicas Tater Vera aprenderán a usar la arcilla para crear cosas para el hogar con diseños típicos ayacuchanos.
+                        {{ workshop.description }}
                     </p>
-                    <p class="audience">Para el público en general</p>
-                    <p class="note">*los niños menores de 8 años se recomienda que estén acompañados de un adulto</p>
+                    <p class="audience">{{ workshop.target_audience }}</p>
+                    <p v-if="workshop.target_audience_note" class="note">*{{ workshop.target_audience_note }}</p>
                     <div class="meta-info">
-                    <p><span class="label">Duración:</span> 2 meses</p>
-                    <p><span class="label">Fecha de inicio:</span> 8 de Julio</p>
-                    <p><span class="label">Horario:</span> 4 a 6 PM cada sábado</p>
-                    <p><span class="label">Materiales:</span> Materiales dados en clase</p>
-                    <p><span class="label">Modalidad:</span> Presencial</p>
-                    <p><span class="label">Lugar:</span> En el Ministerio de Cultura, Lima, Perú</p>
+                    <p><span class="label">Duración:</span> {{ workshop.duration }}</p>
+                    <p><span class="label">Fecha de inicio:</span> {{ workshop.date_start }}</p>
+                    <p><span class="label">Horario:</span> {{ workshop.schedule }}</p>
+                    <p><span class="label">Materiales:</span> {{ workshop.materials }}</p>
+                    <p><span class="label">Modalidad:</span> {{ workshop.modality }}</p>
+                    <p><span class="label">Lugar:</span> {{ workshop.location }}</p>
                     </div>
 
                     <div class="register__all">
