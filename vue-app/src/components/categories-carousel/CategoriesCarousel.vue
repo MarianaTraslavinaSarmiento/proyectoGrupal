@@ -9,50 +9,93 @@ import JewelryIcon from "@icons/categories/JewelryIcon.vue";
 import SheetMetalIcon from "@icons/categories/SheetMetalIcon.vue";
 import PaintingTraditionalIcon from "@icons/categories/PaintingTraditionalIcon.vue";
 import PrintedIcon from "@icons/categories/PrintedIcon.vue";
-
-import { ref } from "vue";
+import { ref, onMounted, watch, nextTick } from "vue";
+import { useRoute, useRouter } from "vue-router";
 
 const categories = [
-  {name: "Textilería", icon: TextileIcon},
-  {name: "Cerámica", icon: CeramicsIcon},
-  {name: "Orfebrería", icon: GoldsmithingIcon},
-  {name: "Piedra", icon: StoneCarving},
-  {name: "Madera", icon: WoodCarving},
-  {name: "Bordado", icon: EmbroideryIcon},
-  {name: "Joyeria", icon: JewelryIcon},
-  {name: "Metalistería", icon: SheetMetalIcon},
-  {name: "Tradicional", icon: PaintingTraditionalIcon},
-  {name: "Impresiones", icon: PrintedIcon}
-]
+  { name: "Textilería", icon: TextileIcon, alias: "textileria" },
+  { name: "Cerámica", icon: CeramicsIcon, alias: "ceramica" },
+  { name: "Orfebrería", icon: GoldsmithingIcon, alias: "orfebreria" },
+  { name: "Piedra", icon: StoneCarving, alias: "piedra" },
+  { name: "Madera", icon: WoodCarving, alias: "madera" },
+  { name: "Bordado", icon: EmbroideryIcon, alias: "bordado" },
+  { name: "Joyeria", icon: JewelryIcon, alias: "joyeria" },
+  { name: "Metalistería", icon: SheetMetalIcon, alias: "metalisteria" },
+  { name: "Tradicional", icon: PaintingTraditionalIcon, alias: "tradicional" },
+  { name: "Impresiones", icon: PrintedIcon, alias: "impresiones" }
+];
 
 const currentCategory = ref(0);
-const selectCategory = (category, index) => {
-  currentCategory.value = index
-  emit('selectCategory', category)
-}
+const categoriesRef = ref(null);
+const route = useRoute();
+const router = useRouter();
 
 const props = defineProps({
+  routeParamName: {
+    type: String,
+    required: true,
+    default: 'category'
+  },
   model: {
     type: Object,
-    required: true
+    required: false
   }
-})
+});
 
-const emit = defineEmits(['selectCategory']);
+const selectCategory = (category, index) => {
+  currentCategory.value = index;
 
+  const newRoute = {
+    ...route,
+    params: {
+      ...route.params,
+      [props.routeParamName]: category.alias
+    }
+  };
+
+  router.push(newRoute);
+  scrollToCategory(index);
+};
+
+const updateCategoryFromRoute = () => {
+  const categoryAlias = route.params[props.routeParamName];
+  const index = categories.findIndex(cat => cat.alias === categoryAlias);
+  if (index !== -1) {
+    currentCategory.value = index;
+    nextTick(() => scrollToCategory(index));
+  }
+};
+
+const scrollToCategory = (index) => {
+  if (categoriesRef.value) {
+    const categoryElements = categoriesRef.value.querySelectorAll('.categories__item');
+    if (categoryElements[index]) {
+      const containerWidth = categoriesRef.value.offsetWidth;
+      const scrollPosition = categoryElements[index].offsetLeft - (containerWidth / 2) + (categoryElements[index].offsetWidth / 2);
+      categoriesRef.value.scrollTo({
+        left: scrollPosition,
+        behavior: 'smooth'
+      });
+    }
+  }
+};
+
+onMounted(() => {
+  updateCategoryFromRoute();
+});
+
+watch(() => route.params[props.routeParamName], updateCategoryFromRoute);
 </script>
 
 <template>
   <main>
-    <div class="categories">
-      <div v-for="(category, index) in categories"
-       :key="category.name"
-       :class="['categories__item', {'active': index === currentCategory}]"
-       @click="selectCategory(category, index)">
+    <div class="categories" ref="categoriesRef">
+      <div v-for="(category, index) in categories" :key="category.name"
+        :class="['categories__item', { 'active': index === currentCategory }]" @click="selectCategory(category, index)">
         <div class="categories__circle">
           <component :is="category.icon" class="categories__icon" />
         </div>
-        <p>{{category.name}}</p>
+        <p>{{ category.name }}</p>
       </div>
     </div>
   </main>

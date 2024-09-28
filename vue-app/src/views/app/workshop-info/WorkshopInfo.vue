@@ -4,6 +4,8 @@ import Back from "@assets/img/general/Back.vue"
 import SmallTriangle from "@assets/icons/workshops/SmallTriangle.vue";
 import SubscribeWorkshop from "@assets/icons/workshops/SubscribeWorkshop.vue";
 
+import HeaderTitle from "@components/header-title/HeaderTitle.vue";
+
 </script>
 
 
@@ -14,11 +16,7 @@ import SubscribeWorkshop from "@assets/icons/workshops/SubscribeWorkshop.vue";
 
         <div class="start__registration">
             <div class="back__icon">
-                <router-link to="/singup">
-                    <div class="back">
-                        <Back class="back__icon" />
-                    </div>
-                </router-link>
+                <HeaderTitle :hideDiamond="true" />
             </div>
 
             <div class="workshop__container">
@@ -135,7 +133,7 @@ import SubscribeWorkshop from "@assets/icons/workshops/SubscribeWorkshop.vue";
     height: 40px;
     position: absolute;
     margin-left:-3%;
-
+    color: var(--background-secondary);
 }
 
 .workshop__name{

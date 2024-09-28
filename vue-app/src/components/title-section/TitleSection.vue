@@ -1,6 +1,6 @@
 <script setup>
     import Diamond from '@assets/img/general/Diamond.vue';
-    import Filter from '@icons/general/Filter.vue';
+    import FilterIcon from '@icons/general/FilterIcon.vue';
     import { defineProps } from 'vue'
 
     const props = defineProps({
@@ -10,7 +10,7 @@
         },
         subtitle: {
             type: String,
-            required: true           
+            required: false           
         },
         showFilter: {
             type: Boolean,
@@ -28,7 +28,7 @@
                 <p class="text__title">{{ title }}</p>
                 <p class="text__subtitle">{{ subtitle }}</p>
             </div>
-            <Filter v-if="showFilter" class="filter__icon"/>
+            <FilterIcon v-if="showFilter" class="filter__icon"/>
         </div>
     </main>
 </template>
@@ -72,7 +72,7 @@
         position: absolute;
         right: 17px;
         bottom: 5px;
-        color: var(--color-contrast);
+        color: var(--color-accent);
     }
 
 }

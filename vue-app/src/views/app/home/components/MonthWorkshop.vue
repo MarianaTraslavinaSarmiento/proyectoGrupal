@@ -1,7 +1,15 @@
 <script setup>
 import HomeImage from '@/assets/img/general/HomeImage.vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const props = defineProps({
+    id: {
+        type: String,
+        required: true,
+        default: '123'
+    },
     imageUrl: {
         type: String,
         required: true,
@@ -13,10 +21,15 @@ const props = defineProps({
         default: 'Taller de Artesania'
     }
 });
+
+const onClick = () => {
+  router.push(`/app/talleres-educativos/info/${props.id}`);
+}
 </script>
 
+
 <template>
-    <div class="month__workshop">
+    <div class="month__workshop" @click="onClick">
         <HomeImage class="home__img" :imageUrl="imageUrl" />
         <p>{{ workshopTitle }}</p>
     </div>
@@ -30,7 +43,6 @@ const props = defineProps({
     width: 100%;
     overflow: hidden;
     position: relative;
-    margin-bottom: 10em;
     gap: 1em;
 
     .home__img {

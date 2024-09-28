@@ -1,0 +1,15 @@
+.app-container.violet-theme {
+    
+    /* Backgrounds */
+    --background-primary: var(--violet-bg-primary);
+    --background-secondary: var(--violet-bg-secondary);
+    --background-base: var(--violet-bg-base);
+
+    /* Text */
+    --text-contrast: var(--violet-text-contrast);
+    --text-color: var(--violet-text-color);
+
+    /* Others */
+    --color-accent: var(--violet-color-accent); 
+    --color-border: var(--violet-color-border);
+}

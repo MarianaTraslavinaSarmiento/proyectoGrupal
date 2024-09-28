@@ -2,7 +2,7 @@
 import CategoriesCarousel from "@components/categories-carousel/CategoriesCarousel.vue";
 import HeaderTitle from "@/components/header-title/HeaderTitle.vue";
 import SearchBar from "@/components/search-bar/SearchBar.vue";
-import Filter from "@icons/general/Filter.vue";
+import FilterIcon from "@icons/general/FilterIcon.vue";
 import { reactive } from "vue";
 
 // const categories = [
@@ -45,12 +45,12 @@ const filterProducts = (category) => {
 <template>
     <main>
         <HeaderTitle title="Categorías" />
-        <CategoriesCarousel @selectCategory="filterProducts" />
+        <CategoriesCarousel :routeParamName="'category'" @selectCategory="filterProducts" />
 
         <div class="filter__products">
             <SearchBar 
             placeholder = "Buscar producto o palabra clave..." />
-            <Filter />
+            <FilterIcon />
         </div>
 
         <div class="container">
@@ -69,7 +69,7 @@ const filterProducts = (category) => {
 
 <style scoped>
 main {
-    font-family: Bellota;
+    font-family: var(--font-bellota);
 }
 
 .filter__products {

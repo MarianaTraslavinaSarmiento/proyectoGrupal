@@ -2,7 +2,7 @@
 import CategoriesCarousel from "@components/categories-carousel/CategoriesCarousel.vue";
 import HeaderTitle from "@/components/header-title/HeaderTitle.vue";
 import SearchBar from "@/components/search-bar/SearchBar.vue";
-import Filter from "@icons/general/Filter.vue";
+import Filter from "@icons/general/FilterIcon";
 import { reactive } from "vue";
 
 // const categories = [

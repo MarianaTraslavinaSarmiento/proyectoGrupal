@@ -1,5 +1,4 @@
 <script setup>
-import Nav from '@/components/nav/Nav.vue';
 import TitleSection from '@components/title-section/TitleSection.vue'
 
 import DiamondIcon from '@/assets/icons/general/DiamondIcon.vue';
@@ -20,31 +19,36 @@ import LocationBar from './components/LocationBar.vue';
 import Categories from './components/Categories.vue';
 import MonthWorkshop from './components/MonthWorkshop.vue';
 
+import { useRouter } from 'vue-router';
+import { ref } from 'vue';
+
+const router = useRouter();
+
 const primeCategories = [
   {
     name: 'Textilería',
     icon: TextileIcon,
-    onClick: () => console.log('Textilería clicked')
+    onClick: () => router.push('/app/productos-por-categoria/textileria')
   },
   {
     name: 'Cerámica',
     icon: CeramicsIcon,
-    onClick: () => console.log('Cerámica clicked')
+    onClick: () => router.push('/app/productos-por-categoria/ceramica')
   },
   {
     name: 'Orfebrería',
     icon: GoldsmithingIcon,
-    onClick: () => console.log('Orfebrería clicked')
+    onClick: () => router.push('/app/productos-por-categoria/orfebreria')
   },
   {
     name: 'Talla en piedra',
     icon: StoneCarving,
-    onClick: () => console.log('Talla en piedra clicked')
+    onClick: () => router.push('/app/productos-por-categoria/piedra')
   },
   {
     name: 'Talla en madera',
     icon: WoodCarving,
-    onClick: () => console.log('Talla en madera clicked')
+    onClick: () => router.push('/app/productos-por-categoria/madera')
   }
 ];
 
@@ -52,29 +56,52 @@ const secondCategories = [
   {
     name: 'Bordado',
     icon: EmbroideryIcon,
-    onClick: () => console.log('Bordado clicked')
+    onClick: () => router.push('/app/productos-por-categoria/bordado')
   },
   {
     name: 'Joyería',
     icon: JewelryIcon,
-    onClick: () => console.log('Joyería clicked')
+    onClick: () => router.push('/app/productos-por-categoria/joyeria')
   },
   {
     name: 'Hojalatería',
     icon: SheetMetalIcon,
-    onClick: () => console.log('Hojalatería clicked')
+    onClick: () => router.push('/app/productos-por-categoria/metalisteria')
   },
   {
     name: 'Estampado',
     icon: PrintedIcon,
-    onClick: () => console.log('Estampado clicked')
+    onClick: () => router.push('/app/productos-por-categoria/impresiones')
   },
   {
     name: 'Pintura tradicional',
     icon: PaintingTraditionalIcon,
-    onClick: () => console.log('Pintura tradicional clicked')
+    onClick: () => router.push('/app/productos-por-categoria/tradicional')
   }
 ];
+
+const workshops = ref([
+  {
+    id: 'mongoId123143132',
+    title: "Taller de bordado ayacuchano",
+    image: "https://i.ytimg.com/vi/oo4lKnhKvrU/hqdefault.jpg"
+  },
+  {
+    id: 'mongoId12131431',
+    title: "Taller de cerámica artesanal",
+    image: "https://i.ytimg.com/vi/oo4lKnhKvrU/hqdefault.jpg"
+  },
+  {
+    id: 'mongoId1243132',
+    title: "Taller de alfarería infantil",
+    image: "https://i.ytimg.com/vi/oo4lKnhKvrU/hqdefault.jpg"
+  },
+  {
+    id: 'mongoId12131132',
+    title: "Taller de pintura tradicional",
+    image: "https://i.ytimg.com/vi/oo4lKnhKvrU/hqdefault.jpg"
+  },
+]);
 
 </script>
 
@@ -97,8 +124,12 @@ const secondCategories = [
       <div class="month__workshops__subtitle">
         <p>¡Aprende como hacerlos en estos talleres educativos!</p>
       </div>
-      <div class="month__workshops">
-        <MonthWorkshop />
+      <div class="month__workshops__container">
+        <MonthWorkshop v-for="workshop in workshops"
+          :key="workshop.id"
+          :id="workshop.id"
+          :imageUrl="workshop.image"
+          :workshopTitle="workshop.title" />
       </div>
     </div>
 
@@ -111,7 +142,7 @@ main {
 }
 
 .month__workshops {
-  margin-top: 35px;
+  margin: 2em 0 5em 0;
 
   .diamond__separator {
     color: var(--background-secondary);
@@ -133,6 +164,13 @@ main {
     color: rgb(from var(--text-contrast) r g b / 50%);
     text-align: center;
     font-size: 1.5rem;
+  }
+
+  &__container {
+    margin: 2em 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
   }
 }
 
