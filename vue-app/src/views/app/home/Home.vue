@@ -127,9 +127,9 @@ const workshops = ref([
       <div class="month__workshops__container">
         <MonthWorkshop v-for="workshop in workshops"
           :key="workshop.id"
+          :id="workshop.id"
           :imageUrl="workshop.image"
           :workshopTitle="workshop.title" />
-          
       </div>
     </div>
 

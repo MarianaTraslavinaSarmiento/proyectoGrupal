@@ -38,7 +38,7 @@ const props = defineProps({
   },
   model: {
     type: Object,
-    required: true
+    required: false
   }
 });
 
