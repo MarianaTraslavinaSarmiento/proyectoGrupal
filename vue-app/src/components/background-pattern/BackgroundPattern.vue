@@ -21,6 +21,7 @@ import DiamondBorder from '@/assets/img/general/DiamondBorder.vue';
         position: relative;
         top: 0;
         left: 0;
+        z-index: -1;
         width: 100%;
         color: var(--background-secondary);
 
