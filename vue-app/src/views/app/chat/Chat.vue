@@ -1,22 +1,3 @@
-<script setup>
-import { ref } from 'vue'
-import BackButton from '@components/back-button/BackButton.vue';
-import ChatMessage from './components/ChatMessage.vue'
-import MessageInput from './components/MessageInput.vue'
-import ChatIcon from '@icons/general/ChatIcon.vue';
-
-const messages = ref([])
-const data = ref({
-    title: 'Chat con servicio al cliente',
-})
-
-const sendMessage = (text) => {
-    messages.value.push({ text, isSent: true })
-    // Here you would typically send the message to a backend
-}
-
-</script>
-
 <template>
     <div class="chat-container">
         <!-- Header -->
@@ -28,16 +9,48 @@ const sendMessage = (text) => {
              </div>
          </header>
 
-        <!-- Chat Messages -->
-        <div class="messages-container">
-            <ChatMessage :message="{ text: 'Hello!', isSent: true }" />
-            <ChatMessage :message="{ text: 'Hi there!', isSent: false }" />
+        <div class="chat-status">
+            <p>posicion actual</p>
         </div>
 
+        <!-- Chat Messages -->
+        <div class="messages-container" ref="messagesContainer">
+            <ChatMessage 
+                v-for="(message, index) in messages" 
+                :key="index"
+                :message="message" 
+            />
+        </div>
         <!-- Message Input -->
         <MessageInput @send="sendMessage" />
     </div>
 </template>
+
+<script setup>
+import { ref, onUpdated } from 'vue'
+import BackButton from '@components/back-button/BackButton.vue';
+import ChatMessage from './components/ChatMessage.vue'
+import MessageInput from './components/MessageInput.vue'
+import ChatIcon from '@icons/general/ChatIcon.vue';
+
+const messages = ref([])
+const messagesContainer = ref(null)
+const data = ref({
+    title: 'Chat con servicio al cliente',
+})
+
+const sendMessage = (text) => {
+    messages.value.push({ text, isSent: true })
+    // Here you would typically send the message to a backend
+}
+
+// Scroll to bottom when new messages are added
+onUpdated(() => {
+    if (messagesContainer.value) {
+        messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
+    }
+})
+</script>
 
 <style lang="scss" scoped>
 .chat-container {
@@ -46,7 +59,6 @@ const sendMessage = (text) => {
     height: 100vh;
     width: 100%;
     background-color: var(--background-base);
-
     .chat-header {
         background-color: var(--background-secondary);
         padding: 0;
@@ -75,13 +87,23 @@ const sendMessage = (text) => {
                 margin-right: 1rem;
             }
         }
+    }
 
+    .chat-status {
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+        font-size: large;
+        font-weight: bold;
+        font-family: var(--font-bellota);
+        color: rgb(from var(--text-contrast) r g b / 50%);
+    }
+
+    .messages-container {
+        flex: 1;
+        overflow-y: auto;
+        padding: 1rem;
     }
 }
 
-.messages-container {
-    flex: 1;
-    overflow-y: auto;
-    padding: 1rem;
-}
 </style>
