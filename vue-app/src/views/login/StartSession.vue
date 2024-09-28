@@ -1,7 +1,7 @@
 <script setup>
 
 import SquareBackground from "@assets/img/general/SquareBackground.vue"
-import Back from "@assets/img/general/Back.vue"
+import BackIcon from '@icons/general/BackIcon.vue'
 import { reactive } from "vue";
 import axios from "axios";
 import router from "@/router";
@@ -32,7 +32,7 @@ const handleUserAuth = async () => {
         <SquareBackground class="triangle__corner__right" />
         <SquareBackground class="triangle__corner__left" />
         <div class="back">
-            <Back class="back__icon" />
+            <BackIcon class="back__icon" />
         </div>
         <div class="login__form">
             <label for="username" class="login__label">Nombre de usuario, celular o correo</label>

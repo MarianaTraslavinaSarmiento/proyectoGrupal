@@ -18,6 +18,8 @@ import CustomerService from "@views/app/customer-service/CustomerService.vue"
 import CommentsToTheApp from "@views/app/comments-to-the-app/CommentsToTheApp.vue"
 import Settings from '@/views/app/settings/Settings.vue'
 
+import Chat from '@views/app/chat/Chat.vue'
+
 
 export const internalRoutes = [
     {
@@ -74,6 +76,30 @@ export const internalRoutes = [
         component: WorkshopInfo
     },
     {
+        path: '/app/educational-workshops/about/:workshop',
+        name: 'AboutWorkshop',
+        alias: 'talleres-educativos/acerca-de/:workshop',
+        component: WorkshopAbout
+    },
+    {
+        path: '/app/products-by-categories/:category',
+        name: 'productsByCategories',
+        alias: 'productos-por-categoria/:category',
+        component: ProductsByCategories
+    },
+    {
+        path: '/app/customer-service',
+        name: 'CustomerService',
+        alias: 'atencion-al-cliente',
+        component: CustomerService
+    },
+    {
+        path: '/app/customer-service/chat',
+        name: 'Chat',
+        alias: 'atencion-al-cliente/chat',
+        component: Chat
+    },
+    {
         path: '/app/settings',
         name: 'Settings',
         alias: 'ajustes',
@@ -85,24 +111,6 @@ export const internalRoutes = [
         alias: 'comentarios',
         component: CommentsToTheApp
     },
-    {
-        path: '/app-settings/customer-service',
-        name: 'CustomerService',
-        alias: 'atencion-al-cliente',
-        component: CustomerService
-    },
-    {
-        path: '/app/products-by-categories/:category',
-        name: 'productsByCategories',
-        alias: 'productos-por-categoria/:category',
-        component: ProductsByCategories
-    },
-    {
-        path: '/app/educational-workshops/about/:workshop',
-        name: 'AboutWorkshop',
-        alias: 'talleres-educativos/acerca-de/:workshop',
-        component: WorkshopAbout
-    }
     // {
     //     path: '/app/workshops-craft-stores',
     //     name: 'workshopsAndCraftStores',

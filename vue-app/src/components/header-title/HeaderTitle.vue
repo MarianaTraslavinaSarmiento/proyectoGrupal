@@ -1,10 +1,7 @@
 <script setup>
-
-import Back from "@assets/img/general/Back.vue"
 import DiamondHeader from "@assets/img/general/DiamondHeader.vue"
-import { useRouter } from 'vue-router';
+import BackButton from '@components/back-button/BackButton.vue'
 
-const router = useRouter();
 
 const props = defineProps({
     title: {
@@ -20,20 +17,12 @@ const props = defineProps({
     }
 })
 
-const goBack = () => {
-    if (props.customBackRoute) {
-        router.push(props.customBackRoute); 
-    } else {
-        router.back();
-    }
-}
-
 </script>
 
 <template>
     <div class="header__container">
         <div class="header__container__back" @click="goBack">
-            <Back class="back__icon" />
+            <BackButton class="back__icon" />
         </div>
         <div v-if="!hideDiamond" class="title">
             <span class="title__text">{{ title }}</span>
@@ -46,22 +35,14 @@ const goBack = () => {
 
 .header__container {
     height: 80px;
-    font-family: Bellota;
+    font-family: var(--font-bellota);
     font-size: 1.7rem;
     position: relative; 
 
     &__back {
         position: absolute;
         z-index: 5;
-
-        .back__icon {
-            width: 50px;
-            cursor: pointer;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 80px;
-        }
+        transform: translate(0%);
     }
 
     .title {
