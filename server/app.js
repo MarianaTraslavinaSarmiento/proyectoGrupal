@@ -31,7 +31,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: process.env.NODE_ENV == "production" ? 2 * 60 * 60 * 1000 : 10 * 1000
+        maxAge: process.env.NODE_ENV == "production" ? 2 * 60 * 60 * 1000 : 30 * 60 * 1000
     }
 }))
 

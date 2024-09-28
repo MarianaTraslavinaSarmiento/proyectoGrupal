@@ -24,35 +24,35 @@ export const internalRoutes = [
         path: '/app/home',
         name: 'Home',
         alias: 'inicio',
-        meta: { requiresNav: true, requiresHeadBar: true },
+        meta: { requiresNav: true, requiresHeadBar: true, requiresAuth: true },
         component: Home
     },
     {
         path: '/app/shops-crafts',
         name: 'ShopsCrafts',
         alias: 'tiendas-artesanias',
-        meta: { requiresNav: true, requiresHeadBar: true },
+        meta: { requiresNav: true, requiresHeadBar: true, requiresAuth: true},
         component: ShopsCrafts
     },
     {
         path: '/app/shopping-cart',
         name: 'ShoppingCart',
         alias: 'carrito-de-compras',
-        meta: { requiresNav: true, requiresHeadBar: true },
+        meta: { requiresNav: true, requiresHeadBar: true, requiresAuth: true },
         component: ShoppingCart
     },
     {
         path: '/app/discounts-promotions',
         name: 'DiscountsPromotions',
         alias: 'descuentos-promociones',
-        meta: { requiresNav: true, requiresHeadBar: true },
+        meta: { requiresNav: true, requiresHeadBar: true, requiresAuth: true },
         component: DiscountsPromotions
     },
     {
         path: '/app/profile',
         name: 'Profile',
         alias: 'perfil',
-        meta: { requiresNav: true, requiresHeadBar: true },
+        meta: { requiresNav: true, requiresHeadBar: true, requiresAuth: true },
         component: Profile
     },
     {

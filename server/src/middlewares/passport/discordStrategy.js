@@ -3,17 +3,16 @@ const bcrypt = require('bcrypt');
 const UserService = require('../../api/users/user.service');
 const UserModel = require('../../api/users/user.model')
 const userService = new UserService()
+const defaultProfilePic = require("../../utils/defaultPfp")
 
-const DISCORD_CDN_BASE_URL = "https://cdn.discordapp.com/attachments/"
+const DISCORD_CDN_BASE_URL = "https://cdn.discordapp.com/avatars/"
 
 function getDiscordAvatarUrl(userId, avatarHash) {
     if (!avatarHash) {
-      // Si el usuario no tiene un avatar personalizado, devolver el avatar por defecto
-      return `${DISCORD_CDN_BASE_URL}embed/avatars/${parseInt(userId) % 5}.png`;
+      return defaultProfilePic
     }
     
-    // Construir la URL del avatar personalizado
-    return `${DISCORD_CDN_BASE_URL}avatars/${userId}/${avatarHash}.png`;
+    return `${DISCORD_CDN_BASE_URL}/${userId}/${avatarHash}`;
   }
 
 const DISCORD_CLIENT_ID = process.env.DISCORD_CLIENT_ID

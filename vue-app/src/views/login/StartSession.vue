@@ -5,6 +5,7 @@ import Back from "@assets/img/general/Back.vue"
 import { reactive } from "vue";
 import axios from "axios";
 import router from "@/router";
+
 const user = reactive({
     login: '',
     password: ''

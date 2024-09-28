@@ -1,43 +1,30 @@
-// import { API_URL } from "@src/config/env";
-// import { apiGetAuth } from '@src/services/api';
-// import { useToast } from 'vue-toastification'
+import toast from '@/config/toast'
+import axios from '@/config/axios'
 
 import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', {
     state: () => ({
-        user: {
-            name: 'SaraMartin9',
-            avatar: 'https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg',
-            email: 'sara.martin@gmail.com',
-            phone: '+56-99999999999',
-            sex : 'F',
-            birthday: '01/01/1990',
-        },
-        // isFilledData: false
+      user: null
     }),
+    getters: {
+      isAuthenticated: (state) => !!state.user,
+      userInfo: (state) => state.user
+    },
     actions: {
-        async setUserProfile() {
-            //   if (!this.isFilledData) {
-            //     await this.getUserProfile()
-            //   }
-        },
-        async getUserProfile() {
-            //   const toast = useToast()
-            //   try {
-            //     const response = await apiGetAuth({
-            //       url: `/users/profile`
-            //     })
-
-            //     const { selectedAccount, ...userData } = response.data.data
-            //     this.user = userData
-            //     this.isFilledData = true
-            //   }
-
-            //   catch (error) {
-            // console.error('Error:', error);
-            // toast.error('Ocurrió un error al obtener los datos de tu perfil.')
-            //   }
+      async fetchUserProfile() {
+        if (this.user !== null) return // Si ya tenemos los datos del usuario, no los volvemos a cargar
+  
+        try {
+          const response = await axios.get("/user/profile")
+          this.user = response.data
+        } catch (error) {
+          console.error('Error:', error)
+          toast.error('Ocurrió un error al obtener los datos de tu perfil.')
         }
+      },
+      clearUser() {
+        this.user = null
+      }
     }
-})
+  })

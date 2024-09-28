@@ -56,7 +56,7 @@ module.exports = new GoogleStrategy({
             user = new UserModel({
                 username: profile.displayName,
                 email: profile.emails[0].value,
-                profile_pic_url: profile.photos[0].value,
+                profile_pic_url: profile.photos[0].value || defaultProfilePic,
                 account_id: profile.id
             })
 

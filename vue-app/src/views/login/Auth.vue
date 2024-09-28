@@ -1,8 +1,9 @@
 <script setup>
-import FacebookIcon from "@/assets/icons/auth/FacebookIcon.vue";
-import InstagramIcon from "@/assets/icons/auth/InstagramIcon.vue";
 import GmailIcon from "@/assets/icons/auth/GmailIcon.vue";
 import UserIcon from "@/assets/icons/auth/UserIcon.vue";
+import DiscordIcon from "@/assets/icons/auth/DiscordIcon.vue";
+import { useAuth } from "@/composables/useAuth";
+import router from "@/router";
 </script>
 
 <template>
@@ -14,19 +15,15 @@ import UserIcon from "@/assets/icons/auth/UserIcon.vue";
         <span class="auth__highlight">artesanías favoritas</span>
       </h1>
       <div class="auth__buttons">
-        <button class="auth__button auth__button__facebook">
-          <FacebookIcon class="auth__button_icon" />
-          <span class="auth__button-text">Inicia sesión con <span style="font-weight: bold;"> Facebook</span></span>
-        </button>
-        <button class="auth__button auth__button__instagram">
-          <InstagramIcon class="auth__button_icon" />
-          <span class="auth__button-text">Inicia sesión con <span style="font-weight: bold;"> Instagram</span></span>
-        </button>
-        <button class="auth__button auth__button__instagram">
+        <button @click="useAuth('google')" class="auth__button auth__button__instagram">
           <GmailIcon class="auth__button_icon" />
           <span class="auth__button-text">Inicia sesión con <span style="font-weight: bold;"> Gmail</span></span>
         </button>
-        <button class="auth__button auth__button__ruraq_maki">
+        <button @click="useAuth('discord')" class="auth__button auth__button__facebook">
+          <DiscordIcon class="auth__button_icon" />
+          <span class="auth__button-text">Inicia sesión con <span style="font-weight: bold;"> Discord</span></span>
+        </button>
+        <button @click="router.push('/login/session-start')" class="auth__button auth__button__ruraq_maki">
           <img src="@/assets/img/auth/userProfileIcon.png" class="auth__button_icon" alt="">
           <span class="auth__button-text">Inicia sesión con tu cuenta de <span style="font-weight: bold;"> Ruraq Maki</span></span>
         </button>

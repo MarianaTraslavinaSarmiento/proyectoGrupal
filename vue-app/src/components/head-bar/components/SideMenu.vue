@@ -28,7 +28,7 @@ const closeMenu = () => {
         <div v-if="isOpen" class="side-menu">
             <div class="user-info">
                 <Avatar class="user-avatar" />
-                <span class="user-name">{{ user.name }}</span>
+                <span class="user-name">{{ user.username }}</span>
             </div>
             <nav class="menu-items">
                 <ul>

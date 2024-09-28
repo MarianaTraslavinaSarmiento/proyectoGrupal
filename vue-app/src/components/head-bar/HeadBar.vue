@@ -3,6 +3,9 @@ import { ref } from 'vue';
 import MenuIcon from '@icons/head-bar/MenuIcon.vue';
 import SearchBar from '@components/search-bar/SearchBar.vue';
 import SideMenu from './components/SideMenu.vue';
+import { useUserStore } from '@/stores/user';
+
+const userStore = useUserStore();
 
 const isMenuOpen = ref(false);
 const user = ref({
@@ -27,7 +30,7 @@ const closeMenu = () => {
         <SearchBar class="search-bar" />
         <SideMenu 
             :is-open="isMenuOpen" 
-            :user="user" 
+            :user="userStore.user" 
             @close="closeMenu"
         />
     </header>

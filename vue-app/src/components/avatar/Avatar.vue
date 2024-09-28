@@ -12,11 +12,12 @@ const props = defineProps({
 
 const userStore = useUserStore()
 const user = computed(() => userStore.user)
+
 </script>
 
 <template>
   <div class="avatar">
-    <img :src="user.avatar" :alt="user.name" class="avatar-img">
+    <img :src="user.profile_pic_url" :alt="user.username" class="avatar-img">
     <EditIcon v-if="showEditIcon" class="edit-icon" />
   </div>
 </template>

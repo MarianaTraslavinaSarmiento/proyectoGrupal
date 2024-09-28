@@ -9,9 +9,10 @@ class UserController {
 
     async getOneById(req, res) {
         const user = req.user
-        res.json({
-            ...user
-        })
+    
+        console.log(req.user)
+        
+        res.json(user)
     }
 
     async updateUser(req, res) {

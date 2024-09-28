@@ -14,14 +14,14 @@ passport.use(discordStrategy)
 // passport.use(linkedinStrategy) 
 
 passport.serializeUser((user, done) => {
-    done(null, user.id);
+    done(null, user._id);
 });
 
 passport.deserializeUser(async (id, done) => {
     try {
         const user = await userService.getOneById(id); 
-        const { password, ...userWithoutPassword } = user;
-        done(null, userWithoutPassword); 
+        delete user.password
+        done(null, user); 
     } catch (err) {
         done(err);
     }
