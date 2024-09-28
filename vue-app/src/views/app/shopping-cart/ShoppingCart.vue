@@ -1,7 +1,7 @@
 <script setup>
 
-import TitleSection from '@/components/title-section/TitleSection.vue';
-import TrashIcon from '@/assets/icons/general/TrashIcon.vue';
+import TitleSection from '@components/title-section/TitleSection.vue';
+import TrashIcon from '@icons/general/TrashIcon.vue';
 
 /** !Note: This is just the HTML and CSS, not the logic, because its neccesary to save the name of the products in global state or pinia... */
 </script>
