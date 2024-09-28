@@ -8,13 +8,19 @@ class WorkshopController {
     }
 
     async getAll(req, res) {
-        const workshops = await this.#service.getAll()
+        const query = req.query || {}
+        const workshops = await this.#service.getAll(query)
         res.json(workshops)
     }
 
     async getOneById(req, res) {
         const workshop = await this.#service.getOneById(req.params.id)
         res.json(workshop)
+    }
+
+    async getTrending(req, res) {
+        const workshops = await this.#service.getTrending()
+        res.json(workshops)
     }
 }
 

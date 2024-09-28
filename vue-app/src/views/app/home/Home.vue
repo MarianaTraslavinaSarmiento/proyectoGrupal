@@ -21,6 +21,8 @@ import MonthWorkshop from './components/MonthWorkshop.vue';
 
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
+import { useGetTrendingWorkshops } from '@/composables/useWorkshop';
+import LoadingScreen from '@/components/loading-screen/LoadingScreen.vue';
 
 const router = useRouter();
 
@@ -80,28 +82,7 @@ const secondCategories = [
   }
 ];
 
-const workshops = ref([
-  {
-    id: 'mongoId123143132',
-    title: "Taller de bordado ayacuchano",
-    image: "https://i.ytimg.com/vi/oo4lKnhKvrU/hqdefault.jpg"
-  },
-  {
-    id: 'mongoId12131431',
-    title: "Taller de cerámica artesanal",
-    image: "https://i.ytimg.com/vi/oo4lKnhKvrU/hqdefault.jpg"
-  },
-  {
-    id: 'mongoId1243132',
-    title: "Taller de alfarería infantil",
-    image: "https://i.ytimg.com/vi/oo4lKnhKvrU/hqdefault.jpg"
-  },
-  {
-    id: 'mongoId12131132',
-    title: "Taller de pintura tradicional",
-    image: "https://i.ytimg.com/vi/oo4lKnhKvrU/hqdefault.jpg"
-  },
-]);
+const { workshops, isLoading } = useGetTrendingWorkshops();
 
 </script>
 
@@ -125,11 +106,14 @@ const workshops = ref([
         <p>¡Aprende como hacerlos en estos talleres educativos!</p>
       </div>
       <div class="month__workshops__container">
-        <MonthWorkshop v-for="workshop in workshops"
+        <p v-if="isLoading">
+          <LoadingScreen style="min-height: 60dvh;"/>
+        </p>
+        <MonthWorkshop v-else v-for="workshop in workshops"
           :key="workshop.id"
           :id="workshop.id"
-          :imageUrl="workshop.image"
-          :workshopTitle="workshop.title" />
+          :imageUrl="workshop.image_url"
+          :workshopTitle="workshop.name" />
       </div>
     </div>
 

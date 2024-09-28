@@ -48,6 +48,10 @@ const workshopSchema = new Schema({
     price: {
         type: Number,
         required: true
+    },
+    trending: {
+        type: Boolean,
+        default: false
     }
 }, {
     timestamps: true
