@@ -1,9 +1,16 @@
 <script setup>
 
+    import TitleSection from '@/components/title-section/TitleSection.vue';
+
 </script>
 
 <template>
-DISCOUNTS AND PROMOTIONS
+
+    <TitleSection 
+    title="Descuentos y promociones" 
+    subtitle="En cientos de artesanías"/>
+
+
 </template>
 
 <style lang="scss" scoped>
