@@ -20,6 +20,7 @@ import Categories from './components/Categories.vue';
 import MonthWorkshop from './components/MonthWorkshop.vue';
 
 import { useRouter } from 'vue-router';
+import { ref } from 'vue';
 
 const router = useRouter();
 
@@ -79,6 +80,29 @@ const secondCategories = [
   }
 ];
 
+const workshops = ref([
+  {
+    id: 'mongoId123143132',
+    title: "Taller de bordado ayacuchano",
+    image: "https://i.ytimg.com/vi/oo4lKnhKvrU/hqdefault.jpg"
+  },
+  {
+    id: 'mongoId12131431',
+    title: "Taller de cerámica artesanal",
+    image: "https://i.ytimg.com/vi/oo4lKnhKvrU/hqdefault.jpg"
+  },
+  {
+    id: 'mongoId1243132',
+    title: "Taller de alfarería infantil",
+    image: "https://i.ytimg.com/vi/oo4lKnhKvrU/hqdefault.jpg"
+  },
+  {
+    id: 'mongoId12131132',
+    title: "Taller de pintura tradicional",
+    image: "https://i.ytimg.com/vi/oo4lKnhKvrU/hqdefault.jpg"
+  },
+]);
+
 </script>
 
 <template>
@@ -101,7 +125,11 @@ const secondCategories = [
         <p>¡Aprende como hacerlos en estos talleres educativos!</p>
       </div>
       <div class="month__workshops">
-        <MonthWorkshop />
+        <MonthWorkshop v-for="workshop in workshops"
+          :key="workshop.id"
+          :imageUrl="workshop.image"
+          :workshopTitle="workshop.title" />
+          
       </div>
     </div>
 
@@ -114,7 +142,10 @@ main {
 }
 
 .month__workshops {
-  margin-top: 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+  margin: 0 0 5em 0;
 
   .diamond__separator {
     color: var(--background-secondary);

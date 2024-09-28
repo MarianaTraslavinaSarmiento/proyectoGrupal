@@ -10,7 +10,7 @@ const router = useRouter();
 const props = defineProps({
     title: {
         type: String,
-        required: true
+        required: false
     },
     hideDiamond: {
         type: Boolean,
@@ -18,7 +18,6 @@ const props = defineProps({
     },
     customBackRoute: {
         type: String,
-        default: false
     }
 })
 

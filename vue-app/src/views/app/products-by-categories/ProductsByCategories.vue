@@ -2,7 +2,7 @@
 import CategoriesCarousel from "@components/categories-carousel/CategoriesCarousel.vue";
 import HeaderTitle from "@/components/header-title/HeaderTitle.vue";
 import SearchBar from "@/components/search-bar/SearchBar.vue";
-import Filter from "@icons/general/Filter.vue";
+import FilterIcon from "@icons/general/FilterIcon.vue";
 import { reactive } from "vue";
 
 // const categories = [
@@ -50,7 +50,7 @@ const filterProducts = (category) => {
         <div class="filter__products">
             <SearchBar 
             placeholder = "Buscar producto o palabra clave..." />
-            <Filter />
+            <FilterIcon />
         </div>
 
         <div class="container">

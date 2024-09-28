@@ -23,7 +23,13 @@
                 <use xlink:href="#image0_126_4088"
                     transform="matrix(0.00246891 0 0 0.00142554 -0.36679 -0.000113423)" />
             </pattern>
-            <image id="image0_126_4088" :href="image" />
+            <image height="100%" id="image0_126_4088" :href="image" />
         </defs>
     </svg>
 </template> 
+
+<style scoped>
+    #image0_126_4088 {
+        object-fit: fill;
+    }
+</style>

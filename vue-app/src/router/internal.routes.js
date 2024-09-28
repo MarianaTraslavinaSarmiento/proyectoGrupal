@@ -4,12 +4,12 @@ import ShoppingCart from '@views/app/shopping-cart/ShoppingCart.vue'
 import DiscountsPromotions from '@views/app/discounts-promotions/DiscountsPromotions.vue'
 import Profile from '@views/app/profile/Profile.vue'
 
-import GeneralPublicInfoWorkshops from "@views/app/educational-workshops/GeneralPublicInfoWorkshops.vue"
 import PurchaseMadeMessage from "@views/app/your-shopping-cart/PurchaseMadeMessage.vue"
-import MoreInformationAboutTheWorkshop from "@views/app/educational-workshops/MoreInformationAboutTheWorkshop.vue"
 
 import RedeemCoupons from "@views/app/redeem-coupons/RedeemCoupons.vue"
+
 import EducationalWorkshops from "@views/app/educational-workshops/EducationalWorkshops.vue"
+import WorkshopInfo from '@/views/app/workshop-info/WorkshopInfo.vue'
 
 import ProductsByCategories from "@views/app/products-by-categories/ProductsByCategories.vue"
 
@@ -65,6 +65,12 @@ export const internalRoutes = [
         name: 'EducationalWorkshops',
         alias: 'talleres-educativos',
         component: EducationalWorkshops
+    },
+    {
+        path: 'app/educational-workshops/info/:workshop',
+        name: 'WorkshopInfo',
+        alias: 'talleres-educativos/info/:workshop',
+        component: WorkshopInfo
     },
     {
         path: '/app/settings',
