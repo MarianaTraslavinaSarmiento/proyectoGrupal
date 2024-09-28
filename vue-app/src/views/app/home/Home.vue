@@ -124,7 +124,7 @@ const workshops = ref([
       <div class="month__workshops__subtitle">
         <p>¡Aprende como hacerlos en estos talleres educativos!</p>
       </div>
-      <div class="month__workshops">
+      <div class="month__workshops__container">
         <MonthWorkshop v-for="workshop in workshops"
           :key="workshop.id"
           :imageUrl="workshop.image"
@@ -142,10 +142,7 @@ main {
 }
 
 .month__workshops {
-  display: flex;
-  flex-direction: column;
-  gap: 3em;
-  margin: 0 0 5em 0;
+  margin: 2em 0 5em 0;
 
   .diamond__separator {
     color: var(--background-secondary);
@@ -167,6 +164,13 @@ main {
     color: rgb(from var(--text-contrast) r g b / 50%);
     text-align: center;
     font-size: 1.5rem;
+  }
+
+  &__container {
+    margin: 2em 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
   }
 }
 
