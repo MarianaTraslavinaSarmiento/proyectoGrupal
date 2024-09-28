@@ -2,33 +2,48 @@
 import { ref } from 'vue';
 import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
 import SearchIcon from '@icons/search-bar/SearchIcon.vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const workshops = ref([
   {
+    id: "mongoId123143132",
     title: "Taller de bordado ayacuchano",
     description: "Para el público en general",
     instructor: "Taller dado por los artesanos de Taller Awaq Ayllus",
     image: "https://i.ytimg.com/vi/oo4lKnhKvrU/hqdefault.jpg"
   },
   {
+    id: "mongoId12131431",
     title: "Taller de cerámica artesanal",
     description: "Para el público en general",
     instructor: "Taller dado por los artesanos de Cerámicas Tater Vera",
     image: "https://i.ytimg.com/vi/oo4lKnhKvrU/hqdefault.jpg"
   },
   {
+    id: "mongoId1243132",
     title: "Taller de alfarería infantil",
     description: "Para niños de 4 a 12 años",
     instructor: "Taller dado por la artesana María Santos Minchán",
     image: "https://i.ytimg.com/vi/oo4lKnhKvrU/hqdefault.jpg"
   },
   {
+    id: "mongoId12131132",
     title: "Taller de pintura tradicional",
     description: "Para adultos mayores",
     instructor: "Taller dado por los artesanos Roldán y Harry Pinedo",
     image: "https://i.ytimg.com/vi/oo4lKnhKvrU/hqdefault.jpg"
   },
 ]);
+
+const onPublicInfoClick = (id) => {
+  router.push(`/app/talleres-educativos/info/${id} `)
+}
+
+const onAboutClick = (id) => {
+  router.push(`/app/talleres-educativos/acerca-de/${id}`)
+}
 </script>
 
 <template>
@@ -49,9 +64,9 @@ const workshops = ref([
         <img :src="workshop.image" :alt="workshop.title" />
         <div class="workshop-info">
           <h2>{{ workshop.title }}</h2>
-          <p class="description">{{ workshop.description }}</p>
+          <a @click="onPublicInfoClick(workshop.id)" class="description">{{ workshop.description }}</a>
           <p class="instructor">{{ workshop.instructor }}</p>
-          <button>Entérate más sobre el taller aquí</button>
+          <button @click="onAboutClick(workshop.id)">Entérate más sobre el taller aquí</button>
         </div>
       </div>
     </div>
@@ -140,6 +155,12 @@ const workshops = ref([
     p {
       font-size: 1.3rem;
       margin-bottom: 0.25rem;
+    }
+    
+    a{
+      font-size: 1.3rem;
+      margin-bottom: 0.25rem;
+      cursor: pointer;
     }
 
     .instructor {

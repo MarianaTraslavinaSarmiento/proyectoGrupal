@@ -10,6 +10,7 @@ import RedeemCoupons from "@views/app/redeem-coupons/RedeemCoupons.vue"
 
 import EducationalWorkshops from "@views/app/educational-workshops/EducationalWorkshops.vue"
 import WorkshopInfo from '@/views/app/workshop-info/WorkshopInfo.vue'
+import WorkshopAbout from '@/views/app/workshop-about/WorkshopAbout.vue'
 
 import ProductsByCategories from "@views/app/products-by-categories/ProductsByCategories.vue"
 
@@ -95,6 +96,12 @@ export const internalRoutes = [
         name: 'productsByCategories',
         alias: 'productos-por-categoria/:category',
         component: ProductsByCategories
+    },
+    {
+        path: '/app/educational-workshops/about/:workshop',
+        name: 'AboutWorkshop',
+        alias: 'talleres-educativos/acerca-de/:workshop',
+        component: WorkshopAbout
     }
     // {
     //     path: '/app/workshops-craft-stores',
