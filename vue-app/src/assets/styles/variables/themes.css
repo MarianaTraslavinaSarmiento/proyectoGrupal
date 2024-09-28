@@ -45,4 +45,18 @@
         --ocean-color-border: #01579B;
     /* #endregion */
 
+    /* #region violet-theme */
+        /* Backgrounds */
+        --violet-bg-primary: #4A0E4E;
+        --violet-bg-secondary: #7B1FA2;
+        --violet-bg-base: #FFFFFF;
+
+        /* Text */
+        --violet-text-contrast: #6A1B9A;
+        --violet-text-color: #FFFFFF;
+
+        /* Others */
+        --violet-color-accent: #E040FB;
+        --violet-color-border: #6A1B9A;
+    /* #endregion */
 }
