@@ -70,6 +70,7 @@ import TrashIcon from '@icons/general/TrashIcon.vue';
 <style lang="scss" scoped>
 main {
     font-family: Bellota;
+    margin-bottom: 8rem;
 }
 
 .products {
@@ -89,12 +90,12 @@ main {
     }
 
     &::-webkit-scrollbar-track {
-        background: #8B4513;
+        background: var(--background-secondary);
     }
 
     &::-webkit-scrollbar-thumb {
         border-radius: 4px;
-        border: 2px solid #8B4513;
+        border: 2px solid var(--background-secondary);
     }
 }
 
