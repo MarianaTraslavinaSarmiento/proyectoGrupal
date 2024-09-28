@@ -58,6 +58,13 @@ export const internalRoutes = [
         component: Profile
     },
     {
+        path: '/app/shopping-cart',
+        name: 'ShoppingCart',
+        alias: 'carrito-de-compras',
+        meta: { requiresNav: true, requiresHeadBar: true },
+        component: ShoppingCart
+    },
+    {
         path: '/app/redeem-coupons',
         name: 'RedeemCoupons',
         alias: 'canjear-cupon',
