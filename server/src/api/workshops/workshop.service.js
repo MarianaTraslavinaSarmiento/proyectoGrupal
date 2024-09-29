@@ -5,7 +5,18 @@ class WorkshopService {
         return await WorkshopModel.find(query)
     }
 
-    async getAllWithStoreInCharge() {
+    async getAllWithStoreInCharge(search) {
+        let query = {};
+        if (search) {
+            query = {
+                $or: [
+                    { name: { $regex: search, $options: 'i' } },
+                    { target_audience: { $regex: search, $options: 'i' } },
+                    { 'store_in_charge.name': { $regex: search, $options: 'i' } }
+                ]
+            };
+        }
+
         return await WorkshopModel.aggregate([
             {
                 $lookup: {
@@ -14,8 +25,9 @@ class WorkshopService {
                     foreignField: "_id",
                     as: "store_in_charge"
                 }
-            }
-        ])
+            },
+            { $match: query }
+        ]);
     }
 
     async getOneById(id) {

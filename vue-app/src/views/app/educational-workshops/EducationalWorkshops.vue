@@ -8,15 +8,15 @@ import LoadingScreen from '@/components/loading-screen/LoadingScreen.vue';
 
 const router = useRouter();
 
-const {isLoading, workshops} = useGetAllWorkshopsWithStoreInCharge();
+const { isLoading, workshops, searchQuery } = useGetAllWorkshopsWithStoreInCharge();
 
 const onPublicInfoClick = (id) => {
-  router.push(`/app/talleres-educativos/info/${id} `)
-}
+  router.push(`/app/talleres-educativos/info/${id}`);
+};
 
 const onAboutClick = (id) => {
-  router.push(`/app/talleres-educativos/acerca-de/${id}`)
-}
+  router.push(`/app/talleres-educativos/acerca-de/${id}`);
+};
 </script>
 
 <template>
@@ -28,20 +28,23 @@ const onAboutClick = (id) => {
     <div class="search-bar">
       <div class="search-input-wrapper">
         <SearchIcon class="search-icon" />
-        <input type="text" placeholder="Buscar taller, por categoría o artesanos" />
+        <input 
+          v-model="searchQuery"
+          type="text" 
+          placeholder="Buscar taller, por categoría o artesanos" 
+        />
       </div>
     </div>
     
-    <div v-if="isLoading">ç
+    <div v-if="isLoading">
       <LoadingScreen style="min-height: 60dvh;" />
     </div>
-    <div class="workshops">
+    <div v-else class="workshops">
       <div v-for="(workshop, index) in workshops" :key="index" class="workshop-card">
         <img :src="workshop.image_url" :alt="workshop.name" />
         <div class="workshop-info">
           <h2>{{ workshop.name }}</h2>
-          <a @click="onPublicInfoClick(workshop.id)" class="description">{{ workshop.
-target_audience }}</a>
+          <a @click="onPublicInfoClick(workshop.id)" class="description">{{ workshop.target_audience }}</a>
           <p class="store-in-charge"><span>Taller dado por los artesanos de </span>{{ workshop.store_in_charge[0].name }}</p>
           <button @click="onAboutClick(workshop.id)">Entérate más sobre el taller aquí</button>
         </div>

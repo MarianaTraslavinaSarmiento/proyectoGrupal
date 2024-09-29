@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useApiCacheStore } from '@/stores/apiCache'
 import { createPinia } from 'pinia'
 import toast from "@/config/toast.js"
@@ -47,22 +47,27 @@ export const useGetTrendingWorkshops = () => {
 }
 
 export const useGetAllWorkshopsWithStoreInCharge = () => {
-    const url = '/workshop/with-store-in-charge'
-    const workshops = ref()
+    const workshops = ref([])
     const isLoading = ref(true)
+    const searchQuery = ref('')
 
     const getWorkshops = async() => {
+        const url = `/workshop/with-store-in-charge${searchQuery.value ? `?search=${encodeURIComponent(searchQuery.value)}` : ''}`
         try {
+            isLoading.value = true
             workshops.value = await apiCacheStore.fetchData(url)
-            isLoading.value = false
-            console.log(workshops.value)
         } catch (err) {
             toast.error('Error al cargar los talleres.')
-        } 
-
+        } finally {
+            isLoading.value = false
+        }
     }
     
+    watch(searchQuery, () => {
+        getWorkshops()
+    })
+
     getWorkshops()
 
-    return { workshops, isLoading }
+    return { workshops, isLoading, searchQuery }
 }

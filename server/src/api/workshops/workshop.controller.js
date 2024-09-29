@@ -14,8 +14,9 @@ class WorkshopController {
     }
 
     async getAllWithStoreInCharge(req, res) {
-        const workshops = await this.#service.getAllWithStoreInCharge()
-        res.json(workshops)
+        const { search } = req.query;
+        const workshops = await this.#service.getAllWithStoreInCharge(search);
+        res.json(workshops);
     }
 
     async getOneById(req, res) {
