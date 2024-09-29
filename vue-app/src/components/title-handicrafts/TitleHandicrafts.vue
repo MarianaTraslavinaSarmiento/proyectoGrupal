@@ -29,6 +29,7 @@ const props = defineProps({
 </template>
 
 <style scoped>
+
 .title {
     background-color: var(--background-primary);
     height: 50px;
@@ -45,7 +46,7 @@ const props = defineProps({
     }
 
     p {
-        margin-left: 30px;
+        margin-inline: 30px;
         font-size: 1.8rem;
         font-weight: bold;
         position: relative;

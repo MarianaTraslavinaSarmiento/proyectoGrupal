@@ -14,6 +14,10 @@ const props = defineProps({
     },
     customBackRoute: {
         type: String,
+    },
+    hideBackButton: {
+        type: Boolean,
+        default: false
     }
 })
 
@@ -22,7 +26,7 @@ const props = defineProps({
 <template>
     <div class="header__container">
         <div class="header__container__back" @click="goBack">
-            <BackButton class="back__icon" />
+            <BackButton v-if="!hideBackButton" class="back__icon" />
         </div>
         <div v-if="!hideDiamond" class="title">
             <span class="title__text">{{ title }}</span>
