@@ -19,6 +19,7 @@ import CommentsToTheApp from "@views/app/comments-to-the-app/CommentsToTheApp.vu
 import Settings from '@/views/app/settings/Settings.vue'
 
 import Chat from '@views/app/chat/Chat.vue'
+import DiscoverOurCrafts from '@/views/app/discover-our-crafts/DiscoverOurCrafts.vue'
 
 
 export const internalRoutes = [
@@ -99,6 +100,12 @@ export const internalRoutes = [
         name: 'CustomerService',
         alias: 'atencion-al-cliente',
         component: CustomerService
+    },
+    {
+        path: '/app/discover-our-crafts',
+        name: 'DiscoverOurCrafts',
+        alias: 'descubre-nuestras-artesanias',
+        component: DiscoverOurCrafts
     },
     {
         path: '/app/customer-service/chat',
