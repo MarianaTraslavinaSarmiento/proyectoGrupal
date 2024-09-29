@@ -21,6 +21,7 @@ import Settings from '@/views/app/settings/Settings.vue'
 
 import Chat from '@views/app/chat/Chat.vue'
 import Shop from '@/views/app/shop/Shop.vue'
+import FavoriteCrafts from '@/views/app/favorite-crafts/FavoriteCrafts.vue'
 
 
 export const internalRoutes = [
@@ -57,6 +58,12 @@ export const internalRoutes = [
         alias: 'descuentos-promociones',
         meta: { requiresNav: true, requiresHeadBar: true, requiresAuth: true },
         component: DiscountsPromotions
+    },
+    {
+        path: '/app/favorite-crafts',
+        name: 'FavoriteCrafts',
+        alias: 'artesanias-favoritas',
+        component: FavoriteCrafts
     },
     {
         path: '/app/profile',
