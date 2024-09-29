@@ -14,7 +14,7 @@ const validateUpdate = () => {
             .optional()
             .isString()
             .withMessage('The genre must be a string.')
-            .isIn(['M', 'F'])
+            .isIn(['M', 'F', 'Other'])
             .withMessage('The genre must be either M or F'),
         body('born_date')
             .optional()

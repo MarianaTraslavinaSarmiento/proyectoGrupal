@@ -32,7 +32,7 @@ const validateSignup = () => {
             .withMessage('The gender is required')
             .isString()
             .withMessage('The gender must be a string.')
-            .isIn(['M', 'F'])
+            .isIn(['M', 'F', 'Other'])
             .withMessage('The gender must be either M or F'),
         body('birth_date')
             .notEmpty()

@@ -13,7 +13,7 @@ const userSchema = new Schema({
     },
     gender: {
         type: String,
-        enum : ['M','F'],
+        enum : ['M','F', 'Other'],
         required: false
     },
     birth_date: {
