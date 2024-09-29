@@ -1,8 +1,7 @@
-const app = require("../app");
 const MongooseDB = require("./config/database");
 const { PORT } = require("./config/environment");
 
-async function startServer() {
+async function startServer(app) {
     await MongooseDB.connect();
     const server = app.listen(PORT, () => {
         console.log(`Server started on port http://localhost:${PORT}`);
@@ -19,4 +18,4 @@ async function closeServer(server) {
     process.exit(0);
 }
 
-startServer();
+module.exports = {startServer};
