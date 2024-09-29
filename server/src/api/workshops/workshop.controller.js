@@ -13,6 +13,11 @@ class WorkshopController {
         res.json(workshops)
     }
 
+    async getAllWithStoreInCharge(req, res) {
+        const workshops = await this.#service.getAllWithStoreInCharge()
+        res.json(workshops)
+    }
+
     async getOneById(req, res) {
         const workshop = await this.#service.getOneById(req.params.id)
         res.json(workshop)

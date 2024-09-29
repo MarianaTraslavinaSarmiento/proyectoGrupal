@@ -5,6 +5,19 @@ class WorkshopService {
         return await WorkshopModel.find(query)
     }
 
+    async getAllWithStoreInCharge() {
+        return await WorkshopModel.aggregate([
+            {
+                $lookup: {
+                    from: "shops",
+                    localField: "store_in_charge",
+                    foreignField: "_id",
+                    as: "store_in_charge"
+                }
+            }
+        ])
+    }
+
     async getOneById(id) {
         return await WorkshopModel.findById(id)
     }

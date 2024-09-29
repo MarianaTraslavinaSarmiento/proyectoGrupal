@@ -61,61 +61,70 @@ export const internalRoutes = [
         path: '/app/shopping-cart',
         name: 'ShoppingCart',
         alias: 'carrito-de-compras',
-        meta: { requiresNav: true, requiresHeadBar: true },
+        meta: { requiresNav: true, requiresHeadBar: true, requiresAuth: true },
         component: ShoppingCart
     },
     {
         path: '/app/redeem-coupons',
         name: 'RedeemCoupons',
         alias: 'canjear-cupon',
+        meta: { requiresAuth: true},
         component: RedeemCoupons
     },
     {
         path: '/app/educational-workshops',
         name: 'EducationalWorkshops',
         alias: 'talleres-educativos',
+        meta: { requiresAuth: true},
         component: EducationalWorkshops
     },
     {
         path: 'app/educational-workshops/info/:workshop',
         name: 'WorkshopInfo',
         alias: 'talleres-educativos/info/:workshop',
+        meta: { requiresAuth: true},
         component: WorkshopInfo
     },
     {
         path: '/app/educational-workshops/about/:workshop',
         name: 'AboutWorkshop',
         alias: 'talleres-educativos/acerca-de/:workshop',
+        meta: { requiresAuth: true},
         component: WorkshopAbout
     },
     {
         path: '/app/products-by-categories/:category',
         name: 'productsByCategories',
         alias: 'productos-por-categoria/:category',
+        meta: { requiresAuth: true},
         component: ProductsByCategories
     },
     {
         path: '/app/customer-service',
         name: 'CustomerService',
         alias: 'atencion-al-cliente',
+        meta: { requiresAuth: true},
         component: CustomerService
     },
     {
         path: '/app/customer-service/chat',
         name: 'Chat',
         alias: 'atencion-al-cliente/chat',
+        meta: { requiresAuth: true},
         component: Chat
     },
     {
         path: '/app/settings',
         name: 'Settings',
         alias: 'ajustes',
+        meta: { requiresAuth: true},
         component: Settings
     },
     {
         path: '/app/coments',
         name: 'Coments',
         alias: 'comentarios',
+        meta: { requiresAuth: true},
         component: CommentsToTheApp
     },
     // {

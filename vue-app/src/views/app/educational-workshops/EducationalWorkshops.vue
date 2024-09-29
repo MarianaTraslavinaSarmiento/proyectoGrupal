@@ -3,39 +3,12 @@ import { ref } from 'vue';
 import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
 import SearchIcon from '@icons/search-bar/SearchIcon.vue';
 import { useRouter } from 'vue-router';
+import { useGetAllWorkshopsWithStoreInCharge } from '@/composables/useWorkshop';
+import LoadingScreen from '@/components/loading-screen/LoadingScreen.vue';
 
 const router = useRouter();
 
-const workshops = ref([
-  {
-    id: "mongoId123143132",
-    title: "Taller de bordado ayacuchano",
-    description: "Para el público en general",
-    instructor: "Taller dado por los artesanos de Taller Awaq Ayllus",
-    image: "https://i.ytimg.com/vi/oo4lKnhKvrU/hqdefault.jpg"
-  },
-  {
-    id: "mongoId12131431",
-    title: "Taller de cerámica artesanal",
-    description: "Para el público en general",
-    instructor: "Taller dado por los artesanos de Cerámicas Tater Vera",
-    image: "https://i.ytimg.com/vi/oo4lKnhKvrU/hqdefault.jpg"
-  },
-  {
-    id: "mongoId1243132",
-    title: "Taller de alfarería infantil",
-    description: "Para niños de 4 a 12 años",
-    instructor: "Taller dado por la artesana María Santos Minchán",
-    image: "https://i.ytimg.com/vi/oo4lKnhKvrU/hqdefault.jpg"
-  },
-  {
-    id: "mongoId12131132",
-    title: "Taller de pintura tradicional",
-    description: "Para adultos mayores",
-    instructor: "Taller dado por los artesanos Roldán y Harry Pinedo",
-    image: "https://i.ytimg.com/vi/oo4lKnhKvrU/hqdefault.jpg"
-  },
-]);
+const {isLoading, workshops} = useGetAllWorkshopsWithStoreInCharge();
 
 const onPublicInfoClick = (id) => {
   router.push(`/app/talleres-educativos/info/${id} `)
@@ -59,13 +32,17 @@ const onAboutClick = (id) => {
       </div>
     </div>
     
+    <div v-if="isLoading">ç
+      <LoadingScreen style="min-height: 60dvh;" />
+    </div>
     <div class="workshops">
       <div v-for="(workshop, index) in workshops" :key="index" class="workshop-card">
-        <img :src="workshop.image" :alt="workshop.title" />
+        <img :src="workshop.image_url" :alt="workshop.name" />
         <div class="workshop-info">
-          <h2>{{ workshop.title }}</h2>
-          <a @click="onPublicInfoClick(workshop.id)" class="description">{{ workshop.description }}</a>
-          <p class="instructor">{{ workshop.instructor }}</p>
+          <h2>{{ workshop.name }}</h2>
+          <a @click="onPublicInfoClick(workshop.id)" class="description">{{ workshop.
+target_audience }}</a>
+          <p class="store-in-charge"><span>Taller dado por los artesanos de </span>{{ workshop.store_in_charge[0].name }}</p>
           <button @click="onAboutClick(workshop.id)">Entérate más sobre el taller aquí</button>
         </div>
       </div>
@@ -163,8 +140,12 @@ const onAboutClick = (id) => {
       cursor: pointer;
     }
 
-    .instructor {
+    .store-in-charge {
       font-weight: bold;
+
+      span {
+        font-weight: normal;
+      }
     }
 
     button {

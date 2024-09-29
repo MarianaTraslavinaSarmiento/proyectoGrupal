@@ -45,3 +45,24 @@ export const useGetTrendingWorkshops = () => {
 
     return { workshops, isLoading }
 }
+
+export const useGetAllWorkshopsWithStoreInCharge = () => {
+    const url = '/workshop/with-store-in-charge'
+    const workshops = ref()
+    const isLoading = ref(true)
+
+    const getWorkshops = async() => {
+        try {
+            workshops.value = await apiCacheStore.fetchData(url)
+            isLoading.value = false
+            console.log(workshops.value)
+        } catch (err) {
+            toast.error('Error al cargar los talleres.')
+        } 
+
+    }
+    
+    getWorkshops()
+
+    return { workshops, isLoading }
+}
