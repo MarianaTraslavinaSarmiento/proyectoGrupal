@@ -37,7 +37,8 @@ const userSchema = new Schema({
         type: String
     }
 }, {
-    timestamps: true
+    timestamps: true,
+    versionKey: false
 })
 
 const User = model('User', userSchema)

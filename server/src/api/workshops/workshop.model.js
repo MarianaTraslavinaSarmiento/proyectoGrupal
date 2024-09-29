@@ -17,10 +17,6 @@ const workshopSchema = new Schema({
         type: String,
         required: true
     },
-    target_audience_note: {
-        type: String,
-        required: false
-    },
     duration: {
         type: String,
         required: true
@@ -53,9 +49,14 @@ const workshopSchema = new Schema({
         type: Number,
         required: true
     },
-    trending: {
-        type: Boolean,
-        default: false
+    image_bar_code: {
+        type: String,
+        required: true
+    },
+    store_in_charge: {
+        type: Schema.Types.ObjectId,
+        ref: 'shops',
+        required: true
     }
 }, {
     timestamps: true
