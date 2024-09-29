@@ -20,6 +20,7 @@ import ProductItem from '@/components/product-item/ProductItem.vue';
             productName="Talla en piedra"
             productPrice="S/ 100.00"
             productCompany="Talla en piedra"
+            :showDelete="false"
             />
 
         </div>

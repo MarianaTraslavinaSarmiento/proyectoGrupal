@@ -1,9 +1,13 @@
 <script setup>
 import DiscountIcon from '@/assets/icons/general/DiscountIcon.vue';
-
+import DeleteIcon from '@/assets/icons/general/DeleteIcon.vue';
 
 const props = defineProps({
     showDiscount: {
+        type: Boolean,
+        default: true
+    },
+    showDelete: {
         type: Boolean,
         default: true
     },
@@ -42,6 +46,9 @@ const props = defineProps({
 
         <p class="discount__text">3x1</p>
 
+        <div v-if="showDelete" class="delete__icon">
+            <DeleteIcon />
+        </div>
 
         <div class="product">
 
@@ -83,6 +90,16 @@ const props = defineProps({
         height: 50px;
         z-index: 2;
         filter: drop-shadow(0px 3px 1px rgba(0, 0, 0, 0.30));
+    }
+
+    .delete__icon {
+        position: absolute;
+        transform: translateY(-30%);
+        top: 5px;
+        right: -7px;
+        width: 20px;
+        height: 20px;
+        z-index: 2;
     }
 
     .product {
