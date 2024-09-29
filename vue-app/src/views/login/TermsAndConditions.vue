@@ -2,13 +2,27 @@
 
 import CheckedIcon from "@assets/icons/general/CheckedIcon.vue";
 import SquareBackground from "@assets/img/general/SquareBackground.vue"
-import BackIcon from '@icons/general/BackIcon.vue'
 import DropdownArrow from "@assets/img/general/DropdownArrow.vue"
+import { computed, onMounted, ref } from 'vue';
+import BackButton from "@/components/back-button/BackButton.vue";
+import { useSignupStore } from "@/stores/signup";
+import router from "@/router";
 
-import { ref } from 'vue';
 const checkedTerms = ref(false);
 const checkedPolicy = ref(false);
 const checkedPromotions = ref(false);
+
+const signupStore = useSignupStore()
+
+const handleRegister = async() => {
+    await signupStore.registerNewUser()
+}
+
+onMounted(() => {
+    if (signupStore.user === null) {
+        router.back()
+    }
+})
 
 
 
@@ -16,10 +30,10 @@ const checkedPromotions = ref(false);
 <template>
     <main class="main__container">
 
-        <SquareBackground class="triangle__corner " />
+        <SquareBackground class="triangle__corner" />
         <SquareBackground class="triangle__center" />
         <div class="back">
-            <BackIcon class="back__icon" />
+            <BackButton />
         </div>
 
         <div class="content">
@@ -62,7 +76,7 @@ const checkedPromotions = ref(false);
 
         <span v-show="checkedPolicy && checkedTerms" class="register_now">
             <DropdownArrow class="arrow_icon"/>
-            <a href="">Registrarse</a>
+            <p @click="handleRegister">Registrarse</p>
         </span>
     </main>
 </template>
@@ -188,10 +202,11 @@ const checkedPromotions = ref(false);
         width: 15px;
     }
 
-    a {
+    p {
         text-decoration: underline;
         font-size: 1.7rem;
         margin-left: 10px;
+        cursor: pointer;
     }
 
 }

@@ -8,8 +8,9 @@ class AuthController {
     }
 
     async signup(req, res) {
-        const {username, email, genre, born_date, password} = req.body
-        const user = await this.service.signup({username, email, genre, born_date, password})
+        const {username, email, gender, birth_date, password} = req.body
+
+        const user = await this.service.signup({username, email, gender, birth_date, password})
 
         res.json({
             message: 'Signup successful',

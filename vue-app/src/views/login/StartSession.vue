@@ -5,6 +5,8 @@ import BackIcon from '@icons/general/BackIcon.vue'
 import { reactive } from "vue";
 import axios from "axios";
 import router from "@/router";
+import BackButton from "@/components/back-button/BackButton.vue";
+import toast from "@/config/toast";
 
 const user = reactive({
     login: '',
@@ -13,16 +15,16 @@ const user = reactive({
 
 const handleUserAuth = async () => {
     try{
-        const res = await axios.post('http://localhost:3000/api/auth/login', user)
-        console.log(res);
+        const res = await axios.post('/auth/login', user)
 
-    if(res.status == 200){
-        router.push('/workshops-craft-stores')
-    }
+        if(res.status == 200){
+            toast.success('Sesión iniciada')
+            router.push('/app/home')
+        }
 
-    }catch(err){
+    } catch(err){
         console.error(err)
-        alert('Error al iniciar sesión. Por favor verifica tu información.')
+        toast.error('Error al iniciar sesión. Por favor verifica tu información.')
     }
 }
 </script>
@@ -32,7 +34,7 @@ const handleUserAuth = async () => {
         <SquareBackground class="triangle__corner__right" />
         <SquareBackground class="triangle__corner__left" />
         <div class="back">
-            <BackIcon class="back__icon" />
+            <BackButton />
         </div>
         <div class="login__form">
             <label for="username" class="login__label">Nombre de usuario, celular o correo</label>

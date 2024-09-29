@@ -11,12 +11,12 @@ const userSchema = new Schema({
         validate: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
         unique: true
     },
-    genre: {
+    gender: {
         type: String,
         enum : ['M','F'],
         required: false
     },
-    born_date: {
+    birth_date: {
         type: Schema.Types.Date,
         required: false
     },

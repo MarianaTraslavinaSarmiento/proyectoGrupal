@@ -27,18 +27,18 @@ const validateSignup = () => {
             .withMessage('The email is required')
             .isEmail()
             .withMessage('The email must be a valid email'),
-        body('genre')
+        body('gender')
             .notEmpty()
-            .withMessage('The genre is required')
+            .withMessage('The gender is required')
             .isString()
-            .withMessage('The genre must be a string.')
+            .withMessage('The gender must be a string.')
             .isIn(['M', 'F'])
-            .withMessage('The genre must be either M or F'),
-        body('born_date')
+            .withMessage('The gender must be either M or F'),
+        body('birth_date')
             .notEmpty()
             .withMessage('The born date is required')
-            .isDate()
-            .withMessage('The born date must be a date'),
+            .isDate({format: 'DD-MM-YYYY'})
+            .withMessage('The born date must be a date (DD-MM-YYYY)'),
         body('password')
             .notEmpty()
             .withMessage('The password is required')
