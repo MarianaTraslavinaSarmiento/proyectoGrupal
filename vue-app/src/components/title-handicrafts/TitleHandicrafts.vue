@@ -5,6 +5,11 @@ const props = defineProps({
     diamondRight: {
         type: Boolean,
         default: false
+    },
+
+    title: {
+        type: String,
+        required: true
     }
 })
 
@@ -16,7 +21,7 @@ const props = defineProps({
     <div class="title">
 
         <Diamond class="diamond__icon" />
-        <p>Tapiz Chumpi Andino III</p>
+        <p>{{ title }}</p>
         <Diamond v-if="diamondRight" class="diamond__icon__right" />
 
     </div>
