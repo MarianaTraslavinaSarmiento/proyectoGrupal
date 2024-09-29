@@ -9,15 +9,12 @@ class UserController {
 
     async getOneById(req, res) {
         const user = req.user
-    
-        console.log(req.user)
-        
         res.json(user)
     }
 
     async updateUser(req, res) {
         const updatedUser = req.body
-        const user = await this.#service.updateUserById(req.user.id, updatedUser)
+        const user = await this.#service.updateUserById(req.user._id, updatedUser)
 
         res.json({
             message: "User information updated sucessfully",

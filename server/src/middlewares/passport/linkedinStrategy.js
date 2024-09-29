@@ -15,7 +15,7 @@ module.exports = new LinkedinStrategy({
     callbackURL: "/api/auth/linkedin/callback",
     scope: ['profile', 'email']
   }, async(accessToken, refreshToken, profile, done ) => {
-    console.log(profile)
+
     try {
         let user = await userService.getOneByQuery({email: profile.emails[0].value, account_id: profile.id})
         if (user) {

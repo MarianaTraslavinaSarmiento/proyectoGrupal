@@ -12,7 +12,7 @@ module.exports = new LocalStrategy(
         try {
             const query = login.includes('@') ? { email: login } : { username: login };
             const user = await userService.getOneByQuery(query);
-            console.log(user)
+
             if (!user) {
                 return done(null, false, { message: 'User not found' });
             }

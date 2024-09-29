@@ -17,6 +17,7 @@ export const useUserStore = defineStore('user', {
   
         try {
           const response = await axios.get("/user/profile")
+
           this.user = response.data
         } catch (error) {
           console.error('Error:', error)
@@ -25,6 +26,19 @@ export const useUserStore = defineStore('user', {
       },
       clearUser() {
         this.user = null
+      },
+      async updateUser(updatedUser) {
+        try {
+          const response = await axios.put("/user/update", updatedUser)
+          console.log(response)
+          this.user = response.data
+          toast.success('Información actualizada con éxito')
+          return {ok: true}
+        } catch (error) {
+          console.error('Error:', error)
+          toast.error('Ocurrió un error al actualizar la información de tu perfil.')
+        }
       }
-    }
+    },
+
   })
