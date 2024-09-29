@@ -30,6 +30,10 @@ const props = defineProps({
     discountPercentage: {
         type: String,
         default: 0
+    },
+    showDiscountText: {
+        type: Boolean,
+        default: false
     }
 });
 
@@ -44,7 +48,7 @@ const props = defineProps({
             <DiscountIcon />
         </div>
 
-        <p class="discount__text">3x1</p>
+        <p v-if="showDiscountText" class="discount__text">3x1</p>
 
         <div v-if="showDelete" class="delete__icon">
             <DeleteIcon />
