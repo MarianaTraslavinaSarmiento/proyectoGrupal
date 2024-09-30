@@ -1,8 +1,8 @@
 <!-- ChatMessage.vue -->
 <template>
-    <div :class="['message-wrapper', message.isSent ? 'sent' : 'received']">
+    <div :class="['message-wrapper', type === 'Admin' ? 'received' : 'sent']">
       <div class="message-bubble">
-        {{ message.text }}
+        {{ message }}
       </div>
     </div>
   </template>
@@ -11,6 +11,10 @@
   defineProps({
     message: {
       type: Object,
+      required: true
+    },
+    type: {
+      type: String,
       required: true
     }
   })

@@ -7,7 +7,7 @@ class MongooseDB {
                 throw new Error('Missing MONGODB_URI environment variable');
             }
             await mongoose.connect(process.env.MONGODB_URI);
-            console.log("Connected to the database sucessfully")
+            console.log("\x1b[42mConnected to the database sucessfully \x1b[0m")
         } catch (error) {
             console.log("Error connecting to database: ", error);
         }
