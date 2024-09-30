@@ -14,7 +14,9 @@ class UserController {
 
     async updateUser(req, res) {
         const updatedUser = req.body
-        const user = await this.#service.updateUserById(req.user._id, updatedUser)
+        const imageFile = req.file
+
+        const user = await this.#service.updateUserById(req.user._id, updatedUser, imageFile)
 
         res.json({
             message: "User information updated sucessfully",

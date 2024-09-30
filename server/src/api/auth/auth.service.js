@@ -10,7 +10,7 @@ class AuthService {
      * @param {UserModel} user 
      */
     async signup(user) {
-        user.profile_pic_url = defaultProfilePic
+        user.profile_pic.url = defaultProfilePic
 
         let emailAlreadyExits = await UserModel.findOne({email: user.email});
         if(emailAlreadyExits) throw new HttpError(409,'This email is already registered, try logging in.')
