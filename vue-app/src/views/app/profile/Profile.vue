@@ -96,9 +96,9 @@ const saveChanges = async () => {
           </div>
         </div>
         <div class="profile-section">
-          <label style="max-width: 90px; ">Fecha de nacimiento:</label>
+          <label style="max-width: 95px; margin-right: 0px;" >Fecha de nacimiento:</label>
           <div class="input-group">
-            <input style="max-width: 130px;" type="date" v-model="user.birth_date" :readonly="!isEditing.birth_date">
+            <input style="max-width: 95px; margin-right: 15px;"  type="date" v-model="user.birth_date" :readonly="!isEditing.birth_date">
             <button @click="toggleEdit('birth_date')" class="edit-button">
               <EditIcon class="edit-icon" />
             </button>
@@ -125,11 +125,13 @@ const saveChanges = async () => {
   .edit-icon {
     width: 1.5em;
     color: var(--text-contrast);
+    margin-left: 3px;
   }
 
   .user-info {
     margin-top: 30px;
     padding-inline: 10px;
+    width: 95vw;
   }
 
   .genre-and-born_date {
@@ -168,7 +170,7 @@ const saveChanges = async () => {
       color: var(--text-contrast);
       font-size: 1.6rem;
       font-weight: bold;
-      margin-right: 5px;
+      margin-right: 15px;
     }
 
     .input-group {
@@ -178,11 +180,11 @@ const saveChanges = async () => {
       select {
         background-color: var(--background-secondary);
         color: #F3D3BD;
-        padding: 10px;
         border-radius: 5px;
         border: none;
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         height: 40px;
+        width: 30px;
       }
 
       select[disabled] {
@@ -192,12 +194,12 @@ const saveChanges = async () => {
       input {
         background-color: var(--background-secondary);
         color: #F3D3BD;
-        padding: 10px;
         border-radius: 5px;
         border: none;
         font-size: 1.4rem;
-        width: 270px;
+        width: 220px;
         height: 40px;
+        margin-right: 10px;
 
 
         &::placeholder {
