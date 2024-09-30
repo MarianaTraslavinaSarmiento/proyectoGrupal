@@ -12,13 +12,30 @@ const { isLoading, workshops, searchQuery } = useGetAllWorkshopsWithStoreInCharg
 
 const hasResults = computed(() => workshops.value && workshops.value.length > 0);
 
-const onPublicInfoClick = (id) => {
-  router.push(`/app/talleres-educativos/info/${id}`);
+const onPublicInfoClick = (workshopId) => {
+  console.log('Public Info Click - Workshop ID:', workshopId);
+  router.push({ name: 'WorkshopInfo', params: { workshop: workshopId } });
 };
 
-const onAboutClick = (id) => {
-  router.push(`/app/talleres-educativos/acerca-de/${id}`);
+const onAboutClick = (workshopId) => {
+  console.log('About Click - Workshop ID:', workshopId);
+  if (workshopId) {
+    router.push({ 
+      name: 'AboutWorkshop', 
+      params: { workshop: workshopId.toString() } 
+    }).catch(error => {
+      console.error('Navigation error:', error);
+    });
+  } else {
+    console.error('Workshop ID is undefined');
+  }
 };
+
+// Debug: Log workshops when they change
+import { watch } from 'vue';
+watch(workshops, (newWorkshops) => {
+  console.log('Workshops updated:', newWorkshops);
+}, { deep: true });
 </script>
 
 <template>
@@ -49,9 +66,9 @@ const onAboutClick = (id) => {
         <img :src="workshop.image_url" :alt="workshop.name" />
         <div class="workshop-info">
           <h2>{{ workshop.name }}</h2>
-          <a @click="onPublicInfoClick(workshop.id)" class="description">{{ workshop.target_audience }}</a>
+          <a @click="onPublicInfoClick(workshop._id)" class="description">{{ workshop.target_audience }}</a>
           <p class="store-in-charge"><span>Taller dado por los artesanos de </span>{{ workshop.store_in_charge[0].name }}</p>
-          <button @click="onAboutClick(workshop.id)">Entérate más sobre el taller aquí</button>
+          <button @click="onAboutClick(workshop._id)">Entérate más sobre el taller aquí</button>
         </div>
       </div>
     </div>
