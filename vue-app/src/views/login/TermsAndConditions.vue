@@ -175,6 +175,7 @@ onMounted(() => {
         transform: translate(-50%, -50%);
         width: 20px;
         height: 20px;
+        color: var(--color-accent);
     }
 
     .label__text {

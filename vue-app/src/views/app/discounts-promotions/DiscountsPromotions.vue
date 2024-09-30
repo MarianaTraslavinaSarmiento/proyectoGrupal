@@ -4,9 +4,9 @@ import TitleSection from '@/components/title-section/TitleSection.vue';
 import CategoriesSlider from '@/components/categories-slider/CategoriesSlider.vue';
 import ProductItem from '@/components/product-item/ProductItem.vue';
 import LoadingScreen from '@/components/loading-screen/LoadingScreen.vue';
+import BackgroundPattern from '@/components/background-pattern/BackgroundPattern.vue';
 
 import { useGetAllProductsWithOffers } from '@/composables/useProduct';
-
 
 const { products, isLoading } = useGetAllProductsWithOffers()
 
@@ -16,6 +16,8 @@ const { products, isLoading } = useGetAllProductsWithOffers()
 
     <main>
 
+
+        <BackgroundPattern/>
         <TitleSection 
         title="Descuentos y promociones" 
         subtitle="En cientos de artesanías" />

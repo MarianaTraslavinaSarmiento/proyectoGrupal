@@ -4,6 +4,7 @@ import toast from '@/config/toast';
 import { computed, reactive } from 'vue';
 import { useSignupStore } from '@/stores/signup';
 import router from '@/router';
+import SquareBackground from '@/assets/img/general/SquareBackground.vue';
 
 const signupStore = useSignupStore()
 
@@ -65,6 +66,7 @@ const handleSubmit = (e) => {
 <template>
     <BackButton style="position: absolute; top: 0;"/>
     <main>
+        <SquareBackground class="triangle__center" />
         <form @submit.prevent="handleSubmit">
             <label for="username">Nombre de usuario*</label>
             <p>*Crea un nombre de usuario de mínimo 5 y máximo de 12 carácteres</p>
@@ -128,6 +130,18 @@ const handleSubmit = (e) => {
 main {
     font-family: Bellota;
     font-size: 1.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.triangle__center {
+    position: absolute;
+    top: 70%;
+    left: 100%;
+    transform: translate(-50%, -50%);
+    width: 450px;
+    height: 450px;
+    z-index: -1;
 }
 
 form {

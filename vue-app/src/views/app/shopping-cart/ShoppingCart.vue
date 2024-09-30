@@ -2,12 +2,14 @@
 
 import TitleSection from '@components/title-section/TitleSection.vue';
 import TrashIcon from '@icons/general/TrashIcon.vue';
+import BackgroundPattern from '@/components/background-pattern/BackgroundPattern.vue';
 
 /** !Note: This is just the HTML and CSS, not the logic, because its neccesary to save the name of the products in global state or pinia... */
 </script>
 
 <template>
 
+  <BackgroundPattern />
     <main>
 
         <TitleSection title="Tu carrito de compras" subtitle="Revisa aquí los productos que añadiste a tu carrito" />
