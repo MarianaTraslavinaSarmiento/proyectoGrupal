@@ -61,6 +61,10 @@ const workshopSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'shops',
         required: true
+    },
+    trending: {
+        type: Boolean,
+        required: false
     }
 }, {
     timestamps: true
