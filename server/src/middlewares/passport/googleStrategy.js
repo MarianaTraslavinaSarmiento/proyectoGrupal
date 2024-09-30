@@ -49,7 +49,7 @@ module.exports = new GoogleStrategy({
   }, async(accessToken, refreshToken, profile, done ) => {
 
     try {
-        let user = await userService.getOneByQuery({email: profile.emails[0].value, account_id: profile.id})
+        let user = await userService.getOneByQuery({account_id: profile.id})
         if (user) {
             return done(null, user)
         } else {

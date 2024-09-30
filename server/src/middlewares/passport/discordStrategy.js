@@ -48,7 +48,7 @@ module.exports = new DiscordStrategy({
     scope: ["identify", "email"],
 }, async(accessToken, refreshToken, profile, done) => {
     try {
-        let user = await userService.getOneByQuery({email: profile.email, account_id: profile.id})
+        let user = await userService.getOneByQuery({account_id: profile.id})
         if (user) {
             return done(null, user);
         } else {
