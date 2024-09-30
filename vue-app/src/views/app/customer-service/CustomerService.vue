@@ -11,6 +11,10 @@ const onChatClick = () => {
   router.push('/app/atencion-al-cliente/chat')
 }
 
+const onCallClick = () => {
+  window.open('https://forms.gle/yJH5z94kcpHgexa8A', '_blank');
+}
+
 const faqs = ref([
   { 
     question: "¿Cómo compro en la app?", 
@@ -42,6 +46,7 @@ const faqs = ref([
 const toggleFaq = (index) => {
   faqs.value[index].isOpen = !faqs.value[index].isOpen;
 }
+
 </script>
 
 <template>
@@ -66,7 +71,7 @@ const toggleFaq = (index) => {
         <CommentIcon class="icon" />
         Empieza un chat
       </button>
-      <button class="call-button">
+      <button @click="onCallClick" class="call-button">
         <Call class="icon" />
         Programa una llamada
       </button>
