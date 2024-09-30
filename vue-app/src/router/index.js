@@ -13,12 +13,12 @@ router.beforeEach(async (to, from, next) => {
   
   if (to.meta.requiresAuth) {
     await userStore.fetchUserProfile()
-
-    if (!userStore.isAuthenticated) {
-      next('/')
-    } else {
-      next()
-    }
+    next()
+    // if (!userStore.isAuthenticated) {
+    //   next('/')
+    // } else {
+    //   next()
+    // }
   } else {
     next()
   }
