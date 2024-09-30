@@ -137,6 +137,7 @@ const saveChanges = async () => {
   .genre-and-born_date {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
   }
 
   h1 {
@@ -184,7 +185,8 @@ const saveChanges = async () => {
         border: none;
         font-size: 1.6rem;
         height: 40px;
-        width: 30px;
+        width: 50px;
+        font-size: 1.2rem;
       }
 
       select[disabled] {
