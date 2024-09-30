@@ -7,22 +7,33 @@ const pinia = createPinia()
 const apiCacheStore = useApiCacheStore(pinia)
 
 export const useGetOneWorkshop = (id) => {
-    const url = `/workshop/${id}`
-    const workshop = ref()
+    const workshop = ref(null)
     const isLoading = ref(true)
+    const error = ref(null)
 
-    const getWorkshop = async() => {
-        try {
-            workshop.value = await apiCacheStore.fetchData(url)
+    const getWorkshop = async () => {
+        if (!id.value) {
+            error.value = new Error('No se proporcionó un ID de taller válido')
             isLoading.value = false
+            return
+        }
+
+        const url = `/workshop/${id.value}`
+        try {
+            isLoading.value = true
+            error.value = null
+            workshop.value = await useApiCacheStore().fetchData(url)
         } catch (err) {
+            error.value = err
             toast.error('Error al cargar el taller.')
+        } finally {
+            isLoading.value = false
         }
     }
 
-    getWorkshop()
+    watch(id, getWorkshop, { immediate: true })
 
-    return { workshop, isLoading }
+    return { workshop, isLoading, error }
 }
 
 export const useGetTrendingWorkshops = () => {
