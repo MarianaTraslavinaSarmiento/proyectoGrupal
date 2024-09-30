@@ -17,6 +17,10 @@ const workshopSchema = new Schema({
         type: String,
         required: true
     },
+    target_audience_comment: {
+        type: String,
+        required: true
+    },
     duration: {
         type: String,
         required: true

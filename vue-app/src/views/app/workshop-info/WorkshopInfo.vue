@@ -1,16 +1,22 @@
 <script setup>
-
 import SmallTriangle from "@assets/icons/workshops/SmallTriangle.vue";
 import SubscribeWorkshop from "@assets/icons/workshops/SubscribeWorkshop.vue";
 import HeaderTitle from "@components/header-title/HeaderTitle.vue";
 import { useRoute } from "vue-router";
 import { useGetOneWorkshop } from "@/composables/useWorkshop";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen.vue";
+import { ref, watchEffect } from 'vue';
 
 const route = useRoute();
+const workshopId = ref(route.params.workshop);
 
-const { workshop, isLoading } = useGetOneWorkshop(route.params.workshop);
+const { workshop, isLoading, error } = useGetOneWorkshop(workshopId);
 
+watchEffect(() => {
+  if (error.value) {
+    console.error('Error loading workshop:', error.value);
+  }
+});
 </script>
 
 
@@ -44,7 +50,7 @@ const { workshop, isLoading } = useGetOneWorkshop(route.params.workshop);
                         {{ workshop.description }}
                     </p>
                     <p class="audience">{{ workshop.target_audience }}</p>
-                    <p v-if="workshop.target_audience_note" class="note">*{{ workshop.target_audience_note }}</p>
+                    <p v-if="workshop.target_audience_comment" class="note">*{{ workshop.target_audience_comment }}</p>
                     <div class="meta-info">
                     <p><span class="label">Duración:</span> {{ workshop.duration }}</p>
                     <p><span class="label">Fecha de inicio:</span> {{ workshop.date_start }}</p>
@@ -67,8 +73,6 @@ const { workshop, isLoading } = useGetOneWorkshop(route.params.workshop);
             
             </div>
         </div>
-
-        
 
     </main>
 </template>

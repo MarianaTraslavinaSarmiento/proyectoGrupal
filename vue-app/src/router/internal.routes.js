@@ -79,10 +79,10 @@ export const internalRoutes = [
         component: EducationalWorkshops
     },
     {
-        path: 'app/educational-workshops/info/:workshop',
+        path: '/app/educational-workshops/info/:workshop',
         name: 'WorkshopInfo',
         alias: 'talleres-educativos/info/:workshop',
-        meta: { requiresAuth: true},
+        meta: { requiresAuth: true },
         component: WorkshopInfo
     },
     {

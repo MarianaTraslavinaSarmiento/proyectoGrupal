@@ -30,7 +30,12 @@ const filteredDatos = computed(() => {
 
 const onPublicInfoClick = (workshopId) => {
   console.log('Public Info Click - Workshop ID:', workshopId);
-  router.push({ name: 'WorkshopInfo', params: { workshop: workshopId } });
+  router.push({ 
+    name: 'WorkshopInfo', 
+    params: { workshop: workshopId } 
+  }).catch(error => {
+    console.error('Navigation error:', error);
+  });
 };
 
 const onAboutClick = (workshopId) => {
