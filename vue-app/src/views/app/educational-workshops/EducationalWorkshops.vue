@@ -8,9 +8,25 @@ import LoadingScreen from '@/components/loading-screen/LoadingScreen.vue';
 
 const router = useRouter();
 
-const { isLoading, workshops, searchQuery } = useGetAllWorkshopsWithStoreInCharge();
+const { isLoading, workshops } = useGetAllWorkshopsWithStoreInCharge();
 
-const hasResults = computed(() => workshops.value && workshops.value.length > 0);
+const searchQuery = ref('')
+const filteredDatos = computed(() => {
+  if (!searchQuery.value) return workshops.value;
+
+  return workshops.value.filter((dato) => {
+    const nombre = dato.name.toLowerCase();
+    const targetAudience = dato.target_audience.toLowerCase();
+    const storeInCharge = dato.store_in_charge[0].name.toLowerCase();
+    const busqueda = searchQuery.value.toLowerCase();
+
+    return (
+      nombre.includes(busqueda) ||
+      targetAudience.includes(busqueda) ||
+      storeInCharge.includes(busqueda)
+    );
+  });
+});
 
 const onPublicInfoClick = (workshopId) => {
   console.log('Public Info Click - Workshop ID:', workshopId);
@@ -31,11 +47,7 @@ const onAboutClick = (workshopId) => {
   }
 };
 
-// Debug: Log workshops when they change
-import { watch } from 'vue';
-watch(workshops, (newWorkshops) => {
-  console.log('Workshops updated:', newWorkshops);
-}, { deep: true });
+
 </script>
 
 <template>
@@ -58,11 +70,11 @@ watch(workshops, (newWorkshops) => {
     <div v-if="isLoading">
       <LoadingScreen style="min-height: 60dvh;" />
     </div>
-    <div v-else-if="!hasResults" class="no-results">
+    <!-- <div v-else-if="!hasResults" class="no-results">
       No se encontraron resultados para tu búsqueda "{{ searchQuery }}".
-    </div>
+    </div> -->
     <div v-else class="workshops">
-      <div v-for="(workshop, index) in workshops" :key="index" class="workshop-card">
+      <div v-for="(workshop, index) in filteredDatos" :key="index" class="workshop-card">
         <img :src="workshop.image_url" :alt="workshop.name" />
         <div class="workshop-info">
           <h2>{{ workshop.name }}</h2>

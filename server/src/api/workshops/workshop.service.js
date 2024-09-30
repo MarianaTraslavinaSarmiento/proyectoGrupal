@@ -7,16 +7,6 @@ class WorkshopService {
 
     async getAllWithStoreInCharge(search) {
         let query = {};
-        if (search) {
-            query = {
-                $or: [
-                    { name: { $regex: search, $options: 'i' } },
-                    { target_audience: { $regex: search, $options: 'i' } },
-                    { 'store_in_charge.name': { $regex: search, $options: 'i' } }
-                ]
-            };
-        }
-
         return await WorkshopModel.aggregate([
             {
                 $lookup: {

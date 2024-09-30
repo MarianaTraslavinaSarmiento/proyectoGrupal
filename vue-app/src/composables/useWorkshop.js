@@ -61,10 +61,9 @@ export const useGetTrendingWorkshops = () => {
 export const useGetAllWorkshopsWithStoreInCharge = () => {
     const workshops = ref([])
     const isLoading = ref(true)
-    const searchQuery = ref('')
 
     const getWorkshops = async() => {
-        const url = `/workshop/with-store-in-charge${searchQuery.value ? `?search=${encodeURIComponent(searchQuery.value)}` : ''}`
+        const url = `/workshop/with-store-in-charge`
         try {
             isLoading.value = true
             workshops.value = await apiCacheStore.fetchData(url)
@@ -74,12 +73,8 @@ export const useGetAllWorkshopsWithStoreInCharge = () => {
             isLoading.value = false
         }
     }
-    
-    watch(searchQuery, () => {
-        getWorkshops()
-    })
 
     getWorkshops()
 
-    return { workshops, isLoading, searchQuery }
+    return { workshops, isLoading }
 }
