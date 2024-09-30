@@ -98,7 +98,7 @@ const saveChanges = async () => {
         <div class="profile-section">
           <label style="max-width: 95px; margin-right: 0px;" >Fecha de nacimiento:</label>
           <div class="input-group">
-            <input style="max-width: 95px; margin-right: 15px;"  type="date" v-model="user.birth_date" :readonly="!isEditing.birth_date">
+            <input style="max-width: 100px; margin-right: 15px;"  type="date" v-model="user.birth_date" :readonly="!isEditing.birth_date">
             <button @click="toggleEdit('birth_date')" class="edit-button">
               <EditIcon class="edit-icon" />
             </button>
