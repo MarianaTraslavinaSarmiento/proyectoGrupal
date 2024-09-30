@@ -25,7 +25,7 @@ class WorkshopService {
     }
 
     async getTrending() {
-        return await WorkshopModel.find({ trending: true }, "name image_url")
+        return await WorkshopModel.find({ trending: true }, "name trending_image")
     }
 }
 

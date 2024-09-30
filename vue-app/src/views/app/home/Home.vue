@@ -112,7 +112,7 @@ const { workshops, isLoading } = useGetTrendingWorkshops();
         <MonthWorkshop v-else v-for="workshop in workshops"
           :key="workshop._id"
           :id="workshop._id"
-          :imageUrl="workshop.image_url"
+          :imageUrl="workshop.trending_image"
           :workshopTitle="workshop.name" />
       </div>
     </div>
