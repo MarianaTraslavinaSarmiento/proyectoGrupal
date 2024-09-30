@@ -65,6 +65,10 @@ const workshopSchema = new Schema({
     trending: {
         type: Boolean,
         required: false
+    },
+    trending_image: {
+        type: String,
+        required: true
     }
 }, {
     timestamps: true
