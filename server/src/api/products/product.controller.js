@@ -9,6 +9,7 @@ class ProductController {
 
     async getAll(req, res) {
         const query = req.query || {}
+
         const products = await this.#service.getAll(query)
         res.json(products)
     } 
@@ -17,6 +18,16 @@ class ProductController {
         const id = req.params.id
         const product = await this.#service.getOneById(id)
         res.json(product)
+    }
+
+    async getOffers(req, res) {
+        // const productsOffers = await this.#service.getOffers()
+        const productsOffers = [
+            {
+                id: 1,
+            }
+        ]
+        res.json(productsOffers)
     }
 }
 

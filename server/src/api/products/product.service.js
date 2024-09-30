@@ -8,6 +8,10 @@ class ProductService {
     async getOneById(id) {
         return await ProductModel.findById(id)
     }
+
+    async getOffers() {
+        return await ProductModel.find()
+    }
 }
 
 module.exports = ProductService

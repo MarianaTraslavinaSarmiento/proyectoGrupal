@@ -17,6 +17,7 @@ export const useApiCacheStore = defineStore('apiCache', {
 
       console.log('Fetching fresh data for:', url)
       const response = await axios.get(url)
+
       this.cache[url] = {
         data: response.data,
         timestamp: now

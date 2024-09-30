@@ -3,6 +3,12 @@
 import TitleSection from '@/components/title-section/TitleSection.vue';
 import CategoriesSlider from '@/components/categories-slider/CategoriesSlider.vue';
 import ProductItem from '@/components/product-item/ProductItem.vue';
+import LoadingScreen from '@/components/loading-screen/LoadingScreen.vue';
+
+import { useGetAllProductsWithOffers } from '@/composables/useProduct';
+
+
+const { products, isLoading } = useGetAllProductsWithOffers()
 
 </script>
 
@@ -14,15 +20,17 @@ import ProductItem from '@/components/product-item/ProductItem.vue';
         title="Descuentos y promociones" 
         subtitle="En cientos de artesanías" />
         <CategoriesSlider />
-        <div class="container">
 
-            <ProductItem 
+        <div v-if="isLoading">
+            <LoadingScreen style="min-height: 60dvh;"/>
+        </div>
+        <div v-else class="container">
+            <ProductItem v-for="product in products"
             productName="Talla en piedra"
             productPrice="S/ 100.00"
             productCompany="Talla en piedra"
             :showDelete="false"
             />
-
         </div>
 
     </main>

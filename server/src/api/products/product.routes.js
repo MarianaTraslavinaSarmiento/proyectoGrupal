@@ -6,5 +6,6 @@ const controller = new ProductController()
 
 appProduct.get("/", asyncHandler((req, res) => controller.getAll(req, res)))
 appProduct.get("/:id", asyncHandler((req, res) => controller.getOneById(req, res)))
+appProduct.get("/offers", asyncHandler((req, res) => controller.getOffers(req, res)))
 
 module.exports = appProduct
