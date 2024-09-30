@@ -1,9 +1,15 @@
 <script setup>
 import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import emailjs from '@emailjs/browser';
 
 const userProblem = ref('');
 const selectedImage = ref(null);
+const showPopup = ref(false);
+
+onMounted(() => {
+  emailjs.init('rgBM3mtwnsSV0v9t4'); 
+});
 
 const handleImageUpload = (event) => {
   const file = event.target.files[0];
@@ -21,6 +27,94 @@ const handleImageUpload = (event) => {
 const removeImage = () => {
   selectedImage.value = null;
 };
+
+
+const sendEmail = async (problem) => {
+  try {
+    let imageData = null;
+    if (selectedImage.value) {
+      // Redimensionar y comprimir la imagen si es necesario
+      imageData = await resizeImage(selectedImage.value, 800, 600);
+    }
+
+    const templateParams = {
+      problem: problem,
+      image: imageData
+    };
+
+    console.log('Enviando email con parámetros:', JSON.stringify(templateParams, null, 2));
+
+    const response = await emailjs.send(
+      'service_dc063yj',
+      'template_kb1i1rz',
+      templateParams
+    );
+
+    console.log('Email enviado, respuesta:', response);
+
+    if (response.status === 200) {
+      showPopup.value = true;
+      setTimeout(() => {
+        showPopup.value = false;
+      }, 3000);
+      // Limpiar el formulario después de enviar con éxito
+      userProblem.value = '';
+      selectedImage.value = null;
+    } else {
+      throw new Error('Respuesta no exitosa de EmailJS');
+    }
+  } catch (error) {
+    console.error('Error al enviar el correo:', error);
+    alert('Hubo un error al enviar el correo. Por favor, inténtalo de nuevo más tarde.');
+  }
+};
+
+const sendPredefinedProblem = (problemText) => {
+  sendEmail(problemText);
+};
+
+const sendCustomProblem = () => {
+  if (userProblem.value.trim() !== '') {
+    sendEmail(userProblem.value);
+  } else {
+    alert('Por favor, describe tu problema antes de enviar.');
+  }
+};
+
+
+const resizeImage = (dataUrl, maxWidth, maxHeight) => {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      let width = img.width;
+      let height = img.height;
+
+      if (width > height) {
+        if (width > maxWidth) {
+          height *= maxWidth / width;
+          width = maxWidth;
+        }
+      } else {
+        if (height > maxHeight) {
+          width *= maxHeight / height;
+          height = maxHeight;
+        }
+      }
+
+      canvas.width = width;
+      canvas.height = height;
+
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, width, height);
+
+      const resizedImage = canvas.toDataURL('image/jpeg', 0.7);
+      console.log('Imagen redimensionada:', resizedImage.substring(0, 50) + '...');
+      resolve(resizedImage);
+    };
+    img.src = dataUrl;
+  });
+};
 </script>
 
 <template>
@@ -29,12 +123,12 @@ const removeImage = () => {
 
     <div class="frequent-problems">
       <h2>Problemas Frecuentes</h2>
-      <button class="problem">La aplicación no carga de manera correcta</button>
-      <button class="problem">Errores al querer comprar en la aplicación</button>
-      <button class="problem">No puedo ver las imágenes de las tiendas y/o artesanías</button>
-      <button class="problem">No me permite usar un cupón de descuento</button>
-      <button class="problem">No me deja inscribirme a los talleres</button>
-      <button class="problem">El QR interactivo no funciona de manera correcta</button>
+      <button @click="sendPredefinedProblem('La aplicación no carga de manera correcta')" class="problem">La aplicación no carga de manera correcta</button>
+      <button @click="sendPredefinedProblem('Errores al querer comprar en la aplicación')" class="problem">Errores al querer comprar en la aplicación</button>
+      <button @click="sendPredefinedProblem('No puedo ver las imágenes de las tiendas y/o artesanías')" class="problem">No puedo ver las imágenes de las tiendas y/o artesanías</button>
+      <button @click="sendPredefinedProblem('No me permite usar un cupón de descuento')" class="problem">No me permite usar un cupón de descuento</button>
+      <button @click="sendPredefinedProblem('No me deja inscribirme a los talleres')" class="problem">No me deja inscribirme a los talleres</button>
+      <button @click="sendPredefinedProblem('El QR interactivo no funciona de manera correcta')" class="problem">El QR interactivo no funciona de manera correcta</button>
     </div>
     
     <div class="other-problem">
@@ -64,7 +158,11 @@ const removeImage = () => {
           class="hidden-input"
         >
       </label>
-      <button class="send-button">Enviar</button>
+      <button @click="sendCustomProblem" class="send-button">Enviar</button>
+    </div>
+
+    <div v-if="showPopup" class="popup">
+      Se ha enviado el problema correctamente.
     </div>
   </div>
 </template>
@@ -193,5 +291,18 @@ textarea {
 
 .hidden-input {
   display: none;
+}
+
+.popup {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--background-primary);
+  color: var(--text-color);
+  padding: 15px 30px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
 }
 </style>
