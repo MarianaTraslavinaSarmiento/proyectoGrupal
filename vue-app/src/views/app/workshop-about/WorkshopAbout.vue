@@ -37,14 +37,12 @@ onMounted(() => {
   </div>
   <div v-else-if="workshop" class="workshop-about">
     <div class="content-wrapper">
-      <!-- Header section -->
       <div class="header-section">
         <div class="diamond-divider">
           <SmallTriangles v-for="i in trianglesCount" :key="i" />
         </div>
         <header-title :hideDiamond="true" />
       </div>
-      <!-- Workshop info -->
       <div class="workshop-info">
         <div class="content-section">
           <p class="workshop-description">
@@ -58,7 +56,6 @@ onMounted(() => {
       </div>
     </div>
     
-    <!-- Video section -->
     <div class="video-wrapper" v-if="videoId">
       <div class="video-background">
         <div class="video-container">
@@ -72,7 +69,6 @@ onMounted(() => {
       </div>
     </div>
     
-    <!-- Workshop details -->
     <div class="content-wrapper">
       <div class="workshop-details">
         <div class="content-section">
@@ -80,7 +76,7 @@ onMounted(() => {
           <p class="qr-instruction">Escanea el código QR con tu celular y disfruta de la experiencia.</p>
           
           <div class="qr-code">
-            <img :src="workshop.image_bar_code" alt="QR Code" />
+            <img :src="workshop.image_bar_code" alt="QR Code" class="colored-qr" />
           </div>
         </div>
       </div>
@@ -143,11 +139,14 @@ onMounted(() => {
     margin: 10px 0;
     color: var(--color-confirmation);
     text-align: center;
+    padding: 0px 30px;
   }
 
   .section-title {
-    font-size: 1.5em;
+    font-size: 1.7rem;
     color: var(--text-contrast);
+    padding: 0px 20px;
+    margin-bottom: 15px;
   }
 
   .video-wrapper {
@@ -183,13 +182,16 @@ onMounted(() => {
     margin-bottom: 10px;
     color: var(--text-contrast);
     font-size: 1.6rem;
+    padding: 0px 20px;
   }
 
   .qr-instruction {
     margin-bottom: 20px;
     color: rgb(from var(--text-contrast) r g b / 40%);
-    font-size: 14px;
+    font-size: 1.4rem;
     padding-right: 80px;
+    padding: 0px 20px;
+    margin-right: 60px;
   }
 
   .qr-code {
@@ -216,4 +218,13 @@ onMounted(() => {
   text-align: center;
   padding: 20px;
 }
+
+img {
+    width: 50%;
+    /* max-width: 100%; */
+    height: auto;
+}
+
+
+
 </style>
