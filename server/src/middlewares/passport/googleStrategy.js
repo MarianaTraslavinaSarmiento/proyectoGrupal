@@ -47,7 +47,7 @@ module.exports = new GoogleStrategy({
     callbackURL: "/api/auth/google/callback",
     scope: ["profile", "email"]
   }, async(accessToken, refreshToken, profile, done ) => {
-    console.log(profile)
+    // console.log(profile)
     try {
         let user = await userService.getOneByQuery({email: profile.emails[0].value, account_id: profile.id})
         if (user) {

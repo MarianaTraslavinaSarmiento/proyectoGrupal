@@ -6,6 +6,7 @@ const configureMiddleware = require('./src/config/configureMiddleware');
 const configureRoutes = require('./src/config/configureRoutes');
 const configureSocketIO = require('./src/services/socketio');
 const errorHandler = require('./src/middlewares/errorHandler');
+const SocketConsole = require('./src/services/socketConsole');
 
 async function startServer() {
   const app = express();
@@ -26,13 +27,18 @@ async function startServer() {
     console.info('\x1b[32m HTTP server created \x1b[0m');
 
     console.log('\x1b[34m Configuring Socket.IO... \x1b[0m');
-    const io = configureSocketIO(server, app.get('sessionMiddleware'));
+    const io = configureSocketIO(server, app);
     app.set('io', io);
     console.info('\x1b[32m Socket.IO configured \x1b[0m');
 
     server.listen(environment.PORT, () => {
       console.info(`\x1b[44mServer started on port http://localhost:${environment.PORT} \x1b[0m`);
     });
+
+    // Uso
+    const socketConsole = new SocketConsole('http://localhost:3001', process.env.API_KEY);
+    
+    socketConsole.start();
 
     setupGracefulShutdown(server);
 

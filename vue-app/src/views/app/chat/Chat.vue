@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onUpdated, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import BackButton from '@components/back-button/BackButton.vue';
 import ChatMessage from './components/ChatMessage.vue'
 import MessageInput from './components/MessageInput.vue'
@@ -8,38 +8,39 @@ import { useChatStore } from '@stores/chat.js'
 
 const chatStore = useChatStore()
 const messagesContainer = ref(null)
-const chatType = ref('support') // o 'store', según se necesite
 
-const data = ref({
-    title: chatType.value === 'store' ? 'Chat con Tienda' : 'Chat con Servicio al Cliente',
-})
+const data = computed(() => ({
+    title: chatStore.currentChatType === 'store' ? 'Chat con Tienda' : 'Chat con Servicio al Cliente',
+}))
 
-const isConnected = computed(() => chatStore.isConnected(chatType.value))
-const connectionError = computed(() => chatStore.connectionError(chatType.value))
+const isConnected = computed(() => chatStore.isConnected(chatStore.currentChatType))
+const connectionError = computed(() => chatStore.connectionError(chatStore.currentChatType))
+const messages = computed(() => chatStore.messages[chatStore.currentChatType] || [])
 
 onMounted(() => {
-    chatStore.initSocket(chatType.value)
+    chatStore.initSocket(chatStore.currentChatType)
 })
 
 onUnmounted(() => {
-    chatStore.closeSocket(chatType.value)
+    chatStore.closeSocket(chatStore.currentChatType)
 })
 
 const sendMessage = (text) => {
-    chatStore.sendMessage(chatType.value, text)
+    chatStore.sendMessage(chatStore.currentChatType, text)
 }
 
-// Scroll to bottom when new messages are added
-onUpdated(() => {
-    if (messagesContainer.value) {
-        messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
-    }
-})
+watch(messages, () => {
+    nextTick(() => {
+        if (messagesContainer.value) {
+            messagesContainer.value.scrollTop = messagesContainer.value.scrollHeight
+        }
+    })
+}, { deep: true })
+
 </script>
 
 <template>
     <div class="chat-container">
-        <!-- Header -->
         <header class="chat-header">
             <BackButton backgroundColor="var(--background-primary)" />
             <div class="header-content">
@@ -49,9 +50,8 @@ onUpdated(() => {
         </header>
 
         <div class="chat-status">
-            <!-- <p>posicion actual</p> -->
             <div v-if="connectionError" class="error-message">
-                Error de conexión
+                Error de conexión: {{ connectionError }}
             </div>
             <div v-else-if="!isConnected" class="connecting-message">
                 Conectando...
@@ -61,11 +61,12 @@ onUpdated(() => {
             </div>
         </div>
 
-        <!-- Chat Messages -->
+      
         <div class="messages-container" ref="messagesContainer">
-            <ChatMessage v-for="(message, index) in messages" :key="index" :message="message" />
+            {{console.log(messages)}}
+            <ChatMessage v-for="(message, index) in messages" :key="index" :message="message.message" :type="message.user" />
         </div>
-        <!-- Message Input -->
+       
         <MessageInput @send="sendMessage" />
     </div>
 </template>
