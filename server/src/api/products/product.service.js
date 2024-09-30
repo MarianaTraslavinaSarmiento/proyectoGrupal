@@ -10,7 +10,21 @@ class ProductService {
     }
 
     async getOffers() {
-        return await ProductModel.find({offer: {$exists: true}})
+        return await ProductModel.aggregate([
+            {
+                $match: {
+                    offer: { $exists: true }
+                }
+            },
+            {
+                $lookup: {
+                    from: 'shops', 
+                    localField: 'shop_id', 
+                    foreignField: '_id', 
+                    as: 'shop'
+                }
+            }
+        ]);
     }
 }
 
