@@ -5,7 +5,7 @@ import HeaderTitle from "@components/header-title/HeaderTitle.vue";
 import { useRoute } from "vue-router";
 import { useGetOneWorkshop } from "@/composables/useWorkshop";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen.vue";
-import { ref, watchEffect } from 'vue';
+import { ref, watchEffect, computed } from 'vue';
 
 const route = useRoute();
 const workshopId = ref(route.params.workshop);
@@ -16,6 +16,23 @@ watchEffect(() => {
   if (error.value) {
     console.error('Error loading workshop:', error.value);
   }
+});
+
+const formatDate = (dateString) => {
+  if (!dateString) return '';
+
+  const date = new Date(dateString);
+  const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  const dayNames = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+
+  return `${dayNames[date.getDay()]} ${date.getDate()} de ${monthNames[date.getMonth()]} del ${date.getFullYear()}`;
+};
+
+const formattedStartDate = computed(() => {
+  if (workshop.value && workshop.value.date_start) {
+    return formatDate(workshop.value.date_start);
+  }
+  return '';
 });
 </script>
 
@@ -50,10 +67,10 @@ watchEffect(() => {
                         {{ workshop.description }}
                     </p>
                     <p class="audience">{{ workshop.target_audience }}</p>
-                    <p v-if="workshop.target_audience_comment" class="note">*{{ workshop.target_audience_comment }}</p>
+                    <p v-if="workshop.target_audience_comment" class="note">{{ workshop.target_audience_comment }}</p>
                     <div class="meta-info">
                     <p><span class="label">Duración:</span> {{ workshop.duration }}</p>
-                    <p><span class="label">Fecha de inicio:</span> {{ workshop.date_start }}</p>
+                    <p><span class="label">Fecha de inicio:</span> {{ formattedStartDate }}</p>
                     <p><span class="label">Horario:</span> {{ workshop.schedule }}</p>
                     <p><span class="label">Materiales:</span> {{ workshop.materials }}</p>
                     <p><span class="label">Modalidad:</span> {{ workshop.modality }}</p>
@@ -69,11 +86,8 @@ watchEffect(() => {
                         <h2>*Cupos limitados</h2>
                     </div>
                 </section>
-  
-            
             </div>
         </div>
-
     </main>
 </template>
   
