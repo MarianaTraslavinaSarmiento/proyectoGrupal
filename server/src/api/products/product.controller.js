@@ -21,12 +21,7 @@ class ProductController {
     }
 
     async getOffers(req, res) {
-        // const productsOffers = await this.#service.getOffers()
-        const productsOffers = [
-            {
-                id: 1,
-            }
-        ]
+        const productsOffers = await this.#service.getOffers()
         res.json(productsOffers)
     }
 }

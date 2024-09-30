@@ -10,7 +10,7 @@ class ProductService {
     }
 
     async getOffers() {
-        return await ProductModel.find()
+        return await ProductModel.find({offer: {$exists: true}})
     }
 }
 
