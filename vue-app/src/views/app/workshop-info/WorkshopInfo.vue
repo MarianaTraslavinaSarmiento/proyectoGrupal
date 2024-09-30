@@ -132,7 +132,7 @@ const formattedStartDate = computed(() => {
     align-items: center;
     justify-content: center;
     width:80vw;
-    height: 10vh;
+    height: 6vh;
 
 }
 
@@ -183,7 +183,7 @@ const formattedStartDate = computed(() => {
 }
 
 .workshop__orginal__name h1{
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     width: 100vw;
     height: 40px;
     margin-top: 4%;
@@ -219,13 +219,13 @@ const formattedStartDate = computed(() => {
     
     p {
       margin-bottom: 5px;
-      font-size: 1.7rem;
+      font-size: 1.5rem;
     }
 
     .label {
       font-weight: bold;
       color: var(--text-contrast);
-      font-size: 1.7rem;
+      font-size: 1.5rem;
     }
   }
 
