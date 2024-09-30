@@ -110,7 +110,7 @@ const { workshops, isLoading } = useGetTrendingWorkshops();
           <LoadingScreen style="min-height: 60dvh;"/>
         </p>
         <MonthWorkshop v-else v-for="workshop in workshops"
-          :key="workshop._id"
+          :key="workshop._id+workshop.name"
           :id="workshop._id"
           :imageUrl="workshop.trending_image"
           :workshopTitle="workshop.name" />

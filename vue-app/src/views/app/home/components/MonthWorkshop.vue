@@ -30,7 +30,7 @@ const onClick = () => {
 
 <template>
     <div class="month__workshop" @click="onClick">
-        <HomeImage class="home__img" :imageUrl="imageUrl" />
+        <HomeImage :id="id" class="home__img" :imageUrl="imageUrl" />
         <p>{{ workshopTitle }}</p>
     </div>
 </template>
