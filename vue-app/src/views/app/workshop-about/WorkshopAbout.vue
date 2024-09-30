@@ -140,6 +140,7 @@ onMounted(() => {
     color: var(--color-confirmation);
     text-align: center;
     padding: 0px 30px;
+    margin-top: 0px;
   }
 
   .section-title {
