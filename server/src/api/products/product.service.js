@@ -23,6 +23,9 @@ class ProductService {
                     foreignField: '_id', 
                     as: 'shop'
                 }
+            },
+            {
+                $unwind: "$shop"
             }
         ]);
     }

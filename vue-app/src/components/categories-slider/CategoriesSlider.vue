@@ -1,53 +1,62 @@
 <script setup>
 
+const emit = defineEmits(['categorySelected'])
 
+const handleEmitCategory = (category) => {
+  emit('categorySelected', category)
+}
 
 </script>
 
 <template>
-
   <main>
-
     <div class="category__carousel">
       <ul class="category__list">
-        <li class="category__item"><a href="#" class="category__link">Textilería</a></li>
-        <li class="category__item"><a href="#" class="category__link">Cerámica</a></li>
-        <li class="category__item"><a href="#" class="category__link">Joyería</a></li>
-        <li class="category__item"><a href="#" class="category__link">Talla en piedra</a></li>
-        <li class="category__item"><a href="#" class="category__link">Tallado en madera</a></li>
-        <li class="category__item"><a href="#" class="category__link">Pintura</a></li>
+        <li class="category__item" @click="handleEmitCategory('Textilería')">
+          <p>Textilería</p>
+        </li>
+        <li class="category__item" @click="handleEmitCategory('Cerámica')">
+          <p>Cerámica</p>
+        </li>
+        <li class="category__item" @click="handleEmitCategory('Joyería')">
+          <p>Joyería</p>
+        </li>
+        <li class="category__item" @click="handleEmitCategory('Talla en piedra')">
+          <p>Talla en piedra</p>
+        </li>
+        <li class="category__item" @click="handleEmitCategory('Tallado en madera')">
+          <p>Tallado en madera</p>
+        </li>
+        <li class="category__item" @click="handleEmitCategory('Pintura')">
+          <p>Pintura</p>
+        </li>
+        <li class="category__item" @click="handleEmitCategory('Orfebrería')">
+          <p>Orfebrería</p>
+        </li>
+        <li class="category__item" @click="handleEmitCategory('Bordado')">
+          <p>Bordado</p>
+        </li>
+        <li class="category__item" @click="handleEmitCategory('Hojalatería')">
+          <p>Hojalatería</p>
+        </li>
+        <li class="category__item" @click="handleEmitCategory('Estampado')">
+          <p>Estampado</p>
+        </li>
+        <li class="category__item" @click="handleEmitCategory('Pintura tradicional')">
+          <p>Pintura tradicional</p>
+        </li>
       </ul>
     </div>
   </main>
-
 </template>
 
 <style lang="scss" scoped>
-
 .category {
-
   &__carousel {
     width: 100%;
     overflow-x: auto;
     margin-top: 20px;
-    padding: 10px 0;
-    scrollbar-width: thin;
-    scrollbar-color: var(--background-primary) var(--background-primary);
     background-color: var(--background-secondary);
-
-
-    &::-webkit-scrollbar {
-      height: 5px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: var(--background-primary);
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: var(--background-primary);
-
-    }
   }
 
   &__list {
@@ -59,17 +68,16 @@
   }
 
   &__item {
-    display: inline-block;
-    margin: 0 10px;
-  }
-
-  &__link {
-    color: var(--text-color);
-    text-decoration: none;
-    height: 100%;
-    font-size: 16px;
-    padding:  10px;
-    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px; 
+    height: 100%; 
+    padding: 10px;
+    padding-inline: 15px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
 
     &:hover,
     &:focus {
