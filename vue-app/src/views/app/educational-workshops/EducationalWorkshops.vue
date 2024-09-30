@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
 import SearchIcon from '@icons/search-bar/SearchIcon.vue';
 import { useRouter } from 'vue-router';
@@ -9,6 +9,8 @@ import LoadingScreen from '@/components/loading-screen/LoadingScreen.vue';
 const router = useRouter();
 
 const { isLoading, workshops, searchQuery } = useGetAllWorkshopsWithStoreInCharge();
+
+const hasResults = computed(() => workshops.value && workshops.value.length > 0);
 
 const onPublicInfoClick = (id) => {
   router.push(`/app/talleres-educativos/info/${id}`);
@@ -38,6 +40,9 @@ const onAboutClick = (id) => {
     
     <div v-if="isLoading">
       <LoadingScreen style="min-height: 60dvh;" />
+    </div>
+    <div v-else-if="!hasResults" class="no-results">
+      No se encontraron resultados para tu búsqueda "{{ searchQuery }}".
     </div>
     <div v-else class="workshops">
       <div v-for="(workshop, index) in workshops" :key="index" class="workshop-card">
@@ -164,5 +169,11 @@ const onAboutClick = (id) => {
       text-decoration: underline;
     }
   }
+  .no-results {
+  text-align: center;
+  font-size: 1.2rem;
+  color: var(--text-color);
+  margin-top: 2rem;
+}
 }
 </style>
