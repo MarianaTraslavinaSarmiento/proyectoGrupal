@@ -6,6 +6,7 @@ import ProductItem from '@/components/product-item/ProductItem.vue';
 import LoadingScreen from '@/components/loading-screen/LoadingScreen.vue';
 import BackgroundPattern from '@/components/background-pattern/BackgroundPattern.vue';
 
+
 import { useGetAllProductsWithOffers } from '@/composables/useProduct';
 
 const { products, isLoading } = useGetAllProductsWithOffers()
@@ -28,9 +29,9 @@ const { products, isLoading } = useGetAllProductsWithOffers()
         </div>
         <div v-else class="container">
             <ProductItem v-for="product in products"
-            productName="Talla en piedra"
-            productPrice="S/ 100.00"
-            productCompany="Talla en piedra"
+            :productName="product.name"
+            :productPrice="product.price"
+            :productCompany="product"
             :showDelete="false"
             />
         </div>

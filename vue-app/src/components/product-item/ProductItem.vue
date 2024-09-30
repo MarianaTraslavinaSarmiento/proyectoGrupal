@@ -1,6 +1,7 @@
 <script setup>
 import DiscountIcon from '@/assets/icons/general/DiscountIcon.vue';
 import DeleteIcon from '@/assets/icons/general/DeleteIcon.vue';
+import { formatoPesosColombianos } from '@/utils/formatMoney';
 
 const props = defineProps({
     showDiscount: {
@@ -16,7 +17,7 @@ const props = defineProps({
         required: true
     },
     productPrice: {
-        type: String,
+        type: Number,
         required: true
     },
     productCompany: {
@@ -55,7 +56,7 @@ const props = defineProps({
             <img :src="imageUrl" :alt=" productName" />
             <div class="product__info">
                 <h4 class="product__name">{{ productName }}</h4>
-                <p class="product__price">{{ productPrice }}</p>
+                <p class="product__price">{{ formatoPesosColombianos(productPrice) }}</p>
                 <p class="product__company">{{ productCompany }}</p>
             </div>
         </div>
