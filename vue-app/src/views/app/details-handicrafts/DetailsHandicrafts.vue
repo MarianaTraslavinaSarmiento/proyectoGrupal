@@ -18,20 +18,14 @@ const route = useRoute();
 
 const { product, isLoading } = useGetOneProduct(route.params.id);
 
-const isFavorite = ref(false);
+const userStore = useUserStore();
 
-const keepLikeIt = computed(()=> {
-    return useUserStore().favorites.includes(product.value._id)
+const isFavorite = computed(() => {
+    return userStore.user.favorites.includes(product.value?._id)
 })
 
-if(keepLikeIt.value){
-    isFavorite.value = true
-}
-
 const toggleFavorite = () => {
-    isFavorite.value = !isFavorite.value
-
-    if(isFavorite.value){
+    if(!isFavorite.value){
         useAddToFavorites(product.value._id)
     }
 };
@@ -110,6 +104,8 @@ const productAlreadyInCart = computed(() => {
         </div>
     </main>
 </template>
+
+
 <style lang="scss" scoped>
 main {
     font-family: Bellota

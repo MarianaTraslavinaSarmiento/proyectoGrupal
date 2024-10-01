@@ -47,6 +47,7 @@ class UserController {
         })
     }
 
+
     async subscribeToWorkshop(req, res) {
         const { workshopId } = req.body;
         const user = await this.#service.subscribeToWorkshop(req.user.id, workshopId);
