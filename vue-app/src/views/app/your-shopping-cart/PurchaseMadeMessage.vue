@@ -1,16 +1,22 @@
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import smallTriangles from "@/assets/icons/your-shopping-cart/smallTriangles.vue"
 import successfulPurchase from "@/assets/icons/your-shopping-cart/successfulPurchase.vue"
 
 const email = ref('');
+const router = useRouter(); 
+
+const goToHome = () => {
+  router.push({ name: 'Home' }); 
+};
 </script>
 
 <template>
   <div class="main__container">
     <div class="content">
       <successfulPurchase class="success-icon" />
-      <h1 class="title">¡Compra realizada con exito!</h1>
+      <h1 class="title">¡Compra realizada con éxito!</h1>
       <div class="diamond-divider">
         <smallTriangles v-for="i in 1" :key="i" />
       </div>
@@ -22,7 +28,6 @@ const email = ref('');
         <smallTriangles v-for="i in 1" :key="i" />
       </div>
     </div>
-      </div>
     <div class="link-mail">
       <p class="email-message">
         Vincula tu correo para recibir más detalles sobre tus compras realizadas
@@ -33,8 +38,9 @@ const email = ref('');
         placeholder="Añadir correo electrónico" 
         class="email-input"
       />
-      <button class="btn-return">Regresar al inicio</button>
+      <button class="btn-return" @click="goToHome">Regresar al inicio</button> 
     </div>
+  </div>
 </template>
 
 
