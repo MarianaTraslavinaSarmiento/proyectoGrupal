@@ -148,6 +148,284 @@ proyectoGrupal/
 
 
 
+### Installations required on the Frontend
+
+- **EmailJS**: Client library to send emails using EmailJS service directly from the browser.
+
+  ```js
+  npm i @emailjs/browser
+  ```
+
+- **Axios**: Promise-based HTTP client for making requests to external APIs.
+
+  ```js
+  npm i axios
+  ```
+
+- **Pinia**: State management library for Vue.js, providing a simple and intuitive API.
+
+  ```js
+  npm i pinia
+  ```
+
+- **Socket.IO Client**: Library for real-time, bidirectional communication between clients and servers.
+
+  ```js
+  npm i socket.io-client
+  ```
+
+- **Vue**: The progressive JavaScript framework for building user interfaces.
+
+  ```js
+  npm i vue
+  ```
+
+- **Vue Router**: The official router for Vue.js, enabling navigation between different views or components.
+
+  ```js
+  npm i vue-router
+  ```
+
+- **Vue Toastification**: A library for displaying toast notifications in Vue applications.
+
+  ```js
+  npm i vue-toastification
+  ```
+
+### Development Dependencies
+
+- **ESLint Patch**: A package that provides a patch for ESLint to improve compatibility with various configurations.
+
+  ```js
+  npm i --save-dev @rushstack/eslint-patch
+  ```
+
+- **Vite Plugin for Vue**: Official Vite plugin for compiling Vue single-file components.
+
+  ```js
+  npm i --save-dev @vitejs/plugin-vue
+  ```
+
+- **ESLint Config Prettier**: An ESLint configuration that turns off all rules that are unnecessary or might conflict with Prettier.
+
+  ```js
+  npm i --save-dev @vue/eslint-config-prettier
+  ```
+
+- **ESLint**: A tool for identifying and fixing problems in JavaScript code.
+
+  ```js
+  npm i --save-dev eslint
+  ```
+
+- **ESLint Plugin for Vue**: A plugin that provides linting rules for Vue.js applications.
+
+  ```js
+  npm i --save-dev eslint-plugin-vue
+  ```
+
+- **Prettier**: An opinionated code formatter that enforces a consistent style in your code.
+
+  ```js
+  npm i --save-dev prettier
+  ```
+
+- **Sass Embedded**: A library that provides support for compiling Sass files.
+
+  ```js
+  npm i --save-dev sass-embedded
+  ```
+
+- **Vite**: A fast build tool that serves your code via native ESM. It’s optimized for speed and performance.
+
+  ```js
+  npm i --save-dev vite
+  ```
+
+- **Vite Plugin for Vue Devtools**: A plugin that enables Vue.js devtools integration with Vite.
+
+  ```js
+  npm i --save-dev vite-plugin-vue-devtools
+  ```
+
+### Scripts
+
+- **Dev**: Starts the development server with Vite.
+
+  ```js
+  npm run dev
+  ```
+
+- **Build**: Compiles the application for production using Vite.
+
+  ```js
+  npm run build
+  ```
+
+- **Preview**: Previews the production build locally.
+
+  ```js
+  npm run preview
+  ```
+
+- **Lint**: Runs ESLint to check for code quality issues and automatically fix them.
+
+  ```js
+  npm run lint
+  ```
+
+- **Format**: Formats the source code using Prettier.
+
+  ```js
+  npm run format
+  ```
+
+
+
+### Required Installations on the Backend
+
+- **Inquirer Prompts**: A collection of interactive command-line prompts for Node.js applications, allowing for user input.
+
+  ```js
+  npm i @inquirer/prompts
+  ```
+
+- **Socket.IO Redis Adapter**: A Redis adapter for Socket.IO that enables scalability of WebSocket connections across multiple server instances.
+
+  ```js
+  npm i @socket.io/redis-adapter
+  ```
+
+- **Bcrypt**: A library for hashing passwords securely, helping to protect user credentials.
+
+  ```js
+  npm i bcrypt
+  ```
+
+- **Bull**: A powerful queue package for handling distributed jobs and messages in Node.js applications.
+
+  ```js
+  npm i bull
+  ```
+
+- **Connect-Redis**: A Redis session store for Express, allowing session data to be stored in Redis for better scalability.
+
+  ```js
+  npm i connect-redis
+  ```
+
+- **Cloudinary**: A cloud service that offers image and video management capabilities, allowing you to upload, store, and manipulate media assets.
+
+  ```js
+  npm i cloudinary
+  ```
+
+- **Cookie Parser**: A middleware for parsing cookies in Express applications.
+
+  ```js
+  npm i cookie-parser
+  ```
+
+- **CORS**: A package that provides a middleware for enabling Cross-Origin Resource Sharing (CORS) in Express applications.
+
+  ```js
+  npm i cors
+  ```
+
+- **Express**: The essential web framework for building the server application.
+
+  ```js
+  npm i express
+  ```
+
+- **Express Session**: Middleware for managing user sessions in Express applications.
+
+  ```js
+  npm i express-session
+  ```
+
+- **Express Validator**: A set of middleware for validating and sanitizing input data in Express routes.
+
+  ```js
+  npm i express-validator
+  ```
+
+- **Ioredis**: A robust Redis client for Node.js, providing a simple API for interacting with Redis.
+
+  ```js
+  npm i ioredis
+  ```
+
+- **Mongoose**: An ODM (Object Data Modeling) library for MongoDB and Node.js, simplifying the interaction with MongoDB databases.
+
+  ```js
+  npm i mongoose
+  ```
+
+- **Multer**: Middleware for handling multipart/form-data, primarily used for uploading files.
+
+  ```js
+  npm i multer
+  ```
+
+- **Passport**: A middleware for authentication in Node.js applications, supporting various authentication strategies.
+
+  ```js
+  npm i passport
+  ```
+
+- **Passport Discord**: A Passport strategy for authenticating users via Discord.
+
+  ```js
+  npm i passport-discord
+  ```
+
+- **Passport Google OAuth20**: A Passport strategy for authenticating users via Google OAuth 2.0.
+
+  ```js
+  npm i passport-google-oauth20
+  ```
+
+- **Passport LinkedIn OAuth2**: A Passport strategy for authenticating users via LinkedIn OAuth 2.0.
+
+  ```js
+  npm i passport-linkedin-oauth2
+  ```
+
+- **Passport Local**: A Passport strategy for authenticating users with a username and password.
+
+  ```js
+  npm i passport-local
+  ```
+
+- **Socket.IO**: A library for real-time communication between clients and servers using WebSockets.
+
+  ```js
+  npm i socket.io
+  ```
+
+- **Socket.IO Client**: The client-side library for Socket.IO, enabling real-time communication from the browser.
+
+  ```js
+  npm i socket.io-client
+  ```
+
+- **Socket.IO Redis**: A package for integrating Socket.IO with Redis for handling scalable real-time applications.
+
+  ```js
+  npm i socket.io-redis
+  ```
+
+### Scripts
+
+- **Dev**: Starts the application in development mode with automatic reloading of changes. It uses the `.env` file for environment variables.
+
+  ```js
+  npm run dev
+  ```
+
+
+
 ## Key Features
 
 ### User Management
@@ -200,7 +478,11 @@ Artisanal Workshops
 
 - **Documentary on Workshops:** Offers a link or integration to view a documentary showcasing the artisanal process, the history of the workshop, or interviews with artisans.
 
+
+
 ## Technologies Used
+
+
 
 
 ### Frontend:
