@@ -14,33 +14,39 @@ export const routes = [
     {
         path: '/',
         name: 'loading',
-        component: SplashScreen
+        component: SplashScreen,
+        meta: { goHome: true }
     },
     {
         path: '/login',
         name: 'login',
-        component: Auth
+        component: Auth,
+        meta: { goHome: true }
     },
     {
         path: '/login/terms-and-conditions',
         name: 'termsAndConditions',
-        component: TermsAndConditions
+        component: TermsAndConditions,
+        meta: { goHome: true }
     },
     {
         path: '/login/session-start',
         name: 'sessionStart',
-        component: StartSession
+        component: StartSession,
+        meta: { goHome: true }
     },
 
     {
         path: '/signup',
         name: 'signup',
-        component: SingUp
+        component: SingUp,
+        meta: { goHome: true }
     },
     {   
         path: '/signup/ruraqmaki',
         name: 'ruraqmaki',
-        component: RegisterRuraqMaki
+        component: RegisterRuraqMaki,
+        meta: { goHome: true }
     },
     {
         path: '/app',

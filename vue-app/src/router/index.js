@@ -10,18 +10,21 @@ const router = createRouter({
 // * Auth
 router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore()
+  await userStore.fetchUserProfile()
   
   if (to.meta.requiresAuth) {
-    await userStore.fetchUserProfile()
     next()
-    if (!userStore.isAuthenticated) {
-      next('/')
-    } else {
-      next()
-    }
-  } else {
-    next()
+    // if (!userStore.isAuthenticated) {
+    //   next('/')
+    // } else {
+    //   next()
+    // }
   }
+
+  if (to.meta.goHome && userStore.isAuthenticated) {
+    next('/app/home')
+  }
+
 })
 
 export default router

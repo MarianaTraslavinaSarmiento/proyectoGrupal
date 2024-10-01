@@ -45,7 +45,6 @@ export const useGetTrendingWorkshops = () => {
         try {
             workshops.value = await apiCacheStore.fetchData(url)
             isLoading.value = false
-            console.log(workshops.value)
 
         } catch (err) {
             toast.error('Error al cargar los talleres del mes.')

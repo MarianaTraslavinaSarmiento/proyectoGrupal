@@ -132,6 +132,7 @@ export const internalRoutes = [
         path: '/app/details-handicrafts/:id',
         name: 'detailsOfHandicrafts',
         alias: 'detalles-de-artesanias/:id',
+        meta: { requiresAuth: true},
         component: DetailsHandicrafts
     },
     {
