@@ -67,7 +67,9 @@ const closeModal = () => {
     </div>
 
     <div class="buy_products">
-    <button class="buy__now" @click="openModal">Realizar compra</button>
+    <div class="buy_productsBox">
+        <button class="buy__now" @click="openModal">Realizar compra</button>
+    </div>
     </div>
 
     <div v-if="isModalOpen" class="modal-overlay">
@@ -105,7 +107,7 @@ main {
   margin-block: 1.5rem;
 
   scrollbar-width: thin;
-  scrollbar-color: var(--background-primary) #8B4513;
+  scrollbar-color: var(--background-primary);
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -123,7 +125,7 @@ main {
 
 .product__card {
   display: flex;
-  background-color: #5D2906;
+  background-color: var(--background-secondary);
   color: var(--text-color);
   border-radius: 10px;
   padding: 15px;
@@ -171,7 +173,7 @@ main {
     margin-top: 10px;
 
     .quantity__btn {
-      background-color: #4A2105;
+      background-color: var(--background-primary);
       color: var(--text-color);
       border: none;
       width: 30px;
@@ -182,7 +184,7 @@ main {
       font-size: 3rem;
 
       &:hover {
-        background-color: #3A1A04;
+        background-color: var(--background-primary);
       }
 
       &.minus {
@@ -200,8 +202,9 @@ main {
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #4A2105;
+      background-color: var(--background-base);
       font-size: 1.5rem;
+      color: var(--text-black);
     }
   }
 
@@ -211,7 +214,7 @@ main {
     right: 10px;
     background: none;
     border: none;
-    color: var(--text-color);
+    color: var(--text-black);
     padding: 0;
 
     .delete__icon {
@@ -226,7 +229,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #5D2906;
+  background-color: var(--background-secondary);
   color: var(--text-color);
   border-radius: 10px;
   padding: 10px;
@@ -237,7 +240,7 @@ main {
 }
 
 .order__summary {
-  background-color: #5D2906;
+  background-color: var(--background-secondary);
   color: var(--text-color);
   border-radius: 10px;
   padding: 10px 15px;
@@ -253,7 +256,7 @@ main {
 }
 
 .total {
-  background-color: #5D2906;
+  background-color: var(--background-secondary);
   padding: 15px;
   color: var(--text-color);
   font-size: 1.6rem;
@@ -264,24 +267,6 @@ main {
   justify-content: space-between;
 }
 
-.buy__now {
-  width: 35%;
-  background-color: #4A2105;
-  margin: 1rem auto;
-  height: 40px;
-  color: var(--text-color);
-  display: flex;
-  justify-content: center;
-  font-size: 1.6rem;
-  align-items: center;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #3A1A04;
-  }
-}
 
 /* Modal Styles */
 .modal-overlay {
@@ -298,7 +283,7 @@ main {
 }
 
 .modal-content {
-  background-color: #8B4513;
+  background-color: var(--background-secondary);
   padding: 20px;
   border-radius: 10px;
   text-align: center;
@@ -321,7 +306,8 @@ main {
 }
 
 .modal-button {
-  background-color: #5D2906;
+  background-color: var(--background-primary);
+
   color: white;
   border: none;
   padding: 10px 20px;
@@ -334,7 +320,7 @@ main {
   width: 45%;
 
   &:hover {
-    background-color: #4A2105;
+    background-color: var(--background-secondary);
   }
 }
 
@@ -346,9 +332,36 @@ main {
 
 .buy_products{
     display: flex;
-    flex-direction: row;
-    align-items: end;
-    justify-content: end;
-    border: 1px solid red;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 5vh;
 }
+
+.buy_productsBox{
+    display: flex;
+    width: 90vw;
+    height: 100%;
+    justify-content: start;
+    align-items: start;
+}
+
+.buy__now {
+    background-color: var(--background-primary);
+
+    width: 50%;
+    height: 100%;
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+  
+    &:hover {
+      background-color: var(--background-secondary);
+    }
+  }
 </style>
