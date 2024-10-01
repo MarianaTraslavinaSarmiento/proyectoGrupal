@@ -50,7 +50,7 @@ const saveChanges = async () => {
   if (updated.ok) {
     originalUser.value = JSON.parse(JSON.stringify(user.value));
     Object.keys(isEditing).forEach(key => isEditing[key] = false);
-    window.location.reload()
+    // window.location.reload()
   } else {
     discardChanges();
   }
@@ -78,12 +78,36 @@ const navigateToWorkshop = (workshopId) => {
     });
   }
 };
+
+const handleProfilePicUpdate = async (file) => {
+  try {
+    const formData = new FormData();
+    
+    // Usa el mismo nombre de campo que Multer espera en el backend
+    formData.append('profile_pic', file);
+
+    // Llamar al método updateUser del store
+    const result = await userStore.updateUser(formData);
+    
+    if (result.ok) {
+      // Actualizar la imagen de perfil en el estado local
+      user.value.profile_pic = result.newUser.profile_pic;
+      originalUser.value.profile_pic = result.newUser.profile_pic;
+      console.log('Profile picture updated successfully');
+    } else {
+      throw new Error('Failed to update profile picture');
+    }
+  } catch (error) {
+    console.error('Error updating profile picture:', error);
+    // Aquí puedes manejar el error, por ejemplo, mostrando un mensaje al usuario
+  }
+};
 </script>
 
 <template>
   <div class="profile">
     <h1>Foto de perfil</h1>
-    <Avatar :showEditIcon="true" class="profile-photo" />
+    <Avatar  @fileSelected="handleProfilePicUpdate" :showEditIcon="true" class="profile-photo" />
 
     <div class="user-info">
       <div class="profile-section">

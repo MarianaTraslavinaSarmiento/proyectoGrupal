@@ -32,7 +32,7 @@ const handleFileChange = (event) => {
     <div v-if="showEditIcon" class="edit-icon-wrapper" @click="openFilePicker">
       <EditIcon v-if="showEditIcon" class="edit-icon" />
     </div>
-    <img :src="user.profile_pic_url" :alt="user.username" class="avatar-img">
+    <img :src="user.profile_pic.url? user.profile_pic.url : user.profile_pic_url" :alt="user.username" class="avatar-img">
     <input
       type="file"
       ref="fileInput"
