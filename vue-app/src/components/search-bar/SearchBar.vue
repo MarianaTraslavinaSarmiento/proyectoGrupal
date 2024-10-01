@@ -110,6 +110,7 @@ const navigateToResult = (result) => {
 .search-container {
     position: relative;
     width: 100%;
+    font-family: Bellota;
 }
 
 .search-bar {
