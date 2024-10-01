@@ -48,10 +48,9 @@ const filteredProducts = computed(() => {
             <ProductItem v-for="product in filteredProducts"
             :productName="product.name"
             :productPrice="product.price"
+            :imageUrl="product.images_url"
             :productCompany="product.shop.name"
-            :showDelete="false"
-            :isFree="product.offer.type.freeShipping"
-
+            :offer="product.offer"
             />
         </div>
 

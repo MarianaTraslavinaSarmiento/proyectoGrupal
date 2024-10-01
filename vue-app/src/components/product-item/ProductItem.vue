@@ -7,7 +7,7 @@ import { formatoPesosColombianos } from '@/utils/formatMoney';
 const props = defineProps({
     showDelete: {
         type: Boolean,
-        default: true
+        default: false
     },
     productName: {
         type: String,
@@ -25,45 +25,39 @@ const props = defineProps({
         type: String,
         required: true
     },
-    discount: {
-        type: Number,
-        default: 0
-    },
-    offerType: {
+    offer: {
+        type: Object,
         type: String,
-        default: ''
+        required: true
     }
 });
 
-const showDiscountOrFreeShipping = computed(() => props.discount > 0);
 
-const discountText = computed(() => {
-    if (props.isFree) return 'Envío gratis';
-    return `-${props.discount}%`;
+const isDiscountOffer = computed(() => props.offer.type === 'discount');
+const isBuyXGetYOffer = computed(() => props.offer.type === 'buyxgety');
+const isFreeShippingOffer = computed(() => props.offer.type === 'freeshipping');
+
+const offerText = computed(() => {
+    if (isFreeShippingOffer.value) return 'Envío gratis';
+    if (isBuyXGetYOffer.value) return `${props.offer.details.buyX}x${props.offer.details.getY}`;
+    if (isDiscountOffer.value) return `-${props.offer.details.discount_percentage}%`;
 });
 
 const displayPrice = computed(() => {
-    if (props.discount > 0) {
-        // Si el descuento es mayor a 0, muestra el descuento
-        const discountedPrice = props.productPrice * (1 - props.discount / 100);
-        return formatoPesosColombianos(discountedPrice);
-    }
-    return formatoPesosColombianos(props.productPrice);
+    const discountedPrice = props.productPrice * (1 - (props.offer.details?.discount_percentage || 0) / 100);
+    return formatoPesosColombianos(discountedPrice);
 });
 
-// se va a generar la funcion si el tipo de oferta es discount
-const isDiscountOffer = computed(() => props.offerType === 'discount');
 </script>
 
 <template>
     <div class="product__container">
-        <div v-if="showDiscountOrFreeShipping" :class="['discount__icon', { 'bottom-right': !isDiscountOffer }]">
+        <div :class="['discount__icon', { 'bottom-right': !isDiscountOffer }]">
             <DiscountIcon />
         </div>
 
-        <p v-if="showDiscountOrFreeShipping"
-            :class="['discount__text', { 'bottom-right': !isDiscountOffer, 'free-shipping': isFree }]">
-            {{ discountText }}
+        <p :class="['discount__text', { 'bottom-right': !isDiscountOffer, 'free-shipping': isFreeShippingOffer }]">
+            {{ offerText }}
         </p>
 
         <div v-if="showDelete" class="delete__icon">
@@ -75,7 +69,7 @@ const isDiscountOffer = computed(() => props.offerType === 'discount');
             <div class="product__info">
                 <h4 class="product__name">{{ productName }}</h4>
                 <div class="product__pricing">
-                    <p v-if="!isFree && discount > 0" class="product__original-price">
+                    <p v-if="isDiscountOffer" class="product__original-price">
                         {{ formatoPesosColombianos(productPrice) }}
                     </p>
                     <p class="product__price">{{ displayPrice }}</p>
@@ -94,9 +88,9 @@ const isDiscountOffer = computed(() => props.offerType === 'discount');
     .discount__text {
         position: absolute;
         transform: rotate(30deg);
-        left: -15px;
+        left: -14px;
         z-index: 3;
-        top: -3px;
+        top: -2px;
         font-size: 1.5rem;
         color: var(--color-text);
         padding: 3px 5px;
@@ -104,10 +98,18 @@ const isDiscountOffer = computed(() => props.offerType === 'discount');
 
         &.bottom-right {
             left: auto;
-            right: -7px;
+            right: -8px;
             top: auto;
-            bottom: -7px;
-            transform: none;
+            font-size: 1.5rem;
+            bottom: 83px;
+            transform: rotate(-30deg); 
+        }
+
+        &.free-shipping {
+            font-size: 1.1rem;
+            width: 50px;
+            right: -22px;
+
         }
     }
 
@@ -121,10 +123,10 @@ const isDiscountOffer = computed(() => props.offerType === 'discount');
         filter: drop-shadow(0px 3px 1px rgba(0, 0, 0, 0.30));
 
         &.bottom-right {
-            left: auto;
-            right: -7px;
+            right: -17px;
             top: auto;
-            bottom: -7px;
+            left: auto;
+            bottom: 70px;
             transform: none;
         }
     }
@@ -161,18 +163,15 @@ const isDiscountOffer = computed(() => props.offerType === 'discount');
             font-size: 12px;
             background-color: var(--background-secondary);
             flex-direction: column;
-            justify-content: space-between;
             padding-block: 1.5rem;
+
 
             .product__name {
                 font-weight: bold;
                 margin: 0 0 0 0;
                 line-height: 1.2;
                 font-size: 14px;
-            }
-
-            .product__pricing {
-                display: flex
+                text-overflow: el;
             }
 
             .product__price {
@@ -182,7 +181,6 @@ const isDiscountOffer = computed(() => props.offerType === 'discount');
 
             .product__original-price {
                 text-decoration: line-through;
-                margin-right: 8px;
                 text-decoration-color: var(--color-accent);
 
             }
