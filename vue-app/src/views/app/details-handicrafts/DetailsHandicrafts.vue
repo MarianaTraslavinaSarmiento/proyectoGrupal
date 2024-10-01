@@ -6,7 +6,7 @@ import HeartIcon from '@/assets/icons/details-handicrafts/HeartIcon.vue';
 import HeartFilledIcon from '@/assets/icons/details-handicrafts/HeartFilledIcon.vue';
 import ShoppingCartIcon from '@/assets/icons/nav/ShoppingCartIcon.vue';
 import SuccessfulPurchaseIcon from '@/assets/icons/details-handicrafts/SuccessfulPurchaseIcon.vue';
-import { useGetOneProduct } from '@/composables/useProduct';
+import { useGetOneProduct, useAddToFavorites } from '@/composables/useProduct';
 import { useRoute } from 'vue-router';
 import { formatoPesosColombianos } from '@/utils/formatMoney';
 import { computed } from 'vue';
@@ -21,7 +21,11 @@ const { product, isLoading } = useGetOneProduct(route.params.id);
 const isFavorite = ref(false);
 
 const toggleFavorite = () => {
-    isFavorite.value = !isFavorite.value;
+    isFavorite.value = !isFavorite.value
+
+    if(isFavorite.value){
+        useAddToFavorites(product.value._id)
+    }
 };
 
 const displayDiscountedPrice = computed(() => {

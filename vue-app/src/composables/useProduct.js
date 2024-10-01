@@ -2,6 +2,7 @@ import { ref } from 'vue'
 import { useApiCacheStore } from '@/stores/apiCache'
 import { createPinia } from 'pinia'
 import toast from "@/config/toast.js"
+import axios from '@/config/axios.js'
 
 const pinia = createPinia()
 const apiCacheStore = useApiCacheStore(pinia)
@@ -84,4 +85,23 @@ export const useGetAllProductsByShopId = (id) => {
     getAllProducts()
 
     return { products, isLoading }
+}
+
+
+export const useAddToFavorites = (productId) => {
+
+    const url = '/user/add-to-favorites'
+
+    const addProductsToFavorites= async() => {
+        
+        try {
+            const response = await axios.post(url, { productId })
+            toast.success('Producto agregado a favoritos')
+        } catch (err) {
+            console.error(err)
+            toast.error('Error al agregar producto a favoritos')
+        }
+    }
+
+    addProductsToFavorites()
 }

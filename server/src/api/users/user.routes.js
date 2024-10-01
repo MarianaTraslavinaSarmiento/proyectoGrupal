@@ -15,6 +15,8 @@ appUser.put("/update", validateUpdate(), handleValidationErrors, update.single("
 // Favorites
 appUser.post("/add-to-favorites", validateAddToFavorites(), handleValidationErrors, asyncHandler((req, res) => controller.addProductToFavorites(req, res)))
 appUser.get("/favorites", asyncHandler((req, res) => controller.getFavorites(req, res)))
+appUser.delete("/favorites", asyncHandler((req, res) => controller.deleteFavoriteProduct(req, res)))
+
 
 // Workshops
 appUser.post("/subscribe-workshop", asyncHandler((req, res) => controller.subscribeToWorkshop(req, res)))

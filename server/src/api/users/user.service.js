@@ -59,6 +59,11 @@ class UserService {
         return await user.save()
     }
 
+    async deleteFavoriteProduct(userId, productId) {
+        const user = await UserModel.findByIdAndUpdate(userId, { $pull: { favorites: productId } }, { new: true })
+        return user
+    }
+
     async getFavorites(userId) {
         const user = await UserModel.aggregate([
             {
