@@ -9,7 +9,7 @@ import FilterIcon from '@/assets/icons/general/FilterIcon.vue';
 import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
 import { useRoute } from 'vue-router';
 import { useGetOneShop } from '@/composables/useShop'
-import { useGetAllProducts } from '@/composables/useProduct';
+import { useGetAllProductsByShopId } from '@/composables/useProduct';
 import LoadingScreen from '@/components/loading-screen/LoadingScreen.vue';
 import ProductItem from '@/components/product-item/ProductItem.vue';
 import SearchIcon from '@/assets/icons/search-bar/SearchIcon.vue';
@@ -17,7 +17,7 @@ import SearchIcon from '@/assets/icons/search-bar/SearchIcon.vue';
 const route = useRoute();
 
 const { shop, isLoading: isLoadingShop } = useGetOneShop(route.params.id)
-const { products, isLoading: isLoadingProducts } = useGetAllProducts('?shop_id=' + route.params.id)
+const { products, isLoading: isLoadingProducts } = useGetAllProductsByShopId(route.params.id)
 
 const searchQuery = ref('')
 

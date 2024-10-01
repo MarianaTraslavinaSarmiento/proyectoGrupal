@@ -4,9 +4,6 @@ class ProductService {
     async getAll(query) {
         return await ProductModel.aggregate([
             {
-                $match: query
-            },
-            {
                 $lookup: {
                     from: 'shops',
                     localField: 'shop_id',
@@ -18,6 +15,10 @@ class ProductService {
                 $unwind: '$shop'
             }
         ])
+    }
+
+    async getAllByShopId(shopId) {
+        return await ProductModel.find({ shop_id: shopId })
     }
 
     async getOneById(id) {
