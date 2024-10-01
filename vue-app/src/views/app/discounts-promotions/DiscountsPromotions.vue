@@ -51,6 +51,7 @@ const filteredProducts = computed(() => {
             :imageUrl="product.images_url"
             :productCompany="product.shop.name"
             :offer="product.offer"
+            :id="product._id"
             />
         </div>
 

@@ -6,41 +6,65 @@ import HeartIcon from '@/assets/icons/details-handicrafts/HeartIcon.vue';
 import HeartFilledIcon from '@/assets/icons/details-handicrafts/HeartFilledIcon.vue';
 import ShoppingCartIcon from '@/assets/icons/nav/ShoppingCartIcon.vue';
 import SuccessfulPurchaseIcon from '@/assets/icons/details-handicrafts/SuccessfulPurchaseIcon.vue';
+import { useGetOneProduct } from '@/composables/useProduct';
+import { useRoute } from 'vue-router';
+import { formatoPesosColombianos } from '@/utils/formatMoney';
+import { computed } from 'vue';
+import LoadingScreen from '@/components/loading-screen/LoadingScreen.vue';
+
+const route = useRoute();
+
+const { product, isLoading } = useGetOneProduct(route.params.id);
 
 const isFavorite = ref(false);
 
 const toggleFavorite = () => {
     isFavorite.value = !isFavorite.value;
 };
+
+const displayDiscountedPrice = computed(() => {
+
+    if (product.value.offer && product.value.offer.type == "discount") {
+        const discountedPrice = product.value.price * (1 - (product.value.offer.details.discount_percentage || 0) / 100);
+        return formatoPesosColombianos(discountedPrice);
+    }
+
+    return ''
+});
+
 </script>
 
 <template>
-    <main>
+    <BackButton />
+    <main v-if="isLoading" >
+        <LoadingScreen style="min-height: 60dvh;"/>
+    </main>
+    <main v-else>
         <div class="handicraft__img">
-            <BackButton class="back__button" />
-            <img src="/public/img/camiseta.png" alt="Camiseta artesanal">
+            <img :src="product.images_url" :alt="product.name">
         </div>
 
-        <TitleHandicrafts title="Tapiz Chumpi Andino III" />
+        <TitleHandicrafts :title="product.name" />
 
         <div class="product__card">
             <div class="product__header">
-                <div class="product__price">
-                    <span class="product__price__original">S/.100</span>
-                    <span class="product__price__discounted">S/.65</span>
+                <div v-if="product.offer.type == 'discount'" class="product__price">
+                    <span class="product__price__original">{{ formatoPesosColombianos(product.price) }}</span>
+                    <span class="product__price__discounted">{{ displayDiscountedPrice }}</span>
+                </div>
+                <div v-else class="product__price">
+                    <span class="product__price__discounted">{{ formatoPesosColombianos(product.price) }}</span>
                 </div>
                 <button @click="toggleFavorite" class="product__favorite__btn" aria-label="Add to favorites">
                     <HeartIcon v-if="!isFavorite" class="product__favorite__icon" />
                     <HeartFilledIcon v-else class="product__favorite__icon" />
                 </button>
             </div>
-            <h2 class="product__artisan">Asociación de artesanos Tinkuy</h2>
-            <p class="product__dimensions"><strong style="color: var(--text-contrast)">Dimensiones:</strong> 18 x 200 cm
+            <h2 class="product__artisan">{{ product.shop.name }}</h2>
+            <p class="product__dimensions"><strong style="color: var(--text-contrast)">Dimensiones:</strong> {{ product.size }}
             </p>
             <p class="product__description">
-                <strong style="color: var(--text-contrast)">Descripción:</strong> Chalina tejida con lana de oveja en
-                color natural beige, hilada a mano. El
-                diseño presenta terminación con flecos en los extremos y líneas en alto relieve.
+                <strong style="color: var(--text-contrast)">Descripción:</strong> {{ product.description }}
             </p>
             <p class="product__shipping">
                 <SuccessfulPurchaseIcon class="product__shipping__icon" />
@@ -97,6 +121,7 @@ main {
                 text-decoration: line-through;
                 color: var(--text-contrast);
                 margin-right: 5px;
+                text-decoration-color: var(--color-accent);
             }
 
             &__discounted {

@@ -32,7 +32,7 @@ const goBack = () => {
 
 <style scoped>
 .header__container__back {
-    position: relative;
+    position: absolute;
     z-index: 5;
 }
 .back__icon {

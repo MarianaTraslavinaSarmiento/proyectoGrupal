@@ -3,6 +3,7 @@ import { computed } from 'vue';
 import DiscountIcon from '@/assets/icons/general/DiscountIcon.vue';
 import DeleteIcon from '@/assets/icons/general/DeleteIcon.vue';
 import { formatoPesosColombianos } from '@/utils/formatMoney';
+import router from '@/router';
 
 const props = defineProps({
     showDelete: {
@@ -28,6 +29,10 @@ const props = defineProps({
     offer: {
         type: Object,
         required: false
+    },
+    id: {
+        type: String,
+        required: true
     }
 });
 
@@ -47,10 +52,14 @@ const displayPrice = computed(() => {
     return formatoPesosColombianos(discountedPrice);
 });
 
+const handleGoProduct = () => {
+    router.push('/app/details-handicrafts/' + props.id)
+}
+
 </script>
 
 <template>
-    <div class="product__container">
+    <div class="product__container" @click="handleGoProduct">
         <div v-if="showOffer" :class="['discount__icon', { 'bottom-right': !isDiscountOffer }]">
             <DiscountIcon />
         </div>

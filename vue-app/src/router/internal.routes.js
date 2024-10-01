@@ -115,9 +115,9 @@ export const internalRoutes = [
         component: ProductsByCategories
     },
     {
-        path: '/app/details-handicrafts',
+        path: '/app/details-handicrafts/:id',
         name: 'detailsOfHandicrafts',
-        alias: 'detalles-de-artesanias',
+        alias: 'detalles-de-artesanias/:id',
         component: DetailsHandicrafts
     },
     {

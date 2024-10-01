@@ -6,7 +6,21 @@ class ProductService {
     }
 
     async getOneById(id) {
-        return await ProductModel.findById(id)
+        const products = await ProductModel.aggregate([
+            {
+                $lookup: {
+                    from: 'shops',
+                    localField: 'shop_id',
+                    foreignField: '_id',
+                    as: 'shop'
+                }
+            },
+            {
+                $unwind: '$shop'
+            }
+        ])
+
+        return products.find(product => product._id == id)
     }
 
     async getOffers() {

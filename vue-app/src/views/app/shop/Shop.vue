@@ -33,7 +33,7 @@ const { products, isLoading: isLoadingProducts } = useGetAllProducts('?shop_id='
         </div>
 
         <div v-else class="handicraft__img">
-            <img style="position: absolute; top: 0; max-height: 350px;" :src="shop.image_url" alt="">
+            <img :src="shop.image_url" alt="">
             <div class="workshop__title">
                 <h4>{{ shop.name }}</h4>
             </div>
@@ -67,7 +67,7 @@ const { products, isLoading: isLoadingProducts } = useGetAllProducts('?shop_id='
         </div>
         <div v-else class="container">
             <ProductItem v-for="product in products" :productName="product.name" :productPrice="product.price"
-                :imageUrl="product.images_url" :productCompany="shop.name" />
+                :imageUrl="product.images_url" :productCompany="shop.name" :id="product._id"/>
         </div>
 
 
