@@ -2,7 +2,22 @@ const ProductModel = require("./product.model")
 
 class ProductService {
     async getAll(query) {
-        return await ProductModel.find(query)
+        return await ProductModel.aggregate([
+            {
+                $match: query
+            },
+            {
+                $lookup: {
+                    from: 'shops',
+                    localField: 'shop_id',
+                    foreignField: '_id',
+                    as: 'shop'
+                }
+            },
+            {
+                $unwind: '$shop'
+            }
+        ])
     }
 
     async getOneById(id) {

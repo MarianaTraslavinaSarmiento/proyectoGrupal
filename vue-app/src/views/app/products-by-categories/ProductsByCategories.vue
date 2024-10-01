@@ -3,68 +3,88 @@ import CategoriesCarousel from "@components/categories-carousel/CategoriesCarous
 import HeaderTitle from "@/components/header-title/HeaderTitle.vue";
 import SearchBar from "@/components/search-bar/SearchBar.vue";
 import FilterIcon from "@icons/general/FilterIcon.vue";
-import { reactive } from "vue";
+import { reactive, ref, watch } from "vue";
+import ProductItem from "@/components/product-item/ProductItem.vue";
+import { useGetAllProducts } from "@/composables/useProduct";
+import { useRoute } from "vue-router";
 
-// const categories = [
-//   {name: "Textilería", icon: Textile},
-//   {name: "Cerámica", icon: Ceramics},
-//   {name: "Orfebrería", icon: Goldsmithing},
-//   {name: "Piedra", icon: StoneCarving},
-//   {name: "Madera", icon: WoodCarving},
-//   {name: "Bordado", icon: Embroidery},
-//   {name: "Joyeria", icon: Jewelry},
-//   {name: "Metalistería", icon: SheetMetal},
-//   {name: "Tradicional", icon: PaintingTraditiona},
-//   {name: "Impresiones", icon: Printed},
-// ]
+const { products: allProducts, isLoading } = useGetAllProducts()
 
-let products = reactive([
-    {
-        name: "Camiseta",
-        category: "Textilería"
-    },
-    {
-        name: "Camiseta",
-        category: "Cerámica"
-    },
-    {
-        name: "Camiseta",
-        category: "Orfebrería"
-    }
-])
+const products = ref([])
 
-console.log("Productos:", products)
+const route = useRoute();
 
-const filterProducts = (category) => {
-    let filtered = products.filter(product => product.category == category.name)
-    console.log(filtered)
+const categoryMap = reactive({
+  'textileria': 'Textileria',
+  'ceramica': 'Ceramica',
+  'orfebreria': 'Orfebrería',
+  'piedra': 'Talla en piedra',
+  'madera': 'Talla en madera',
+  'bordado': 'Bordado',
+  'joyeria': 'Joyería',
+  'metalisteria': 'Hojalatería',
+  'tradicional': 'Pintura tradicional',
+  'impresiones': 'Estampado'
+});
+
+const filterProducts = (routeCategory) => {
+  if (!allProducts.value) return;
+  
+  const dbCategory = categoryMap[routeCategory];
+  if (dbCategory) {
+    products.value = allProducts.value.filter(product => product.category === dbCategory);
+  } else {
+    products.value = allProducts.value;
+  }
 }
 
+watch(
+  () => route.params.category,
+  (newCategory) => {
+    if (newCategory in categoryMap) {
+      filterProducts(newCategory);
+    } else {
+      products.value = allProducts.value;
+    }
+  },
+  { immediate: true }
+)
+
+watch(
+  allProducts,
+  (newProducts) => {
+    if (newProducts) {
+      filterProducts(route.params.category);
+    }
+  },
+  { immediate: true }
+)
 </script>
 
 <template>
-    <main>
-        <HeaderTitle title="Categorías" customBackRoute="/app/inicio" />
-        <CategoriesCarousel :routeParamName="'category'" @selectCategory="filterProducts" />
+  <main>
+    <HeaderTitle title="Categorías" customBackRoute="/app/inicio" />
+    <CategoriesCarousel :routeParamName="'category'" />
 
-        <div class="filter__products">
-            <SearchBar 
-            placeholder = "Buscar producto o palabra clave..." />
-            <FilterIcon />
-        </div>
+    <div class="filter__products">
+      <SearchBar 
+        placeholder="Buscar producto o palabra clave..." />
+      <FilterIcon />
+    </div>
 
-        <div class="container">
-            <div class="product">
-                <img src="/public/img/camiseta.png" alt="Tapiz Chumpi Andino III" />
-                <div class="product__info">
-                    <h4 class="product__name">Tapiz Chumpi Andino</h4>
-                    <p class="product__price">S/ 600</p>
-                    <p class="product__description">Taller Awaq Ayllus</p>
-                </div>
-            </div>
-
-        </div>
-    </main>
+    <div class="container">
+      <ProductItem
+        v-for="product in products"
+        :key="product.id"
+        :product-price="product.price"
+        :id="product._id"
+        :offer="product.offer"
+        :product-name="product.name"
+        :image-url="product.images_url"
+        :product-company="product.shop.name"
+      />
+    </div>
+  </main>
 </template>
 
 <style scoped>
