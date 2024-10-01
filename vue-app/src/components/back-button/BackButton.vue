@@ -11,6 +11,10 @@ const props = defineProps({
     },
     customBackRoute: {  
         type: String
+    },
+    position: {
+        type: String,
+        default: 'absolute'
     }
 })
 
@@ -25,14 +29,13 @@ const goBack = () => {
 
 <template>
     {{console.log('reached', props.customBackRoute)}}
-    <div class="header__container__back" @click="goBack">
+    <div class="header__container__back" :style="{ position: position }" @click="goBack">
         <BackIcon class="back__icon" :backgroundColor="backgroundColor"/>
     </div>
 </template>
 
 <style scoped>
 .header__container__back {
-    position: absolute;
     z-index: 5;
 }
 .back__icon {
