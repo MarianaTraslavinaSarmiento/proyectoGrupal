@@ -39,6 +39,12 @@ export const internalRoutes = [
         component: ShopsCrafts
     },
     {
+        path: '/app/shops-crafts/:id',
+        name: 'ShopsCraftsOne',
+        alias: 'tiendas-artesanias/:id',
+        component: Shop
+    },
+    {
         path: '/app/shopping-cart',
         name: 'ShoppingCart',
         alias: 'carrito-de-compras',
@@ -113,12 +119,6 @@ export const internalRoutes = [
         alias: 'atencion-al-cliente',
         meta: { requiresAuth: true},
         component: CustomerService
-    },
-    {
-        path: '/app/shop/:id',
-        name: 'shop',
-        alias: 'tienda/:id',
-        component: Shop
     },
     {
         path: '/app/customer-service/chat',

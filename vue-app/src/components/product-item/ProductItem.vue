@@ -89,7 +89,6 @@ const displayPrice = computed(() => {
         position: absolute;
         transform: rotate(30deg);
         left: -14px;
-        z-index: 3;
         top: -2px;
         font-size: 1.5rem;
         color: var(--color-text);
@@ -119,7 +118,6 @@ const displayPrice = computed(() => {
         left: -20px;
         width: 50px;
         height: 50px;
-        z-index: 2;
         filter: drop-shadow(0px 3px 1px rgba(0, 0, 0, 0.30));
 
         &.bottom-right {

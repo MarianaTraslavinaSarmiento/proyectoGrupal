@@ -25,3 +25,23 @@ export const useGetAllShops = () => {
 
     return { shops, isLoading }
 }
+
+export const useGetOneShop = (id) => {
+    const url = '/shop/' + id
+    const shop = ref()
+    const isLoadingShop = ref(true)
+
+    const getShop = async() => {
+        try {
+            shop.value = await apiCacheStore.fetchData(url)
+            isLoadingShop.value = false
+        } catch (err) {
+            toast.error('Error al cargar la tienda')
+        } 
+
+    }
+    
+    getShop()
+
+    return { shop, isLoadingShop }
+}

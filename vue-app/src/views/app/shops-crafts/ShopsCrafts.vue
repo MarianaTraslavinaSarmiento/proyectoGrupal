@@ -5,8 +5,13 @@ import TitleSection from '@components/title-section/TitleSection.vue'
 import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
 import LoadingScreen from '@/components/loading-screen/LoadingScreen.vue'
 import { useGetAllShops } from '@/composables/useShop';
+import router from '@/router';
 
 const { shops, isLoading } = useGetAllShops();
+
+const handleGoShop = (id) => {
+    router.push('/app/shops-crafts/' + id);
+}
 
 </script>
 
@@ -20,7 +25,7 @@ const { shops, isLoading } = useGetAllShops();
             <LoadingScreen class="loading" style="min-height: 60dvh;"/>
         </div>
         <div v-else class="workshops__container">
-            <div v-for="shop in shops" :key="shop.id" class="item">
+            <div @click="handleGoShop(shop._id)" v-for="shop in shops" :key="shop._id" class="item">
                 <div class="item__title">
                     <h5>{{ shop.name }}</h5>
                     <p>{{ shop.location }}</p>

@@ -25,3 +25,23 @@ export const useGetAllProductsWithOffers = () => {
 
     return { products, isLoading }
 }
+
+export const useGetAllProducts = (query = '') => {
+    const url = '/product' + query 
+    const products = ref()
+    const isLoading = ref(true)
+
+    const getAllProducts = async () => {
+        try {
+            products.value = await apiCacheStore.fetchData(url)
+            isLoading.value = false
+        } catch (err) {
+            toast.error('Error al cargar los productos')
+        }
+
+    }
+
+    getAllProducts()
+
+    return { products, isLoading }
+}

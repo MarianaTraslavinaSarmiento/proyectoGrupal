@@ -6,6 +6,18 @@ import ChatIcon from '@icons/general/ChatIcon.vue';
 import SearchBar from '@/components/search-bar/SearchBar.vue';
 import FilterIcon from '@/assets/icons/general/FilterIcon.vue';
 import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
+import { useRoute } from 'vue-router';
+import { useGetOneShop } from '@/composables/useShop'
+import { useGetAllProducts } from '@/composables/useProduct';
+import LoadingScreen from '@/components/loading-screen/LoadingScreen.vue';
+import ProductItem from '@/components/product-item/ProductItem.vue';
+
+const route = useRoute();
+
+const { shop, isLoadingShop } = useGetOneShop(route.params.id)
+const { products, isLoading } = useGetAllProducts('?shop_id=' + route.params.id)
+
+
 
 </script>
 
@@ -13,18 +25,24 @@ import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
 
     <main>
 
-        <div class="handicraft__img">
-            <BackButton class="back__button" />
-            <img src="/public/img/camiseta.png" alt="Camiseta artesanal">
+        
+        <BackButton />
+
+        <div v-if="isLoadingShop">
+            <LoadingScreen />
+        </div>
+
+        <div v-else class="handicraft__img">
+            <img :src="shop.image_url" alt="">
             <div class="workshop__title">
-                <h4>Tapiz Chumpi Andino III</h4>
+                <h4>{{ shop.name }}</h4>
             </div>
         </div>
 
         <div class="title">
 
             <Diamond class="diamond__icon" />
-            <p>Conoce la historia detrás de este taller artesanal y conoce como producen sus textiles</p>
+            <p>Conoce la historia detrás de este taller artesanal y conoce como producen sus artesanias</p>
             <Diamond class="diamond__icon__right" />
 
         </div>
@@ -32,27 +50,28 @@ import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
         <div class="title__container">
 
             <div class="header__title">
-                <HeaderTitle
-                title = "Artesanías"
-                :hideBackButton=true
-                 />
+                <HeaderTitle title="Artesanías" :hideBackButton=true />
                 <ChatIcon class="header__title__chat" />
             </div>
         </div>
 
 
         <div class="filter__products">
-            <SearchBar 
-            placeholder = "Buscar producto o palabra clave..." />
+            <SearchBar placeholder="Buscar producto o palabra clave..." />
             <FilterIcon style="color: var(--color-accent)" />
         </div>
 
 
+        <div v-if="isLoading">
+            <LoadingScreen style="min-height: 60dvh;" />
+        </div>
+        <div v-else class="container">
+            <ProductItem v-for="product in products" :productName="product.name" :productPrice="product.price"
+                :imageUrl="product.images_url" :productCompany="product.shop.name" />
+        </div>
+
 
     </main>
-
-
-
 
 
 </template>
@@ -62,8 +81,17 @@ main {
     font-family: Bellota
 }
 
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 2.5rem 3rem 7rem 3rem;
+}
+
 .handicraft__img {
-    position: relative;
     width: 100%;
     height: 250px;
     overflow: hidden;
@@ -76,7 +104,6 @@ main {
 
     .back__button {
         position: absolute;
-        z-index: 10;
     }
 
     .workshop__title {
@@ -84,7 +111,7 @@ main {
         z-index: 10;
         top: 10px;
         left: 50%;
-        width:55%;
+        width: 55%;
         transform: translate(-50%, -50%);
         color: var(--text-color);
         font-size: 1.7rem;
