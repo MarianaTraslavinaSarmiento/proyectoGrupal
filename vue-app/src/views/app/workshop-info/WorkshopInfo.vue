@@ -38,6 +38,7 @@ const formattedStartDate = computed(() => {
 
 const userStore = useUserStore();
 const isSubscribed = ref(false);
+const isProcessing = ref(false);
 
 onMounted(async () => {
   await checkSubscription();
@@ -49,65 +50,76 @@ const checkSubscription = async () => {
 };
 
 const toggleSubscription = async () => {
-  if (isSubscribed.value) {
-    await userStore.unsubscribeFromWorkshop(workshop.value._id);
-  } else {
-    await userStore.subscribeToWorkshop(workshop.value._id);
+  if (isProcessing.value) return;
+  
+  isProcessing.value = true;
+  try {
+    if (isSubscribed.value) {
+      const result = await userStore.unsubscribeFromWorkshop(workshop.value._id);
+      if (result.ok) isSubscribed.value = false;
+    } else {
+      const result = await userStore.subscribeToWorkshop(workshop.value._id);
+      if (result.ok) isSubscribed.value = true;
+    }
+  } catch (error) {
+    console.error('Error toggling subscription:', error);
+  } finally {
+    isProcessing.value = false;
   }
-  await checkSubscription();
 };
 </script>
 
 <template>
-    <main class="main__container">
-        <div class="start__registration">
-            <div class="back__icon">
-                <HeaderTitle :hideDiamond="true" />
-            </div>
+  <main class="main__container">
+    <div class="start__registration">
+      <div class="back__icon">
+        <HeaderTitle :hideDiamond="true" />
+      </div>
 
-            <div v-if="isLoading">
-                <LoadingScreen style="min-height: 60dvh;"/>
-            </div>
-            <div v-else class="workshop__container">
-                <img :src="workshop.image_url" :alt="workshop.name" class="workshop__image" />
-            
-                <div class="workshop__name">
-                    <div class="workshop__icon">
-                        <SmallTriangle class="smallTriangle__icon" />
-                    </div>
-                    <div class="workshop__orginal__name">
-                        <h1>{{ workshop.name }}</h1>
-                    </div>
-                </div>
-
-                <section class="workshop-details">
-                    <p class="description">
-                        {{ workshop.description }}
-                    </p>
-                    <p class="audience">{{ workshop.target_audience }}</p>
-                    <p v-if="workshop.target_audience_comment" class="note">{{ workshop.target_audience_comment }}</p>
-                    <div class="meta-info">
-                    <p><span class="label">Duración:</span> {{ workshop.duration }}</p>
-                    <p><span class="label">Fecha de inicio:</span> {{ formattedStartDate }}</p>
-                    <p><span class="label">Horario:</span> {{ workshop.schedule }}</p>
-                    <p><span class="label">Materiales:</span> {{ workshop.materials }}</p>
-                    <p><span class="label">Modalidad:</span> {{ workshop.modality }}</p>
-                    <p><span class="label">Lugar:</span> {{ workshop.location }}</p>
-                    </div>
-
-                    <div class="register__all">
-                        <button class="register-button" @click="toggleSubscription">
-                        <SubscribeWorkshop class="SubscribeWorkshop__icon" />
-                        <span class="button-text">{{ isSubscribed ? 'Cancelar inscripción' : 'Inscribirse al taller' }}</span>
-                        </button>
-                        <h2 v-if="!isSubscribed">*Cupos limitados</h2>
-                    </div>
-                </section>
-            </div>
+      <div v-if="isLoading">
+        <LoadingScreen style="min-height: 60dvh;"/>
+      </div>
+      <div v-else class="workshop__container">
+        <img :src="workshop.image_url" :alt="workshop.name" class="workshop__image" />
+      
+        <div class="workshop__name">
+          <div class="workshop__icon">
+            <SmallTriangle class="smallTriangle__icon" />
+          </div>
+          <div class="workshop__orginal__name">
+            <h1>{{ workshop.name }}</h1>
+          </div>
         </div>
-    </main>
+
+        <section class="workshop-details">
+          <p class="description">
+            {{ workshop.description }}
+          </p>
+          <p class="audience">{{ workshop.target_audience }}</p>
+          <p v-if="workshop.target_audience_comment" class="note">{{ workshop.target_audience_comment }}</p>
+          <div class="meta-info">
+            <p><span class="label">Duración:</span> {{ workshop.duration }}</p>
+            <p><span class="label">Fecha de inicio:</span> {{ formattedStartDate }}</p>
+            <p><span class="label">Horario:</span> {{ workshop.schedule }}</p>
+            <p><span class="label">Materiales:</span> {{ workshop.materials }}</p>
+            <p><span class="label">Modalidad:</span> {{ workshop.modality }}</p>
+            <p><span class="label">Lugar:</span> {{ workshop.location }}</p>
+          </div>
+
+          <div class="register__all">
+            <button class="register-button" @click="toggleSubscription" :disabled="isProcessing">
+              <SubscribeWorkshop class="SubscribeWorkshop__icon" />
+              <span class="button-text">
+                {{ isProcessing ? 'Procesando...' : (isSubscribed ? 'Cancelar inscripción' : 'Inscribirse al taller') }}
+              </span>
+            </button>
+            <h2 v-if="!isSubscribed">*Cupos limitados</h2>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
 </template>
-  
 
 
 <style lang="scss" scoped>
