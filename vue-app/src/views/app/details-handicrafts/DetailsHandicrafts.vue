@@ -6,11 +6,13 @@ import HeartIcon from '@/assets/icons/details-handicrafts/HeartIcon.vue';
 import HeartFilledIcon from '@/assets/icons/details-handicrafts/HeartFilledIcon.vue';
 import ShoppingCartIcon from '@/assets/icons/nav/ShoppingCartIcon.vue';
 import SuccessfulPurchaseIcon from '@/assets/icons/details-handicrafts/SuccessfulPurchaseIcon.vue';
-import { useGetOneProduct } from '@/composables/useProduct';
+import { useGetOneProduct, useAddToFavorites } from '@/composables/useProduct';
 import { useRoute } from 'vue-router';
 import { formatoPesosColombianos } from '@/utils/formatMoney';
 import { computed } from 'vue';
 import LoadingScreen from '@/components/loading-screen/LoadingScreen.vue';
+import { useShoppingCartStore } from '@/stores/shoppingCart.js';
+
 
 const route = useRoute();
 
@@ -19,7 +21,11 @@ const { product, isLoading } = useGetOneProduct(route.params.id);
 const isFavorite = ref(false);
 
 const toggleFavorite = () => {
-    isFavorite.value = !isFavorite.value;
+    isFavorite.value = !isFavorite.value
+
+    if(isFavorite.value){
+        useAddToFavorites(product.value._id)
+    }
 };
 
 const displayDiscountedPrice = computed(() => {
@@ -31,6 +37,21 @@ const displayDiscountedPrice = computed(() => {
 
     return ''
 });
+
+const shoppingCartStore = useShoppingCartStore();
+
+const addToCart = () => {
+    shoppingCartStore.addProductToCart({...product.value});
+}
+
+const deleteFromCart = () => {
+    shoppingCartStore.removeProductFromCart(product.value._id)
+}
+
+const productAlreadyInCart = computed(() => {
+    return shoppingCartStore.productsInCart.find(productInCart => productInCart._id === product.value._id)
+})
+
 
 </script>
 
@@ -70,7 +91,11 @@ const displayDiscountedPrice = computed(() => {
                 <SuccessfulPurchaseIcon class="product__shipping__icon" />
                 Cuenta con envío hacia tu ubicación
             </p>
-            <button class="product__cart__btn">
+            <button style="background-color: var(--background-primary);" @click="deleteFromCart" v-if="productAlreadyInCart" class="product__cart__btn">
+                <ShoppingCartIcon class="shopping__cart__icon" />
+                Quitar del carrito de compras
+            </button>
+            <button v-else @click="addToCart" class="product__cart__btn">
                 <ShoppingCartIcon class="shopping__cart__icon" />
                 Añadir a mi carrito de compras
             </button>

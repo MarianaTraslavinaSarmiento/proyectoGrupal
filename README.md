@@ -55,41 +55,43 @@ The project is divided into two main parts:
 3. Create a `.env` file in the root of the `node-server` directory with the following variables:
 
    ```
-    NODE_ENV=development
+  NODE_ENV=development
 
-    ALLOWED_ORIGIN=http://localhost:5173
+  ALLOWED_ORIGIN=http://localhost:5173
 
-    MONGODB_URI=mongodb://samuelsuarezgm:G6y9T2O2gNCnsOJn@ac-hqpoaeb-shard-00-00.bjigbd8.mongodb.net:27017,ac-hqpoaeb-shard-00-01.bjigbd8.mongodb.net:27017,ac-hqpoaeb-shard-00-02.bjigbd8.mongodb.net:27017/ruraqMaki?replicaSet=atlas-rsw4t9-shard-0&ssl=true&authSource=admin
+  MONGODB_URI=mongodb://samuelsuarezgm:G6y9T2O2gNCnsOJn@ac-hqpoaeb-shard-00-00.bjigbd8.mongodb.net:27017,ac-hqpoaeb-shard-00-01.bjigbd8.mongodb.net:27017,ac-hqpoaeb-shard-00-02.bjigbd8.mongodb.net:27017/ruraqMaki?replicaSet=atlas-rsw4t9-shard-0&ssl=true&authSource=admin
 
-    SESSION_SECRET=4259e48e-413e-4c12-b748-513debb10fdd
+  SESSION_SECRET=4259e48e-413e-4c12-b748-513debb10fdd
 
-    GOOGLE_CLIENT_ID=216020252548-uea6sgqmqb2m1v0t51rqqdu3jak6ud3f.apps.googleusercontent.com
+  GOOGLE_CLIENT_ID=216020252548-uea6sgqmqb2m1v0t51rqqdu3jak6ud3f.apps.googleusercontent.com
 
-    GOOGLE_CLIENT_SECRET=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
+  GOOGLE_CLIENT_SECRET=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
 
-    DISCORD_CLIENT_ID=1286776055251734638
+  DISCORD_CLIENT_ID=1286776055251734638
 
-    DISCORD_CLIENT_SECRET=XyBDBxS8FId2nwojYrXuXPA7J27GgbWa
+  DISCORD_CLIENT_SECRET=XyBDBxS8FId2nwojYrXuXPA7J27GgbWa
 
-    LINKEDIN_CLIENT_ID=78rasaii7dlq9e
+  LINKEDIN_CLIENT_ID=78rasaii7dlq9e
 
-    LINKEDIN_CLIENT_SECRET='WPL_AP1.8NvoLqU4MObCPxqa.B5Fhvg=='
+  LINKEDIN_CLIENT_SECRET='WPL_AP1.8NvoLqU4MObCPxqa.B5Fhvg=='
 
-    REDIS_URL=redis://default:qS4Jn7wtHcQ2Hgw2lxcET5A4skwAQUvP@redis-12050.c85.us-east-1-2.ec2.redns.redis-cloud.com:12050
-    API_KEY=someInternalAPiKEy
+  REDIS_URL=redis://default:qS4Jn7wtHcQ2Hgw2lxcET5A4skwAQUvP@redis-12050.c85.us-east-1-2.ec2.redns.redis-cloud.com:12050
+  API_KEY=someInternalAPiKEy
 
-    CLOUDINARY_CLOUD_NAME=dnl0acrzg
+  CLOUDINARY_CLOUD_NAME=dnl0acrzg
 
-    CLOUDINARY_API_KEY=326851215572484
+  CLOUDINARY_API_KEY=326851215572484
 
-    CLOUDINARY_API_SECRET=9e9L-b1NNt4h_qnrWVCNRvoUDJs
+  CLOUDINARY_API_SECRET=9e9L-b1NNt4h_qnrWVCNRvoUDJs
    ```
+
 
    FRONTEND ENV
 
    ```
-   VITE_API_URL=http://localhost:3001/api
-   VITE_SERVER_CHAT=http://localhost:3001
+    VITE_API_URL=http://localhost:3001/api
+
+    VITE_SERVER_CHAT=http://localhost:3001
    ```
    
    Make sure to fill in the missing values.

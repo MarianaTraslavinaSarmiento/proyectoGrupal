@@ -14,6 +14,12 @@ class ProductController {
         res.json(products)
     } 
 
+    async getAllByShopId(req, res) {
+        const shopId = req.params.shopId
+        const products = await this.#service.getAllByShopId(shopId)
+        res.json(products)
+    }
+
     async getOneById(req, res) {
         const id = req.params.id
         const product = await this.#service.getOneById(id)
