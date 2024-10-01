@@ -55,7 +55,7 @@ module.exports = new DiscordStrategy({
             user = new UserModel({
                 username: profile.username,
                 email: profile.email,
-                profile_pic_url: getDiscordAvatarUrl(profile.id, profile.avatar),
+                profile_pic: {url: getDiscordAvatarUrl(profile.id, profile.avatar)},
                 account_id: profile.id    
             });
             await user.save();

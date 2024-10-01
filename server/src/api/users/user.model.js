@@ -24,9 +24,12 @@ const userSchema = new Schema({
         type: String,
         required: false
     },
-    profile_pic_url: {
-        type: String,
-        required: true
+    profile_pic: {
+        type: Object,
+        required: false,
+        url: String,
+        hash: String,
+        public_id: String
     },
     favorites: {
         type: [Schema.Types.ObjectId],
