@@ -105,3 +105,23 @@ export const useAddToFavorites = (productId) => {
 
     addProductsToFavorites()
 }
+
+
+export const useDeleteFavorites = (productId) => {
+
+    const url = '/user/delete-favorites'
+    
+
+    const deleteProductsFromFavorites= async() => {
+
+        try {
+            await axios.delete(url, { productId })
+            toast.success('Producto eliminado de favoritos')
+        } catch (err) {
+            console.error(err)
+            toast.error('Error al eliminar producto de favoritos')
+        }
+    }
+
+    deleteProductsFromFavorites()
+}

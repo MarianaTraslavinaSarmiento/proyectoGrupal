@@ -4,6 +4,7 @@ import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
 import CategoriesCarousel from '@/components/categories-carousel/CategoriesCarousel.vue';
 import ProductItem from '@/components/product-item/ProductItem.vue';
 
+
 </script>
 
 <template>

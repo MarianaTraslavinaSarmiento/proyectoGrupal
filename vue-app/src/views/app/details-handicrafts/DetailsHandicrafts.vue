@@ -12,13 +12,21 @@ import { formatoPesosColombianos } from '@/utils/formatMoney';
 import { computed } from 'vue';
 import LoadingScreen from '@/components/loading-screen/LoadingScreen.vue';
 import { useShoppingCartStore } from '@/stores/shoppingCart.js';
-
+import { useUserStore } from '@/stores/user';
 
 const route = useRoute();
 
 const { product, isLoading } = useGetOneProduct(route.params.id);
 
 const isFavorite = ref(false);
+
+const keepLikeIt = computed(()=> {
+    return useUserStore().favorites.includes(product.value._id)
+})
+
+if(keepLikeIt.value){
+    isFavorite.value = true
+}
 
 const toggleFavorite = () => {
     isFavorite.value = !isFavorite.value
@@ -102,7 +110,6 @@ const productAlreadyInCart = computed(() => {
         </div>
     </main>
 </template>
-
 <style lang="scss" scoped>
 main {
     font-family: Bellota
