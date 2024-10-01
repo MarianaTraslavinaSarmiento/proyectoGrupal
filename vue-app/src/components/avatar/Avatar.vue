@@ -17,7 +17,7 @@ const user = computed(() => userStore.user)
 
 <template>
   <div class="avatar">
-    <img :src="user.profile_pic.url" :alt="user.username" class="avatar-img">
+    <img :src="user?.profile_pic?.url" :alt="user?.username" class="avatar-img">
     <EditIcon v-if="showEditIcon" class="edit-icon" />
   </div>
 </template>
