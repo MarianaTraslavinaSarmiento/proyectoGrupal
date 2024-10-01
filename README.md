@@ -506,3 +506,696 @@ Artisanal Workshops
 - Postman for API testing.
 - Netlify and Render for deployment.
 - Jira for task management.
+
+
+
+# Product API Documentation
+
+
+
+1. **Get All Products**
+* **Method:** `GET`
+* **Route:** `/`
+* **Description:** Retrieves a list of all products.
+* Responses:
+   * Success (200 OK):
+   ```json
+   [
+     {
+       "id": "string",
+       "name": "string",
+       "description": "string",
+       "price": "number",
+       "category": "string",
+       "stock": "number"
+     }
+   ]
+   ```
+   * Internal Error (500 Internal Server Error):
+   ```json
+   {
+     "message": "Error retrieving products",
+     "error": "string"
+   }
+   ```
+
+2. **Get Product by ID**
+* **Method:** `GET`
+* **Route:** `/one/:id`
+* **Description:** Retrieves a specific product by its ID.
+* URL Parameters:
+   * `id`: ID of the product to retrieve.
+* Responses:
+   * Success (200 OK):
+   ```json
+   {
+     "id": "string",
+     "name": "string",
+     "description": "string",
+     "price": "number",
+     "category": "string",
+     "stock": "number"
+   }
+   ```
+   * Not Found (404 Not Found):
+   ```json
+   {
+     "message": "Product not found"
+   }
+   ```
+   * Internal Error (500 Internal Server Error):
+   ```json
+   {
+     "message": "Error retrieving product",
+     "error": "string"
+   }
+   ```
+
+3. **Get Offers**
+* **Method:** `GET`
+* **Route:** `/offers`
+* **Description:** Retrieves a list of products currently on offer.
+* Responses:
+   * Success (200 OK):
+   ```json
+   [
+     {
+       "id": "string",
+       "name": "string",
+       "description": "string",
+       "originalPrice": "number",
+       "discountedPrice": "number",
+       "category": "string",
+       "stock": "number"
+     }
+   ]
+   ```
+   * Internal Error (500 Internal Server Error):
+   ```json
+   {
+     "message": "Error retrieving offers",
+     "error": "string"
+   }
+   ```
+
+Note: All routes are handled asynchronously using the `asyncHandler` middleware to manage potential errors.
+
+
+
+# Authentication API Documentation
+
+
+
+1. **User Login**
+* **Method:** `POST`
+* **Route:** `/login`
+* **Description:** Authenticates a user with their credentials.
+* **Middleware:** 
+   * `validateLogin()`: Validates login input
+   * `handleValidationErrors`: Handles validation errors
+   * `passport.authenticate("local")`: Local authentication strategy
+* **Body Parameters:**
+   ```json
+   {
+     "email": "string",
+     "password": "string"
+   }
+   ```
+* **Responses:**
+   * Success (200 OK):
+   ```json
+   {
+     "message": "Login successful"
+   }
+   ```
+   * Validation Error (400 Bad Request):
+   ```json
+   {
+     "errors": [
+       {
+         "msg": "string",
+         "param": "string",
+         "location": "body"
+       }
+     ]
+   }
+   ```
+   * Authentication Error (401 Unauthorized):
+   ```json
+   {
+     "message": "Authentication failed"
+   }
+   ```
+
+2. **User Signup**
+* **Method:** `POST`
+* **Route:** `/signup`
+* **Description:** Registers a new user.
+* **Middleware:** 
+   * `validateSignup()`: Validates signup input
+   * `handleValidationErrors`: Handles validation errors
+* **Body Parameters:**
+   ```json
+   {
+     "email": "string",
+     "password": "string",
+     "name": "string"
+   }
+   ```
+* **Responses:**
+   * Success (201 Created):
+   ```json
+   {
+     "message": "User created successfully",
+     "user": {
+       "id": "string",
+       "email": "string",
+       "name": "string"
+     }
+   }
+   ```
+   * Validation Error (400 Bad Request):
+   ```json
+   {
+     "errors": [
+       {
+         "msg": "string",
+         "param": "string",
+         "location": "body"
+       }
+     ]
+   }
+   ```
+   * Internal Error (500 Internal Server Error):
+   ```json
+   {
+     "message": "Error creating user",
+     "error": "string"
+   }
+   ```
+
+3. **User Logout**
+* **Method:** `GET`
+* **Route:** `/logout`
+* **Description:** Logs out the currently authenticated user.
+* **Responses:**
+   * Success (200 OK):
+   ```json
+   {
+     "message": "Logged out successfully"
+   }
+   ```
+   * Internal Error (500 Internal Server Error):
+   ```json
+   {
+     "message": "Error logging out",
+     "error": "string"
+   }
+   ```
+
+4. **Verify Authentication**
+* **Method:** `GET`
+* **Route:** `/verify`
+* **Description:** Verifies if the user is currently authenticated.
+* **Responses:**
+   * Success (200 OK):
+   ```json
+   {
+     "isAuthenticated": true,
+     "user": {
+       "id": "string",
+       "email": "string",
+       "name": "string"
+     }
+   }
+   ```
+   * Not Authenticated (401 Unauthorized):
+   ```json
+   {
+     "isAuthenticated": false
+   }
+   ```
+
+5. **Google Authentication**
+* **Method:** `GET`
+* **Route:** `/google`
+* **Description:** Initiates Google OAuth authentication.
+* **Middleware:** `passport.authenticate("google")`
+
+
+
+6. **Google Authentication Callback**
+* **Method:** `GET`
+* **Route:** `/google/callback`
+* **Description:** Handles the Google OAuth callback.
+* **Middleware:** `passport.authenticate("google", redirects)`
+* **Redirects:**
+   * Success: `${process.env.ALLOWED_ORIGIN}/app/home`
+   * Failure: `${process.env.ALLOWED_ORIGIN}/login`
+   
+   
+
+7. **Discord Authentication**
+* **Method:** `GET`
+* **Route:** `/discord`
+* **Description:** Initiates Discord OAuth authentication.
+* **Middleware:** `passport.authenticate("discord")`
+
+
+
+8. **Discord Authentication Callback**
+* **Method:** `GET`
+* **Route:** `/discord/callback`
+* **Description:** Handles the Discord OAuth callback.
+* **Middleware:** `passport.authenticate("discord", redirects)`
+* **Redirects:**
+   * Success: `${process.env.ALLOWED_ORIGIN}/app/home`
+   * Failure: `${process.env.ALLOWED_ORIGIN}/login`
+
+Note: All routes are handled asynchronously using the `asyncHandler` middleware to manage potential errors. The `handleValidationErrors` middleware is used to process and respond with validation errors where applicable.
+
+
+
+# Shop API Documentation
+
+
+
+1. **Get All Shops**
+* **Method:** `GET`
+* **Route:** `/`
+* **Description:** Retrieves a list of all shops.
+* **Responses:**
+   * Success (200 OK):
+   ```json
+   [
+     {
+       "id": "string",
+       "name": "string",
+       "description": "string",
+       "location": "string",
+       "rating": "number",
+       "createdAt": "string (ISO date)",
+       "updatedAt": "string (ISO date)"
+     }
+   ]
+   ```
+   * Internal Error (500 Internal Server Error):
+   ```json
+   {
+     "message": "Error retrieving shops",
+     "error": "string"
+   }
+   ```
+
+2. **Get Shop by ID**
+* **Method:** `GET`
+* **Route:** `/:id`
+* **Description:** Retrieves a specific shop by its ID.
+* **URL Parameters:**
+   * `id`: ID of the shop to retrieve.
+* **Responses:**
+   * Success (200 OK):
+   ```json
+   {
+     "id": "string",
+     "name": "string",
+     "description": "string",
+     "location": "string",
+     "rating": "number",
+     "createdAt": "string (ISO date)",
+     "updatedAt": "string (ISO date)"
+   }
+   ```
+   * Not Found (404 Not Found):
+   ```json
+   {
+     "message": "Shop not found"
+   }
+   ```
+   * Internal Error (500 Internal Server Error):
+   ```json
+   {
+     "message": "Error retrieving shop",
+     "error": "string"
+   }
+   ```
+
+Note: All routes are handled asynchronously using the `asyncHandler` middleware to manage potential errors.
+
+
+
+# User API Documentation
+
+
+
+1. **Get User Profile**
+* **Method:** `GET`
+* **Route:** `/profile`
+* **Description:** Retrieves the profile of the currently authenticated user.
+* **Responses:**
+   * Success (200 OK):
+   ```json
+   {
+     "id": "string",
+     "username": "string",
+     "email": "string",
+     "profile_pic": "string (URL)",
+     "createdAt": "string (ISO date)",
+     "updatedAt": "string (ISO date)"
+   }
+   ```
+   * Not Authenticated (401 Unauthorized):
+   ```json
+   {
+     "message": "User not authenticated"
+   }
+   ```
+   * Internal Error (500 Internal Server Error):
+   ```json
+   {
+     "message": "Error retrieving user profile",
+     "error": "string"
+   }
+   ```
+
+2. **Update User Profile**
+* **Method:** `PUT`
+* **Route:** `/update`
+* **Description:** Updates the profile of the currently authenticated user.
+* **Middleware:** 
+   * `validateUpdate()`: Validates update input
+   * `handleValidationErrors`: Handles validation errors
+   * `update.single("profile_pic")`: Handles file upload for profile picture
+* **Body Parameters:**
+   * Form-data:
+     - `username`: string (optional)
+     - `email`: string (optional)
+     - `profile_pic`: file (optional)
+* **Responses:**
+   * Success (200 OK):
+   ```json
+   {
+     "message": "User updated successfully",
+     "user": {
+       "id": "string",
+       "username": "string",
+       "email": "string",
+       "profile_pic": "string (URL)",
+       "updatedAt": "string (ISO date)"
+     }
+   }
+   ```
+   * Validation Error (400 Bad Request):
+   ```json
+   {
+     "errors": [
+       {
+         "msg": "string",
+         "param": "string",
+         "location": "body"
+       }
+     ]
+   }
+   ```
+   * Internal Error (500 Internal Server Error):
+   ```json
+   {
+     "message": "Error updating user",
+     "error": "string"
+   }
+   ```
+
+3. **Add Product to Favorites**
+* **Method:** `POST`
+* **Route:** `/add-to-favorites`
+* **Description:** Adds a product to the user's favorites list.
+* **Middleware:** 
+   * `validateAddToFavorites()`: Validates input
+   * `handleValidationErrors`: Handles validation errors
+* **Body Parameters:**
+   ```json
+   {
+     "productId": "string"
+   }
+   ```
+* **Responses:**
+   * Success (200 OK):
+   ```json
+   {
+     "message": "Product added to favorites successfully"
+   }
+   ```
+   * Validation Error (400 Bad Request):
+   ```json
+   {
+     "errors": [
+       {
+         "msg": "string",
+         "param": "string",
+         "location": "body"
+       }
+     ]
+   }
+   ```
+   * Internal Error (500 Internal Server Error):
+   ```json
+   {
+     "message": "Error adding product to favorites",
+     "error": "string"
+   }
+   ```
+
+4. **Get User's Favorite Products**
+* **Method:** `GET`
+* **Route:** `/favorites`
+* **Description:** Retrieves the list of the user's favorite products.
+* **Responses:**
+   * Success (200 OK):
+   ```json
+   [
+     {
+       "id": "string",
+       "name": "string",
+       "description": "string",
+       "price": "number",
+       "image": "string (URL)"
+     }
+   ]
+   ```
+   * Internal Error (500 Internal Server Error):
+   ```json
+   {
+     "message": "Error retrieving favorite products",
+     "error": "string"
+   }
+   ```
+
+5. **Subscribe to Workshop**
+* **Method:** `POST`
+* **Route:** `/subscribe-workshop`
+* **Description:** Subscribes the user to a workshop.
+* **Body Parameters:**
+   ```json
+   {
+     "workshopId": "string"
+   }
+   ```
+* **Responses:**
+   * Success (200 OK):
+   ```json
+   {
+     "message": "Successfully subscribed to workshop"
+   }
+   ```
+   * Internal Error (500 Internal Server Error):
+   ```json
+   {
+     "message": "Error subscribing to workshop",
+     "error": "string"
+   }
+   ```
+
+6. **Unsubscribe from Workshop**
+* **Method:** `POST`
+* **Route:** `/unsubscribe-workshop`
+* **Description:** Unsubscribes the user from a workshop.
+* **Body Parameters:**
+   ```json
+   {
+     "workshopId": "string"
+   }
+   ```
+* **Responses:**
+   * Success (200 OK):
+   ```json
+   {
+     "message": "Successfully unsubscribed from workshop"
+   }
+   ```
+   * Internal Error (500 Internal Server Error):
+   ```json
+   {
+     "message": "Error unsubscribing from workshop",
+     "error": "string"
+   }
+   ```
+
+7. **Get Subscribed Workshops**
+* **Method:** `GET`
+* **Route:** `/subscribed-workshops`
+* **Description:** Retrieves the list of workshops the user is subscribed to.
+* **Responses:**
+   * Success (200 OK):
+   ```json
+   [
+     {
+       "id": "string",
+       "title": "string",
+       "description": "string",
+       "date": "string (ISO date)",
+       "instructor": "string"
+     }
+   ]
+   ```
+   * Internal Error (500 Internal Server Error):
+   ```json
+   {
+     "message": "Error retrieving subscribed workshops",
+     "error": "string"
+   }
+   ```
+
+Note: All routes are handled asynchronously using the `asyncHandler` middleware to manage potential errors. The `handleValidationErrors` middleware is used to process and respond with validation errors where applicable.
+
+
+
+# Workshop API Documentation
+
+
+
+1. **Get All Workshops**
+* **Method:** `GET`
+* **Route:** `/`
+* **Description:** Retrieves a list of all workshops.
+* **Responses:**
+   * Success (200 OK):
+   ```json
+   [
+     {
+       "id": "string",
+       "title": "string",
+       "description": "string",
+       "date": "string (ISO date)",
+       "instructor": "string",
+       "capacity": "number",
+       "currentParticipants": "number"
+     }
+   ]
+   ```
+   * Internal Error (500 Internal Server Error):
+   ```json
+   {
+     "message": "Error retrieving workshops",
+     "error": "string"
+   }
+   ```
+
+2. **Get All Workshops with Store in Charge**
+* **Method:** `GET`
+* **Route:** `/with-store-in-charge`
+* **Description:** Retrieves a list of all workshops including information about the store in charge.
+* **Responses:**
+   * Success (200 OK):
+   ```json
+   [
+     {
+       "id": "string",
+       "title": "string",
+       "description": "string",
+       "date": "string (ISO date)",
+       "instructor": "string",
+       "capacity": "number",
+       "currentParticipants": "number",
+       "store": {
+         "id": "string",
+         "name": "string",
+         "location": "string"
+       }
+     }
+   ]
+   ```
+   * Internal Error (500 Internal Server Error):
+   ```json
+   {
+     "message": "Error retrieving workshops with store information",
+     "error": "string"
+   }
+   ```
+
+3. **Get Trending Workshops**
+* **Method:** `GET`
+* **Route:** `/trending`
+* **Description:** Retrieves a list of trending workshops (criteria for "trending" may vary).
+* **Responses:**
+   * Success (200 OK):
+   ```json
+   [
+     {
+       "id": "string",
+       "title": "string",
+       "description": "string",
+       "date": "string (ISO date)",
+       "instructor": "string",
+       "capacity": "number",
+       "currentParticipants": "number",
+       "trendingScore": "number"
+     }
+   ]
+   ```
+   * Internal Error (500 Internal Server Error):
+   ```json
+   {
+     "message": "Error retrieving trending workshops",
+     "error": "string"
+   }
+   ```
+
+4. **Get Workshop by ID**
+* **Method:** `GET`
+* **Route:** `/:id`
+* **Description:** Retrieves a specific workshop by its ID.
+* **URL Parameters:**
+   * `id`: ID of the workshop to retrieve.
+* **Responses:**
+   * Success (200 OK):
+   ```json
+   {
+     "id": "string",
+     "title": "string",
+     "description": "string",
+     "date": "string (ISO date)",
+     "instructor": "string",
+     "capacity": "number",
+     "currentParticipants": "number",
+     "store": {
+       "id": "string",
+       "name": "string",
+       "location": "string"
+     }
+   }
+   ```
+   * Not Found (404 Not Found):
+   ```json
+   {
+     "message": "Workshop not found"
+   }
+   ```
+   * Internal Error (500 Internal Server Error):
+   ```json
+   {
+     "message": "Error retrieving workshop",
+     "error": "string"
+   }
+   ```
+
+Note: All routes are handled asynchronously using the `asyncHandler` middleware to manage potential errors.
