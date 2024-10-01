@@ -4,7 +4,7 @@
 Diana Carolina Moreno Cárdenas
 Mariana Traslaviña Sarmiento
 David Steven Romero Serrano
-Samuel Enrique Sua
+Samuel Enrique Suarez Estupiñan
 ```
 
 
