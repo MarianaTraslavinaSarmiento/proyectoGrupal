@@ -25,6 +25,8 @@ router.beforeEach(async (to, from, next) => {
     next('/app/home')
   }
 
+  next()
+
 })
 
 export default router

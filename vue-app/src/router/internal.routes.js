@@ -44,6 +44,7 @@ export const internalRoutes = [
         path: '/app/shops-crafts/:id',
         name: 'ShopsCraftsOne',
         alias: 'tiendas-artesanias/:id',
+        meta: { requiresAuth: true},
         component: Shop
     },
     {

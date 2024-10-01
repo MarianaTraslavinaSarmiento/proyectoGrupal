@@ -2,10 +2,12 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router'; 
 import TitleSection from '@components/title-section/TitleSection.vue';
-import TrashIcon from '@icons/general/TrashIcon.vue';
 import Buy from '@icons/your-shopping-cart/buy.vue';
 import NoBuy from '@icons/your-shopping-cart/noBuy.vue';
 import BackgroundPattern from '@/components/background-pattern/BackgroundPattern.vue';
+import { useShoppingCartStore } from '@/stores/shoppingCart';
+import { formatoPesosColombianos } from '@/utils/formatMoney';
+import ShoppingCartProduct from './components/ShoppingCartProduct.vue';
 
 const router = useRouter(); 
 const isModalOpen = ref(false);
@@ -23,7 +25,9 @@ const confirmPurchase = () => {
   closeModal(); 
 };
 
-/** !Note: This is just the HTML and CSS, not the logic, because its neccesary to save the name of the products in global state or pinia... */
+const shoppingCartStore = useShoppingCartStore();
+
+
 </script>
 
 <template>
@@ -32,25 +36,7 @@ const confirmPurchase = () => {
     <TitleSection title="Tu carrito de compras" subtitle="Revisa aquí los productos que añadiste a tu carrito" />
 
     <div class="products">
-      <div class="product__card">
-        <div class="product__image">
-          <img src="" alt="Vasija pequeña">
-        </div>
-        <div class="product__info">
-          <p class="product__title">Vasija pequeña con diseño de flor</p>
-          <p class="product__price">S/.50</p>
-          <p class="product__details">13x10 cm, 2 KG</p>
-          <p class="product__origin">Asoc. de artesanos productores de Chazuta</p>
-          <div class="product__quantity">
-            <button class="quantity__btn minus">-</button>
-            <span class="quantity__value">1</span>
-            <button class="quantity__btn plus">+</button>
-          </div>
-        </div>
-        <button class="delete__btn" aria-label="Delete item">
-          <TrashIcon class="delete__icon" />
-        </button>
-      </div>
+      <ShoppingCartProduct v-for="product in shoppingCartStore.productsInCart" :product="product"/>
     </div>
 
     <div class="discount__coupon">
@@ -130,107 +116,6 @@ main {
   }
 }
 
-.product__card {
-  display: flex;
-  background-color: var(--background-secondary);
-  color: var(--text-color);
-  border-radius: 10px;
-  padding: 15px;
-  width: 90%;
-  max-width: 450px;
-  position: relative;
-
-  .product__image {
-    flex: 0 0 120px;
-    margin-right: 15px;
-
-    img {
-      width: 100%;
-      height: auto;
-      border-radius: 5px;
-      object-fit: cover;
-    }
-  }
-
-  .product__info {
-    flex: 0.8;
-    display: flex;
-    flex-direction: column;
-    font-size: 1.3rem;
-  }
-
-  .product__title {
-    margin: 0 0 2px;
-    font-weight: normal;
-  }
-
-  .product__price {
-    margin: 0 0 2px;
-    font-weight: bold;
-  }
-
-  .product__details,
-  .product__origin {
-    margin: 0 0 2px;
-  }
-
-  .product__quantity {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-
-    .quantity__btn {
-      background-color: var(--background-primary);
-      color: var(--text-color);
-      border: none;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-
-      &:hover {
-        background-color: var(--background-primary);
-      }
-
-      &.minus {
-        border-radius: 5px 0px 0px 5px;
-      }
-
-      &.plus {
-        border-radius: 0px 5px 5px 0px;
-      }
-    }
-
-    .quantity__value {
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: var(--background-base);
-      font-size: 1.5rem;
-      color: var(--text-black);
-    }
-  }
-
-  .delete__btn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    color: var(--text-black);
-    padding: 0;
-
-    .delete__icon {
-      width: 30px;
-      height: 30px;
-      margin-top: 10px;
-    }
-  }
-}
 
 .discount__coupon {
   display: flex;

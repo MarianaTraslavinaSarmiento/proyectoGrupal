@@ -13,12 +13,20 @@ export const useShoppingCartStore = defineStore('shoppingCart', {
     },
     actions: {
         addProductToCart(product) {
+            product.quantity = 1
             this.products.push(product)
+
             toast.success('Producto agregado al carrito')
         },
         removeProductFromCart(productId) {
             this.products = this.products.filter(product => product._id !== productId)
             toast('Producto eliminado del carrito')
+        },
+        updateProductQuantity(productId, quantity) {
+            const product = this.products.find(product => product._id === productId)
+            if (product) {
+                product.quantity = quantity
+            }
         },
         async purchaseProducts() {
             try {
