@@ -22,6 +22,8 @@ import Settings from '@/views/app/settings/Settings.vue'
 import Chat from '@views/app/chat/Chat.vue'
 import Shop from '@/views/app/shop/Shop.vue'
 import FavoriteCrafts from '@/views/app/favorite-crafts/FavoriteCrafts.vue'
+import FavoriteCrafts from '@/views/app/favorite-crafts/FavoriteCrafts.vue'
+import PurchasesMade from '@/views/app/purchases-made/PurchasesMade.vue'
 
 
 export const internalRoutes = [
@@ -64,6 +66,12 @@ export const internalRoutes = [
         name: 'FavoriteCrafts',
         alias: 'artesanias-favoritas',
         component: FavoriteCrafts
+    },
+    {
+        path: '/app/purchases-made',
+        name: 'PurchasesMade',
+        alias: 'compras-realizadas',
+        component: PurchasesMade
     },
     {
         path: '/app/profile',
