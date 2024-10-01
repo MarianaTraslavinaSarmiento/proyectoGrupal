@@ -1,11 +1,13 @@
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router'; 
 import TitleSection from '@components/title-section/TitleSection.vue';
 import TrashIcon from '@icons/general/TrashIcon.vue';
 import Buy from '@icons/your-shopping-cart/buy.vue';
 import NoBuy from '@icons/your-shopping-cart/noBuy.vue';
 import BackgroundPattern from '@/components/background-pattern/BackgroundPattern.vue';
 
+const router = useRouter(); 
 const isModalOpen = ref(false);
 
 const openModal = () => {
@@ -14,6 +16,11 @@ const openModal = () => {
 
 const closeModal = () => {
   isModalOpen.value = false;
+};
+
+const confirmPurchase = () => {
+  router.push({ name: 'PurchaseMadeMessage' }); 
+  closeModal(); 
 };
 
 /** !Note: This is just the HTML and CSS, not the logic, because its neccesary to save the name of the products in global state or pinia... */
@@ -67,16 +74,16 @@ const closeModal = () => {
     </div>
 
     <div class="buy_products">
-    <div class="buy_productsBox">
+      <div class="buy_productsBox">
         <button class="buy__now" @click="openModal">Realizar compra</button>
-    </div>
+      </div>
     </div>
 
     <div v-if="isModalOpen" class="modal-overlay">
       <div class="modal-content">
         <h2>¿Seguro de realizar la compra?</h2>
         <div class="modal-buttons">
-          <button @click="closeModal" class="modal-button">
+          <button @click="confirmPurchase" class="modal-button"> 
             <Buy class="modal-icon" />
             Sí
           </button>
@@ -267,8 +274,6 @@ main {
   justify-content: space-between;
 }
 
-
-/* Modal Styles */
 .modal-overlay {
   position: fixed;
   top: 0;
