@@ -52,16 +52,16 @@ export const useUserStore = defineStore('user', {
       },
       async unsubscribeFromWorkshop(workshopId) {
         try {
-          const response = await axios.post("/user/unsubscribe-workshop", { workshopId })
-          this.user = response.data.user
-          toast.success('Te has desinscrito del taller con éxito')
-          return {ok: true}
+            const response = await axios.post("/user/unsubscribe-workshop", { workshopId });
+            this.user = response.data.user;
+            toast.success('Te has desinscrito del taller con éxito');
+            return {ok: true};
         } catch (error) {
-          console.error('Error:', error)
-          toast.error('Ocurrió un error al desinscribirte del taller.')
-          return {ok: false}
+            console.error('Error:', error);
+            toast.error('Ocurrió un error al desinscribirte del taller.');
+            return {ok: false};
         }
-      },
+    },
       async getSubscribedWorkshops() {
         try {
           const response = await axios.get("/user/subscribed-workshops")

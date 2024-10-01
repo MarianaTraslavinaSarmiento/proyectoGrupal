@@ -16,7 +16,7 @@ appUser.get("/favorites", asyncHandler((req, res) => controller.getFavorites(req
 
 // Workshops
 appUser.post("/subscribe-workshop", asyncHandler((req, res) => controller.subscribeToWorkshop(req, res)))
-appUser.post("/unsubscribe-workshop", asyncHandler((req, res) => controller.unsubscribeFromWorkshop(req, res)))
+appUser.post("/unsubscribe-workshop", asyncHandler((req, res) => controller.unsubscribeFromWorkshop(req, res)));
 appUser.get("/subscribed-workshops", asyncHandler((req, res) => controller.getSubscribedWorkshops(req, res)))
 
 module.exports = appUser

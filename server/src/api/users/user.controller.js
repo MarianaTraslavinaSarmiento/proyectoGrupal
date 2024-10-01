@@ -46,12 +46,18 @@ class UserController {
     }
 
     async unsubscribeFromWorkshop(req, res) {
-        const { workshopId } = req.body;
-        const user = await this.#service.unsubscribeFromWorkshop(req.user.id, workshopId);
-        res.json({
-            message: "Unsubscribed from workshop successfully",
-            user
-        });
+        try {
+            const { workshopId } = req.body;
+            const userId = req.user.id; 
+            const user = await this.#service.unsubscribeFromWorkshop(userId, workshopId);
+            res.json({
+                message: "Unsubscribed from workshop successfully",
+                user
+            });
+        } catch (error) {
+            console.error('Error in unsubscribeFromWorkshop:', error);
+            res.status(500).json({ message: "Error al desinscribirse del taller", error: error.message });
+        }
     }
 
     async getSubscribedWorkshops(req, res) {

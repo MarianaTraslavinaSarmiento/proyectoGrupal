@@ -53,10 +53,18 @@ class UserService {
     }
 
     async unsubscribeFromWorkshop(userId, workshopId) {
-        const user = await UserModel.findById(userId);
-        user.workshops_subscribed = user.workshops_subscribed.filter(id => id.toString() !== workshopId);
-        return await user.save();
-    }
+      try {
+          const user = await UserModel.findById(userId);
+          if (!user) {
+              throw new Error('Usuario no encontrado');
+          }
+          user.workshops_subscribed = user.workshops_subscribed.filter(id => id.toString() !== workshopId);
+          return await user.save();
+      } catch (error) {
+          console.error('Error in unsubscribeFromWorkshop service:', error);
+          throw error;
+      }
+  }
 
     async getSubscribedWorkshops(userId) {
         const user = await UserModel.findById(userId).populate('workshops_subscribed');
