@@ -1,7 +1,7 @@
 <script setup>
 import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
 import { ref, onMounted } from 'vue';
-// import emailjs from '@emailjs/browser';
+import emailjs from '@emailjs/browser';
 
 const userProblem = ref('');
 const selectedImage = ref(null);
@@ -57,7 +57,6 @@ const sendEmail = async (problem) => {
       setTimeout(() => {
         showPopup.value = false;
       }, 3000);
-      // Limpiar el formulario después de enviar con éxito
       userProblem.value = '';
       selectedImage.value = null;
     } else {
