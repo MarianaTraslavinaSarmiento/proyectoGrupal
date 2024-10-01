@@ -34,7 +34,8 @@ import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
             <div class="header__title">
                 <HeaderTitle
                 title = "Artesanías"
-                :hideBackButton = true />
+                :hideBackButton=true
+                 />
                 <ChatIcon class="header__title__chat" />
             </div>
         </div>
