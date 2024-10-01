@@ -48,7 +48,7 @@ const displayDiscountedPrice = computed(() => {
 
         <div class="product__card">
             <div class="product__header">
-                <div v-if="product.offer.type == 'discount'" class="product__price">
+                <div v-if="product.offer && product.offer.type == 'discount'" class="product__price">
                     <span class="product__price__original">{{ formatoPesosColombianos(product.price) }}</span>
                     <span class="product__price__discounted">{{ displayDiscountedPrice }}</span>
                 </div>
