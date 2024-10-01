@@ -44,7 +44,7 @@ const filterProducts = (category) => {
 
 <template>
     <main>
-        <HeaderTitle title="Categorías" />
+        <HeaderTitle title="Categorías" customBackRoute="/app/inicio" />
         <CategoriesCarousel :routeParamName="'category'" @selectCategory="filterProducts" />
 
         <div class="filter__products">

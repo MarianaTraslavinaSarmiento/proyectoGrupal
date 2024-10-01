@@ -8,6 +8,9 @@ const props = defineProps({
     backgroundColor: {
         type: String,
         default: 'var(--background-secondary)'
+    },
+    customBackRoute: {  
+        type: String
     }
 })
 
@@ -21,6 +24,7 @@ const goBack = () => {
 </script>
 
 <template>
+    {{console.log('reached', props.customBackRoute)}}
     <div class="header__container__back" @click="goBack">
         <BackIcon class="back__icon" :backgroundColor="backgroundColor"/>
     </div>

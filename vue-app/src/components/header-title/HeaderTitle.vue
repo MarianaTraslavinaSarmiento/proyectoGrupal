@@ -21,8 +21,8 @@ const props = defineProps({
 
 <template>
     <div class="header__container">
-        <div class="header__container__back" @click="goBack">
-            <BackButton class="back__icon" />
+        <div class="header__container__back">
+            <BackButton class="back__icon" :customBackRoute="customBackRoute" />
         </div>
         <div v-if="!hideDiamond" class="title">
             <span class="title__text">{{ title }}</span>
