@@ -13,12 +13,16 @@ const props = defineProps({
 const userStore = useUserStore()
 const user = computed(() => userStore.user)
 
+const openFilePicker = () => {
+
+}
+
 </script>
 
 <template>
   <div class="avatar">
     <img :src="user.profile_pic.url" :alt="user.username" class="avatar-img">
-    <EditIcon v-if="showEditIcon" class="edit-icon" />
+    <EditIcon v-if="showEditIcon" class="edit-icon" @click="openFilePicker" />
   </div>
 </template>
 
