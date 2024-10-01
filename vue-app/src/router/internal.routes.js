@@ -73,6 +73,13 @@ export const internalRoutes = [
         component: ShoppingCart
     },
     {
+        path: '/app/purchase-message',
+        name: 'PurchaseMadeMessage',
+        alias: 'mensaje-de-compra-con-exito',
+        meta: { requiresAuth: true},
+        component: PurchaseMadeMessage
+    },
+    {
         path: '/app/redeem-coupons',
         name: 'RedeemCoupons',
         alias: 'canjear-cupon',
