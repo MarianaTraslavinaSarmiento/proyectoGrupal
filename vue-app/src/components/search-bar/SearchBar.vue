@@ -62,10 +62,10 @@ watch(searchQuery, () => {
 const navigateToResult = (result) => {
     switch(result.type) {
         case 'product':
-            router.push({ name: 'ProductDetails', params: { id: result._id } });
+            router.push({ name: 'detailsOfHandicrafts', params: { id: result._id } });
             break;
         case 'shop':
-            router.push({ name: 'ShopDetails', params: { id: result._id } });
+            router.push({ name: 'ShopsCraftsOne', params: { id: result._id } });
             break;
         case 'workshop':
             router.push({ name: 'WorkshopInfo', params: { workshop: result._id } });
