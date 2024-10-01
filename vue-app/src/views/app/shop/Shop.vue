@@ -88,7 +88,7 @@ const handleSearch = (query) => {
  
     <div v-else class="container">
       <ProductItem v-for="product in filteredProducts" :key="product.id" :productName="product.name"
-        :productPrice="product.price" :imageUrl="product.images_url" :productCompany="shop.name" />
+        :productPrice="product.price" :imageUrl="product.images_url" :productCompany="shop.name" :id="product._id" />
     </div>
 
 
