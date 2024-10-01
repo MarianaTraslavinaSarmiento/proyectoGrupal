@@ -11,13 +11,13 @@ export default [
   {
     pageName: 'Favorites',
     text: 'Lista de favoritos',
-    alias: 'lista-de-favoritos',
+    alias: 'artesanias-favoritas',
     icon: HeartLineIcon,
   },
   {
     pageName: 'Purchases',
     text: 'Compras',
-    alias: 'purchases',
+    alias: 'compras-realizadas',
     icon: ShoppingBagIcon,
   },
   {
