@@ -27,24 +27,23 @@ const props = defineProps({
     },
     offer: {
         type: Object,
-        type: String,
-        required: true
+        required: false
     }
 });
 
-
-const isDiscountOffer = computed(() => props.offer.type === 'discount');
-const isBuyXGetYOffer = computed(() => props.offer.type === 'buyxgety');
-const isFreeShippingOffer = computed(() => props.offer.type === 'freeshipping');
+const showOffer = computed(() => props.offer?.type);
+const isDiscountOffer = computed(() => props.offer?.type === 'discount');
+const isBuyXGetYOffer = computed(() => props.offer?.type === 'buyxgety');
+const isFreeShippingOffer = computed(() => props.offer?.type === 'freeshipping');
 
 const offerText = computed(() => {
     if (isFreeShippingOffer.value) return 'Envío gratis';
-    if (isBuyXGetYOffer.value) return `${props.offer.details.buyX}x${props.offer.details.getY}`;
-    if (isDiscountOffer.value) return `-${props.offer.details.discount_percentage}%`;
+    if (isBuyXGetYOffer.value) return `${props.offer?.details.buyX}x${props.offer.details?.getY}`;
+    if (isDiscountOffer.value) return `-${props.offer?.details.discount_percentage}%`;
 });
 
 const displayPrice = computed(() => {
-    const discountedPrice = props.productPrice * (1 - (props.offer.details?.discount_percentage || 0) / 100);
+    const discountedPrice = props.productPrice * (1 - (props.offer?.details?.discount_percentage || 0) / 100);
     return formatoPesosColombianos(discountedPrice);
 });
 
@@ -52,11 +51,11 @@ const displayPrice = computed(() => {
 
 <template>
     <div class="product__container">
-        <div :class="['discount__icon', { 'bottom-right': !isDiscountOffer }]">
+        <div v-if="showOffer" :class="['discount__icon', { 'bottom-right': !isDiscountOffer }]">
             <DiscountIcon />
         </div>
 
-        <p :class="['discount__text', { 'bottom-right': !isDiscountOffer, 'free-shipping': isFreeShippingOffer }]">
+        <p v-if="showOffer" :class="['discount__text', { 'bottom-right': !isDiscountOffer, 'free-shipping': isFreeShippingOffer }]">
             {{ offerText }}
         </p>
 
@@ -169,7 +168,6 @@ const displayPrice = computed(() => {
                 margin: 0 0 0 0;
                 line-height: 1.2;
                 font-size: 14px;
-                text-overflow: el;
             }
 
             .product__price {

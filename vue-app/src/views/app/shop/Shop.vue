@@ -14,8 +14,8 @@ import ProductItem from '@/components/product-item/ProductItem.vue';
 
 const route = useRoute();
 
-const { shop, isLoadingShop } = useGetOneShop(route.params.id)
-const { products, isLoading } = useGetAllProducts('?shop_id=' + route.params.id)
+const { shop, isLoading: isLoadingShop } = useGetOneShop(route.params.id)
+const { products, isLoading: isLoadingProducts } = useGetAllProducts('?shop_id=' + route.params.id)
 
 
 
@@ -33,7 +33,7 @@ const { products, isLoading } = useGetAllProducts('?shop_id=' + route.params.id)
         </div>
 
         <div v-else class="handicraft__img">
-            <img :src="shop.image_url" alt="">
+            <img style="position: absolute; top: 0; max-height: 350px;" :src="shop.image_url" alt="">
             <div class="workshop__title">
                 <h4>{{ shop.name }}</h4>
             </div>
@@ -62,12 +62,12 @@ const { products, isLoading } = useGetAllProducts('?shop_id=' + route.params.id)
         </div>
 
 
-        <div v-if="isLoading">
+        <div v-if="isLoadingProducts || isLoadingShop">
             <LoadingScreen style="min-height: 60dvh;" />
         </div>
         <div v-else class="container">
             <ProductItem v-for="product in products" :productName="product.name" :productPrice="product.price"
-                :imageUrl="product.images_url" :productCompany="product.shop.name" />
+                :imageUrl="product.images_url" :productCompany="shop.name" />
         </div>
 
 
