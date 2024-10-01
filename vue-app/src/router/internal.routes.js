@@ -11,6 +11,7 @@ import RedeemCoupons from "@views/app/redeem-coupons/RedeemCoupons.vue"
 import EducationalWorkshops from "@views/app/educational-workshops/EducationalWorkshops.vue"
 import WorkshopInfo from '@/views/app/workshop-info/WorkshopInfo.vue'
 import WorkshopAbout from '@/views/app/workshop-about/WorkshopAbout.vue'
+import DetailsHandicrafts from '@/views/app/details-handicrafts/DetailsHandicrafts.vue'
 
 import ProductsByCategories from "@views/app/products-by-categories/ProductsByCategories.vue"
 
@@ -19,6 +20,7 @@ import CommentsToTheApp from "@views/app/comments-to-the-app/CommentsToTheApp.vu
 import Settings from '@/views/app/settings/Settings.vue'
 
 import Chat from '@views/app/chat/Chat.vue'
+import DiscoverOurCrafts from '@/views/app/discover-our-crafts/DiscoverOurCrafts.vue'
 
 
 export const internalRoutes = [
@@ -100,11 +102,23 @@ export const internalRoutes = [
         component: ProductsByCategories
     },
     {
+        path: '/app/details-handicrafts',
+        name: 'detailsOfHandicrafts',
+        alias: 'detalles-de-artesanias',
+        component: DetailsHandicrafts
+    },
+    {
         path: '/app/customer-service',
         name: 'CustomerService',
         alias: 'atencion-al-cliente',
         meta: { requiresAuth: true},
         component: CustomerService
+    },
+    {
+        path: '/app/discover-our-crafts',
+        name: 'DiscoverOurCrafts',
+        alias: 'descubre-nuestras-artesanias',
+        component: DiscoverOurCrafts
     },
     {
         path: '/app/customer-service/chat',

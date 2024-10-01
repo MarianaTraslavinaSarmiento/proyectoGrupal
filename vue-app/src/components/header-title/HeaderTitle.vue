@@ -14,6 +14,10 @@ const props = defineProps({
     },
     customBackRoute: {
         type: String,
+    },
+    hideBackButton: {
+        type: Boolean,
+        default: false
     }
 })
 
