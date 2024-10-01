@@ -5,7 +5,6 @@ class UserService {
         return await UserModel.findOne(query)
     }
 
-
     async getOneById(id) {
         return await UserModel.findById(id)
     }
@@ -42,6 +41,26 @@ class UserService {
             }
           ])
         return user.favorites
+    }
+
+    async subscribeToWorkshop(userId, workshopId) {
+        const user = await UserModel.findById(userId);
+        if (!user.workshops_subscribed.includes(workshopId)) {
+            user.workshops_subscribed.push(workshopId);
+            return await user.save();
+        }
+        return user;
+    }
+
+    async unsubscribeFromWorkshop(userId, workshopId) {
+        const user = await UserModel.findById(userId);
+        user.workshops_subscribed = user.workshops_subscribed.filter(id => id.toString() !== workshopId);
+        return await user.save();
+    }
+
+    async getSubscribedWorkshops(userId) {
+        const user = await UserModel.findById(userId).populate('workshops_subscribed');
+        return user.workshops_subscribed;
     }
 }
 

@@ -35,7 +35,12 @@ const userSchema = new Schema({
     },
     account_id: {
         type: String
-    }
+    },
+    workshops_subscribed: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Workshop',
+        required: false
+    }]
 }, {
     timestamps: true,
     versionKey: false

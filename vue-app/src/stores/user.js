@@ -1,6 +1,5 @@
 import toast from '@/config/toast'
 import axios from '@/config/axios'
-
 import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', {
@@ -17,7 +16,6 @@ export const useUserStore = defineStore('user', {
   
         try {
           const response = await axios.get("/user/profile")
-
           this.user = response.data
         } catch (error) {
           console.error('Error:', error)
@@ -37,8 +35,42 @@ export const useUserStore = defineStore('user', {
         } catch (error) {
           console.error('Error:', error)
           toast.error('Ocurrió un error al actualizar la información de tu perfil.')
+          return {ok: false}
+        }
+      },
+      async subscribeToWorkshop(workshopId) {
+        try {
+          const response = await axios.post("/user/subscribe-workshop", { workshopId })
+          this.user = response.data.user
+          toast.success('Te has inscrito al taller con éxito')
+          return {ok: true}
+        } catch (error) {
+          console.error('Error:', error)
+          toast.error('Ocurrió un error al inscribirte al taller.')
+          return {ok: false}
+        }
+      },
+      async unsubscribeFromWorkshop(workshopId) {
+        try {
+          const response = await axios.post("/user/unsubscribe-workshop", { workshopId })
+          this.user = response.data.user
+          toast.success('Te has desinscrito del taller con éxito')
+          return {ok: true}
+        } catch (error) {
+          console.error('Error:', error)
+          toast.error('Ocurrió un error al desinscribirte del taller.')
+          return {ok: false}
+        }
+      },
+      async getSubscribedWorkshops() {
+        try {
+          const response = await axios.get("/user/subscribed-workshops")
+          return response.data
+        } catch (error) {
+          console.error('Error:', error)
+          toast.error('Ocurrió un error al obtener los talleres inscritos.')
+          return []
         }
       }
     },
-
-  })
+})

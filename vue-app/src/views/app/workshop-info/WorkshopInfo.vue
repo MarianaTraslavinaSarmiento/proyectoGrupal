@@ -5,7 +5,8 @@ import HeaderTitle from "@components/header-title/HeaderTitle.vue";
 import { useRoute } from "vue-router";
 import { useGetOneWorkshop } from "@/composables/useWorkshop";
 import LoadingScreen from "@/components/loading-screen/LoadingScreen.vue";
-import { ref, watchEffect, computed } from 'vue';
+import { ref, watchEffect, computed, onMounted } from 'vue';
+import { useUserStore } from '@/stores/user';
 
 const route = useRoute();
 const workshopId = ref(route.params.workshop);
@@ -34,13 +35,31 @@ const formattedStartDate = computed(() => {
   }
   return '';
 });
+
+const userStore = useUserStore();
+const isSubscribed = ref(false);
+
+onMounted(async () => {
+  await checkSubscription();
+});
+
+const checkSubscription = async () => {
+  const subscribedWorkshops = await userStore.getSubscribedWorkshops();
+  isSubscribed.value = subscribedWorkshops.some(w => w._id === workshop.value._id);
+};
+
+const toggleSubscription = async () => {
+  if (isSubscribed.value) {
+    await userStore.unsubscribeFromWorkshop(workshop.value._id);
+  } else {
+    await userStore.subscribeToWorkshop(workshop.value._id);
+  }
+  await checkSubscription();
+};
 </script>
-
-
 
 <template>
     <main class="main__container">
-
         <div class="start__registration">
             <div class="back__icon">
                 <HeaderTitle :hideDiamond="true" />
@@ -50,7 +69,6 @@ const formattedStartDate = computed(() => {
                 <LoadingScreen style="min-height: 60dvh;"/>
             </div>
             <div v-else class="workshop__container">
-
                 <img :src="workshop.image_url" :alt="workshop.name" class="workshop__image" />
             
                 <div class="workshop__name">
@@ -78,12 +96,11 @@ const formattedStartDate = computed(() => {
                     </div>
 
                     <div class="register__all">
-
-                        <button class="register-button">
+                        <button class="register-button" @click="toggleSubscription">
                         <SubscribeWorkshop class="SubscribeWorkshop__icon" />
-                        <span class="button-text">Inscribirse al taller</span>
+                        <span class="button-text">{{ isSubscribed ? 'Cancelar inscripción' : 'Inscribirse al taller' }}</span>
                         </button>
-                        <h2>*Cupos limitados</h2>
+                        <h2 v-if="!isSubscribed">*Cupos limitados</h2>
                     </div>
                 </section>
             </div>

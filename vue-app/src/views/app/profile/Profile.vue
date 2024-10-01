@@ -2,10 +2,11 @@
 import Avatar from '@components/avatar/Avatar.vue';
 import EditIcon from '@icons/profile/EditIcon.vue';
 import BackgroundPattern from '@components/background-pattern/BackgroundPattern.vue';
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed, onMounted } from 'vue'
 import { useUserStore } from '@/stores/user';
 import { dateToYYYYMMDD, YYYYMMDDToDate } from '@/utils/formatDate';
 import router from '@/router';
+
 const userStore = useUserStore()
 
 const user = ref(JSON.parse(JSON.stringify({
@@ -53,10 +54,16 @@ const saveChanges = async () => {
     discardChanges();
   }
 };
+
+const subscribedWorkshops = ref([]);
+
+onMounted(async () => {
+  subscribedWorkshops.value = await userStore.getSubscribedWorkshops();
+});
 </script>
+
 <template>
   <div class="profile">
-
     <h1>Foto de perfil</h1>
     <Avatar :showEditIcon="true" class="profile-photo" />
 
@@ -96,9 +103,9 @@ const saveChanges = async () => {
           </div>
         </div>
         <div class="profile-section">
-          <label style="max-width: 95px; margin-right: 0px;" >Fecha de nacimiento:</label>
+          <label style="max-width: 95px; margin-right: 0px;">Fecha de nacimiento:</label>
           <div class="input-group">
-            <input style="max-width: 100px; margin-right: 15px;"  type="date" v-model="user.birth_date" :readonly="!isEditing.birth_date">
+            <input style="max-width: 100px; margin-right: 15px;" type="date" v-model="user.birth_date" :readonly="!isEditing.birth_date">
             <button @click="toggleEdit('birth_date')" class="edit-button">
               <EditIcon class="edit-icon" />
             </button>
@@ -109,7 +116,20 @@ const saveChanges = async () => {
         <button @click="discardChanges">Deshacer cambios</button>
         <button @click="saveChanges">Guardar cambios</button>
       </div>
+    </div>
 
+    <div class="subscribed-workshops">
+      <h2>Talleres inscritos</h2>
+      <div v-if="subscribedWorkshops.length > 0" class="workshops-list">
+        <div 
+          v-for="workshop in subscribedWorkshops" 
+          :key="workshop._id"
+          class="workshop-item"
+        >
+          {{ workshop.name }}
+        </div>
+      </div>
+      <p v-else class="no-workshops">No estás inscrito en ningún taller actualmente.</p>
     </div>
   </div>
   <BackgroundPattern/>
@@ -121,6 +141,8 @@ const saveChanges = async () => {
   flex-direction: column;
   align-items: center;
   font-family: var(--font-bellota);
+  overflow-y: auto;
+  height: 100vh;
 
   .edit-icon {
     width: 1.5em;
@@ -241,4 +263,41 @@ const saveChanges = async () => {
     }
   }
 }
+
+.subscribed-workshops {
+  margin-top: 30px;
+  width: 95vw;
+  max-width: 600px;
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: var(--text-contrast);
+    text-align: center;
+  }
+
+  .workshops-list {
+    display: grid;
+    gap: 10px;
+  }
+
+  .workshop-item {
+    background-color: var(--background-secondary);
+    color:  var(--text-color);
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 1.4rem;
+    transition: background-color 0.3s ease;
+  }
+
+  .no-workshops {
+    text-align: center;
+    color:  var(--text-color);
+    font-size: 1.4rem;
+    background-color: var(--background-secondary);
+    padding: 20px;
+    border-radius: 5px;
+  }
+}
+
 </style>
