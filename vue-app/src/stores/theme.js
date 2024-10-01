@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 
 export const useThemeStore = defineStore('theme', {
   state: () => ({
-    availableThemes: ['grey', 'brown', 'ocean'],
+    availableThemes: ['grey', 'brown', 'ocean', 'violet'],
     currentTheme: 'brown'
   }),
   getters: {

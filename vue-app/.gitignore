@@ -1,3 +1,17 @@
-node_modules
+node_modules/
 package-lock.json
 .env
+
+# Ignorar archivos de configuración de EmailJS
+/emailjs-config.json
+/emailjs-logs/
+/*.emailjs.*
+
+# Ignorar carpetas de compilación
+dist/
+build/
+
+# Ignorar configuraciones locales de editores
+.vscode/
+.idea/
+package-lock.json

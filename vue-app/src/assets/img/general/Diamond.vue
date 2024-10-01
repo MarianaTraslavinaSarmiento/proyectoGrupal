@@ -1,0 +1,7 @@
+
+<template>
+    <svg height="100%" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="28" width="39.5976" height="39.5976" transform="rotate(45 28 0)" fill="var(--background-secondary)"/>
+    </svg>
+</template>
+
