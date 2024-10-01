@@ -6,6 +6,7 @@ import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
 import LoadingScreen from '@/components/loading-screen/LoadingScreen.vue'
 import { useGetAllShops } from '@/composables/useShop';
 import router from '@/router';
+import { computed } from 'vue';
 
 const { shops, isLoading } = useGetAllShops();
 
@@ -22,7 +23,7 @@ const handleGoShop = (id) => {
             :showFilter="true" />
 
         <div v-if="isLoading">
-            <LoadingScreen class="loading" style="min-height: 60dvh;"/>
+            <LoadingScreen class="loading" style="min-height: 60dvh;" />
         </div>
         <div v-else class="workshops__container">
             <div @click="handleGoShop(shop._id)" v-for="shop in shops" :key="shop._id" class="item">
@@ -39,7 +40,6 @@ const handleGoShop = (id) => {
 </template>
 
 <style lang="scss" scoped>
-
 .workshops__container {
     font-family: Bellota;
     display: grid;
@@ -76,12 +76,13 @@ const handleGoShop = (id) => {
     &__image {
         height: 100px;
         flex-grow: 1;
+
         img {
             object-fit: cover;
             width: 100%;
             height: 100%;
             border-radius: 0px 0px 5px 5px;
-        }	
+        }
     }
 
 }

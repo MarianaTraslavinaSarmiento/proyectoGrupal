@@ -20,6 +20,7 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (id, done) => {
     try {
         const user = await userService.getOneById(id); 
+        if (!user) return done(null, false);  // user not found
         delete user.password
         done(null, user); 
     } catch (err) {
