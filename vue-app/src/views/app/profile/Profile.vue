@@ -5,8 +5,9 @@ import BackgroundPattern from '@components/background-pattern/BackgroundPattern.
 import { ref, reactive, computed, onMounted } from 'vue'
 import { useUserStore } from '@/stores/user';
 import { dateToYYYYMMDD, YYYYMMDDToDate } from '@/utils/formatDate';
-import router from '@/router';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const userStore = useUserStore()
 
 const user = ref(JSON.parse(JSON.stringify({
@@ -60,6 +61,23 @@ const subscribedWorkshops = ref([]);
 onMounted(async () => {
   subscribedWorkshops.value = await userStore.getSubscribedWorkshops();
 });
+
+const navigateToWorkshop = (workshopId) => {
+  if (workshopId) {
+    router.push({ 
+      name: 'WorkshopInfo', 
+      params: { workshop: workshopId.toString() } 
+    }).catch(error => {
+      console.error('Navigation error:', error);
+    });
+  } else {
+    router.push({ 
+      path: '/app/educational-workshops'
+    }).catch(error => {
+      console.error('Navigation error:', error);
+    });
+  }
+};
 </script>
 
 <template>
@@ -125,11 +143,14 @@ onMounted(async () => {
           v-for="workshop in subscribedWorkshops" 
           :key="workshop._id"
           class="workshop-item"
+          @click="navigateToWorkshop(workshop._id)"
         >
           {{ workshop.name }}
         </div>
       </div>
-      <p v-else class="no-workshops">No estás inscrito en ningún taller actualmente.</p>
+      <p v-else class="no-workshops" @click="navigateToWorkshop()">
+        No estás inscrito en ningún taller actualmente. Haz clic aquí para explorar talleres disponibles.
+      </p>
     </div>
   </div>
   <BackgroundPattern/>
@@ -182,8 +203,6 @@ onMounted(async () => {
     align-items: center;
     justify-content: space-between;
 
-
-
     h2,
     h3 {
       margin-bottom: 10px;
@@ -224,7 +243,6 @@ onMounted(async () => {
         width: 220px;
         height: 40px;
         margin-right: 10px;
-
 
         &::placeholder {
           color: #A67B5B;
@@ -288,6 +306,11 @@ onMounted(async () => {
     border-radius: 5px;
     font-size: 1.4rem;
     transition: background-color 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--background-tertiary);
+    }
   }
 
   .no-workshops {
@@ -297,7 +320,11 @@ onMounted(async () => {
     background-color: var(--background-secondary);
     padding: 20px;
     border-radius: 5px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--background-tertiary);
+    }
   }
 }
-
 </style>
