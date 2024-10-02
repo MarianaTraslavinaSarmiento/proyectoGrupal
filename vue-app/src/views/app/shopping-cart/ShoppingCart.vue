@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router'; 
 import TitleSection from '@components/title-section/TitleSection.vue';
 import Buy from '@icons/your-shopping-cart/buy.vue';
@@ -11,6 +11,7 @@ import ShoppingCartProduct from './components/ShoppingCartProduct.vue';
 
 const router = useRouter(); 
 const isModalOpen = ref(false);
+const shoppingCartStore = useShoppingCartStore();
 
 const openModal = () => {
   isModalOpen.value = true;
@@ -21,12 +22,54 @@ const closeModal = () => {
 };
 
 const confirmPurchase = () => {
-  router.push({ name: 'PurchaseMadeMessage' }); 
   closeModal(); 
+  shoppingCartStore.purchaseProducts();
 };
 
-const shoppingCartStore = useShoppingCartStore();
+const calculateProductPrice = (product) => {
+  if (product.offer && product.offer.type === 'discount') {
+    const discountPercentage = product.offer.details.discount_percentage;
+    return product.price * (1 - discountPercentage / 100);
+  }
+  return product.price;
+};
 
+const calculateProductQuantity = (product) => {
+  if (product.offer && product.offer.type === 'buyxgety') {
+    const { buyX, getY } = product.offer.details;
+    const totalItems = (buyX + getY) * product.quantity;
+    const paidItems = buyX * product.quantity;
+    return { total: totalItems, paid: paidItems };
+  }
+  return { total: product.quantity, paid: product.quantity };
+};
+
+const subtotal = computed(() => {
+  return shoppingCartStore.productsInCart.reduce((acc, product) => {
+    const price = calculateProductPrice(product);
+    const { paid } = calculateProductQuantity(product);
+    return acc + (price * paid);
+  }, 0);
+});
+
+const shippingCost = computed(() => {
+  return shoppingCartStore.productsInCart.reduce((acc, product) => {
+    if (product.offer && product.offer.type === 'freeshipping') {
+      return acc;
+    }
+    return acc + (product.shipping_price * product.quantity);
+  }, 0);
+});
+
+const total = computed(() => subtotal.value + shippingCost.value);
+
+const updateQuantity = (productId, newQuantity) => {
+  shoppingCartStore.updateProductQuantity(productId, newQuantity);
+};
+
+const removeProduct = (productId) => {
+  shoppingCartStore.removeProductFromCart(productId);
+};
 
 </script>
 
@@ -36,7 +79,13 @@ const shoppingCartStore = useShoppingCartStore();
     <TitleSection title="Tu carrito de compras" subtitle="Revisa aquí los productos que añadiste a tu carrito" />
 
     <div class="products">
-      <ShoppingCartProduct v-for="product in shoppingCartStore.productsInCart" :product="product"/>
+      <ShoppingCartProduct 
+        v-for="product in shoppingCartStore.productsInCart" 
+        :key="product._id" 
+        :product="product"
+        @update-quantity="updateQuantity"
+        @remove-product="removeProduct"
+      />
     </div>
 
     <div class="discount__coupon">
@@ -46,19 +95,18 @@ const shoppingCartStore = useShoppingCartStore();
     <div class="order__summary">
       <div class="summary__row">
         <span class="summary__label">Sub total</span>
-        <span class="summary__value">S/.90</span>
+        <span class="summary__value">{{ formatoPesosColombianos(subtotal) }}</span>
       </div>
       <div class="summary__row">
         <span class="summary__label">Gastos de envío</span>
-        <span class="summary__value">S/.20</span>
+        <span class="summary__value">{{ formatoPesosColombianos(shippingCost) }}</span>
       </div>
     </div>
 
     <div class="summary-row total">
       <span class="summary__label">Total</span>
-      <span class="summary__value">S/.110</span>
+      <span class="summary__value">{{ formatoPesosColombianos(total) }}</span>
     </div>
-
     <div class="buy_products">
       <div class="buy_productsBox">
         <button class="buy__now" @click="openModal">Realizar compra</button>

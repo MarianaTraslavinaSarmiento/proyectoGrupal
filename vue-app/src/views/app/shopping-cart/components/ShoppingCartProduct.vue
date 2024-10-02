@@ -34,12 +34,16 @@ const displayDiscountPrice = computed(() => {
 
 });
 
+const deleteFromCart = () => {
+    shoppingCartStore.removeProductFromCart(props.product._id)
+}
+
 </script>
 
 <template>
     <div class="product__card">
         <div class="product__image">
-          <img :src="product.images_url" alt="Vasija peque a">
+          <img :src="product.images_url" :alt="product.name">
         </div>
         <div class="product__info">
           <p class="product__title">{{ product.name }}</p>
@@ -53,7 +57,7 @@ const displayDiscountPrice = computed(() => {
             <button class="quantity__btn plus" @click="handleQuantity('plus')">+</button>
           </div>
         </div>
-        <button class="delete__btn" aria-label="Delete item">
+        <button class="delete__btn" aria-label="Delete item" @click="deleteFromCart">
           <TrashIcon class="delete__icon" />
         </button>
     </div>
