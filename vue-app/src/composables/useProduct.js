@@ -110,20 +110,40 @@ export const useAddToFavorites = (productId) => {
 
 
 export const useDeleteFavorites = (productId) => {
-
-    const url = '/user/delete-favorites'
-    
+    const userStore = useUserStore();
+    const url = '/user/delete-favorites/' + productId
 
     const deleteProductsFromFavorites= async() => {
 
         try {
-            await axios.delete(url, { productId })
-            toast.success('Producto eliminado de favoritos')
+            await axios.delete(url)
+            userStore.user.favorites = userStore.user.favorites.filter(favorite => favorite != productId)
         } catch (err) {
             console.error(err)
-            toast.error('Error al eliminar producto de favoritos')
         }
     }
 
     deleteProductsFromFavorites()
+}
+
+
+
+export const useGetAllFavoriteProducts = () => {
+    const url = '/user/favorites'
+    const favoriteProducts = ref()
+    const isLoading = ref(true)
+
+    const getAllFavoriteProducts = async () => {
+        try {
+            const {data} = await axios.get(url)
+            favoriteProducts.value = data
+            isLoading.value = false
+        } catch (err) {
+            toast.error('Error al cargar los productos favoritos')
+        }
+
+    }
+
+    getAllFavoriteProducts()
+    return { favoriteProducts, isLoading }
 }

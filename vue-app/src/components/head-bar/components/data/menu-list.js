@@ -11,7 +11,7 @@ export default [
   {
     pageName: 'Favorites',
     text: 'Lista de favoritos',
-    alias: 'artesanias-favoritas',
+    alias: 'artesanias-favoritas/textiles',
     icon: HeartLineIcon,
   },
   {

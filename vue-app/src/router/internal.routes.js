@@ -63,9 +63,10 @@ export const internalRoutes = [
         component: DiscountsPromotions
     },
     {
-        path: '/app/favorite-crafts',
+        path: '/app/favorite-crafts/:category',
         name: 'FavoriteCrafts',
-        alias: 'artesanias-favoritas',
+        alias: 'artesanias-favoritas/:category',
+        meta: { requiresAuth: true },
         component: FavoriteCrafts
     },
     {
