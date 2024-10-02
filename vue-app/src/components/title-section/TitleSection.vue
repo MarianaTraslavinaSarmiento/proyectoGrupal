@@ -60,7 +60,7 @@
 
         &__subtitle {
             color: rgb(from var(--text-contrast) r g b / 50%);
-            font-size: 1.4rem;
+            font-size: 1.3rem;
         }
     }
 
