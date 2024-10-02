@@ -1,7 +1,8 @@
 const PurchaseModel = require("./purchase.model")
 const ProductModel = require("../products/product.model")
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
-const { ALLOWED_ORIGIN } = require("../../config/environment")
+const { ALLOWED_ORIGIN } = require("../../config/environment");
+const VoucherModel = require("../vouchers/voucher.model");
 
 class PurchaseService {
     async getAllPurchasesByUserId(userId) {
@@ -24,83 +25,108 @@ class PurchaseService {
     }
 
 
-    async registerNewPurchase(products, userId) {
-        // Verificar y calcular el precio total
-        let totalAmount = 0;
-        let lineItems = [];
+    async registerNewPurchase(products, userId, coupon) {
+        try {
+            let totalAmount = 0;
+            let lineItems = [];
 
-        for (let product of products) {
-            // Obtener el producto actual de la base de datos para verificar el precio y las ofertas
-            const dbProduct = await ProductModel.findById(product._id);
-            if (!dbProduct) {
-                throw new Error(`Producto no encontrado: ${product._id}`);
+            // Verificar y aplicar el cupón
+            let discountPercentage = 0;
+            if (coupon) {
+                const validCoupon = await VoucherModel.findOne({ 
+                    code: coupon.code, 
+                    user_id: userId,
+                });
+                if (validCoupon) {
+                    discountPercentage = validCoupon.discount / 100;
+                } else {
+                    throw new Error('Cupón inválido o expirado');
+                }
             }
 
-            let price = dbProduct.price;
-            let quantity = product.quantity;
+            for (let product of products) {
+                const dbProduct = await ProductModel.findById(product._id);
+                if (!dbProduct) {
+                    throw new Error(`Producto no encontrado: ${product._id}`);
+                }
 
-            // Aplicar descuentos si existen
-            if (dbProduct.offer && dbProduct.offer.type === 'discount') {
-                const discountPercentage = dbProduct.offer.details.discount_percentage;
-                price = price * (1 - discountPercentage / 100);
-            }
+                let price = this.calculateProductPrice(dbProduct, product.quantity);
+                let quantity = this.calculateProductQuantity(dbProduct, product.quantity);
 
-            // Manejar oferta "buyxgety"
-            if (dbProduct.offer && dbProduct.offer.type === 'buyxgety') {
-                const { buyX, getY } = dbProduct.offer.details;
-                const sets = Math.floor(quantity / (buyX + getY));
-                const remainder = quantity % (buyX + getY);
-                quantity = (sets * buyX) + Math.min(remainder, buyX);
-            }
+                // Aplicar descuento del cupón
+                price = price * (1 - discountPercentage);
 
-            let productTotal = price * quantity;
+                let productTotal = price * quantity;
 
-            // Añadir gastos de envío si no hay oferta de envío gratis
-            if (!(dbProduct.offer && dbProduct.offer.type === 'freeshipping')) {
-                productTotal += dbProduct.shipping_price * product.quantity;
-            }
+                // Añadir gastos de envío si no hay oferta de envío gratis
+                if (!(dbProduct.offer && dbProduct.offer.type === 'freeshipping')) {
+                    productTotal += dbProduct.shipping_price * product.quantity;
+                }
 
-            totalAmount += productTotal;
+                totalAmount += productTotal;
 
-            lineItems.push({
-                price_data: {
-                    currency: 'cop',
-                    product_data: {
-                        name: dbProduct.name,
+                lineItems.push({
+                    price_data: {
+                        currency: 'cop',
+                        product_data: {
+                            name: dbProduct.name,
+                        },
+                        unit_amount: Math.round(price * 100), // Stripe espera el precio en centavos
                     },
-                    unit_amount: Math.round(price * 100), // Stripe espera el precio en centavos
-                },
-                quantity: quantity,
+                    quantity: quantity,
+                });
+            }
+
+            // Crear sesión de Stripe
+            const session = await stripe.checkout.sessions.create({
+                payment_method_types: ['card'],
+                line_items: lineItems,
+                mode: 'payment',
+                success_url: `${ALLOWED_ORIGIN}/app/mensaje-de-compra-con-exito?session_id={CHECKOUT_SESSION_ID}` ,
+                cancel_url: `${ALLOWED_ORIGIN}/app/carrito-de-compras`,
             });
+
+            // Crear nuevo registro de compra
+            const purchase = new PurchaseModel({
+                user_id: userId,
+                products: products.map(p => ({
+                    productId: p._id,
+                    quantity: p.quantity,
+                    price: p.price,
+                    offer: p.offer
+                })),
+                amount: totalAmount,
+                stripeSessionId: session.id,
+                status: 'pending',
+                currency: 'cop',
+            });
+
+            await purchase.save();
+
+            return { purchaseId: purchase._id, sessionId: session.id, sessionUrl: session.url };
+        } catch (error) {
+            console.error('Error al procesar la compra:', error);
+            throw new Error('No se pudo procesar la compra. Por favor, inténtelo de nuevo.');
         }
+    }
 
-        // Crear sesión de Stripe
-        const session = await stripe.checkout.sessions.create({
-            payment_method_types: ['card'],
-            line_items: lineItems,
-            mode: 'payment',
-            success_url: `${ALLOWED_ORIGIN}/app/mensaje-de-compra-con-exito?session_id={CHECKOUT_SESSION_ID}` ,
-            cancel_url: `${ALLOWED_ORIGIN}/app/carrito-de-compras`,
-        });
+    calculateProductPrice(product, quantity) {
+        let price = product.price;
+        if (product.offer && product.offer.type === 'discount') {
+            const discountPercentage = product.offer.details.discount_percentage;
+            price = price * (1 - discountPercentage / 100);
+        }
+        return price;
+    }
 
-        // Crear nuevo registro de compra
-        const purchase = new PurchaseModel({
-            user_id: userId,
-            products: products.map(p => ({
-                productId: p._id,
-                quantity: p.quantity,
-                price: p.price,
-                offer: p.offer
-            })),
-            amount: totalAmount,
-            stripeSessionId: session.id,
-            currency: 'cop',
-            status: 'pending'
-        });
-
-        await purchase.save();
-
-        return { purchaseId: purchase._id, sessionId: session.id, sessionUrl: session.url };
+    calculateProductQuantity(product, requestedQuantity) {
+        if (product.offer && product.offer.type === 'buyxgety') {
+            const { buyX, getY } = product.offer.details;
+            const sets = Math.floor(requestedQuantity / (buyX + getY));
+            const remainder = requestedQuantity % (buyX + getY);
+            return (sets * buyX) + Math.min(remainder, buyX);
+        }
+        return requestedQuantity;
     }
 
     async confirmPurchase(sessionId) {

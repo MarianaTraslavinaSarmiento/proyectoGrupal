@@ -88,8 +88,12 @@ const removeProduct = (productId) => {
       />
     </div>
 
-    <div class="discount__coupon">
-      <p>Añadir cupón de descuento</p>
+    <div v-if="shoppingCartStore.currentCoupon" class="discount__coupon" style="display: flex; flex-direction: column;">
+      <p>Cupón de descuento: <span style="font-weight: bold; color: var(--color-accent);">{{ shoppingCartStore.currentCoupon.code }}</span></p>
+      <p>Descuento: <span style="font-weight: bold; color: var(--color-accent);">{{ shoppingCartStore.currentCoupon.discount }}%</span> </p>
+    </div>
+    <div v-else class="discount__coupon">
+      <router-link to="/app/canjear-cupon">Añadir cupón de descuento</router-link>
     </div>
 
     <div class="order__summary">
@@ -109,7 +113,7 @@ const removeProduct = (productId) => {
     </div>
     <div class="buy_products">
       <div class="buy_productsBox">
-        <button class="buy__now" @click="openModal">Realizar compra</button>
+        <button v-if="shoppingCartStore.productsInCart.length" class="buy__now" @click="openModal">Realizar compra</button>
       </div>
     </div>
 

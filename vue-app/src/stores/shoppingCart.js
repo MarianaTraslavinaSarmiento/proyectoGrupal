@@ -6,7 +6,8 @@ import router from '@/router'
 
 export const useShoppingCartStore = defineStore('shoppingCart', {
     state: () => ({
-        products: []
+        products: [],
+        currentCoupon: null
     }),
     getters: {
         productsInCart: (state) => state.products
@@ -30,16 +31,17 @@ export const useShoppingCartStore = defineStore('shoppingCart', {
         },
         async purchaseProducts() {
             try {
-                const response = await axios.post('/purchase', { products: this.products })
+                const response = await axios.post('/purchase', {
+                    products: this.products,
+                    coupon: this.currentCoupon
+                })
                 
                 if (response.data && response.data.sessionUrl) {
-                    // Redirigir al usuario a la página de pago de Stripe
                     window.location.href = response.data.sessionUrl
                 } else {
                     throw new Error('No se recibió la URL de sesión de Stripe')
                 }
 
-                // No limpiamos el carrito aquí, lo haremos después de confirmar el pago
                 toast.success('Redirigiendo al pago...')
             } catch (error) {
                 console.error('Error al iniciar la compra:', error)
@@ -62,6 +64,13 @@ export const useShoppingCartStore = defineStore('shoppingCart', {
                 toast.error('Ocurrió un error al confirmar la compra. Por favor, contacte con soporte.')
                 router.replace('/app/home')
             }
+        },
+        setCurrentCoupon(coupon) {
+            if (this.productsInCart.length === 0) {
+                toast.error('No hay productos en el carrito')
+                return
+            }
+            this.currentCoupon = coupon
         },
         clearCart() {
             this.products = []

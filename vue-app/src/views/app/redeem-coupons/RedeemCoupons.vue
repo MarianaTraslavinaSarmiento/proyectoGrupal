@@ -2,80 +2,61 @@
 import { ref } from 'vue';
 import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
 import CouponIcon from "@icons/general/CouponIcon.vue";
+import { useValidateCoupon, useGetAllCoupons } from '@/composables/useCoupon';
+import LoadingScreen from '@/components/loading-screen/LoadingScreen.vue';
+import { useShoppingCartStore } from '@/stores/shoppingCart';
+import router from '@/router';
 
 const couponCode = ref('');
-
-const validateCoupon = () => {
-
-  console.log('Validating coupon:', couponCode.value);
-};
-
-const useCoupon = () => {
-
-  console.log('Using coupon');
-};
-
-
-const coupons = ref([
-  {
-    id: 1,
-    image: "https://images.unsplash.com/photo-1690214141978-3a038a437dec?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z2F0aXRvJTIwZW4lMjBsYSUyMGNhbWF8ZW58MHx8MHx8fDA%3D",
-    discount: "50% de descuento en cartucheras del Taller Awaq Ayllus",
-    expiry: "4/9/23"
-  },
-  // Add more coupons here for demonstration
-  {
-    id: 2,
-    image: "https://images.unsplash.com/photo-1690214141978-3a038a437dec?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z2F0aXRvJTIwZW4lMjBsYSUyMGNhbWF8ZW58MHx8MHx8fDA%3D",
-    discount: "25% de descuento en tejidos del Taller Inca",
-    expiry: "15/9/23"
-  },
-  {
-    id: 3,
-    image: "https://images.unsplash.com/photo-1690214141978-3a038a437dec?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z2F0aXRvJTIwZW4lMjBsYSUyMGNhbWF8ZW58MHx8MHx8fDA%3D",
-    discount: "10% de descuento en cerámicas del Taller Cusco",
-    expiry: "30/9/23"
-  },
-  {
-    id: 4,
-    image: "https://images.unsplash.com/photo-1690214141978-3a038a437dec?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z2F0aXRvJTIwZW4lMjBsYSUyMGNhbWF8ZW58MHx8MHx8fDA%3D",
-    discount: "10% de descuento en cerámicas del Taller Cusco",
-    expiry: "30/9/23"
-  },
-  {
-    id: 5,
-    image: "https://images.unsplash.com/photo-1690214141978-3a038a437dec?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Z2F0aXRvJTIwZW4lMjBsYSUyMGNhbWF8ZW58MHx8MHx8fDA%3D",
-    discount: "10% de descuento en cerámicas del Taller Cusco",
-    expiry: "30/9/23"
+const validCoupons = ref([]);
+const validateCoupon = async () => {
+  if (!couponCode.value) return;
+  const validCoupon = await useValidateCoupon(couponCode.value);
+  if (validCoupon) {
+    validCoupons.value.push(validCoupon);
+    couponCode.value = '';
   }
-]);
+};
+
+const { coupons, isLoading } = useGetAllCoupons()
+
+const shoppingCartStore = useShoppingCartStore();
+const useCoupon = (coupon) => {
+  shoppingCartStore.setCurrentCoupon(coupon)
+  router.push('/app/shopping-cart')
+};
+
+
 </script>
 
 <template>
+
   <div class="customer-service">
-    <header-title :title="'Canjear Cupon'" :hideDiamond="false" />
+    <HeaderTitle :title="'Canjear Cupon'" :hideDiamond="false" />
     
-    <div class="content">
+    <div v-if="isLoading">
+      <LoadingScreen style="min-height: 60dvh;" />
+    </div>
+    <div v-else class="content">
       <h2 class="question">¿Cuentas con algún cupón de descuento?</h2>
       <p class="subtext">Canjealo aquí</p>
       
       <div class="coupon-input">
         <CouponIcon class="coupon-icon" />
         <input v-model="couponCode" type="text" placeholder="Ingresa tu cupón" />
-        <button @click="validateCoupon">Validar</button>
+        <button @click="validateCoupon" :disabled="!couponCode">Validar</button>
       </div>
-      
       <div class="active-coupons">
         <h3>Cupones vigentes</h3>
         <p class="expiry-note">*Usar antes de la fecha de vencimiento</p>
         
         <div class="coupon-container">
-          <div v-for="coupon in coupons" :key="coupon.id" class="coupon-card">
-            <img :src="coupon.image" alt="Coupon Image" class="coupon-image" />
+          <div v-for="coupon in [...coupons, ...validCoupons]" :key="coupon.id" class="coupon-card">
+            <img :src="coupon.image_url" alt="Coupon Image" class="coupon-image" />
             <div class="coupon-details">
-              <p class="discount">{{ coupon.discount }}</p>
-              <p class="expiry">Fecha de vencimiento: {{ coupon.expiry }}</p>
-              <button @click="useCoupon" class="use-coupon">Usar cupón</button>
+              <p class="discount">{{ coupon.description }}</p>
+              <p class="expiry">Fecha de vencimiento: {{ new Date(coupon.expiry_date).toLocaleDateString() }}</p>
+              <button @click="useCoupon(coupon)" class="use-coupon">Usar cupón</button>
             </div>
           </div>
         </div>

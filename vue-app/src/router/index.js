@@ -18,14 +18,11 @@ router.beforeEach(async (to, from, next) => {
     } else {
       next()
     }
-  }
-
-  if (to.meta.goHome && userStore.isAuthenticated) {
+  } else if (to.meta.goHome && userStore.isAuthenticated) {
     next('/app/home')
+  } else {
+    next()
   }
-
-  next()
-
 })
 
 export default router

@@ -13,10 +13,14 @@ class PurchaseController {
     }
 
     async registerNewPurchase(req, res) {
-        const { products } = req.body;
+        const { products, coupon } = req.body;
         const userId = req.user._id; 
 
-        const purchaseResult = await this.#service.registerNewPurchase(products, userId);
+        if (!products || !Array.isArray(products) || products.length === 0) {
+            return res.status(400).json({ message: 'Se requiere un array de productos válido' });
+        }
+
+        const purchaseResult = await this.#service.registerNewPurchase(products, userId, coupon);
 
         res.status(200).json({
             message: 'Compra registrada exitosamente',
