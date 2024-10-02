@@ -1,43 +1,45 @@
 <script setup>
 import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
 import ChatIcon from '@/assets/icons/general/ChatIcon.vue';
+import { useGetAllPurchases } from '@/composables/usePurchase';
+import { useUserStore } from '@/stores/user';
+import { formatoPesosColombianos } from '@/utils/formatMoney';
+import ProductItem from '@/components/product-item/ProductItem.vue';
+
+const userStore = useUserStore();
+const { purchases, isLoading } = useGetAllPurchases(userStore.userInfo._id);
+
 </script>
 
 <template>
     <main>
         <HeaderTitle title="Compras realizadas" />
         <div class="carousel__container">
-            <div class="carousel__item">
+            <div v-for="product in purchases" :key="product._id" class="carousel__item">
                 <div class="carousel__image">
-                    <img src="" alt="">
+                    <img :src="product.images_url" alt="">
                 </div>
                 <div class="carousel__details">
-                    <h2 class="carousel__title">Vasija pequeña con diseño de flor</h2>
-                    <p class="carousel__price">S/.50</p>
-                    <p class="carousel__dimensions">13x10 cm, 2 KG</p>
-                    <p class="carousel__producer">Asoc. de artesanos productores de Chazuta</p>
+                    <h2 class="carousel__title">{{ product.name }}</h2>
+                    <p class="carousel__price">{{ formatoPesosColombianos(product.price) }}</p>
+                    <p class="carousel__dimensions">{{ product.size }}, {{ product.weight }}</p>
+                    <p class="carousel__producer">{{ product.shop.name }}</p>
                     <button class="carousel__button">Ver seguimiento del producto</button>
                 </div>
                 <ChatIcon class="carousel__chat__icon" />
             </div>
+        </div>
 
-            <div class="carousel__item">
-                <div class="carousel__image">
-                    <img src="" alt="">
-                </div>
-                <div class="carousel__details">
-                    <h2 class="carousel__title">Vasija pequeña con diseño de flor</h2>
-                    <p class="carousel__price">S/.50</p>
-                    <p class="carousel__dimensions">13x10 cm, 2 KG</p>
-                    <p class="carousel__producer">Asoc. de artesanos productores de Chazuta</p>
-                    <button class="carousel__button">Ver seguimiento del producto</button>
-                </div>
-                <ChatIcon class="carousel__chat__icon" />
-            </div>
+        <p class="follow__more">Sigue viendo más artesanías</p>
 
+        <div class="container__carousel">
+<!-- 
+            <ProductItem v-for="product in products" :key="product.id" :product-price="product.price" :id="product._id"
+                :offer="product.offer" :product-name="product.name" :image-url="product.images_url"
+                :product-company="product.shop.name" /> -->
 
         </div>
-        
+
     </main>
 </template>
 
@@ -48,7 +50,7 @@ main {
 
 .carousel {
     &__container {
-        max-height: 400px;
+        max-height: 350px;
         overflow-y: auto;
         padding: 20px;
         display: flex;
@@ -65,6 +67,7 @@ main {
 
     &__item {
         display: flex;
+        max-height: 150px;
         background-color: var(--background-secondary);
         border-radius: 10px;
         padding: 20px;
@@ -86,7 +89,7 @@ main {
 
         img {
             width: 100%;
-            height: auto;
+            height: 100%;
             border-radius: 5px;
         }
     }
@@ -117,16 +120,31 @@ main {
     &__button {
         margin-top: auto;
         background-color: var(--background-primary);
-        color:  var(--text-color);
+        color: var(--text-color);
         border: none;
         padding: 5px;
         border-radius: 5px;
         cursor: pointer;
         transition: background-color 0.3s ease;
 
-        &:hover {
-            background-color: #f0f0f0;
-        }
     }
+
+}
+
+
+.follow__more {
+    color: var(--text-contrast);
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding: 2rem;
+}
+
+.container__carousel {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 2rem 3rem 0rem 3rem;
 }
 </style>

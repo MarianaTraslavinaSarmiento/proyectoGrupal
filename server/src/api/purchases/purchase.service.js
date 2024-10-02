@@ -5,8 +5,24 @@ const { ALLOWED_ORIGIN } = require("../../config/environment")
 
 class PurchaseService {
     async getAllPurchasesByUserId(userId) {
-        return await PurchaseModel.findById(userId)
+        const purchases = await PurchaseModel.find({user_id: userId}).populate({
+            path: "products.productId",
+            model: "Product",
+            populate: {
+                path: "shop_id",
+                model: "Shop",
+            }
+        });
+
+        return purchases.flatMap(purchase => {
+            return purchase.products.map(product => ({
+                ...product.productId.toObject(),
+                shop: product.productId.shop_id.toObject(),
+                quantity: product.quantity,
+            }))
+        });
     }
+
 
     async registerNewPurchase(products, userId) {
         // Verificar y calcular el precio total

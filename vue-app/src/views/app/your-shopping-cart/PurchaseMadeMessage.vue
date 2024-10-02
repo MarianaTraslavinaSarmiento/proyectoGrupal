@@ -8,7 +8,7 @@ const email = ref('');
 const router = useRouter(); 
 
 const goToHome = () => {
-  router.push({ name: 'Home' }); 
+  router.replace('/app/home')
 };
 </script>
 

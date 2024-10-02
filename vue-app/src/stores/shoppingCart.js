@@ -53,7 +53,7 @@ export const useShoppingCartStore = defineStore('shoppingCart', {
                 if (response.data.status === 'success') {
                     toast.success('Compra realizada con éxito')
                     this.clearCart()
-                    router.replace('/app/home')
+                    
                 } else {
                     throw new Error('El pago no se completó correctamente')
                 }
