@@ -3,7 +3,9 @@
 import HeaderTitle from '@/components/header-title/HeaderTitle.vue';
 import CategoriesCarousel from '@/components/categories-carousel/CategoriesCarousel.vue';
 import ProductItem from '@/components/product-item/ProductItem.vue';
+import { useAddToFavorites } from '@/composables/useProduct';
 
+const { products } = useAddToFavorites()
 
 </script>
 
@@ -16,13 +18,14 @@ import ProductItem from '@/components/product-item/ProductItem.vue';
 
         <div class="container">
 
-            <ProductItem 
+            <!-- <ProductItem v-for="product in products"
+            :key="product.id"
             :showDiscount="false"
             :showDiscountText="false"
-            productName="Talla en piedra" 
-            productPrice="S/ 100.00" 
-            productCompany="Talla en piedra"
-            :showDelete="true" />
+            :productName="product.name" 
+            :productPrice="price.price" 
+            :productCompany="Talla en piedra"
+            :showDelete="true" /> -->
 
         </div>
     </main>

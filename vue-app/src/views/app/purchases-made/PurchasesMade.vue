@@ -5,9 +5,11 @@ import { useGetAllPurchases } from '@/composables/usePurchase';
 import { useUserStore } from '@/stores/user';
 import { formatoPesosColombianos } from '@/utils/formatMoney';
 import ProductItem from '@/components/product-item/ProductItem.vue';
+import { useGetAllProducts } from '@/composables/useProduct';
 
 const userStore = useUserStore();
 const { purchases, isLoading } = useGetAllPurchases(userStore.userInfo._id);
+const { products } = useGetAllProducts()
 
 </script>
 
@@ -33,10 +35,14 @@ const { purchases, isLoading } = useGetAllPurchases(userStore.userInfo._id);
         <p class="follow__more">Sigue viendo más artesanías</p>
 
         <div class="container__carousel">
-<!-- 
-            <ProductItem v-for="product in products" :key="product.id" :product-price="product.price" :id="product._id"
-                :offer="product.offer" :product-name="product.name" :image-url="product.images_url"
-                :product-company="product.shop.name" /> -->
+
+            <ProductItem v-for="product in products" 
+            :key="product.id" 
+            :productPrice="product.price" 
+            :id="product._id"
+            :productName="product.name" 
+            :imageUrl="product.images_url"
+            :productCompany="product.shop.name" />
 
         </div>
 
