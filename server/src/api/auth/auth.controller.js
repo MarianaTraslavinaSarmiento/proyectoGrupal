@@ -19,12 +19,24 @@ class AuthController {
     }
 
     async logout(req, res) {
-        req.session.destroy((err) => {
+        console.log('Recibida solicitud de logout');
+        req.logout((err) => {
             if (err) {
+                console.error('Error al cerrar sesión:', err);
                 return res.status(500).json({ error: 'Error logging out' });
             }
-            res.json({ message: "Logout successful" });
-        });  
+            req.session.destroy((err) => {
+                if (err) {
+                    console.error('Error al destruir la sesión:', err);
+                    return res.status(500).json({ error: 'Error destroying session' });
+                }
+                console.log('Sesión destruida exitosamente');
+                res.json({ 
+                    message: "Logout successful",
+                    redirectUrl: "/signup" 
+                });
+            });
+        });
     }
 
     async verify(req, res) {

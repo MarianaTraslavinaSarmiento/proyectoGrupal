@@ -4,6 +4,9 @@ import SideItemLink from './SideItemLink.vue'
 import menuList from './data/menu-list.js'
 import DiamondIcon from '@icons/general/DiamondIcon.vue'
 import DiamondSeparator from '@components/diamond-separator/DiamondSeparator.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const props = defineProps({
     isOpen: {
@@ -16,15 +19,38 @@ const props = defineProps({
     }
 });
 
-const emit = defineEmits(['close', 'logout']);
+const emit = defineEmits(['close']);
 
 const closeMenu = () => {
     emit('close');
 };
 
-const logout = () => {
-    emit('logout');
+const logout = async () => {
+    try {
+        const url = `${import.meta.env.VITE_API_URL}/auth/logout`;
+        console.log('Intentando logout con URL:', url);
+        
+        const response = await fetch(url, {
+            method: 'GET',
+            credentials: 'include'
+        });
+        
+        if (response.ok) {
+            const data = await response.json();
+            console.log('Logout exitoso, redirigiendo...');
+            if (data.redirectUrl) {
+                window.location.href = data.redirectUrl;
+            } else {
+                await router.push('/login');
+            }
+        } else {
+            console.error('Error en logout:', await response.text());
+        }
+    } catch (error) {
+        console.error('Error durante logout:', error);
+    }
 };
+
 </script>
 
 <template>
@@ -50,7 +76,7 @@ const logout = () => {
             </nav>
             <div class="footer-info">
                 <span class="footer-text">Aplicación potenciada por:</span>
-                <img src="https://caroline.sirv.com/ruraq%20maki/Ministerio%20de%20Arte%20y%20Cultura.png" alt="Ministerio de Arte y Cultura" class="footer-image" />
+                <img src="https://caroline.sirv.com/ruraq%20maki/2.png" alt="Ministerio de Arte y Cultura" class="footer-image" />
             </div>
         </div>
     </Transition>

@@ -40,7 +40,14 @@ export const routes = [
         path: '/signup',
         name: 'signup',
         component: SingUp,
-        meta: { goHome: true }
+        meta: { goHome: true },
+        beforeEnter: (to, from, next) => {
+            if (from.name === 'signup') {
+                next(false);
+            } else {
+                next();
+            }
+        }
     },
     {   
         path: '/signup/ruraqmaki',
@@ -56,3 +63,4 @@ export const routes = [
     }
 
 ]
+
