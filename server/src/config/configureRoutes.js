@@ -3,6 +3,7 @@ const appShop = require("../api/shops/shop.routes");
 const appUser = require("../api/users/user.routes");
 const appProduct = require("../api/products/product.routes");
 const appWorkshop = require("../api/workshops/workshop.routes");
+const appPurchase = require("../api/purchases/purchase.routes")
 
 function configureRoutes(app) {
     app.use("/api/auth", appAuth);
@@ -10,6 +11,7 @@ function configureRoutes(app) {
     app.use("/api/user", appUser);
     app.use("/api/product", appProduct);
     app.use("/api/workshop", appWorkshop);
+    app.use("/api/purchase", appPurchase);
 }
 
 module.exports = configureRoutes;

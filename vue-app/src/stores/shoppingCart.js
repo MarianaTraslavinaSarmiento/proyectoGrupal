@@ -30,13 +30,37 @@ export const useShoppingCartStore = defineStore('shoppingCart', {
         },
         async purchaseProducts() {
             try {
-                await axios.post('/shopping-cart/purchase', this.products)
-                toast.success('Compra realizada con exito')
-                this.clearCart()
-                router.replace('/app/home')
+                const response = await axios.post('/purchase', { products: this.products })
+                
+                if (response.data && response.data.sessionUrl) {
+                    // Redirigir al usuario a la página de pago de Stripe
+                    window.location.href = response.data.sessionUrl
+                } else {
+                    throw new Error('No se recibió la URL de sesión de Stripe')
+                }
+
+                // No limpiamos el carrito aquí, lo haremos después de confirmar el pago
+                toast.success('Redirigiendo al pago...')
             } catch (error) {
-                console.error('Error:', error)
-                toast.error('Ocurrio un error al realizar la compra')
+                console.error('Error al iniciar la compra:', error)
+                toast.error('Ocurrió un error al procesar la compra. Por favor, inténtelo de nuevo.')
+            }
+        },
+        async confirmPurchase(sessionId) {
+            try {
+                const response = await axios.post('/purchase/confirm-purchase', { sessionId })
+                
+                if (response.data.status === 'success') {
+                    toast.success('Compra realizada con éxito')
+                    this.clearCart()
+                    router.replace('/app/home')
+                } else {
+                    throw new Error('El pago no se completó correctamente')
+                }
+            } catch (error) {
+                console.error('Error al confirmar la compra:', error)
+                toast.error('Ocurrió un error al confirmar la compra. Por favor, contacte con soporte.')
+                router.replace('/app/home')
             }
         },
         clearCart() {

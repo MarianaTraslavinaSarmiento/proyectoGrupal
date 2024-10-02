@@ -23,6 +23,7 @@ import Chat from '@views/app/chat/Chat.vue'
 import Shop from '@/views/app/shop/Shop.vue'
 import FavoriteCrafts from '@/views/app/favorite-crafts/FavoriteCrafts.vue'
 import PurchasesMade from '@/views/app/purchases-made/PurchasesMade.vue'
+import { useShoppingCartStore } from '@/stores/shoppingCart'
 
 
 export const internalRoutes = [
@@ -92,7 +93,15 @@ export const internalRoutes = [
         name: 'PurchaseMadeMessage',
         alias: 'mensaje-de-compra-con-exito',
         meta: { requiresAuth: true},
-        component: PurchaseMadeMessage
+        component: PurchaseMadeMessage,
+        beforeEnter: (to, from, next) => {
+            const sessionId = to.query.session_id
+            if (sessionId) {
+              const store = useShoppingCartStore()
+              store.confirmPurchase(sessionId)
+            }
+            next()
+        }
     },
     {
         path: '/app/redeem-coupons',
