@@ -10,7 +10,7 @@ const checkAuth = require("../middlewares/checkAuth")
 function configureRoutes(app) {
     app.use("/api/auth", appAuth);
     app.use("/api/shop", checkAuth, appShop);
-    app.use("/api/user", checkAuth, appUser);
+    app.use("/api/user", appUser);
     app.use("/api/product", checkAuth, appProduct);
     app.use("/api/workshop", checkAuth, appWorkshop);
     app.use("/api/purchase", checkAuth, appPurchase);

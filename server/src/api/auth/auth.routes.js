@@ -8,8 +8,8 @@ const passport = require("../../middlewares/passport")
 const controller = new AuthController()
 
 const redirects = {
-    successRedirect: process.env.ALLOWED_ORIGIN + "/app/home",
-    failureRedirect: process.env.ALLOWED_ORIGIN + "/login"
+    successRedirect: process.env.ALLOWED_ORIGIN + "app/home",
+    failureRedirect: process.env.ALLOWED_ORIGIN + "login"
 }
 
 appAuth.post("/login", validateLogin(), handleValidationErrors, passport.authenticate("local"), (req, res) => {
