@@ -158,6 +158,7 @@ The project is divided into two main parts:
    CLOUDINARY_CLOUD_NAME=dnl0acrzg
    CLOUDINARY_API_KEY=326851215572484
    CLOUDINARY_API_SECRET=9e9L-b1NNt4h_qnrWVCNRvoUDJs
+   STRIPE_SECRET_KEY=sk_test_51Q5HcuREyzrfyxsHmUGTJKVpiByUE9Kryh1vItY8TZXL0mXGRpjmV65DBUzekxVgpVrlJV2bQWuFy7MXaTds73Tq00Pu49VAie
    ```
    
    Make sure to fill in the missing values.
