@@ -102,6 +102,10 @@ main {
   font-family: Bellota
 }
 
+ main{
+  overflow: hidden;
+ }
+
 
 .container {
   display: grid;
