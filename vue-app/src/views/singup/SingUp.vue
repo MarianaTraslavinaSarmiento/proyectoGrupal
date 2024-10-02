@@ -1,11 +1,20 @@
 <script setup>
+import { onMounted } from 'vue';
 import FacebookIcon from "@/assets/icons/auth/FacebookIcon.vue";
 import InstagramIcon from "@/assets/icons/auth/InstagramIcon.vue";
 import GmailIcon from "@/assets/icons/auth/GmailIcon.vue";
 import UserIcon from "@/assets/icons/auth/UserIcon.vue";
 import DiscordIcon from "@/assets/icons/auth/DiscordIcon.vue";
-import {useAuth} from "@/composables/useAuth.js";
+import { useAuth } from "@/composables/useAuth.js";
+
+onMounted(() => {
+  window.history.pushState(null, "", window.location.href);
+  window.onpopstate = function() {
+    window.history.pushState(null, "", window.location.href);
+  };
+});
 </script>
+
 
 <template>
   <main class="auth">
