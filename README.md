@@ -1,10 +1,10 @@
-## Students:
+# Work team made up of:
 
 ```js
-Diana Carolina Moreno Cárdenas
-Mariana Traslaviña Sarmiento
-David Steven Romero Serrano
-Samuel Enrique Suarez Estupiñan
+- Diana Carolina Moreno Cárdenas
+- Mariana Traslaviña Sarmiento
+- David Steven Romero Serrano
+- Samuel Enrique Suarez Estupiñan
 ```
 
 
@@ -14,9 +14,92 @@ Samuel Enrique Suarez Estupiñan
 
 The project involves the development of a Craft Buying and Selling Application. The goal of this application is to connect artisans from Bucaramanga with buyers interested in unique and authentic handcrafted products. The platform will be commissioned and managed by Campuslands, a company dedicated to promoting and marketing local, handcrafted, and technological products.
 
+
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+
+
+
+## Key Features
+
+### User Management
+
+- **Registration and Login:** Users (artisans and buyers) can register and access their accounts.
+
+### Buyer Profiles:
+
+- **Information Update:** Buyers can update their personal information, such as name, address, and email.
+
+- **Profile Picture Update:** Buyers can change their profile pictures.
+
+- **Favorites List:** Buyers can mark artisanal products and workshops as favorites and view this list in their profile.
+
+- **Purchase History:** Buyers can review their purchase history, including details of each order.
+
+- **Registered Workshops:** Buyers can see the workshops they are enrolled in.
+
+- **Coupon List:** Buyers can view and manage the coupons available for redemption.
+
+- **Chat with Artisans:** Buyers can initiate and maintain a chat with artisans related to the workshops they are enrolled in.
+  Product Management
+
+- **Product Listing:** Product information will be manually uploaded to the database by the system administrator. Each product includes name, description, price, category, photos, and available stock.
+
+- **Product Visualization:** Buyers can view listed products with details and photos.
+
+- **Discount Coupons:** Artisans can create coupons that offer discounts on products.
+  Search and Filtering
+
+- **Product Search:** Allows searching for products by name or description.
+
+- **Product Filtering:** Filters products by defined categories (e.g., ceramics, textiles, jewelry).
+
+- **Workshop Filtering:** Allows searching and filtering of artisanal workshops by location, type of craft, modality, and other relevant criteria.
+
+
+### Cart and Checkout Process
+
+- **Shopping Cart:** Buyers can add products to the cart and review details before proceeding to payment.
+
+- **Coupon Application:** Buyers can enter coupon codes assigned to their profile or general coupon codes available.
+  Payment Process: Optional integration with a payment gateway to securely complete transactions.
+  Communication
+
+- **Direct Messaging:** Buyers and artisans can exchange messages to resolve doubts or discuss details about products.
+  Artisanal Workshops
+
+- **Workshop Profile:** Information about the modality (in-person or virtual), dates, duration, materials provided and required.
+
+- **Documentary on Workshops:** Offers a link or integration to view a documentary showcasing the artisanal process, the history of the workshop, or interviews with artisans.
+
+
+
+## Technologies Used
+
+
+### Frontend:
+
+- Framework: Vue.js (Composition API)
+- Styles: CSS/SCSS for responsive design.
+- Libraries: Vue Router for navigation and Pinia for state management.
+
+
+### Backend:
+
+- Language: JavaScript (Node.js)
+- Framework: Express.js to create the RESTful API.
+- Database: MongoDB, using Mongoose as ODM.
+- Authentication: Express Sessions to manage sessions and user permissions.
+
+
+### Tools:
+
+- Git for version control.
+- Postman for API testing.
+- Netlify and Render for deployment.
+- Jira for task management.
 
 
 
@@ -43,55 +126,38 @@ The project is divided into two main parts:
 ### Backend (node-server)
 
 1. Navigate to the `server` folder:
-   ```
+   ```js
    cd server
    ```
 
 2. Install the dependencies:
-   ```
+   ```js
    npm install
    ```
 
 3. Create a `.env` file in the root of the `node-server` directory with the following variables:
 
-   ```
-  NODE_ENV=development
-
-  ALLOWED_ORIGIN=http://localhost:5173
-
-  MONGODB_URI=mongodb://samuelsuarezgm:G6y9T2O2gNCnsOJn@ac-hqpoaeb-shard-00-00.bjigbd8.mongodb.net:27017,ac-hqpoaeb-shard-00-01.bjigbd8.mongodb.net:27017,ac-hqpoaeb-shard-00-02.bjigbd8.mongodb.net:27017/ruraqMaki?replicaSet=atlas-rsw4t9-shard-0&ssl=true&authSource=admin
-
-  SESSION_SECRET=4259e48e-413e-4c12-b748-513debb10fdd
-
-  GOOGLE_CLIENT_ID=216020252548-uea6sgqmqb2m1v0t51rqqdu3jak6ud3f.apps.googleusercontent.com
-
-  GOOGLE_CLIENT_SECRET=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
-
-  DISCORD_CLIENT_ID=1286776055251734638
-
-  DISCORD_CLIENT_SECRET=XyBDBxS8FId2nwojYrXuXPA7J27GgbWa
-
-  LINKEDIN_CLIENT_ID=78rasaii7dlq9e
-
-  LINKEDIN_CLIENT_SECRET='WPL_AP1.8NvoLqU4MObCPxqa.B5Fhvg=='
-
-  REDIS_URL=redis://default:qS4Jn7wtHcQ2Hgw2lxcET5A4skwAQUvP@redis-12050.c85.us-east-1-2.ec2.redns.redis-cloud.com:12050
-  API_KEY=someInternalAPiKEy
-
-  CLOUDINARY_CLOUD_NAME=dnl0acrzg
-
-  CLOUDINARY_API_KEY=326851215572484
-
-  CLOUDINARY_API_SECRET=9e9L-b1NNt4h_qnrWVCNRvoUDJs
-   ```
-
-
-   FRONTEND ENV
-
-   ```
-    VITE_API_URL=http://localhost:3001/api
-
-    VITE_SERVER_CHAT=http://localhost:3001
+   ```js
+   NODE_ENV=development
+   ALLOWED_ORIGIN=http://localhost:5173
+   MONGODB_URI=mongodb://samuelsuarezgm:G6y9T2O2gNCnsOJn@ac-hqpoaeb-shard-00-00.bjigbd8.mongodb.net:27017,ac-hqpoaeb-shard-00-01.bjigbd8.mongodb.net:27017,ac-hqpoaeb-shard-00-02.bjigbd8.mongodb.net:27017/ruraqMaki?replicaSet=atlas-rsw4t9-shard-0&ssl=true&authSource=admin
+   SESSION_SECRET=4259e48e-413e-4c12-b748-513debb10fdd
+   
+   GOOGLE_CLIENT_ID=216020252548-uea6sgqmqb2m1v0t51rqqdu3jak6ud3f.apps.googleusercontent.com
+   GOOGLE_CLIENT_SECRET=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
+   
+   DISCORD_CLIENT_ID=1286776055251734638
+   DISCORD_CLIENT_SECRET=XyBDBxS8FId2nwojYrXuXPA7J27GgbWa
+   
+   LINKEDIN_CLIENT_ID=78rasaii7dlq9e
+   LINKEDIN_CLIENT_SECRET='WPL_AP1.8NvoLqU4MObCPxqa.B5Fhvg=='
+   
+   REDIS_URL=redis://default:qS4Jn7wtHcQ2Hgw2lxcET5A4skwAQUvP@redis-12050.c85.us-east-1-2.ec2.redns.redis-cloud.com:12050
+   API_KEY=someInternalAPiKEy
+   
+   CLOUDINARY_CLOUD_NAME=dnl0acrzg
+   CLOUDINARY_API_KEY=326851215572484
+   CLOUDINARY_API_SECRET=9e9L-b1NNt4h_qnrWVCNRvoUDJs
    ```
    
    Make sure to fill in the missing values.
@@ -101,18 +167,18 @@ The project is divided into two main parts:
 ### Frontend (vue-app)
 
 1. Navigate to the `vue-app` folder:
-   ```
+   ```js
    cd vue-app
    ```
 
 2. Install the dependencies:
-   ```
+   ```js
    npm install
    ```
 
 3. Create a `.env` file in the root of the `vue-app` directory with the following variables:
 
-   ```
+   ```js
    VITE_API_URL=http://localhost:3001/api
    VITE_SERVER_CHAT=http://localhost:3001
    ```
@@ -127,7 +193,7 @@ The project is divided into two main parts:
 
 In the `server` folder, run:
 
-```
+```js
 npm run dev
 ```
 
@@ -137,7 +203,7 @@ npm run dev
 
 In the `vue-app` folder, run:
 
-```
+```js
 npm run dev
 ```
 
@@ -145,7 +211,7 @@ npm run dev
 
 ## Folder Structure
 
-```
+```js
 proyectoGrupal/
 ├── server/                # Backend directory
 │   └── src/               # Contains the main logic of the server
@@ -221,6 +287,8 @@ proyectoGrupal/
   npm i vue-toastification
   ```
 
+
+
 ### Development Dependencies
 
 - **ESLint Patch**: A package that provides a patch for ESLint to improve compatibility with various configurations.
@@ -276,6 +344,8 @@ proyectoGrupal/
   ```js
   npm i --save-dev vite-plugin-vue-devtools
   ```
+
+
 
 ### Scripts
 
@@ -445,6 +515,8 @@ proyectoGrupal/
   npm i socket.io-redis
   ```
 
+
+
 ### Scripts
 
 - **Dev**: Starts the application in development mode with automatic reloading of changes. It uses the `.env` file for environment variables.
@@ -452,89 +524,6 @@ proyectoGrupal/
   ```js
   npm run dev
   ```
-
-
-
-## Key Features
-
-### User Management
-
-- **Registration and Login:** Users (artisans and buyers) can register and access their accounts.
-
-### Buyer Profiles:
-
-- **Information Update:** Buyers can update their personal information, such as name, address, and email.
-
-- **Profile Picture Update:** Buyers can change their profile pictures.
-
-- **Favorites List:** Buyers can mark artisanal products and workshops as favorites and view this list in their profile.
-
-- **Purchase History:** Buyers can review their purchase history, including details of each order.
-
-- **Registered Workshops:** Buyers can see the workshops they are enrolled in.
-
-- **Coupon List:** Buyers can view and manage the coupons available for redemption.
-
-- **Chat with Artisans:** Buyers can initiate and maintain a chat with artisans related to the workshops they are enrolled in.
-Product Management
-
-- **Product Listing:** Product information will be manually uploaded to the database by the system administrator. Each product includes name, description, price, category, photos, and available stock.
-
-- **Product Visualization:** Buyers can view listed products with details and photos.
-
-- **Discount Coupons:** Artisans can create coupons that offer discounts on products.
-Search and Filtering
-
-- **Product Search:** Allows searching for products by name or description.
-
-- **Product Filtering:** Filters products by defined categories (e.g., ceramics, textiles, jewelry).
-
-- **Workshop Filtering:** Allows searching and filtering of artisanal workshops by location, type of craft, modality, and other relevant criteria.
-
-
-### Cart and Checkout Process
-
-- **Shopping Cart:** Buyers can add products to the cart and review details before proceeding to payment.
-
-- **Coupon Application:** Buyers can enter coupon codes assigned to their profile or general coupon codes available.
-Payment Process: Optional integration with a payment gateway to securely complete transactions.
-Communication
-
-- **Direct Messaging:** Buyers and artisans can exchange messages to resolve doubts or discuss details about products.
-Artisanal Workshops
-
-- **Workshop Profile:** Information about the modality (in-person or virtual), dates, duration, materials provided and required.
-
-- **Documentary on Workshops:** Offers a link or integration to view a documentary showcasing the artisanal process, the history of the workshop, or interviews with artisans.
-
-
-
-## Technologies Used
-
-
-
-
-### Frontend:
-
-- Framework: Vue.js (Composition API)
-- Styles: CSS/SCSS for responsive design.
-- Libraries: Vue Router for navigation and Pinia for state management.
-
-
-### Backend:
-
-- Language: JavaScript (Node.js)
-- Framework: Express.js to create the RESTful API.
-- Database: MongoDB, using Mongoose as ODM.
-- Authentication: Express Sessions to manage sessions and user permissions.
-
-
-### Tools:
-
-- Git for version control.
-- Postman for API testing.
-- Netlify and Render for deployment.
-- Jira for task management.
 
 
 
@@ -627,7 +616,7 @@ Artisanal Workshops
    }
    ```
 
-Note: All routes are handled asynchronously using the `asyncHandler` middleware to manage potential errors.
+**Note:** All routes are handled asynchronously using the `asyncHandler` middleware to manage potential errors.
 
 
 
@@ -801,7 +790,7 @@ Note: All routes are handled asynchronously using the `asyncHandler` middleware 
    * Success: `${process.env.ALLOWED_ORIGIN}/app/home`
    * Failure: `${process.env.ALLOWED_ORIGIN}/login`
 
-Note: All routes are handled asynchronously using the `asyncHandler` middleware to manage potential errors. The `handleValidationErrors` middleware is used to process and respond with validation errors where applicable.
+**Note:** All routes are handled asynchronously using the `asyncHandler` middleware to manage potential errors. The `handleValidationErrors` middleware is used to process and respond with validation errors where applicable.
 
 
 
@@ -869,7 +858,7 @@ Note: All routes are handled asynchronously using the `asyncHandler` middleware 
    }
    ```
 
-Note: All routes are handled asynchronously using the `asyncHandler` middleware to manage potential errors.
+**Note:** All routes are handled asynchronously using the `asyncHandler` middleware to manage potential errors.
 
 
 
@@ -1094,7 +1083,7 @@ Note: All routes are handled asynchronously using the `asyncHandler` middleware 
    }
    ```
 
-Note: All routes are handled asynchronously using the `asyncHandler` middleware to manage potential errors. The `handleValidationErrors` middleware is used to process and respond with validation errors where applicable.
+**Note:** All routes are handled asynchronously using the `asyncHandler` middleware to manage potential errors. The `handleValidationErrors` middleware is used to process and respond with validation errors where applicable.
 
 
 
@@ -1227,4 +1216,4 @@ Note: All routes are handled asynchronously using the `asyncHandler` middleware 
    }
    ```
 
-Note: All routes are handled asynchronously using the `asyncHandler` middleware to manage potential errors.
+**Note:** All routes are handled asynchronously using the `asyncHandler` middleware to manage potential errors.
