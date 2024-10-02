@@ -16,10 +16,14 @@ const props = defineProps({
     }
 });
 
-const emit = defineEmits(['close']);
+const emit = defineEmits(['close', 'logout']);
 
 const closeMenu = () => {
     emit('close');
+};
+
+const logout = () => {
+    emit('logout');
 };
 </script>
 
@@ -42,9 +46,11 @@ const closeMenu = () => {
                         />
                     </li>
                 </ul>
+                <button @click="logout" class="logout-button">Cerrar sesión</button>
             </nav>
             <div class="footer-info">
                 <span class="footer-text">Aplicación potenciada por:</span>
+                <img src="https://caroline.sirv.com/ruraq%20maki/Ministerio%20de%20Arte%20y%20Cultura.png" alt="Ministerio de Arte y Cultura" class="footer-image" />
             </div>
         </div>
     </Transition>
@@ -57,7 +63,7 @@ const closeMenu = () => {
     top: 0;
     left: 0;
     height: 100vh;
-    width: 60%;
+    width: 70%;
     background-color: var(--background-primary);
     box-shadow: 20px 0px 38px 2px rgba(0, 0, 0, 0.25);
     padding: 20px;
@@ -106,11 +112,33 @@ const closeMenu = () => {
 }
 
 .footer-info {
+    display: flex;
     font-family: var(--font-bellota);
-    font-size: 0.8rem;
+    font-size: 1.2rem;
     color: var(--color-text);
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: start;
+    gap: 0.5rem;
+
+    .footer-image {
+        max-width: 70%;
+        margin-top: 10px;
+        height: auto;
+    }
+}
+
+.logout-button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--background-secondary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-family: var(--font-bellota);
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 1rem;
 }
 
 .overlay {
@@ -132,4 +160,5 @@ const closeMenu = () => {
 .slide-leave-to {
     transform: translateX(-100%);
 }
+
 </style>
