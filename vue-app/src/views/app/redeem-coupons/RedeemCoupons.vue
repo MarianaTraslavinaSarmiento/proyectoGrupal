@@ -56,7 +56,8 @@ const useCoupon = (coupon) => {
             <div class="coupon-details">
               <p class="discount">{{ coupon.description }}</p>
               <p class="expiry">Fecha de vencimiento: {{ new Date(coupon.expiry_date).toLocaleDateString() }}</p>
-              <button @click="useCoupon(coupon)" class="use-coupon">Usar cupón</button>
+              <button v-if="!coupon.used" @click="useCoupon(coupon)" class="use-coupon">Usar cupón</button>
+            <button v-else disabled class="use-coupon">Cupon usado 😥</button>
             </div>
           </div>
         </div>

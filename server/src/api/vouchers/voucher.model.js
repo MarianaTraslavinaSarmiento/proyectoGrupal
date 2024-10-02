@@ -45,6 +45,11 @@ const voucherSchema = new Schema({
         type: String,
         ref: "User",
         required: false
+    },
+    used: {
+        type: Boolean,
+        required: false,
+        default: false
     }
 }, {
     timestamps: true

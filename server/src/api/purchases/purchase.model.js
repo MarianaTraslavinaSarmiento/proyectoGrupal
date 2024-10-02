@@ -23,6 +23,18 @@ const purchaseSchema = new Schema({
         type: String,
         required: true
     },
+    shipping_cost: {
+        type: Number,
+        required: false
+    },
+    discount_amount: {
+        type: Number,
+        required: false
+    },
+    coupon_used: {
+        type: String,
+        required: false
+    },
     status: {
         type: String,
         enum: ['pending', 'completed', 'rejected'],
