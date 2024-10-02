@@ -99,6 +99,7 @@ main {
     height: 35px;
     padding-inline: 3rem;
     gap: 1.5rem;
+    color: var(--color-accent);
 }
 
 .container {

@@ -4,11 +4,16 @@ import { useRouter } from 'vue-router';
 import smallTriangles from "@/assets/icons/your-shopping-cart/smallTriangles.vue"
 import successfulPurchase from "@/assets/icons/your-shopping-cart/successfulPurchase.vue"
 
+
 const email = ref('');
 const router = useRouter(); 
 
 const goToHome = () => {
-  router.push({ name: 'Home' }); 
+  router.replace('/app/home');
+};
+
+const goToPurchases = () => {
+  router.push({ path: '/app/purchases-made' }); // Redirección a la ruta de compras
 };
 </script>
 
@@ -23,7 +28,7 @@ const goToHome = () => {
       <p class="message">
         Gracias por apoyar a los artesanos Colombianos, puedes revisar tu compra en la opción de 
       </p>
-      <button class="btn-purchases">Compras</button>
+      <button class="btn-purchases" @click="goToPurchases">Compras</button> <!-- Agregado manejador de clic -->
       <div class="diamond-divider">
         <smallTriangles v-for="i in 1" :key="i" />
       </div>
@@ -42,6 +47,7 @@ const goToHome = () => {
     </div>
   </div>
 </template>
+
 
 
 <style scoped>

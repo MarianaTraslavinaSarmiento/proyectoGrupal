@@ -42,7 +42,7 @@ watch(messages, () => {
 <template>
     <div class="chat-container">
         <header class="chat-header">
-            <BackButton backgroundColor="var(--background-primary)" />
+            <BackButton position="relative" backgroundColor="var(--background-primary)" />
             <div class="header-content">
                 <ChatIcon class="chat-icon" />
                 <h1>{{ data.title }}</h1>

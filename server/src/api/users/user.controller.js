@@ -34,18 +34,20 @@ class UserController {
     }
 
     async getFavorites(req, res) {
-        const favorites = await this.#service.getFavorites(req.user.id)
+        const favorites = await this.#service.getFavorites(req.user._id)
         res.json(favorites)
     }
 
     async deleteFavoriteProduct(req, res) {
-        const { productId } = req.body;
+        const { productId } = req.params;
+
         const user = await this.#service.deleteFavoriteProduct(req.user._id, productId)
         res.json({
             message: "Product removed from favorites",
             user
         })
     }
+
 
     async subscribeToWorkshop(req, res) {
         const { workshopId } = req.body;

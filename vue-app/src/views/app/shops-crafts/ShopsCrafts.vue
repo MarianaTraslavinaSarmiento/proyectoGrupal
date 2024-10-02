@@ -19,7 +19,7 @@ const handleGoShop = (id) => {
 <template>
     <main>
 
-        <TitleSection title="Talleres y tiendas artesanales" subtitle="Tiendas de artesanías de todas partes del Perú"
+        <TitleSection title="Talleres y tiendas artesanales" subtitle="Tiendas de artesanías de todas partes de Colombia"
             :showFilter="true" />
 
         <div v-if="isLoading">
@@ -51,6 +51,10 @@ const handleGoShop = (id) => {
     justify-content: center;
     align-items: center;
     height: auto;
+}
+
+.text__subtitle{
+    font-size: 1.3rem;
 }
 
 .item {

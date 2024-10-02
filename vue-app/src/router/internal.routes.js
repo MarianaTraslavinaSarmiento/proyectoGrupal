@@ -22,6 +22,8 @@ import Settings from '@/views/app/settings/Settings.vue'
 import Chat from '@views/app/chat/Chat.vue'
 import Shop from '@/views/app/shop/Shop.vue'
 import FavoriteCrafts from '@/views/app/favorite-crafts/FavoriteCrafts.vue'
+import PurchasesMade from '@/views/app/purchases-made/PurchasesMade.vue'
+import { useShoppingCartStore } from '@/stores/shoppingCart'
 
 
 export const internalRoutes = [
@@ -43,6 +45,7 @@ export const internalRoutes = [
         path: '/app/shops-crafts/:id',
         name: 'ShopsCraftsOne',
         alias: 'tiendas-artesanias/:id',
+        meta: { requiresAuth: true},
         component: Shop
     },
     {
@@ -60,10 +63,17 @@ export const internalRoutes = [
         component: DiscountsPromotions
     },
     {
-        path: '/app/favorite-crafts',
+        path: '/app/favorite-crafts/:category',
         name: 'FavoriteCrafts',
-        alias: 'artesanias-favoritas',
+        alias: 'artesanias-favoritas/:category',
+        meta: { requiresAuth: true },
         component: FavoriteCrafts
+    },
+    {
+        path: '/app/purchases-made',
+        name: 'PurchasesMade',
+        alias: 'compras-realizadas',
+        component: PurchasesMade
     },
     {
         path: '/app/profile',
@@ -84,7 +94,15 @@ export const internalRoutes = [
         name: 'PurchaseMadeMessage',
         alias: 'mensaje-de-compra-con-exito',
         meta: { requiresAuth: true},
-        component: PurchaseMadeMessage
+        component: PurchaseMadeMessage,
+        beforeEnter: (to, from, next) => {
+            const sessionId = to.query.session_id
+            if (sessionId) {
+              const store = useShoppingCartStore()
+              store.confirmPurchase(sessionId)
+            }
+            next()
+        }
     },
     {
         path: '/app/redeem-coupons',
@@ -125,6 +143,7 @@ export const internalRoutes = [
         path: '/app/details-handicrafts/:id',
         name: 'detailsOfHandicrafts',
         alias: 'detalles-de-artesanias/:id',
+        meta: { requiresAuth: true},
         component: DetailsHandicrafts
     },
     {

@@ -2,6 +2,7 @@ const calculateFileHash = require("../../utils/crypto")
 const UserModel = require("./user.model")
 const cloudinary = require("../../services/cloudinary")
 const fs = require("fs")
+const { default: mongoose } = require("mongoose")
 
 class UserService {
     async getOneByQuery(query = {}) {
@@ -60,32 +61,51 @@ class UserService {
     }
 
     async deleteFavoriteProduct(userId, productId) {
-        const user = await UserModel.findByIdAndUpdate(userId, { $pull: { favorites: productId } }, { new: true })
+        const user = await UserModel.findByIdAndUpdate(userId, { $pull: { favorites: new mongoose.Types.ObjectId(productId) } }, { new: true })
+        console.log(user)
         return user
     }
 
     async getFavorites(userId) {
-        const user = await UserModel.aggregate([
+        const favorites = await await UserModel.aggregate([
             {
                 $match: {
-                    _id: userId
+                    _id: new mongoose.Types.ObjectId(userId) 
                 }
             },
             {
                 $lookup: {
-                    from: "products",
-                    localField: "favorites",
+                    from: "products", 
+                    localField: "favorites", 
                     foreignField: "_id",
-                    as: "favorites"
+                    as: "favorites" 
                 }
             },
             {
                 $project: {
                     favorites: 1
                 }
+            },
+            {
+                $unwind: "$favorites" 
+            },
+            {
+                $replaceRoot: { newRoot: "$favorites" } 
+            },
+            {
+                $lookup: {
+                    from: "shops",
+                    localField: "shop_id", 
+                    foreignField: "_id",
+                    as: "shop" 
+                }
+            },
+            {
+                $unwind: "$shop" 
             }
-        ])
-        return user.favorites
+        ]);
+
+        return favorites
     }
 
     async subscribeToWorkshop(userId, workshopId) {

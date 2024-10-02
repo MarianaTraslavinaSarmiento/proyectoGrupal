@@ -4,6 +4,7 @@ import DiscountIcon from '@/assets/icons/general/DiscountIcon.vue';
 import DeleteIcon from '@/assets/icons/general/DeleteIcon.vue';
 import { formatoPesosColombianos } from '@/utils/formatMoney';
 import router from '@/router';
+import { useDeleteFavorites } from '@/composables/useProduct';
 
 const props = defineProps({
     showDelete: {
@@ -36,6 +37,9 @@ const props = defineProps({
     }
 });
 
+const emits = defineEmits(['productDeleted'])
+
+
 const showOffer = computed(() => props.offer?.type);
 const isDiscountOffer = computed(() => props.offer?.type === 'discount');
 const isBuyXGetYOffer = computed(() => props.offer?.type === 'buyxgety');
@@ -56,6 +60,15 @@ const handleGoProduct = () => {
     router.push('/app/details-handicrafts/' + props.id)
 }
 
+const handleDelete = async (event) => {
+    event.stopPropagation(); 
+    try {
+        useDeleteFavorites(props.id);
+    } catch (err) {
+        console.error('Error al eliminar el producto favorito:', err);
+    }
+}
+
 </script>
 
 <template>
@@ -68,7 +81,7 @@ const handleGoProduct = () => {
             {{ offerText }}
         </p>
 
-        <div v-if="showDelete" class="delete__icon">
+        <div v-if="showDelete" class="delete__icon" @click="handleDelete">
             <DeleteIcon />
         </div>
 

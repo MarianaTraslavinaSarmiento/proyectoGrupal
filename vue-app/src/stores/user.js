@@ -30,15 +30,18 @@ export const useUserStore = defineStore('user', {
       },
       async updateUser(updatedUser) {
         try {
-          const response = await axios.put("/user/update", updatedUser)
-          console.log(response)
-          this.user = response.data
-          toast.success('Información actualizada con éxito')
-          return {ok: true}
+          const response = await axios.put("/user/update", updatedUser, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          });
+          this.user = response.data.newUser;
+          toast.success('Información actualizada con éxito');
+          return { ok: true, newUser: response.data.newUser };
         } catch (error) {
-          console.error('Error:', error)
-          toast.error('Ocurrió un error al actualizar la información de tu perfil.')
-          return {ok: false}
+          console.error('Error:', error);
+          toast.error('Ocurrió un error al actualizar la información de tu perfil.');
+          return { ok: false };
         }
       },
       async subscribeToWorkshop(workshopId) {

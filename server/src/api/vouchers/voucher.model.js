@@ -5,6 +5,10 @@ const voucherSchema = new Schema({
         type: String,
         required: true
     },
+    image_url: {
+        type: String,
+        required: true
+    },
     code: {
         type: String,
         required: true
@@ -41,6 +45,11 @@ const voucherSchema = new Schema({
         type: String,
         ref: "User",
         required: false
+    },
+    used: {
+        type: Boolean,
+        required: false,
+        default: false
     }
 }, {
     timestamps: true
