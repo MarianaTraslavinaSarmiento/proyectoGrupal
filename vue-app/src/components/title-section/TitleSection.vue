@@ -38,6 +38,7 @@
     position: relative;
     color: var(--color-black);
     font-family: Bellota;
+    margin-bottom: -60px;
 
     .diamond__icon {
         width: 50px;
