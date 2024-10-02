@@ -121,6 +121,146 @@ The project is divided into two main parts:
 
 
 
+# Deployment Guide for Ruraq Maki
+
+
+
+## Recommended Version
+
+For the Ruraq Maki project, it is recommended to use version 20.17 for optimal performance and compatibility.
+
+## Version Management
+
+### Step 1: Check the current version
+
+Before changing the version, it's important to verify which version you're currently working with. To do this, run the following command:
+
+```
+version --current
+```
+
+### Step 2: Install and use version 20.17
+
+Below are the steps to install and use version 20.17 in a Node.js environment using nvm (Node Version Manager).
+
+#### a. Install nvm (if not already installed)
+
+If you don't have nvm installed yet, you can do so with the following command:
+
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+```
+
+After installation, close and reopen your terminal, or run `source ~/.bashrc` (or the configuration file corresponding to your shell) to load nvm.
+
+#### b. Install Node.js 20.17
+
+Once nvm is installed, you can install the specific version of Node.js:
+
+```
+nvm install 20.17
+```
+
+#### c. Use Node.js 20.17
+
+To switch to the newly installed version:
+
+```
+nvm use 20.17
+```
+
+#### d. Verify the version
+
+Make sure you're using the correct version:
+
+```
+node -v
+```
+
+This should display `v20.17.x` (where x is the patch number).
+
+### Step 3: Clone the Ruraq Maki repository
+
+```
+git clone https://github.com/MarianaTraslavinaSarmiento/proyectoGrupal
+
+cd ruraq-maki
+```
+
+### Step 4: Switch to the specific project version
+
+```
+git checkout v20.17
+```
+
+### Step 5: Install dependencies
+
+```
+npm install
+```
+
+### Step 6: Start the application
+
+```
+npm run dev
+```
+
+## Switching between versions
+
+If you need to switch to a different version of Ruraq Maki in the future, follow these steps:
+
+1. Check the available project versions:
+
+   ```
+   git tag -l
+   ```
+
+2. Switch to the desired version:
+
+   ```
+   git checkout vX.Y.Z
+   ```
+
+   (Replace X.Y.Z with the version you need)
+
+3. Make sure to use the corresponding Node.js version:
+
+   ```
+   nvm use X.Y.Z
+   ```
+
+   (Where X.Y.Z is the Node.js version required for that project version)
+
+4. Update the dependencies:
+
+   ```
+   npm install
+   ```
+
+5. Restart the application:
+
+   ```
+   npm run dev
+   ```
+
+
+
+## Troubleshooting common issues
+
+- If you encounter errors when changing versions, try clearing the npm cache:
+
+  ```
+  npm cache clean --force
+  ```
+
+- If you have issues with global dependencies, you can reinstall them for the new version:
+
+  ```
+  npm rebuild
+  ```
+
+
+
 ## Configuration
 
 ### Backend (node-server)
